@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  SERVER_URL: 'http://192.168.1.31:4042',
+  SERVER_URL: 'http://172.16.8.96:4042',
   production: true,
   useHash: true,
   hmr: false,
