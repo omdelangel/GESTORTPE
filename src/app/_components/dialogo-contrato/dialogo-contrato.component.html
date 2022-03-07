@@ -1,0 +1,87 @@
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayout.lt-sm="row">
+	<div fxLayout="row wrap" fxLayoutGap="20px" fxFlex="100">
+		<div fxFlex="100">
+			<mat-card>
+				<div class="example-button-container">
+                    <button mat-mini-fab  class="close-button" style="outline: none;" (click)="onNoClick()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+				<mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+					<mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Generar Contratos
+					</mat-card-title>
+				</mat-card-actions>
+				<mat-card-content>
+					<form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+						<div fxLayout="row wrap" fxLayoutGap="30px grid">
+							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Concesionario</mat-label>
+									<input matInput formControlName="Concesionario">
+								</mat-form-field>
+							</div>
+							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Sindicato</mat-label>
+									<input matInput formControlName="Sindicato">
+								</mat-form-field>
+							</div>
+							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Tipo de Vehículo</mat-label>
+									<input matInput formControlName="TipoVehiculo">
+								</mat-form-field>
+							</div>	
+							<div fxFlex="25" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Tipo convertidor</mat-label>
+									<input matInput formControlName="TipoConvertidor">
+								</mat-form-field>
+							</div>
+							<div fxFlex="25" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Costo convertidor</mat-label>
+									<input matInput formControlName="CostoConvertidor">
+								</mat-form-field>
+							</div>
+							<div fxFlex="25" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Consumo mensual</mat-label>
+									<input matInput formControlName="ConsumoMensualLTS">
+								</mat-form-field>
+							</div>
+							<div fxFlex="25" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Periodo</mat-label>
+									<input matInput formControlName="Periodo">
+								</mat-form-field>
+							</div>	
+																
+						</div>
+					</form>
+					<mat-divider></mat-divider>
+							<br>
+							<div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+							<button  mat-raised-button class='w-full login-field' (click)="generarContratoMembresia()">								
+									Contrato de membresía al programa de beneficios</button>   
+
+                                    <button  mat-raised-button class='w-full login-field' (click)="generarContratoSuministro()">								
+                                        Contrato de suministro y compra venta</button>   
+								</div>		  					
+				</mat-card-content>		
+                <h3 fx-item style="color: #001C71; font-weight: lighter;">{{tituloContrato}}</h3>	
+			</mat-card>
+		</div>		
+	</div>	
+</div>
+
+<div *ngIf="value">
+<ngx-extended-pdf-viewer 
+	[src]="'assets/S156375.pdf'"
+	[useBrowserLocale]="true"
+	[textLayer]="true"
+	[showHandToolButton]="true"
+	[showPresentationModeButton]="true"
+	[showDownloadButton]="false"
+></ngx-extended-pdf-viewer>
+</div>

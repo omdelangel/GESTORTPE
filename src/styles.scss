@@ -1,0 +1,103 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~angular-notifier/styles";
+
+html,body{height:100%;}
+body{margin:0;font-family:Roboto, "Helvetica Neue", sans-serif;}
+form{width:100%;margin:5px auto 5px;display:block;float:none;}
+.mat-form-field{width:100%;}
+.misc-bottom-padding{margin:8px 0 20px;}
+.misc-bottom-padding mat-label{margin-right:15px;}
+.mat-radio-label{margin:0 15px 0 0;}
+.title-center{margin:0 auto;}
+.button-wrapper{margin-top:10px;}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+div.route-sign-in {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    height: 100vh;
+    min-height: 800px;
+}
+
+div.route-sign-in>div.left {
+  /* background-color: #f7faff;*/
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    display: -ms-flexbox;
+    display: grid;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    margin-left: 5%;
+    margin-right: 5%;
+
+}
+
+div.route-sign-in>div.right {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    background-position: 100% 0,100% 100%;
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+    background-image: url('assets/images/img-login-2-1.png');
+    background-size: 100%;
+    -ms-flex-positive: 6;
+    flex-grow: 6;
+}
+
+@media only screen and (max-width: 600px) {
+    div.route-sign-in>div.right {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        background-position: 100% 0,100% 100%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-color: #fff;
+        background-image:none;
+        -ms-flex-positive: 6;
+        flex-grow: 20;
+    }
+}
+
+  .center-div {
+    text-align:center;
+    width: 50%;
+    margin: 0 auto
+  }
+  
+  .mat-form-field-flex {
+    background-color: #ffffff !important;
+  }
+  
+  .mat-card-header-text {
+    margin: 0 0px !important;
+  }
+  
+  .mat-card-header {
+    font-size: 16pt;
+    margin-bottom: 30px;
+  }
+  
+  .card-content {
+    font-size: 12pt;
+  }
+
+  .active-list-item {
+    color: #d8c7a2 !important;
+  }
+
+  .disable_ripple:hover{
+    background: #d8c7a2 !important;
+  }

@@ -1,0 +1,184 @@
+mat-toolbar {
+  background: #001C71;
+  color: white;
+}
+
+mat-sidenav {
+  margin: 16px;
+  width: 240px;
+  border-right: none;
+  background: #001C71;
+  color: white;
+  border-radius: 10px;
+  padding-top: 16px;
+  text-align: center;
+}
+
+.content {
+  height: calc(100vh - 100px);
+  border-radius: 10px;
+  margin: 16px;
+  margin-left: 32px;
+  padding: 16px;
+
+  
+  display: block;
+  justify-content: center;
+
+  font-size: 2rem;
+  color: lightgray;
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 65px);
+
+}
+
+.menu-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 14px;
+  margin: 0px 0px 0px 10px;
+}
+
+
+mat-icon {
+  margin-right: 8px;
+}
+
+.avatar {
+  margin-top: 16px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.name {
+  margin-top: 8px;
+  margin-bottom: 1px;
+  font-weight: normal;
+}
+
+.designation {
+  margin-top: 0px; 
+  font-size: 0.7rem;
+  color: ligredhtgrey;
+}
+
+mat-divider {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.colorToolBar{
+  background-color: #001C71;
+  color: #ffffff;
+}
+
+
+.mat-list-item {
+  color: #ffffff !important;
+  font-size: 14px;
+
+}
+
+.mat-expansion-panel{
+  font-size: 14px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  background-color: #001C71;
+}
+
+
+.content > mat-card {
+  width: 200px;
+}
+
+.mat-expansion-panel-header{
+  padding: 12px !important;
+}
+
+.is-active {
+  background-color: red;
+}
+
+.active-list-item {
+  color: #d8c7a2 !important; /* Note: You could also use a custom theme */
+}
+
+.disable_ripple:hover{
+  background: #d8c7a2 !important;
+  opacity: 0.5;
+  }
+
+
+  @import './../../theme';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  outline: none;
+  width: 100%;
+
+  .mat-list-item.active {
+    background-color: mat-color($app-primary, 50);
+  }
+  &:hover,
+  &:focus {
+    >.mat-list-item:not(.expanded) {
+      background-color: mat-color($app-primary, 100) !important;
+    }
+  }
+}
+
+.mat-list-item {
+  padding: 8px 0;
+  display: flex;
+  width: auto;
+
+  .routeIcon {
+    margin-right: 40px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

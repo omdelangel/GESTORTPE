@@ -1,0 +1,1 @@
+export * from './altacita.component';

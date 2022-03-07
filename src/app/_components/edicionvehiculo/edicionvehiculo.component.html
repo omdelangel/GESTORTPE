@@ -1,0 +1,99 @@
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+	<div fxLayout="row wrap" fxLayoutGap="20px" style="width: 100%;">
+		<div fxFlex="100">
+			<mat-card>
+				<mat-card-content>
+					<form [formGroup]="frmStepTwo" (ngSubmit)="onSubmit()">
+						<div fxLayout="row wrap" fxLayoutGap="30px grid">
+							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>VIN</mat-label>
+									<input matInput placeholder="VIN" formControlName="VIN" maxlength="17" required>
+									<mat-error *ngIf="frmStepTwo.get('VIN')!.hasError('required')">
+										El dato es oblgatorio
+									</mat-error>
+								</mat-form-field>
+							</div>
+							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="Marca" formControlName="Marca"
+                                        [errorStateMatcher]="matcher" required
+                                        (selectionChange)="onSelectionChanged($event)">
+                                        <mat-option *ngFor="let marca of marcas"
+                                            [value]="marca.IdMarca">
+                                            {{marca.Nombre}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="frmStepTwo.get('Marca')!.invalid">Campo requerido
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="Submarca"
+                                        formControlName="Submarca" [errorStateMatcher]="matcher" required>
+                                        <mat-option *ngFor="let submarca of submarcas"
+                                            [value]="submarca.IdSubmarca">
+                                            {{submarca.Nombre}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="frmStepTwo.get('Submarca')!.invalid">Campo requerido
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>			
+							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Modelo</mat-label>
+									<input matInput placeholder="Modelo" formControlName="Modelo"
+										(keypress)="keyPress($event)" maxlength="4" required>
+									<mat-error *ngIf="frmStepTwo.get('Modelo')!.hasError('required')">
+										El dato es oblgatorio
+									</mat-error>
+								</mat-form-field>
+							</div>
+							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Placa</mat-label>
+									<input matInput placeholder="Placa" formControlName="Placa" maxlength="10" 
+									onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+									<mat-error *ngIf="frmStepTwo.get('Placa')!.hasError('required')">
+										El dato es oblgatorio
+									</mat-error>
+								</mat-form-field>
+							</div>
+							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="Color"
+                                        formControlName="Color" [errorStateMatcher]="matcher" required>
+                                        <mat-option *ngFor="let color of colores"
+                                            [value]="color.IdColor">
+                                            {{color.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="frmStepTwo.get('Color')!.invalid">Campo requerido
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>			
+						</div>
+				<!--		<div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+							<button mat-fab style="background-color: #f65545; outline:none;" matTooltip="Cerrar"
+								matDialogClose>
+								<mat-icon>clear</mat-icon>
+							</button>
+							<button mat-fab style="background-color: #00b140; outline:none;"
+								matTooltip="Guardar y Continuar" (click)="guardarVehiculo()">
+								<mat-icon>done</mat-icon>
+							</button>
+						</div> -->
+
+					</form>
+				</mat-card-content>
+				<notifier-container></notifier-container>	
+			</mat-card>
+		<!--	<br>
+			<alert></alert> -->
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,45 @@
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+	<div fxLayout="row wrap" fxLayoutGap="20px" style="width: 100%;">
+		<div fxFlex="100">
+			<mat-card >
+				<mat-card-header fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+					<mat-card-title fx-item style="color: #009288; font-weight: lighter;">Código QR</mat-card-title>
+                    <mat-card-subtitle>Inscrito al programa Convertidor a Gas LP </mat-card-subtitle>
+				</mat-card-header>       
+				<mat-card-content class="content-class">
+						<div fxLayout="row wrap" fxLayoutGap="30px grid">
+                            <h2>{{nombreConcesionario}}</h2>
+                            <span><mat-icon>directions_car</mat-icon>{{nombreOperador}}</span>               									
+						</div>
+            <div id="qrcode" style="text-align: center;">
+                        <qr-code 
+                        value={{myAngularQrcode}}
+                        size="300" 
+                        errorCorrectionLevel="M" >
+                        </qr-code>
+            </div>
+				</mat-card-content>
+                <mat-divider></mat-divider>
+                <mat-card-actions>
+                    <div class="example-button-row" fxLayout="row"  fxLayoutAlign="space-between center" fxLayoutGap="20px" >
+                       
+                            <button mat-fab color="warn" (click)="openPDF()" style="outline: none;">
+                              <mat-icon>print</mat-icon>
+                            </button>                     
+                            <button mat-fab color="accent" style="outline: none;">
+                              <mat-icon>email</mat-icon>
+                            </button>                      
+                                 
+                    </div>                  
+                  </mat-card-actions>
+			</mat-card>    
+		</div>
+	</div>	
+</div>
+
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+.header-class {
+    max-width:30%;
+}
+
+.content-class {
+    text-align: center;
+  }
+
+
+
+  .example-button-container {
+     display: flex;
+    justify-content: center;
+    width: 80px;
+    align-items: right;
+  }
+
+  .example-flex-container {
+    display: flex;
+    //justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+
+

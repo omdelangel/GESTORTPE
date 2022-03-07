@@ -1,0 +1,141 @@
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayout.lt-sm="row">
+	<div fxLayout="row wrap" fxLayoutGap="20px" fxFlex="100">
+		<div fxFlex="100">
+			<mat-card>
+				<mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+					<mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Concesionarios - Firma de Contrato
+					</mat-card-title>
+				</mat-card-actions>
+
+				<mat-card-header>
+					<div class="w-full" fxFlex="30">
+						<mat-form-field>
+							<input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
+						</mat-form-field>
+					</div>
+				</mat-card-header>
+
+				<mat-card-content>
+					<div>
+						<alert style="font-size: small; height: 30px;"></alert>
+					</div>
+					<form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+						<div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100">
+							<mat-table [dataSource]="dataSource" matSort>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="IdConcesionario">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Id Concesionario
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.IdConcesionario}} </mat-cell>
+								</ng-container>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="NombreConcesionario">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Concesionario
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row">
+										{{row.NombreConcesionario}}</mat-cell>
+								</ng-container>
+
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="FechaRegistro">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Registro
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.FechaRegistro | date: 'dd-MM-YYYY'}}
+									</mat-cell>
+								</ng-container>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="IdVehiculo">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Id Vehículo
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.IdVehiculo}} </mat-cell>
+								</ng-container>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="Marca">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Marca
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.Marca}} </mat-cell>
+								</ng-container>
+
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="SubMarca">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> SubMarca
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.Submarca}} </mat-cell>
+								</ng-container>
+
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="Modelo">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Modelo
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.Modelo}} </mat-cell>
+								</ng-container>
+
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="Placa">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Placa
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.Placa}} </mat-cell>
+								</ng-container>
+
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="Estatus" sticky>
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Estatus
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.Estatus}} </mat-cell>
+								</ng-container>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="IdSindicato">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> IdSindicato
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.IdSindicato}} </mat-cell>
+								</ng-container>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="Sindicato">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Sindicato
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.Sindicato}} </mat-cell>
+								</ng-container>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="IdAsignacionSindicato">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Asignación Sindicato
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.IdAsignacionSindicato}} </mat-cell>
+								</ng-container>
+
+								<!--toggle column -->
+
+								<ng-container matColumnDef="actions">
+									<mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+									<mat-cell *matCellDef="let row">
+										<button mat-mini-fab class="button-documentos" (click)="documentos(row)" [disabled]="!row.EditaDocumentos"	
+											matTooltip="Ir a documentos">
+											<mat-icon class="iconSize">attach_file</mat-icon>
+										</button>&nbsp; &nbsp;
+									</mat-cell>
+
+								</ng-container>
+								<mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+								<mat-row *matRowDef="let row; columns: displayedColumns;">
+								</mat-row>
+							</mat-table>
+							<mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+						</div>
+					</form>
+				</mat-card-content>
+				<notifier-container></notifier-container>
+			</mat-card>
+		</div>
+	</div>
+</div>

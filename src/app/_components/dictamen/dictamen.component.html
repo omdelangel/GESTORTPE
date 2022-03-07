@@ -1,0 +1,72 @@
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayout.lt-sm="row">
+	<div fxLayout="row wrap" fxLayoutGap="20px" fxFlex="100">
+		<div fxFlex="100">
+			<mat-card>
+				<div class="example-button-container">
+                    <button mat-mini-fab  class="close-button" style="outline: none;" (click)="onNoClick()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+				<mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+					<mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Datos de la Cita
+					</mat-card-title>
+				</mat-card-actions>
+				<mat-card-content>
+					<form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+						<div fxLayout="row wrap" fxLayoutGap="30px grid">
+							<div fxFlex="50" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Concesionario</mat-label>
+									<input matInput formControlName="Concesionario">
+								</mat-form-field>
+							</div>
+							<div fxFlex="50" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Taller</mat-label>
+									<input matInput formControlName="Taller">
+								</mat-form-field>
+							</div>
+							<div fxFlex="100" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Domicilio</mat-label>
+									<input matInput formControlName="Domicilio">
+								</mat-form-field>
+							</div>
+							<div fxFlex="25" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Teléfono</mat-label>
+									<input matInput formControlName="Telefono">
+								</mat-form-field>
+							</div>
+							<div fxFlex="25" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Contacto</mat-label>
+									<input matInput formControlName="Contacto">
+								</mat-form-field>
+							</div>
+							<div fxFlex="25" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Fecha</mat-label>
+									<input matInput formControlName="Fecha">
+								</mat-form-field>
+							</div>
+							<div fxFlex="25" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Hora</mat-label>
+									<input matInput formControlName="Hora">
+								</mat-form-field>
+							</div>									
+						</div>
+					</form>
+					<mat-divider></mat-divider>
+							<br>
+							<div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+							<button  mat-raised-button class='w-full login-field' [disabled]="dictamen" (click)="dictamenCita()">								
+									EMITIR DICTAMEN</button>   
+								</div>		  					
+				</mat-card-content>	
+				<alert style="font-size: small; height: 30px;"></alert>			
+			</mat-card>
+		</div>		
+	</div>	
+</div>

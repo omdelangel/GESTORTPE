@@ -1,0 +1,1 @@
+export * from './horacita-dialog.component';

@@ -1,0 +1,67 @@
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+	<div fxLayout="row wrap" fxLayoutGap="20px" style="width: 100%;">
+		<div fxFlex="100">
+			<mat-card>
+				<div class="example-button-container">
+                    <button mat-mini-fab  class="close-button" style="outline: none;" (click)="onNoClick()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>				
+				<mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+					<mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Pre Registro
+					</mat-card-title>
+				</mat-card-actions>
+				<mat-card-content>
+
+				<!--	<button mat-raised-button (click)="isOptional = !isOptional">
+						{{!isOptional ? 'Enable optional steps' : 'Disable optional steps'}}
+					</button> -->
+					<mat-horizontal-stepper [linear]=false  #stepper >
+						<ng-template matStepperIcon="edit">
+							<mat-icon>check</mat-icon>
+						  </ng-template>
+
+						<mat-step [stepControl]="edicionconcesionario!">
+									<ng-template matStepLabel >Concesionario</ng-template>
+									<app-edicionconcesionario ></app-edicionconcesionario>
+									<br>
+									<div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+										<button mat-mini-fab  style="background-color: #80BC00; outline:none;" matTooltip="Guardar" 
+										(click)="guardaConcesionario()">
+											<mat-icon>save</mat-icon>
+										</button>
+									  </div>
+						</mat-step>
+
+						<mat-step [stepControl]="edicionvehiculo!">
+									<ng-template matStepLabel>Vehículo</ng-template>
+									<app-edicionvehiculo ></app-edicionvehiculo>
+									<br>
+									<div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+										<button mat-mini-fab  style="background-color: #80BC00; outline:none;" matTooltip="Guardar"
+										(click)="guardaVehiculo()">
+											<mat-icon>save</mat-icon>
+										</button>
+									  </div>
+						</mat-step>
+									
+						<mat-step [stepControl]="edicionpropietario!" *ngIf="valueAsigna">
+									<ng-template matStepLabel >Propietario</ng-template>
+									<app-edicionpropietario ></app-edicionpropietario>
+									<br>
+									<div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+										<button mat-mini-fab  style="background-color: #80BC00; outline:none;" matTooltip="Guardar"
+										(click)="guardaPropietario()">
+											<mat-icon>save</mat-icon>
+										</button>
+									  </div>
+						</mat-step>			
+
+					</mat-horizontal-stepper>
+				</mat-card-content>
+			</mat-card>
+		</div>
+	</div>
+</div>
+
+

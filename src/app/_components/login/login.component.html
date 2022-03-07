@@ -1,0 +1,37 @@
+<div class="route-sign-in">
+    <div class="left">
+            <mat-card>
+                <img mat-card-image src="assets/images/logo-cambia.jpg" alt="">
+                <!--<mat-card-title >GESTOR DE GAS LP</mat-card-title>-->
+                <h2>Bienvenido</h2>   
+                <mat-card-content>
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                        <alert></alert>
+                            <mat-form-field>
+                                <input matInput placeholder="&nbsp; Usuario" formControlName="username" required maxlength="50">
+                                <mat-icon matPrefix>person</mat-icon>
+                                <mat-error *ngIf="loginForm.get('username')!.invalid">Campo requerido</mat-error>
+                              </mat-form-field>
+                                            
+                            <mat-form-field>
+                                <input matInput placeholder="&nbsp; Contraseña" formControlName="password" required type="Password" maxlength="15">
+                                <mat-icon matPrefix>lock</mat-icon>
+                                <mat-error *ngIf="loginForm.get('password')!.invalid">Campo requerido</mat-error>
+                              </mat-form-field>
+                                               
+                            <button [disabled]="loading" mat-raised-button class='w-full login-field'>
+                                <span *ngIf="loading" class="login-field spinner-border spinner-border-sm mr-1"></span>
+                                ACCEDER</button>   
+                            
+                           <!-- <a [routerLink]="['/register']" class="btn btn-link">Registro</a>-->
+                        
+                    </form>
+                </mat-card-content>
+            </mat-card>
+  
+    </div>
+    <div class='right'>
+
+    </div>
+</div>
+

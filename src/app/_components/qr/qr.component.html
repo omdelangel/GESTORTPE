@@ -1,0 +1,49 @@
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+	<div fxLayout="row wrap" fxLayoutGap="20px" style="width: 100%;">
+		<div fxFlex="100">
+			<mat-card class="header-class">
+				<mat-card-header fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+					<mat-card-title fx-item style="color: #009288; font-weight: lighter;">Código QR</mat-card-title>
+                    <mat-card-subtitle>Inscrito al programa Convertidor a Gas LP </mat-card-subtitle>
+				</mat-card-header>       
+				<mat-card-content class="content-class">
+						<div fxLayout="row wrap" fxLayoutGap="30px grid">
+                            <h2>Christian González</h2>
+                            <span><mat-icon>phone</mat-icon>+52 552323-1111</span>               									
+						</div>
+                        <span><mat-icon>mail</mat-icon>cgonzalez@gmail.com</span>
+                        <qrcode id="qrcode"
+                        [qrdata]="myAngularQrcode"
+                        [width]="256"
+                        [errorCorrectionLevel]="'M'">                           
+                        </qrcode>
+				</mat-card-content>
+                <mat-divider></mat-divider>
+                <mat-card-actions>
+                    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+                        <div class="example-flex-container">
+                        <div class="example-button-container">
+                            <button mat-fab color="warn" (click)="download()" >
+                              <mat-icon>print</mat-icon>
+                            </button>
+                          </div>
+
+                          <div class="example-button-container">
+                            <button mat-fab color="accent" >
+                              <mat-icon>email</mat-icon>
+                            </button>
+                          </div>
+                        </div>                       
+                    </div>                  
+                  </mat-card-actions>
+			</mat-card>    
+		</div>
+	</div>	
+</div>
+
+
+
+
+
+
+

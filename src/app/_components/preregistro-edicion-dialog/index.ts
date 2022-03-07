@@ -1,0 +1,1 @@
+export * from './preregistro-edicion-dialog.component';
