@@ -31,6 +31,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class DialogoDocumentosRegistroComponent implements OnInit {
 
   private readonly notifier: NotifierService;
+  
 
   displayedColumns = ['select', 'Documento', 'NombreArchivo', 'Faltante', 'Observaciones', 'archivoPDF', 'actions'];
   dataSource!: MatTableDataSource<DocumentosVehiculo>;
@@ -39,6 +40,7 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
 
   frmStepFive!: FormGroup;
   idVehiculo: number = 0;
