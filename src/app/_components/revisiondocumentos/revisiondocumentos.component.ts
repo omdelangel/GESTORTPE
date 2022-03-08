@@ -33,48 +33,45 @@ export class RevisiondocumentosComponent implements OnInit {
   private readonly notifier: NotifierService;
 
   //Columnas en Tabla de consulta
-  displayedColumns = ['NombreConcesionario', 'FechaRegistro', 'Marca', 'SubMarca', 'Modelo', 'Placa', 
-  'Estatus', 'Sindicato', 'actions'];
+  displayedColumns = ['NombreConcesionario', 'FechaRegistro', 'Marca', 'SubMarca', 'Modelo', 'Placa',
+    'Estatus', 'Sindicato', 'actions'];
   dataSource!: MatTableDataSource<ConcesionarioRegistro>;
 
   //@ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  
+
 
   reactiveForm!: FormGroup;
-  registro: ConcesionarioRegistro[] = [];
+  verifica: ConcesionarioRegistro[] = [];
 
   constructor(public dialog: MatDialog,
     private concesionarioService: ConcesionarioService,
     private formBuilder: FormBuilder,
-    notifierService: NotifierService) { 
+    notifierService: NotifierService) {
 
-      this.notifier = notifierService;   
-    }
+    this.notifier = notifierService;
+  }
 
   ngOnInit(): void {
 
-    this.getConsultaRegistro();
+    this.getConsultaDocumentosVerifica();
 
     //Validación de campos en pantalla
     this.reactiveForm = this.formBuilder.group({
       'IdConcesionario': [''],
-      'NombreConcesionario':[''],
-      'FechaRegistro':[''],
+      'NombreConcesionario': [''],
+      'FechaRegistro': [''],
       'IdVehiculo': [''],
-      'Marca':[''],
-      'Submarca':[''],
-      'Modelo':[''],
+      'Marca': [''],
+      'Submarca': [''],
+      'Modelo': [''],
       'Placa': [''],
-      'Estatus':[''],
-      'IdSindicato':[''],
-      'Sindicato':[''],
-      'IdAsignacionSindicato':[''],
-      'EditaContrato':[''],
-      'EditaDocumentos':[''],
-      'EditaOperador':[''],
-    });    
+      'Estatus': [''],
+      'IdSindicato': [''],
+      'Sindicato': [''],
+      'IdAsignacionSindicato': [''],
+    });
 
   }
 
@@ -90,64 +87,56 @@ export class RevisiondocumentosComponent implements OnInit {
 
 
 
-    //Consulta los datos de concesionarios aprobados
-    getConsultaRegistro(){
-      //this.clear();
+  //Consulta los datos de concesionarios aprobados
+  getConsultaDocumentosVerifica() {
+
+    this.concesionarioService.getConcesionarioVerifica()
+      .pipe(first())
+      .subscribe(data => {
+
+        this.verifica = data.concesionario;
+        this.dataSource = new MatTableDataSource(this.verifica);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
+      },
+        error => {
+
+        });
+
+  }
 
 
-      this.concesionarioService.getRegistroConcesionario()
-        .pipe(first())
-        .subscribe(data => {   
- 
-          this.registro = data.concesionario;   
-          this.dataSource = new MatTableDataSource(this.registro);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-              
- 
-        },
-          error => {
+  public handlePage(e: any) {
+
+  }
+
+
+  //Edita los documentos
+  documentos(e: any) {
+
+    const dialogRef = this.dialog.open(DialogoDocumentosRegistroComponent, {
+      disableClose: true,
+      data: {
+        IdVehiculo: e.IdVehiculo, IdConcesionario: e.IdConcesionario, nombreConcesionario: e.NombreConcesionario, marca: e.Marca,
+        submarca: e.Submarca, modelo: e.Modelo
+      },
+      width: '1500px',
+      //height: '700px'
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      this.getConsultaDocumentosVerifica();
+    });
+
+  }
+
   
-          });
-
-    }
-
-
-    public handlePage(e: any) {
-
-    }
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
 
 
-   
-
-
-
-     //Edita los documentos
-     documentos(e: any) {
-
-      const dialogRef = this.dialog.open(DialogoDocumentosRegistroComponent, {
-        disableClose: true,
-        data: { IdVehiculo: e.IdVehiculo, IdConcesionario: e.IdConcesionario, nombreConcesionario: e.NombreConcesionario, marca: e.Marca,
-        submarca: e.Submarca, modelo: e.Modelo},
-        width: '1500px',
-        //height: '700px'
-      });
-  
-      dialogRef.afterClosed().subscribe(res => {
-        this.getConsultaRegistro();
-      });
-
-    }
-
-
-
-       
-
-    applyFilter(filterValue: string) {
-      filterValue = filterValue.trim(); // Remove whitespace
-      filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-      this.dataSource.filter = filterValue;
-    }
-  
-  
 }
