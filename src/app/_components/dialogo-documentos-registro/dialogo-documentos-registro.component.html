@@ -61,13 +61,13 @@
                                         <mat-cell *matCellDef="let row" style="font-size: 12px;"> <button mat-mini-fab
                                                 class="upload-btn" *ngIf="row.Faltante == 1"
                                                 style="outline:none; background-color: #F15A24;"
-                                                matTooltip="Adjuntar Archivo PDF">
+                                                matTooltip="">
                                                 <mat-icon color="white">{{row.Faltante=='1' ? 'priority_high': ''}}
                                                 </mat-icon>
                                             </button>
                                             <button mat-mini-fab class="upload-btn" *ngIf="row.Faltante == 0"
                                                 style="outline:none; background-color: #80BC00;"
-                                                matTooltip="Adjuntar Archivo PDF">
+                                                matTooltip="">
                                                 <mat-icon color="white"> {{row.Faltante=='0' ? 'done': ''}}</mat-icon>
                                             </button>
                                         </mat-cell>
@@ -84,17 +84,6 @@
                                             {{row.NombreArchivoPDF}}</mat-cell>
                                     </ng-container>
 
-                                							<!-- Color Column -->
-							<ng-container matColumnDef="Observaciones">
-								<mat-header-cell *matHeaderCellDef mat-sort-header> Observaciones </mat-header-cell>
-								<mat-cell *matCellDef="let row"> <span *ngIf="!row.editable; else editPlace">
-									{{row.Observaciones}}
-								  </span>
-								  <ng-template #editPlace>
-									<input matInput formControlName="Observaciones" 
-										   [(ngModel)]="row.Observaciones" type="text"  >
-								  </ng-template> </mat-cell>
-							</ng-container>
 
                                     <!-- Color Column -->
                                     <ng-container matColumnDef="archivoPDF">
@@ -135,47 +124,87 @@
                                         </mat-cell>
                                     </ng-container>
                                     						<!--toggle column -->
-						<ng-container matColumnDef="Correcto" >
-							<mat-header-cell  *matHeaderCellDef mat-sort-header> Correcto/Incorrecto</mat-header-cell>
-							<mat-cell  *matCellDef="let row;let i = index; " [formGroup]="reactiveForm" >
-								<div *ngIf="condicion">
-							<mat-slide-toggle [checked] = "row.Correcto" [disabled] = "disabled" > </mat-slide-toggle>
-						</div>
-							</mat-cell>
-						</ng-container>
-
-                            <!-- Color Column -->
-							<ng-container matColumnDef="Observaciones" >
-								<mat-header-cell *matHeaderCellDef mat-sort-header> Observaciones </mat-header-cell>
-								<mat-cell *matCellDef="let row" > <span *ngIf="!row.editable; else editPlace" >
-									{{row.Observaciones}}
-								  </span>
-								  <ng-template #editPlace  >
-									<input matInput formControlName="Observaciones" 
-										   [(ngModel)]="row.Observaciones"  >
-								  </ng-template> </mat-cell>
-							</ng-container>
-                            
-                            <ng-container matColumnDef="actions1" stickyEnd>
+						
+                            <ng-container matColumnDef="Correcto" stickyEnd>
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Validar documentos</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
-                                    <a (click)="editar(row)" matTooltip="Validar" *ngIf="!row.editable"
+                                    <a (click)="editar(row, 1)" matTooltip="Correcto" *ngIf="!row.editable"
                                     class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
                                     mat-icon-button>
-                                   <mat-icon style="color: #009288;">check_box</mat-icon>
+                                   <mat-icon style="color: #1B4F72;">check_box</mat-icon>
                                  </a>
-                                 <a (click)="salvar(row)" matTooltip="Guardar" *ngIf="row.editable"
+                                 <a (click)="salvar(row, 1)" matTooltip="Guardar" *ngIf="row.editable"
                                  class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
                                  mat-icon-button>
                                 <mat-icon style="color: #009288;">save</mat-icon>
                               </a>
-                              <a (click)="cancelar(row)" matTooltip="Cancelar" *ngIf="row.editable"
+                              <a (click)="cancelar(row, 1)" matTooltip="Cancelar" *ngIf="row.editable"
                                  class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
                                  mat-icon-button>
                                 <mat-icon style="color: #009288;">cancel</mat-icon>
                               </a>
                                 </mat-cell>
                             </ng-container>
+
+                            <ng-container matColumnDef="Incorrecto" stickyEnd>
+                                <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                                <mat-cell *matCellDef="let row">
+                                    <a (click)="editar(row, 0)" matTooltip="Incorrecto" *ngIf="!row.editable1"
+                                    class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
+                                    mat-icon-button>
+                                   <mat-icon style="color: #009288;">cancel</mat-icon>
+                                 </a>
+                                 <a (click)="salvar(row, 0)" matTooltip="Guardar" *ngIf="row.editable1"
+                                 class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
+                                 mat-icon-button>
+                                <mat-icon style="color: #009288;">save</mat-icon>
+                              </a>
+                              <a (click)="cancelar(row, 0)" matTooltip="Cancelar" *ngIf="row.editable1"
+                                 class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
+                                 mat-icon-button>
+                                <mat-icon style="color: #009288;">cancel</mat-icon>
+                              </a>
+                                </mat-cell>
+                            </ng-container>
+
+
+                             <!-- Progress Column -->
+                             <ng-container matColumnDef="Calificacion">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus de la Revisión
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let row" style="font-size: 12px;"> 
+                                    <button mat-mini-fab class="upload-btn" *ngIf="row.Calificacion == 0"
+                                        style="outline:none; background-color: #F15A24;"
+                                        matTooltip="">
+                                        <mat-icon color="white">{{row.Calificacion=='0' ? 'close': ''}} </mat-icon>
+                                    </button>
+                                    <button mat-mini-fab class="upload-btn" *ngIf="row.Calificacion == 1"
+                                        style="outline:none; background-color: #80BC00;"
+                                        matTooltip="">
+                                        <mat-icon color="white"> {{row.Calificacion=='1' ? 'done': ''}}</mat-icon>
+                                    </button>
+                                    <button mat-mini-fab class="upload-btn" *ngIf="row.Calificacion == 2"
+                                    style="outline:none; background-color: #F1C40F;"
+                                    matTooltip="">
+                                    <mat-icon color="white"> {{row.Calificacion=='2' ? 'search': ''}}</mat-icon>
+                                </button>
+                                </mat-cell>
+                            </ng-container>
+    
+                                <!-- Color Column -->
+                                <ng-container matColumnDef="Observaciones" >
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Observaciones </mat-header-cell>
+                                    <mat-cell *matCellDef="let row" > <span *ngIf="!row.editable1; else editPlace" >
+                                        {{row.Observaciones}}
+                                      </span>
+                                      <ng-template #editPlace  >
+                                          <mat-form-field  appereance="fill">                                        
+                                        <input matInput formControlName="Observaciones" 
+                                               [(ngModel)]="row.Observaciones"  >
+                                            </mat-form-field >
+                                      </ng-template> </mat-cell>
+                                </ng-container>
+                                
 
 
                                     <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>

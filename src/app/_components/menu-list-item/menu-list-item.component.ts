@@ -50,12 +50,10 @@ export class MenuListItemComponent implements OnInit {
 
           
       if (!item.children || !item.children.length) {
-        console.log("HACE CLICK0");
         this.router.navigate([item.route]);
         //this.navService.closeNav();
       }
       if (item.children && item.children.length) {
-        console.log("HACE CLICK1");
         this.expanded = !this.expanded;
       }
      

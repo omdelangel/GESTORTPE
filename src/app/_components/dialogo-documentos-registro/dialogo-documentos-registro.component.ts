@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, Ng
 import { DocumentosService} from '../../_services';
 import { first } from 'rxjs/operators';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { DocumentosVehiculo } from '../../_models';
+import { DocumentosVehiculo, DocumentoVerificacion } from '../../_models';
 import { MatTableDataSource } from '@angular/material/table';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog';
@@ -32,9 +32,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class DialogoDocumentosRegistroComponent implements OnInit {
 
   private readonly notifier: NotifierService;
-  
 
-  //displayedColumns = ['Documento', 'NombreArchivo', 'Faltante', 'archivoPDF', 'actions', 'Correcto', 'Observaciones', 'actions1' ];
+
+  //displayedColumns = ['Documento', 'NombreArchivo', 'Faltante', 'archivoPDF', 'actions', 'Correcto', 'Observaciones', 'actions1', 'actions2' ];
   displayedColumns: any[];
   dataSource!: MatTableDataSource<DocumentosVehiculo>;
   selection = new SelectionModel<DocumentosVehiculo>(true, []);
@@ -55,43 +55,44 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
   modeloValue: string = "";
   editable: boolean = true;
   edit: boolean = true;
-  condicion = true;
+  editable1: boolean = true;
   disabled = true;
   dataPerfil: any = "";
   perfil: number = 0;
   submitted = false;
- 
+  documento: DocumentoVerificacion;
+
   constructor(private formBuilder: FormBuilder,
     private documentosService: DocumentosService,
     public dialog: MatDialog,
     notifierService: NotifierService,
     public dialogRef: MatDialogRef<DialogoDocumentosRegistroComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { 
+    @Inject(MAT_DIALOG_DATA) public data: any) {
 
-      dialogRef.disableClose = true;
-      this.notifier = notifierService;  
-      this.idVehiculo = data.IdVehiculo;
-      this.idConcesionario = data.IdConcesionario;
-      this.nombreConcesionarioValue = data.nombreConcesionario;
-      this.marcaValue = data.marca;
-      this.submarcaValue = data.submarca;
-     this.modeloValue = data.modelo; 
-     
-     this.dataPerfil = sessionStorage.getItem('usuario');
+    dialogRef.disableClose = true;
+    this.notifier = notifierService;
+    this.idVehiculo = data.IdVehiculo;
+    this.idConcesionario = data.IdConcesionario;
+    this.nombreConcesionarioValue = data.nombreConcesionario;
+    this.marcaValue = data.marca;
+    this.submarcaValue = data.submarca;
+    this.modeloValue = data.modelo;
 
-     let valores = JSON.parse(this.dataPerfil);     
-     this.perfil = valores.IdPerfil;
+    //Obtiene el valor del perfil para la revisión de los documentos
+    this.dataPerfil = sessionStorage.getItem('usuario');
+    let valores = JSON.parse(this.dataPerfil);
+    this.perfil = valores.IdPerfil;
 
-     if (this.perfil == 6){
-      this.displayedColumns = ['Documento', 'NombreArchivo', 'Faltante', 'archivoPDF', 'actions', 'Correcto', 'Observaciones' ];
+    if (this.perfil == 6) {
+      this.displayedColumns = ['Documento', 'NombreArchivo', 'Faltante', 'archivoPDF', 'actions', 'Calificacion', 'Observaciones'];
 
-     } else {
-      this.displayedColumns = ['Documento', 'NombreArchivo', 'Faltante', 'archivoPDF', 'actions', 'Correcto', 'Observaciones', 'actions1' ];
-
-     }
-
+    } else {
+      this.displayedColumns = ['Documento', 'NombreArchivo', 'Faltante', 'archivoPDF', 'actions', 'Correcto', 'Incorrecto', 'Calificacion', 'Observaciones'];
 
     }
+
+
+  }
 
   ngOnInit(): void {
 
@@ -104,9 +105,12 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
       'IdVehiculo': [''],
       'NombreArchivo': [''],
       'Faltante': [''],
+      'Calificacion': [''],
       'Observaciones': ['']
     });
- }
+  }
+
+  get f() { return this.reactiveForm.controls; }
 
   onSubmit() {
     if (this.reactiveForm.valid) {
@@ -121,7 +125,7 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
   verPDF(row: any) {
 
     if (row.Faltante == 1) {
-      this.openDialogSinPDF(row);      
+      this.openDialogSinPDF(row);
     } else {
       this.openDialogPDF(row.NombreArchivo);
     }
@@ -165,11 +169,14 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
       .pipe(first())
       .subscribe(dataList => {
 
-          this.dataSource = new MatTableDataSource(dataList.documentos);
+        console.log("REGRESA DE LA CONSULTA");
+        console.log(dataList);
 
-          // Assign the data to the data source for the table to render
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
+        this.dataSource = new MatTableDataSource(dataList.documentos);
+
+        // Assign the data to the data source for the table to render
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
         error => {
 
@@ -184,9 +191,9 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
 
       const formData = new FormData();
       formData.append('Documento', this.uploadedFiles[0], this.uploadedFiles[0].name),
-      formData.append('IdVehiculo', row.IdVehiculo),
-      formData.append('IdDocumento', row.IdDocumento),
-      formData.append('IdConcesionario', this.idConcesionario)
+        formData.append('IdVehiculo', row.IdVehiculo),
+        formData.append('IdDocumento', row.IdDocumento),
+        formData.append('IdConcesionario', this.idConcesionario)
 
       this.documentosService.postGuardaDocumentoRegistro(formData)
         .pipe(first())
@@ -196,11 +203,11 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
             if (data.estatus) {
               //this.success(data.mensaje);
               this.notifier.notify('success', data.mensaje, '');
-              this.getDocumentosContrato(row.IdVehiculo);          
+              this.getDocumentosContrato(row.IdVehiculo);
             } else if (!data.estatus) {
               //this.warn(data.mensaje);
               this.notifier.notify('warning', data.mensaje, '');
-            } 
+            }
           },
           error => {
             //this.error(error);
@@ -240,9 +247,9 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
       .afterClosed()
       .subscribe((confirmado: Boolean) => {
         if (confirmado) {
-          
+
         } else {
-          
+
         }
       });
   }
@@ -259,56 +266,95 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
- /** Whether the number of selected elements matches the total number of rows. */
- isAllSelected() {
-  const numSelected = this.selection.selected.length;
-  const numRows = this.dataSource.data.length;
-  return numSelected === numRows;
-}
-
-/** Selects all rows if they are not all selected; otherwise clear selection. */
-masterToggle() {
-  this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
-}
-
-editar(e: any) {
-  if (this.edit) e.editable = !e.editable;
-  this.disabled = false;
-  this.edit = false;
-  this.condicion = true;
-
-}
-
-cancelar(e: any) {
-  this.getDocumentosContrato(this.idVehiculo);
-  this.disabled = true;
-  this.edit = true;
-  e.editable = !e.editable;
-  this.condicion = true;
-
-}
-
-salvar(e: any) {
-  this.editaDocumento(e);
-  this.edit = true;
-  e.editable = !e.editable;
-  this.condicion = true;
-}
-
-editaDocumento(e: any){
-
-  this.submitted = true;
-
-  // stop here if form is invalid
-  if (this.reactiveForm.invalid) {
-    return;
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
   }
-  console.log("Va a guardar los datos verificados");
-  console.log(e);
 
-}
+  //Califica el documento
+  editar(e: any, valor: number) {
+
+    if (valor == 1) {
+      if (this.edit) e.editable = !e.editable;
+      this.disabled = false;
+      this.edit = false;
+    } else {
+      if (this.edit) e.editable1 = !e.editable1;
+      this.disabled = false;
+      this.edit = false;
+    }
+
+  }
+
+  //Cancela la calificación del documento
+  cancelar(e: any, valor: number) {
+    this.getDocumentosContrato(this.idVehiculo);
+
+    if (valor == 1) {
+      this.disabled = true;
+      this.edit = true;
+      e.editable = !e.editable;
+    } else {
+      this.disabled = true;
+      this.edit = true;
+      e.editable1 = !e.editable1;
+    }
+
+  }
+
+  //Guarda la calificación del documento
+  salvar(e: any, valor: number) {
+
+    if (valor == 1) {
+      this.calificaDocumento(e, valor);
+      this.edit = true;
+      e.editable = !e.editable;
+    } else {
+      this.calificaDocumento(e, valor);
+      this.edit = true;
+      e.editable1 = !e.editable1;
+    }
+
+  }
+
+  //Ejecuta el servicio que guarda la calificación
+  calificaDocumento(e: any, cal: number) {
+
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.reactiveForm.invalid) {
+      return;
+    }
+
+    this.documento = {
+      IdVehiculo: e.IdVehiculo, IdConcesionario: this.idConcesionario, IdDocumento: e.IdDocumento,
+      Correcto: cal, Observaciones: e.Observaciones
+    }
+
+    this.documentosService.postDocumentoVerifica(this.documento)
+      .pipe(first())
+      .subscribe(data => {
+
+        console.log("REGRESA DE LA CAL");
+        console.log(data);
+
+        if (data.estatus) {
+          this.getDocumentosContrato(this.idVehiculo);
+          this.notifier.notify('success', data.mensaje, '');
+        } else {
+
+          this.notifier.notify('warning', data.mensaje, '');
+        }
+      },
+        error => {
+          //this.error(error);
+          this.notifier.notify('error', error, '');
+        });
 
 
+
+  }
 }
