@@ -4,12 +4,12 @@ mat-toolbar {
 }
 
 mat-sidenav {
-  margin: 16px;
+ /* margin: 16px;*/
   width: 240px;
   border-right: none;
   background: #001C71;
   color: white;
-  border-radius: 10px;
+  /*border-radius: 10px;*/
   padding-top: 16px;
   text-align: center;
 }
@@ -79,7 +79,7 @@ mat-divider {
 }
 
 .colorToolBar{
-  background-color: #001C71;
+  background-color: #ffffff;
   color: #ffffff;
 }
 
