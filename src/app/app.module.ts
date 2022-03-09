@@ -54,11 +54,13 @@ import { DictamenComponent } from './_components/dictamen/dictamen.component';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { ConsultaRegistroComponent } from './_components/consulta-registro/consulta-registro.component';
 import { DialogoContratoComponent } from './_components/dialogo-contrato/dialogo-contrato.component';
-import { DialogoDocumentosRegistroComponent } from './_components/dialogo-documentos-registro/dialogo-documentos-registro.component';
+import { DialogoDocumentosRegistroComponent } from './_components/dialogo-documentos-registro';
 import { DialogoOperadorComponent } from './_components/dialogo-operador/dialogo-operador.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { RevisiondocumentosComponent } from './_components/revisiondocumentos/revisiondocumentos.component';
 import { OperadoresComponent } from './_components/operadores/operadores.component';
+import { CatDictamenesComponent  } from './_catalogos/cat-dictamenes';
+import { CurrencyPipe } from '@angular/common'; 
 
 
 /**
@@ -153,7 +155,8 @@ FullCalendarModule.registerPlugins([
     DialogoDocumentosRegistroComponent,
     DialogoOperadorComponent,
     RevisiondocumentosComponent,
-    OperadoresComponent
+    OperadoresComponent,
+    CatDictamenesComponent
 
   ],
   imports: [
@@ -175,7 +178,7 @@ FullCalendarModule.registerPlugins([
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    NavService, SharingService
+    NavService, SharingService, CurrencyPipe
   ],
   bootstrap: [AppComponent]
 })

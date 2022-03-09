@@ -6,6 +6,7 @@ import { first } from 'rxjs/operators';
 import { DocumentosService } from 'src/app/_services';
 import { VehiculoContrato } from 'src/app/_models';
 import { NotifierService } from 'angular-notifier';
+import { CurrencyPipe } from '@angular/common';  
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -36,6 +37,7 @@ export class DialogoContratoComponent implements OnInit {
     public dialog: MatDialog,
     public documentosService: DocumentosService,
     notifierService: NotifierService,
+    public currencyPipe: CurrencyPipe,
     public dialogRef: MatDialogRef<DialogoContratoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
@@ -87,8 +89,8 @@ export class DialogoContratoComponent implements OnInit {
         this.f.Concesionario.setValue(this.concesionarioValue);
         this.f.Sindicato.setValue(this.sindicatoValue);
         this.f.TipoConvertidor.setValue(data.contrato[0].Convertidor);
-        this.f.CostoConvertidor.setValue(data.contrato[0].ConsumoRequerido);
-        this.f.ConsumoMensualLTS.setValue(data.contrato[0].ConsumoMensual);
+        this.f.CostoConvertidor.setValue(this.currencyPipe.transform(data.contrato[0].ConsumoRequerido));
+        this.f.ConsumoMensualLTS.setValue(this.currencyPipe.transform(data.contrato[0].ConsumoMensual));
         this.f.Periodo.setValue(data.contrato[0].NumeroPeriodos);
         this.f.TipoVehiculo.setValue(data.contrato[0].TipoVehiculo);       
 

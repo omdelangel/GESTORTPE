@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { DocumentosVehiculo } from '../_models/documentos.model';
+import { DocumentoVerificacion } from '../_models/documentos.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ import { DocumentosVehiculo } from '../_models/documentos.model';
 export class DocumentosService {
 
   SERVER_URL: string = `${environment.SERVER_URL}/documento-edicion`;  
+  SERVER_URLReg: string = `${environment.SERVER_URL}/documento-digitalizacion`;
   constructor(private http: HttpClient) { }
 
   //Consulta los documentos asociados a un vehículo
@@ -34,9 +35,6 @@ postGuardaDocumentoPDF(formData: any): Observable<any> {
 
   return this.http.post<any>(this.SERVER_URL, formData)
   .pipe(map((res: Response) => {
-
-    console.log("res");
-    console.log(res);
 
       return res || {}
     }),
@@ -66,6 +64,32 @@ getDocumentosContrato(IdVehiculo: number): Observable<any> {
   params = params.append('IdVehiculo', IdVehiculo);
 
   return this.http.get<any>(`${environment.SERVER_URL}/documentos-contrato`, { params: params })
+    .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+      catchError(this.handleError)
+    )
+}
+
+//Guarda los documentos de la pantalla de Registro
+postGuardaDocumentoRegistro(formData: any): Observable<any> {  
+
+  return this.http.post<any>(this.SERVER_URLReg, formData)
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Guarda las observaciones de los documentos revisados
+postDocumentoVerifica(documento: DocumentoVerificacion): Observable<any> {
+
+  return this.http.post<any>(`${environment.SERVER_URL}/documento-verificacion`, {
+    'IdVehiculo': documento.IdVehiculo, 'IdConcesionario': documento.IdConcesionario, 
+    'IdDocumento': documento.IdDocumento, 'Correcto': documento.Correcto, 'Observaciones': documento.Observaciones})
     .pipe(map((res: Response) => {
 
       return res || {}

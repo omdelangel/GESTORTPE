@@ -3,7 +3,7 @@
 		<div fxFlex="100">
 			<mat-card>
 				<mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-					<mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Concesionarios - Firma de Contrato
+					<mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Concesionarios - Revisión de Documentos
 					</mat-card-title>
 				</mat-card-actions>
 
@@ -119,7 +119,7 @@
 								<ng-container matColumnDef="actions">
 									<mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
 									<mat-cell *matCellDef="let row">
-										<button mat-mini-fab class="button-documentos" (click)="documentos(row)" [disabled]="!row.EditaDocumentos"	
+										<button mat-mini-fab class="button-documentos" (click)="documentos(row)" 
 											matTooltip="Ir a documentos">
 											<mat-icon class="iconSize">attach_file</mat-icon>
 										</button>&nbsp; &nbsp;
