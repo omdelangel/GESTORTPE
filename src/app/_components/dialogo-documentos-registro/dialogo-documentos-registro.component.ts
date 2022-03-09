@@ -14,6 +14,7 @@ import { Row } from 'jspdf-autotable';
 import {SelectionModel} from '@angular/cdk/collections';
 import { DialogoConfirmacionComponent } from '../dialogo-confirmacion';
 import { NotifierService } from 'angular-notifier';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -33,14 +34,14 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
   private readonly notifier: NotifierService;
   
 
-  displayedColumns = ['select', 'Documento', 'NombreArchivo', 'Faltante', 'Observaciones', 'archivoPDF', 'actions'];
+  //displayedColumns = ['Documento', 'NombreArchivo', 'Faltante', 'archivoPDF', 'actions', 'Correcto', 'Observaciones', 'actions1' ];
+  displayedColumns: any[];
   dataSource!: MatTableDataSource<DocumentosVehiculo>;
   selection = new SelectionModel<DocumentosVehiculo>(true, []);
 
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
 
   frmStepFive!: FormGroup;
   idVehiculo: number = 0;
@@ -53,8 +54,13 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
   submarcaValue: string = "";
   modeloValue: string = "";
   editable: boolean = true;
-
-
+  edit: boolean = true;
+  condicion = true;
+  disabled = true;
+  dataPerfil: any = "";
+  perfil: number = 0;
+  
+ 
   constructor(private formBuilder: FormBuilder,
     private documentosService: DocumentosService,
     public dialog: MatDialog,
@@ -69,7 +75,21 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
       this.nombreConcesionarioValue = data.nombreConcesionario;
       this.marcaValue = data.marca;
       this.submarcaValue = data.submarca;
-     this.modeloValue = data.modelo;
+     this.modeloValue = data.modelo; 
+     
+     this.dataPerfil = sessionStorage.getItem('usuario');
+
+     let valores = JSON.parse(this.dataPerfil);     
+     this.perfil = valores.IdPerfil;
+
+     if (this.perfil == 6){
+      this.displayedColumns = ['Documento', 'NombreArchivo', 'Faltante', 'archivoPDF', 'actions', 'Correcto', 'Observaciones' ];
+
+     } else {
+      this.displayedColumns = ['Documento', 'NombreArchivo', 'Faltante', 'archivoPDF', 'actions', 'Correcto', 'Observaciones', 'actions1' ];
+
+     }
+
 
     }
 
@@ -168,7 +188,7 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
       formData.append('IdDocumento', row.IdDocumento),
       formData.append('IdConcesionario', this.idConcesionario)
 
-      this.documentosService.postGuardaDocumentoPDF(formData)
+      this.documentosService.postGuardaDocumentoRegistro(formData)
         .pipe(first())
         .subscribe(
           data => {
@@ -231,6 +251,7 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
     this.dialogRef.close();
   }
 
+
   applyFilter(filterValue: string) {
 
     filterValue = filterValue.trim(); // Remove whitespace
@@ -251,4 +272,33 @@ masterToggle() {
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
 }
+
+editar(e: any) {
+  if (this.edit) e.editable = !e.editable;
+  this.edit = false;
+  this.condicion = true;
+
+}
+
+cancelar(e: any) {
+  this.edit = true;
+  e.editable = !e.editable;
+  this.condicion = true;
+
+}
+
+salvar(e: any) {
+
+  this.editCuenta(e);
+  this.edit = true;
+  e.editable = !e.editable;
+  this.condicion = true;
+}
+
+editCuenta(e: any){
+
+
+}
+
+
 }

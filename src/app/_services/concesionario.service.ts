@@ -78,6 +78,18 @@ export class ConcesionarioService {
       )
   }
 
+   //Consulta los datos de Concesionario para la pantalla de Verificación
+   getConcesionarioVerifica(): Observable<any> {   
+
+    return this.http.get<any>(`${environment.SERVER_URL}/concesionario-verificacion`)
+      .pipe(map((res: Response) => {    
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }
+
 
 
   //Registra concesionarios
