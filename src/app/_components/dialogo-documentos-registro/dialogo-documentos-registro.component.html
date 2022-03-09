@@ -17,7 +17,7 @@
                 </mat-card-actions>
 
                 <mat-card-content>
-                    <form [formGroup]="frmStepFive" (ngSubmit)="onSubmit()">
+                    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
                         <div fxLayout="row wrap" fxLayoutGap="20px" fxFlex="100">
 
                             <div class=" mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100">
@@ -137,7 +137,7 @@
                                     						<!--toggle column -->
 						<ng-container matColumnDef="Correcto" >
 							<mat-header-cell  *matHeaderCellDef mat-sort-header> Correcto/Incorrecto</mat-header-cell>
-							<mat-cell  *matCellDef="let row;let i = index; " [formGroup]="frmStepFive" >
+							<mat-cell  *matCellDef="let row;let i = index; " [formGroup]="reactiveForm" >
 								<div *ngIf="condicion">
 							<mat-slide-toggle [checked] = "row.Correcto" [disabled] = "disabled" > </mat-slide-toggle>
 						</div>

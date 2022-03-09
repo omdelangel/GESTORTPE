@@ -43,7 +43,7 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  frmStepFive!: FormGroup;
+  reactiveForm!: FormGroup;
   idVehiculo: number = 0;
   uploadedFiles!: Array<File>;
   disable: boolean = false;
@@ -59,7 +59,7 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
   disabled = true;
   dataPerfil: any = "";
   perfil: number = 0;
-  
+  submitted = false;
  
   constructor(private formBuilder: FormBuilder,
     private documentosService: DocumentosService,
@@ -98,7 +98,7 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
     this.getDocumentosContrato(this.idVehiculo);
 
     //Validación de campos en pantalla
-    this.frmStepFive = this.formBuilder.group({
+    this.reactiveForm = this.formBuilder.group({
       'IdDocumento': [''],
       'Documento': [''],
       'IdVehiculo': [''],
@@ -109,7 +109,7 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
  }
 
   onSubmit() {
-    if (this.frmStepFive.valid) {
+    if (this.reactiveForm.valid) {
       //console.log(this.reactiveForm.value)
 
     } else {
@@ -275,12 +275,15 @@ masterToggle() {
 
 editar(e: any) {
   if (this.edit) e.editable = !e.editable;
+  this.disabled = false;
   this.edit = false;
   this.condicion = true;
 
 }
 
 cancelar(e: any) {
+  this.getDocumentosContrato(this.idVehiculo);
+  this.disabled = true;
   this.edit = true;
   e.editable = !e.editable;
   this.condicion = true;
@@ -288,15 +291,22 @@ cancelar(e: any) {
 }
 
 salvar(e: any) {
-
-  this.editCuenta(e);
+  this.editaDocumento(e);
   this.edit = true;
   e.editable = !e.editable;
   this.condicion = true;
 }
 
-editCuenta(e: any){
+editaDocumento(e: any){
 
+  this.submitted = true;
+
+  // stop here if form is invalid
+  if (this.reactiveForm.invalid) {
+    return;
+  }
+  console.log("Va a guardar los datos verificados");
+  console.log(e);
 
 }
 
