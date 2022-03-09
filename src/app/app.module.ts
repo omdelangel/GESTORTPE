@@ -59,6 +59,7 @@ import { DialogoOperadorComponent } from './_components/dialogo-operador/dialogo
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { RevisiondocumentosComponent } from './_components/revisiondocumentos/revisiondocumentos.component';
 import { OperadoresComponent } from './_components/operadores/operadores.component';
+import { CatDictamenesComponent  } from './_catalogos/cat-dictamenes';
 import { CurrencyPipe } from '@angular/common'; 
 
 
@@ -154,7 +155,8 @@ FullCalendarModule.registerPlugins([
     DialogoDocumentosRegistroComponent,
     DialogoOperadorComponent,
     RevisiondocumentosComponent,
-    OperadoresComponent
+    OperadoresComponent,
+    CatDictamenesComponent
 
   ],
   imports: [

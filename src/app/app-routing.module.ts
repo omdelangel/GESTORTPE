@@ -14,6 +14,8 @@ import { ConsultaPreregistroComponent } from './_components/consulta-preregistro
 import { ConsultaRegistroComponent } from './_components/consulta-registro';
 import { RevisiondocumentosComponent } from './_components/revisiondocumentos';
 import { OperadoresComponent } from './_components/operadores';
+import { CatDictamenesComponent } from './_catalogos/cat-dictamenes';
+
 
 
 const routes: Routes = [
@@ -31,7 +33,8 @@ const routes: Routes = [
                { path: 'preRegistro', component: ConsultaPreregistroComponent},
                { path: 'registro', component: ConsultaRegistroComponent},
                { path: 'revisaDocumentos', component: RevisiondocumentosComponent},
-               { path: 'operadores', component: OperadoresComponent}
+               { path: 'operadores', component: OperadoresComponent},
+               { path: 'dictamenes', component: CatDictamenesComponent}
                ]},  
  
  

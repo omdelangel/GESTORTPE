@@ -115,4 +115,16 @@ handleError(error: HttpErrorResponse) {
   return throwError(msg);
 }
 
+//Obtiene la información existente en la tabla de Dictámenes
+getCatalogoDictamenes(): Observable<any> {
+
+  return this.http.get<any>(`${environment.SERVER_URL}/cat-dictamenes`, {})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
 }

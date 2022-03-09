@@ -18,6 +18,18 @@ export class CatalogoTpoAsignacion {
     }    
 }
 
+export class CatalogoDictamenes {
+    IdDictamen:     string;
+    Nombre:         string;
+    Estatus:        string;    
+
+    constructor(catalogoGeneral: { IdDictamen: string; Nombre: string; Estatus: string}){
+        this.IdDictamen      = catalogoGeneral.IdDictamen;
+        this.Nombre          = catalogoGeneral.Nombre; 
+        this.Estatus         = catalogoGeneral.Estatus; 
+    }    
+}
+
 export class CP {
     Municipio: string;
     EntidadFederativa: string;
