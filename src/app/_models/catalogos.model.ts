@@ -21,9 +21,9 @@ export class CatalogoTpoAsignacion {
 export class CatalogoDictamenes {
     IdDictamen:     string;
     Nombre:         string;
-    Estatus:        string;    
+    Estatus:        boolean;    
 
-    constructor(catalogoGeneral: { IdDictamen: string; Nombre: string; Estatus: string}){
+    constructor(catalogoGeneral: { IdDictamen: string; Nombre: string; Estatus: boolean}){
         this.IdDictamen      = catalogoGeneral.IdDictamen;
         this.Nombre          = catalogoGeneral.Nombre; 
         this.Estatus         = catalogoGeneral.Estatus; 

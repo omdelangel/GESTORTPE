@@ -41,10 +41,22 @@
                                 </ng-container>
 
                                 <!-- ID Column -->
+                                <!--
                                 <ng-container matColumnDef="Estatus" sticky>
                                     <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let row"> {{row.Estatus=='A' ? 'Abierta': ''}} {{row.Estatus=='D' ? 'Dictaminada': ''}} {{row.Estatus=='C' ? 'Cancelada': ''}} {{row.Estatus=='V' ? 'Vencida': ''}}</mat-cell>
+                                </ng-container>
+                                -->
+
+                                <!--toggle column -->
+                                <ng-container matColumnDef="Estatus">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Inactivo/Activo</mat-header-cell>
+                                    <mat-cell *matCellDef="let row;let i = index; " [formGroup]="reactiveForm">
+                                        <div>
+                                            <mat-slide-toggle [checked]="row.Estatus" (change)="changeEstatus(row)"> </mat-slide-toggle>
+                                        </div>
+                                    </mat-cell>
                                 </ng-container>
 
                                 <!--toggle column -->

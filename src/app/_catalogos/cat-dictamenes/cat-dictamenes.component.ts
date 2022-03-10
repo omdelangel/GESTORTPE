@@ -31,6 +31,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class CatDictamenesComponent implements OnInit {
   private readonly notifier: NotifierService;
 
+  disabled = false;
   //Columnas en Tabla de consulta
   displayedColumns = ['IdDictamen', 
                       'Nombre', 
@@ -106,6 +107,26 @@ export class CatDictamenesComponent implements OnInit {
           error => {  
           });
     }
+
+  //cambiar estatatus(Inactivo/Activo)  
+    changeEstatus(e: any){
+      console.log("change Estatus ")
+      console.log(e.Estatus)
+      e.Estatus = !e.Estatus;
+      console.log(e.Estatus)
+      console.log(e)
+      this.catalogosService.actualizaCatalogoDictamen(e)
+        .pipe(first())
+        .subscribe(data => {   
+          console.log("Actualiza Dictamen data ===>  ")
+          console.log(data)
+          this.getConsultaDictamen();
+        },
+          error => {  
+          });
+    }
+
+
 
 
   //Edita el registro de Dictamen
