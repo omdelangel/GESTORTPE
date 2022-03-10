@@ -6,6 +6,7 @@ export class Operador {
     Nombre: string;
     Paterno: string;
     Materno: string;
+    NombreCompleto: string;
     RFC: string;
     CURP: string;
     FechaNacimiento: string;
@@ -33,6 +34,7 @@ export class Operador {
         Nombre: string;
         Paterno: string;
         Materno: string;
+        NombreCompleto: string;
         RFC: string;
         CURP: string;
         FechaNacimiento: string;
@@ -59,6 +61,7 @@ export class Operador {
         this.Nombre = operador.Nombre;
         this.Paterno = operador.Paterno;
         this.Materno = operador.Materno;
+        this.NombreCompleto = operador.NombreCompleto;
         this.RFC = operador.RFC;
         this.CURP = operador.CURP;
         this.FechaNacimiento = operador.FechaNacimiento;

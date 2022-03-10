@@ -1,1 +1,40 @@
-<p>operadores works!</p>
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+      <div fxFlex="30">
+        <mat-card>
+          <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px" >
+            <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Filtros de búsqueda
+            </mat-card-title>
+            <button mat-fab style="background-color: #2d4248; outline: none;" matTooltip="Buscar Placa" outline:none;>
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-card-actions>
+          <mat-card-content>
+            <div fxLayout="row wrap" fxLayoutGap="30px grid">
+              <div fxFlex="100" fxFlex.lt-md="100" fxl>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Placa</mat-label>
+                  <input matInput placeholder="Placa" maxlength="10" formControlName="placa">
+                  <mat-error *ngIf="reactiveForm.get('placa')!.invalid">Campo requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </form>
+    <div fxFlex="100">
+      <alert style="font-size: small; height: 30px;"></alert>
+    </div>
+    
+      <div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="30">
+        <h2 mat-raised-button>Operadores</h2>
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro" onkeyup="javascript:this.value=this.value.toUpperCase();">
+        </mat-form-field>
+      </div>
+  
+  
+  
+  </div>
