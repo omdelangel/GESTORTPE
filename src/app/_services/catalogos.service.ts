@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { CatalogoDictamenes } from 'src/app/_models';
 
 @Injectable({
   providedIn: 'root'
@@ -119,6 +120,21 @@ handleError(error: HttpErrorResponse) {
 getCatalogoDictamenes(): Observable<any> {
 
   return this.http.get<any>(`${environment.SERVER_URL}/cat-dictamenes`, {})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Obtiene la información existente en la tabla de Dictámenes
+actualizaCatalogoDictamen(catalogoDictamenes: CatalogoDictamenes): Observable<any> {
+
+  return this.http.post<any>(`${environment.SERVER_URL}/cat-dictamen`, {
+    'IdDictamen': catalogoDictamenes.IdDictamen,
+    'Estatus': catalogoDictamenes.Estatus,
+  })
   .pipe(map((res: Response) => {
 
       return res || {}

@@ -26,9 +26,6 @@ export class PropietarioService {
 //Registra propietario
 postRegistraPropietario(propietario: Propietario): Observable<any> {
 
-  console.log("DATOS DEL PROP");
-  console.log(propietario);
-
   return this.http.post<any>(`${environment.SERVER_URL}/propietario-edicion`, {'IdPropietario': propietario.IdPropietario, 
   'IdVehiculo': propietario.IdVehiculo, 'Nombre': propietario.Nombre, 'Paterno': propietario.Paterno, 'Materno': propietario.Materno, 
   'RFC': propietario.RFC, 'CURP': propietario.CURP, 'FechaNacimiento': propietario.FechaNacimiento, 'TipoPersona': propietario.TipoPersona,

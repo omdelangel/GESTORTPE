@@ -10,8 +10,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoContratoComponent } from '../dialogo-contrato';
 import { DialogoDocumentosRegistroComponent } from '../dialogo-documentos-registro';
-import { DialogoOperadorComponent } from '../dialogo-operador';
-import { isEmpty } from 'lodash';
 import { NotifierService } from 'angular-notifier';
 
 /** Error when invalid control is dirty, touched, or submitted. */
