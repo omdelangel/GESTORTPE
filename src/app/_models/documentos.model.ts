@@ -6,8 +6,7 @@ export class DocumentosVehiculo {
     IdVehiculo: number;
     NombreArchivo: string;
     Faltante: number;
-    Revisado: number;
-    Correcto: boolean;
+    Calificacion: number;
     Observaciones: string;
 
     constructor(documentosVehiculo: { IdDocumento: number;
@@ -15,16 +14,14 @@ export class DocumentosVehiculo {
         IdVehiculo: number;
         NombreArchivo: string;
         Faltante: number;
-        Revisado: number;
-        Correcto: boolean;
+        Calificacion: number;
         Observaciones: string;}){
         this.IdDocumento = documentosVehiculo.IdDocumento;
         this.Documento = documentosVehiculo.Documento;
         this.IdVehiculo = documentosVehiculo.IdVehiculo;
         this.NombreArchivo = documentosVehiculo.NombreArchivo;
         this.Faltante = documentosVehiculo.Faltante;
-        this.Revisado = documentosVehiculo.Revisado;
-        this.Correcto = documentosVehiculo.Correcto;
+        this.Calificacion = documentosVehiculo.Calificacion;
         this.Observaciones = documentosVehiculo.Observaciones;
     }    
 }
@@ -60,14 +57,14 @@ export class DocumentoVerificacion {
     IdVehiculo: number;
     IdConcesionario: number;
     IdDocumento: number;
-    Correcto: boolean;
+    Correcto: number;
     Observaciones: string;
 
     constructor(documentoVerificacion: {
         IdVehiculo: number;
         IdConcesionario: number;
         IdDocumento: number;
-        Correcto: boolean;
+        Correcto: number;
         Observaciones: string; }) {
             this.IdVehiculo = documentoVerificacion.IdVehiculo;
             this.IdConcesionario = documentoVerificacion.IdConcesionario;
