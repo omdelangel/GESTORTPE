@@ -8,7 +8,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { NotifierService } from 'angular-notifier';
 import { OperadorService } from 'src/app/_services';
-import { DialogoOperadorComponent } from '../dialogo-operador';
+import { DialogoOperadorAltaComponent } from '../dialogo-operador-alta';
+import { DialogoOperadorEditaComponent } from '../dialogo-operador-edita';
 import { Operador } from 'src/app/_models';
 
 
@@ -29,20 +30,26 @@ export class OperadoresComponent implements OnInit {
   private readonly notifier: NotifierService;
 
   //Columnas en Tabla de consulta
-  displayedColumns = ['NombreConcesionario', 'FechaRegistro', 'Marca', 'SubMarca', 'Modelo', 'Placa', 
-  'Estatus', 'Sindicato', 'actions'];
+  displayedColumns = ['NombreCompleto', 'RFC', 'FechaNacimiento',
+ 'TipoPersona', 'EntidadFederativa', 'Telefono', 'Celular', 'email', 'Licencia', 'Estatus', 'actions']
   dataSource!: MatTableDataSource<Operador>;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   reactiveForm!: FormGroup;
-  consulta: Operador[] = [];
+  operadores: Operador[] = [];
+  submitted = false;
+  placa: string = "";
+
 
   constructor(public dialog: MatDialog,
     private operadorService: OperadorService,
     private formBuilder: FormBuilder,
-    notifierService: NotifierService) { }
+    notifierService: NotifierService) {
+
+      this.notifier = notifierService; 
+     }
 
   ngOnInit(): void {
 
@@ -50,42 +57,83 @@ export class OperadoresComponent implements OnInit {
 
     //Validación de campos en pantalla
     this.reactiveForm = this.formBuilder.group({
-      'placa': ['', Validators.required],
-      'IdConcesionario': [''],
-      'NombreConcesionario':[''],
-      'FechaRegistro':[''],
-      'IdVehiculo': [''],
-      'Marca':[''],
-      'Submarca':[''],
-      'Modelo':[''],
-      'Placa': [''],
-      'Estatus':[''],
-      'IdSindicato':[''],
-      'Sindicato':[''],
-      'IdAsignacionSindicato':[''],
-      'EditaContrato':[''],
-      'EditaDocumentos':[''],
-      'EditaOperador':[''],
+      'placa': ['', Validators.required]
+
     }); 
   }
 
-  get g() { return this.reactiveForm.controls; }
+  get f() { return this.reactiveForm.controls; }
 
   onSubmit() {
-    if (this.reactiveForm.valid) {
-      //console.log(this.reactiveForm.value)
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.reactiveForm.invalid) {
+      return;
     } else {
-      return
+
+      this.placa = this.f.placa.value;
+      this.operadorService.getOperadorVehiculo(this.placa)
+      .pipe(first())
+      .subscribe(data => {
+
+        console.log("data.operadores");
+        console.log(data.operadores);
+  
+        if (data.estatus == true && data.operadores != "") {
+  
+          // Assign the data to the data source for the table to render
+          this.operadores = data.operadores;
+
+          this.dataSource = new MatTableDataSource(this.operadores);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+  
+          var elemDiv = document.getElementById('divTitle');
+          elemDiv!.style.visibility = "visible";
+  
+          var elemTable = document.getElementById('htmlData');
+          elemTable!.style.visibility = "visible";
+  
+  
+        }  else if (data.estatus == false ){
+         
+           var elemDiv = document.getElementById('divTitle');
+            elemDiv!.style.visibility = "hidden";
+  
+            var elemTable = document.getElementById('htmlData');
+            elemTable!.style.visibility = "hidden";            
+
+            this.notifier.notify('warning', data.mensaje);
+  
+        } else if (data.estatus == true && data.operadores == ""){
+
+          var elemDiv = document.getElementById('divTitle');
+          elemDiv!.style.visibility = "hidden";
+
+          var elemTable = document.getElementById('htmlData');
+          elemTable!.style.visibility = "hidden";            
+
+          this.notifier.notify('warning', data.mensaje);
+
+          this.openDialog();
+
+        }
+      },
+        error => {        
+  
+        });
+
     }
   }
 
 
       //Abre modal para alta de los operadores
       openDialog(): void {
-        const dialogRef = this.dialog.open(DialogoOperadorComponent, {
+        const dialogRef = this.dialog.open(DialogoOperadorAltaComponent, {
           disableClose: true,
-          width: '1500px',
-          height: '900px'
+          //width: '1500px',
+          //height: '900px'
         });
     
         dialogRef.afterClosed().subscribe(res => {
@@ -97,12 +145,12 @@ export class OperadoresComponent implements OnInit {
       //Consulta los operadores
       getConsultaOperadores(){
 
-        this.operadorService.getOperadorVehiculo("placa")
+        this.operadorService.getOperadorVehiculo(this.placa)
         .pipe(first())
         .subscribe(data => {   
  
-          this.consulta = data.operador;   
-          this.dataSource = new MatTableDataSource(this.consulta);
+          this.operadores = data.operadores;   
+          this.dataSource = new MatTableDataSource(this.operadores);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
               
@@ -114,6 +162,29 @@ export class OperadoresComponent implements OnInit {
 
       }
 
+      changeEstatus(e: any){
+
+
+
+      }
+
+      editar(e: any){
+
+        const dialogRef = this.dialog.open(DialogoOperadorEditaComponent, {
+          disableClose: true,
+          data: { data: e},
+          //width: '1500px',
+          //height: '900px'
+        });
+    
+        dialogRef.afterClosed().subscribe(res => {
+          this.getConsultaOperadores();
+        });
+
+
+      }
+
+      
       applyFilter(filterValue: string) {
         filterValue = filterValue.trim(); // Remove whitespace
         filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches

@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject, Optional  } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm, ControlContainer } from '@angular/forms';
-import { CatalogosService, PropietarioService} from '../../_services';
+import { CatalogosService, OperadorService} from '../../_services';
 import { first } from 'rxjs/operators';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { AlertService } from '../../_alert';
-import { Propietario, CP, Asentamientos, Identificaciones } from '../../_models';
+import { Operador, CP, Asentamientos, Identificaciones } from '../../_models';
 import * as moment from 'moment';
 import { NotifierService } from 'angular-notifier';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -30,23 +30,22 @@ interface EstadoCivil {
   viewValue: string;
 }
 
-
 @Component({
-  selector: 'app-dialogo-operador',
-  templateUrl: './dialogo-operador.component.html',
-  styleUrls: ['./dialogo-operador.component.scss']
+  selector: 'app-dialogo-operador-alta',
+  templateUrl: './dialogo-operador-alta.component.html',
+  styleUrls: ['./dialogo-operador-alta.component.scss']
 })
-export class DialogoOperadorComponent implements OnInit {
+export class DialogoOperadorAltaComponent implements OnInit {
   private readonly notifier: NotifierService;
 
-  frmStepThree!: FormGroup;
+  reactiveForm!: FormGroup;
   submitted = false;
   matcher = new MyErrorStateMatcher();
   rfc: string = "";
   nombre: string = "";
   tipo: string = "";
-  propietario!: Propietario;
-  idPropietario: number = 0;
+  operador: Operador;
+  idOperador: number = 0;
   cp: string = "";
   asentamientos!: CP;
   municipio: string = "";
@@ -54,8 +53,11 @@ export class DialogoOperadorComponent implements OnInit {
   colonias: Asentamientos[] = [];
   identificaciones: Identificaciones[] = [];
   idVehiculo: number = 0;
+  idConcesionario: number = 0;
   fechaNacimiento: string = "";
   asigna: boolean = false;
+  placa: string = "";
+  RFC: string = "";
 
   //Catálogos locales
   genero: Genero[] = [
@@ -79,12 +81,13 @@ export class DialogoOperadorComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private alertService: AlertService,
     private catalogoService: CatalogosService,
-    private propietarioService: PropietarioService,
+    private operadorService: OperadorService,
     notifierService: NotifierService,
-    public dialogRef: MatDialogRef<DialogoOperadorComponent>,
+    public dialogRef: MatDialogRef<DialogoOperadorAltaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
       this.notifier = notifierService; 
+
   }
 
   ngOnInit(): void {
@@ -92,37 +95,38 @@ export class DialogoOperadorComponent implements OnInit {
     this.getCatalogoIdentificaciones();
 
     //Validación de campos en pantalla
-    this.frmStepThree = this.formBuilder.group({
-      'RFC': ['', Validators.required],
-      'CURP': [''],
+    this.reactiveForm = this.formBuilder.group({     
       'Nombre': ['', Validators.required],
       'Paterno': ['', Validators.required],
       'Materno': [''],
+      'RFC': ['', Validators.required],
+      'CURP': [''],
+      'FechaNacimiento': [''],
       'TipoPersona': ['', Validators.required],
       'Genero': ['', Validators.required],
       'EstadoCivil': [''],
-      'FechaNacimiento': [''],
-      'cp': ['', Validators.required],
-      'municipio': [{ value: "", disabled: true }],
-      'entidad': [{ value: "", disabled: true }],
-      'IdColonia': ['', Validators.required],
       'Calle': [''],
       'Exterior': [''],
       'Interior': [''],
+      'IdColonia': [''],
+      'cp': [''],
+      'municipio': [{ value: "", disabled: true }],
+      'entidad': [{ value: "", disabled: true }],   
       'Telefono': ['', Validators.required],
       'Celular': [''],
       'email': [''],
       'IdIdentificacion': [''],
       'FolioIdentificacion': [''],
+      'Licencia': ['', Validators.required],
     });
 
   }
 
-  get f() { return this.frmStepThree.controls; }
+  get f() { return this.reactiveForm.controls; }
 
 
   onSubmit() {
-    if (this.frmStepThree.valid) {
+    if (this.reactiveForm.valid) {
       //console.log(this.reactiveForm.value)
 
 
@@ -142,40 +146,42 @@ export class DialogoOperadorComponent implements OnInit {
   }
 
   //Registro de propietario
-  guardarPropietario() {
+  guardaOperador() {
 
     //this.clear();
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.frmStepThree.invalid) {
+    if (this.reactiveForm.invalid) {
       return;
     }
 
-    if (this.idPropietario == 0) {
-      this.idPropietario == 0;
+    if (this.idOperador == 0) {
+      this.idOperador == 0;
     } else {
-      this.idPropietario == this.idPropietario;
+      this.idOperador == this.idOperador;
     }
   
     this.fechaNacimiento = moment(this.f.FechaNacimiento.value).format('YYYY/MM/DD');
 
-    this.propietario = {
-      IdPropietario: this.idPropietario, IdVehiculo: this.idVehiculo, Nombre: this.f.Nombre.value, Paterno: this.f.Paterno.value, Materno: this.f.Materno.value,
+    this.operador = {
+      IdOperador: this.idOperador, IdVehiculo: this.idVehiculo, IdConcesionario: this.idConcesionario,  Placa: this.placa,
+      Nombre: this.f.Nombre.value, Paterno: this.f.Paterno.value, Materno: this.f.Materno.value, NombreCompleto: "",
       RFC: this.f.RFC.value, CURP: this.f.CURP.value, FechaNacimiento: this.fechaNacimiento, TipoPersona: this.f.TipoPersona.value,
       Genero: this.f.Genero.value, EstadoCivil: this.f.EstadoCivil.value, Calle: this.f.Calle.value, Exterior: this.f.Exterior.value,
       Interior: this.f.Interior.value, IdColonia: this.f.IdColonia.value, Telefono: this.f.Telefono.value, Celular: this.f.Celular.value,
-      email: this.f.email.value, IdIdentificacion: this.f.IdIdentificacion.value, FolioIdentificacion: this.f.FolioIdentificacion.value
+      email: this.f.email.value, IdIdentificacion: this.f.IdIdentificacion.value, FolioIdentificacion: this.f.FolioIdentificacion.value,
+      Licencia: this.f.Licencia.value, Estatus: ""
     }
 
-    this.propietarioService.postRegistraPropietario(this.propietario)
+
+    this.operadorService.postRegistraOperador(this.operador)
       .pipe(first())
       .subscribe(
         data => {
 
           if (data.estatus) {
-            this.idPropietario = data.IdPropietario;
-            this.propietarioService.sendIdPrope(this.idVehiculo);
+            this.idOperador = data.IdPropietario;
             //this.success(data.mensaje);
             this.notifier.notify('success', data.mensaje, '');   
           } else {
@@ -203,7 +209,7 @@ export class DialogoOperadorComponent implements OnInit {
           if (data.estatus && data.cp != "") {
             this.asentamientos = data.cp;
 
-            this.frmStepThree.patchValue({
+            this.reactiveForm.patchValue({
               municipio: this.asentamientos.Municipio,
               entidad: this.asentamientos.EntidadFederativa
             });
@@ -214,7 +220,7 @@ export class DialogoOperadorComponent implements OnInit {
             //this.info(data.mensaje);
             this.notifier.notify('info', data.mensaje, '');
 
-            this.frmStepThree.patchValue({
+            this.reactiveForm.patchValue({
               municipio: "",
               entidad: ""
             });
@@ -244,37 +250,38 @@ export class DialogoOperadorComponent implements OnInit {
   onChangeEvent(event: any) {
   
 
-    this.propietarioService.getPropietarioRFC(event.target.value)
+    this.operadorService.getOperadorRFC(event.target.value)
       .pipe(first())
       .subscribe(
         data => {
 
-          if (data.estatus && data.propietario[0].IdPropietario != 0) {
-            this.idPropietario = data.propietario[0].IdPropietario;
-            this.f.Nombre.setValue(data.propietario[0].Nombre);
-            this.f.Paterno.setValue(data.propietario[0].Paterno);
-            this.f.Materno.setValue(data.propietario[0].Materno);
-            this.f.CURP.setValue(data.propietario[0].CURP);
-            this.f.IdIdentificacion.setValue(data.propietario[0].IdIdentificacion);
-            this.f.FolioIdentificacion.setValue(data.propietario[0].FolioIdentificacion);
-            this.f.FechaNacimiento.setValue(data.propietario[0].FechaNacimiento);
-            this.f.TipoPersona.setValue(data.propietario[0].TipoPersona);
-            this.f.Genero.setValue(data.propietario[0].Genero);
-            this.f.EstadoCivil.setValue(data.propietario[0].EstadoCivil);
-            this.f.Calle.setValue(data.propietario[0].Calle);
-            this.f.Exterior.setValue(data.propietario[0].Exterior);
-            this.f.Interior.setValue(data.propietario[0].Interior);
-            this.f.cp.setValue(data.propietario[0].CP);
+          if (data.estatus && data.operador[0].IdOperador != 0) {
+            this.idOperador = data.operador[0].IdOperador;
+            this.f.Nombre.setValue(data.operador[0].Nombre);
+            this.f.Paterno.setValue(data.operador[0].Paterno);
+            this.f.Materno.setValue(data.operador[0].Materno);
+            this.f.CURP.setValue(data.operador[0].CURP);
+            this.f.IdIdentificacion.setValue(data.operador[0].IdIdentificacion);
+            this.f.FolioIdentificacion.setValue(data.operador[0].FolioIdentificacion);
+            this.f.FechaNacimiento.setValue(data.operador[0].FechaNacimiento);
+            this.f.TipoPersona.setValue(data.operador[0].TipoPersona);
+            this.f.Genero.setValue(data.operador[0].Genero);
+            this.f.EstadoCivil.setValue(data.operador[0].EstadoCivil);
+            this.f.Calle.setValue(data.operador[0].Calle);
+            this.f.Exterior.setValue(data.operador[0].Exterior);
+            this.f.Interior.setValue(data.operador[0].Interior);
+            this.f.cp.setValue(data.operador[0].CP);
             this.changeCP();
-            this.f.IdColonia.setValue(data.propietario[0].IdColonia);
-            this.f.municipio.setValue(data.propietario[0].Municipio);
-            this.f.entidad.setValue(data.propietario[0].EntidadFederativa);
-            this.f.Telefono.setValue(data.propietario[0].Telefono);
-            this.f.Celular.setValue(data.propietario[0].Celular);
-            this.f.email.setValue(data.propietario[0].email);
-          } else if (data.estatus && data.propietario[0].IdPropietario == 0) {
+            this.f.IdColonia.setValue(data.operador[0].IdColonia);
+            this.f.municipio.setValue(data.operador[0].Municipio);
+            this.f.entidad.setValue(data.operador[0].EntidadFederativa);
+            this.f.Telefono.setValue(data.operador[0].Telefono);
+            this.f.Celular.setValue(data.operador[0].Celular);
+            this.f.email.setValue(data.operador[0].email);
+            this.f.Licencia.setValue(data.operador[0].Licencia);
+          } else if (data.estatus && data.operador[0].IdOperador == 0) {
             //this.info(data.mensaje);
-            this.idPropietario = 0;
+            this.idOperador = 0;
             this.f.Nombre.setValue("");
             this.f.Paterno.setValue("");
             this.f.Materno.setValue("");
@@ -294,11 +301,12 @@ export class DialogoOperadorComponent implements OnInit {
             this.f.entidad.setValue("");
             this.f.Telefono.setValue("");
             this.f.Celular.setValue("");
-            this.f.email.setValue("");          
+            this.f.email.setValue("");   
+            this.f.Licencia.setValue("");       
           } else if (!data.estatus) {
             //this.info(data.mensaje);
             this.notifier.notify('info', data.mensaje, '');
-            this.idPropietario = 0;
+            this.idOperador = 0;
             this.f.Nombre.setValue("");
             this.f.Paterno.setValue("");
             this.f.Materno.setValue("");
@@ -319,6 +327,7 @@ export class DialogoOperadorComponent implements OnInit {
             this.f.Telefono.setValue("");
             this.f.Celular.setValue("");
             this.f.email.setValue("");
+            this.f.Licencia.setValue("");   
           }
         },
         error => {
@@ -330,5 +339,8 @@ export class DialogoOperadorComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+
+   
 
 }
