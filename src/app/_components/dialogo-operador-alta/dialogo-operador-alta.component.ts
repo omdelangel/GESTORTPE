@@ -87,6 +87,8 @@ export class DialogoOperadorAltaComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
       this.notifier = notifierService; 
+      this.idConcesionario = data.IdConcesionario;
+      this.idVehiculo = data.IdVehiculo;
 
   }
 
@@ -156,11 +158,6 @@ export class DialogoOperadorAltaComponent implements OnInit {
       return;
     }
 
-    if (this.idOperador == 0) {
-      this.idOperador == 0;
-    } else {
-      this.idOperador == this.idOperador;
-    }
   
     this.fechaNacimiento = moment(this.f.FechaNacimiento.value).format('YYYY/MM/DD');
 
@@ -174,14 +171,13 @@ export class DialogoOperadorAltaComponent implements OnInit {
       Licencia: this.f.Licencia.value, Estatus: ""
     }
 
-
     this.operadorService.postRegistraOperador(this.operador)
       .pipe(first())
       .subscribe(
         data => {
 
-          if (data.estatus) {
-            this.idOperador = data.IdPropietario;
+          if (data.estatus) {         
+            this.dialogRef.close();
             //this.success(data.mensaje);
             this.notifier.notify('success', data.mensaje, '');   
           } else {
@@ -246,7 +242,7 @@ export class DialogoOperadorAltaComponent implements OnInit {
         });
   }
 
-  //Valida el RFC del propietario
+  //Valida el RFC del operador
   onChangeEvent(event: any) {
   
 

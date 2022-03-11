@@ -41,7 +41,10 @@ export class OperadoresComponent implements OnInit {
   operadores: Operador[] = [];
   submitted = false;
   placa: string = "";
-
+  idConcesionario: number = 0;
+  idVehiculo: number = 0;
+  idOperador: number = 0;
+  estatus: string = "";
 
   constructor(public dialog: MatDialog,
     private operadorService: OperadorService,
@@ -52,8 +55,6 @@ export class OperadoresComponent implements OnInit {
      }
 
   ngOnInit(): void {
-
-    this.getConsultaOperadores();
 
     //Validación de campos en pantalla
     this.reactiveForm = this.formBuilder.group({
@@ -76,14 +77,14 @@ export class OperadoresComponent implements OnInit {
       this.operadorService.getOperadorVehiculo(this.placa)
       .pipe(first())
       .subscribe(data => {
-
-        console.log("data.operadores");
-        console.log(data.operadores);
   
         if (data.estatus == true && data.operadores != "") {
   
           // Assign the data to the data source for the table to render
           this.operadores = data.operadores;
+          this.idConcesionario = data.IdConcesionario;
+          this.idVehiculo = data.IdVehiculo;
+
 
           this.dataSource = new MatTableDataSource(this.operadores);
           this.dataSource.paginator = this.paginator;
@@ -116,7 +117,10 @@ export class OperadoresComponent implements OnInit {
 
           this.notifier.notify('warning', data.mensaje);
 
+          this.idConcesionario = data.IdConcesionario;
+          this.idVehiculo = data.IdVehiculo;
           this.openDialog();
+          
 
         }
       },
@@ -132,20 +136,21 @@ export class OperadoresComponent implements OnInit {
       openDialog(): void {
         const dialogRef = this.dialog.open(DialogoOperadorAltaComponent, {
           disableClose: true,
+          data: {IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo}
           //width: '1500px',
           //height: '900px'
         });
     
         dialogRef.afterClosed().subscribe(res => {
-          this.getConsultaOperadores();
+          this.getConsultaOperadores(this.placa);
         });
       }
 
 
       //Consulta los operadores
-      getConsultaOperadores(){
+      getConsultaOperadores(placa: string){
 
-        this.operadorService.getOperadorVehiculo(this.placa)
+        this.operadorService.getOperadorVehiculo(placa)
         .pipe(first())
         .subscribe(data => {   
  
@@ -164,7 +169,24 @@ export class OperadoresComponent implements OnInit {
 
       changeEstatus(e: any){
 
+        this.idOperador = e.IdOperador;
+        if(e.Estatus == "A"){
+        this.estatus = "I";
+        } else if (e.Estatus == "I"){
+          this.estatus = "A";
+        }
 
+        this.operadorService.postBajaOperador(this.idOperador, this.idVehiculo, this.estatus)
+        .pipe(first())
+        .subscribe(data => {  
+          
+          this.getConsultaOperadores(this.placa);
+          this.notifier.notify('success', data.mensaje);
+        },
+          error => {
+  
+            this.notifier.notify('success',error);
+          });
 
       }
 
@@ -172,13 +194,13 @@ export class OperadoresComponent implements OnInit {
 
         const dialogRef = this.dialog.open(DialogoOperadorEditaComponent, {
           disableClose: true,
-          data: { data: e},
+          data: { data: e, IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo},
           //width: '1500px',
           //height: '900px'
         });
     
         dialogRef.afterClosed().subscribe(res => {
-          this.getConsultaOperadores();
+          this.getConsultaOperadores(this.placa);
         });
 
 
