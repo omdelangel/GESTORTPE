@@ -30,6 +30,49 @@ export class CatalogoDictamenes {
     }    
 }
 
+export class CatalogoUsuarios {
+    IdUsuario        :string;
+    Nombre           :string;
+    Contrasenia      :string;
+    IdEmpleado       :number;
+    IdPerfil         :number;
+    Perfil           :string;
+    FechaRegistro    :Date;
+    Estatus          :string;
+    email            :string;
+    Bloqueado        :number;
+    Intentos         :number;
+    UltimaTransaccion:Date;
+
+    constructor(catalogoGeneral: { IdUsuario        :string; 
+                                   Nombre           :string; 
+                                   Contrasenia      :string; 
+                                   IdEmpleado       :number; 
+                                   IdPerfil         :number; 
+                                   Perfil           :string;
+                                   FechaRegistro    :Date; 
+                                   Estatus          :string; 
+                                   email            :string; 
+                                   Bloqueado        :number; 
+                                   Intentos         :number; 
+                                   UltimaTransaccion:Date;
+    }){
+        this.IdUsuario             = catalogoGeneral.IdUsuario        ; 
+        this.Nombre                = catalogoGeneral.Nombre           ; 
+        this.Contrasenia           = catalogoGeneral.Contrasenia      ; 
+        this.IdEmpleado            = catalogoGeneral.IdEmpleado       ; 
+        this.IdPerfil              = catalogoGeneral.IdPerfil         ; 
+        this.Perfil                = catalogoGeneral.Perfil           ; 
+        this.FechaRegistro         = catalogoGeneral.FechaRegistro    ; 
+        this.Estatus               = catalogoGeneral.Estatus          ; 
+        this.email                 = catalogoGeneral.email            ; 
+        this.Bloqueado             = catalogoGeneral.Bloqueado        ; 
+        this.Intentos              = catalogoGeneral.Intentos         ; 
+        this.UltimaTransaccion     = catalogoGeneral.UltimaTransaccion; 
+    }    
+}
+
+
 export class CP {
     Municipio: string;
     EntidadFederativa: string;

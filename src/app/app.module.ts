@@ -14,7 +14,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './_helpers/authconfig.inteceptor';
 import { QrCodeModule } from 'ng-qrcode';
 import { QRComponent } from './_components/qr/qr.component';
-import { UsuariosComponent } from './_components/usuarios/usuarios.component';
 import { EstacionesComponent } from './_components/estaciones/estaciones.component';
 import { SindicatosComponent } from './_components/sindicatos/sindicatos.component';
 import { InicioComponent } from './_components/inicio/inicio.component';
@@ -60,7 +59,8 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { RevisiondocumentosComponent } from './_components/revisiondocumentos/revisiondocumentos.component';
 import { OperadoresComponent } from './_components/operadores/operadores.component';
 import { CatDictamenesComponent  } from './_catalogos/cat-dictamenes';
-import { CurrencyPipe } from '@angular/common'; 
+import { CurrencyPipe } from '@angular/common';
+import { ConsultaUsuariosComponent } from './_catalogos/consulta-usuarios/consulta-usuarios.component'; 
 
 
 /**
@@ -121,7 +121,6 @@ FullCalendarModule.registerPlugins([
     SidenavComponent,
     LoginComponent,
     QRComponent,
-    UsuariosComponent,
     EstacionesComponent,
     SindicatosComponent,
     InicioComponent,
@@ -156,7 +155,8 @@ FullCalendarModule.registerPlugins([
     DialogoOperadorComponent,
     RevisiondocumentosComponent,
     OperadoresComponent,
-    CatDictamenesComponent
+    CatDictamenesComponent,
+    ConsultaUsuariosComponent
 
   ],
   imports: [
