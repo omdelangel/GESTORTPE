@@ -64,11 +64,14 @@ export class OperadorService {
   }
 
   //Cambia el estatus del operador
-  postBajaOperador(operador: Operador): Observable<any> {
+  postBajaOperador(idOperador: number, idVehiculo: number, estatus: string): Observable<any> {
+
+    console.log("baja del operador");
+    console.log(idOperador + " " + idVehiculo + " " +  estatus);
+
 
     return this.http.post<any>(`${environment.SERVER_URL}/operador-estatus`, {
-      'IdOperador': operador.IdOperador,
-      'Placa': operador.Placa, 'Estatus': operador.Estatus
+      'IdOperador': idOperador, 'IdVehiculo': idVehiculo, 'Estatus': estatus
     })
       .pipe(map((res: Response) => {
 
