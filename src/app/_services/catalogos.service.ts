@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { CatalogoDictamenes } from 'src/app/_models';
+import { CatalogoDictamenes, CatalogoUsuarios } from 'src/app/_models';
 
 @Injectable({
   providedIn: 'root'
@@ -128,7 +128,7 @@ getCatalogoDictamenes(): Observable<any> {
   )
 }
 
-//Obtiene la información existente en la tabla de Dictámenes
+//Actualiza el estatus de Activo/Inactivo de la información de la tabla de Dictámenes
 actualizaCatalogoDictamen(catalogoDictamenes: CatalogoDictamenes): Observable<any> {
 
   return this.http.post<any>(`${environment.SERVER_URL}/cat-dictamen`, {
@@ -143,4 +143,32 @@ actualizaCatalogoDictamen(catalogoDictamenes: CatalogoDictamenes): Observable<an
   )
 }
 
+//Actualiza el valor de la columna Bloqueado de la información de la tabla de Usuarios
+getCatalogoUsuarios(): Observable<any> {
+
+  return this.http.get<any>(`${environment.SERVER_URL}/usuarios`, {})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+
+//Actualiza el valor de la columna Bloqueado de la información de la tabla de Usuarios
+getCatUsuBloqueado(catalogoUsuarios: CatalogoUsuarios): Observable<any> {
+
+  return this.http.post<any>(`${environment.SERVER_URL}/Bloquea-Usuario`, {
+    'IdUsuario': catalogoUsuarios.IdUsuario,
+    'Bloqueado': catalogoUsuarios.Bloqueado,
+
+  })
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
 }

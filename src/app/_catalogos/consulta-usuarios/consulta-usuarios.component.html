@@ -1,0 +1,158 @@
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayout.lt-sm="row">
+    <div fxLayout="row wrap" fxLayoutGap="20px" fxFlex="100">
+        <div fxFlex="100">
+            <mat-card>
+                <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+                    <mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Usuarios
+                    </mat-card-title>
+                    <button mat-fab style="background-color: #80BC00; outline: none;" matTooltip="Usuarios" outline:none; (click)="openDialog()">
+						<mat-icon>add</mat-icon>
+					</button>
+                </mat-card-actions>
+
+                <mat-card-header>
+                    <div class="w-full" fxFlex="30">
+                        <mat-form-field>
+                            <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
+                        </mat-form-field>
+                    </div>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <div>
+                        <alert style="font-size: small; height: 30px;"></alert>
+                    </div>
+                    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+                        <div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100">
+                            <mat-table [dataSource]="dataSource" matSort>
+
+                                <!-- ID Column -->
+                                <ng-container matColumnDef="IdUsuario">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Id Usuario
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.IdUsuario}} </mat-cell>
+                                </ng-container>
+
+                                <!-- ID Column -->
+                                <ng-container matColumnDef="Nombre">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.Nombre}} </mat-cell>
+                                </ng-container>
+
+                                <!-- ID Column -->
+                                <ng-container matColumnDef="Contrasenia">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Contraseña
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.Contrasenia} </mat-cell>
+                                </ng-container>
+
+                                <!-- ID Column -->
+                                <ng-container matColumnDef="IdEmpleado">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Id Empleado
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.IdEmpleado}} </mat-cell>
+                                </ng-container>
+
+                                <!-- ID Column -->
+                                <ng-container matColumnDef="IdPerfil">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Id Perfil
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.IdPerfil}} </mat-cell>
+                                </ng-container>
+
+                                <!-- ID Column -->
+                                <ng-container matColumnDef="Perfil">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Perfil
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.Perfil}} </mat-cell>
+                                </ng-container>
+
+                                <!-- ID Column -->
+                                <ng-container matColumnDef="FechaRegistro">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Registro
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.FechaRegistro} </mat-cell>
+                                </ng-container>
+
+                                <!-- ID Column -->
+                                <!--
+                                <ng-container matColumnDef="Estatus" sticky>
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.Estatus=='A' ? 'Activo': ''}} {{row.Estatus=='I' ? 'Inactivo': ''}}</mat-cell>
+                                </ng-container>
+                                -->
+
+
+                                <!--toggle column -->
+                                <ng-container matColumnDef="Estatus">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus</mat-header-cell>
+                                    <mat-cell *matCellDef="let row;let i = index; " [formGroup]="reactiveForm">
+                                        <mat-chip-list>
+                                            <mat-chip *ngIf="row.Estatus=='A'" style="background-color:#80BC00">Activo</mat-chip>
+                                            <mat-chip *ngIf="row.Estatus=='I'" style="background-color:red">Inactivo</mat-chip>
+                                        </mat-chip-list>
+                                        <!--                                        
+                                        <mat-chip style="background-color:green">{{row.Estatus=='A' ? ' Activo ': ''}} </mat-chip>
+                                        <mat-chip style="background-color:red">{{row.Estatus=='I' ? ' Inactivo ': ''}} </mat-chip>
+-->
+                                    </mat-cell>
+                                </ng-container>
+
+
+
+                                <!-- ID Column -->
+                                <ng-container matColumnDef="email">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Correo Electrónico
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+                                </ng-container>
+
+                                <!--toggle column -->
+                                <ng-container matColumnDef="Bloqueado">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Desbloqueado/Bloqueado</mat-header-cell>
+                                    <mat-cell *matCellDef="let row;let i = index; " [formGroup]="reactiveForm">
+                                        <div>
+                                            <mat-slide-toggle [checked]="row.Bloqueado" (change)="cambiaBloqueo(row)"> </mat-slide-toggle>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- ID Column -->
+                                <ng-container matColumnDef="Intentos">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Intentos
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.Intentos}} </mat-cell>
+                                </ng-container>
+
+                                <!-- ID Column -->
+                                <ng-container matColumnDef="UltimaTransaccion">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Ultima Transaccion
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.UltimaTransaccion} </mat-cell>
+                                </ng-container>
+
+                                <!--toggle column -->
+                                <ng-container matColumnDef="actions">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                                    <mat-cell *matCellDef="let row">
+                                        <button mat-mini-fab class="button-edit" (click)="editar(row)" matTooltip="Editar">
+									<mat-icon class="iconSize">edit</mat-icon>
+									</button> &nbsp; &nbsp;
+                                    </mat-cell>
+
+                                </ng-container>
+                                <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                                </mat-row>
+                            </mat-table>
+                            <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+                        </div>
+                    </form>
+                </mat-card-content>
+                <notifier-container></notifier-container>
+            </mat-card>
+        </div>
+    </div>
+</div>

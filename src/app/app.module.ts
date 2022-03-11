@@ -14,7 +14,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './_helpers/authconfig.inteceptor';
 import { QrCodeModule } from 'ng-qrcode';
 import { QRComponent } from './_components/qr/qr.component';
-import { UsuariosComponent } from './_components/usuarios/usuarios.component';
 import { EstacionesComponent } from './_components/estaciones/estaciones.component';
 import { SindicatosComponent } from './_components/sindicatos/sindicatos.component';
 import { InicioComponent } from './_components/inicio/inicio.component';
@@ -55,12 +54,14 @@ import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { ConsultaRegistroComponent } from './_components/consulta-registro/consulta-registro.component';
 import { DialogoContratoComponent } from './_components/dialogo-contrato/dialogo-contrato.component';
 import { DialogoDocumentosRegistroComponent } from './_components/dialogo-documentos-registro';
-import { DialogoOperadorComponent } from './_components/dialogo-operador/dialogo-operador.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { RevisiondocumentosComponent } from './_components/revisiondocumentos/revisiondocumentos.component';
 import { OperadoresComponent } from './_components/operadores/operadores.component';
 import { CatDictamenesComponent  } from './_catalogos/cat-dictamenes';
-import { CurrencyPipe } from '@angular/common'; 
+import { CurrencyPipe } from '@angular/common';
+import { ConsultaUsuariosComponent } from './_catalogos/consulta-usuarios/consulta-usuarios.component'; 
+import { DialogoOperadorAltaComponent } from './_components/dialogo-operador-alta/dialogo-operador-alta.component';
+import { DialogoOperadorEditaComponent } from './_components/dialogo-operador-edita/dialogo-operador-edita.component'; 
 
 
 /**
@@ -121,7 +122,6 @@ FullCalendarModule.registerPlugins([
     SidenavComponent,
     LoginComponent,
     QRComponent,
-    UsuariosComponent,
     EstacionesComponent,
     SindicatosComponent,
     InicioComponent,
@@ -153,10 +153,12 @@ FullCalendarModule.registerPlugins([
     ConsultaRegistroComponent,
     DialogoContratoComponent,
     DialogoDocumentosRegistroComponent,
-    DialogoOperadorComponent,
     RevisiondocumentosComponent,
     OperadoresComponent,
-    CatDictamenesComponent
+    CatDictamenesComponent,
+    ConsultaUsuariosComponent,
+    DialogoOperadorAltaComponent,
+    DialogoOperadorEditaComponent
 
   ],
   imports: [
