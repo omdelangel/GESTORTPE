@@ -75,17 +75,7 @@
                                     <mat-cell *matCellDef="let row"> {{row.FechaRegistro} </mat-cell>
                                 </ng-container>
 
-                                <!-- ID Column -->
-                                <!--
-                                <ng-container matColumnDef="Estatus" sticky>
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let row"> {{row.Estatus=='A' ? 'Activo': ''}} {{row.Estatus=='I' ? 'Inactivo': ''}}</mat-cell>
-                                </ng-container>
-                                -->
-
-
-                                <!--toggle column -->
+                                <!--chip column -->
                                 <ng-container matColumnDef="Estatus">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus</mat-header-cell>
                                     <mat-cell *matCellDef="let row;let i = index; " [formGroup]="reactiveForm">
@@ -93,14 +83,8 @@
                                             <mat-chip *ngIf="row.Estatus=='A'" style="background-color:#80BC00">Activo</mat-chip>
                                             <mat-chip *ngIf="row.Estatus=='I'" style="background-color:red">Inactivo</mat-chip>
                                         </mat-chip-list>
-                                        <!--                                        
-                                        <mat-chip style="background-color:green">{{row.Estatus=='A' ? ' Activo ': ''}} </mat-chip>
-                                        <mat-chip style="background-color:red">{{row.Estatus=='I' ? ' Inactivo ': ''}} </mat-chip>
--->
                                     </mat-cell>
                                 </ng-container>
-
-
 
                                 <!-- ID Column -->
                                 <ng-container matColumnDef="email">

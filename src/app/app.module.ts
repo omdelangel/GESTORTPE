@@ -61,7 +61,9 @@ import { CatDictamenesComponent  } from './_catalogos/cat-dictamenes';
 import { CurrencyPipe } from '@angular/common';
 import { ConsultaUsuariosComponent } from './_catalogos/consulta-usuarios/consulta-usuarios.component'; 
 import { DialogoOperadorAltaComponent } from './_components/dialogo-operador-alta/dialogo-operador-alta.component';
-import { DialogoOperadorEditaComponent } from './_components/dialogo-operador-edita/dialogo-operador-edita.component'; 
+import { DialogoOperadorEditaComponent } from './_components/dialogo-operador-edita/dialogo-operador-edita.component';
+import { AltaUsuariosComponent } from './_catalogos/alta-usuarios/alta-usuarios.component';
+import { EdicionUsuariosComponent } from './_catalogos/edicion-usuarios/edicion-usuarios.component'; 
 
 
 /**
@@ -158,8 +160,9 @@ FullCalendarModule.registerPlugins([
     CatDictamenesComponent,
     ConsultaUsuariosComponent,
     DialogoOperadorAltaComponent,
-    DialogoOperadorEditaComponent
-
+    DialogoOperadorEditaComponent,
+    AltaUsuariosComponent,
+    EdicionUsuariosComponent
   ],
   imports: [
     BrowserModule,

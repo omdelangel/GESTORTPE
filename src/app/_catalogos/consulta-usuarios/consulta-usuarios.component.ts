@@ -9,7 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertService } from '../../_alert';
-import { PreregistroDialogComponent } from '../../_components/preregistro-dialog';
+import { AltaUsuariosComponent } from '../alta-usuarios';
 import { PreregistroEdicionDialogComponent } from '../../_components/preregistro-edicion-dialog';
 import { NotifierService } from 'angular-notifier';
 
@@ -75,10 +75,10 @@ export class ConsultaUsuariosComponent implements OnInit {
   
   //Abre modal para Usuarios
     openDialog(): void {
-      const dialogRef = this.dialog.open(PreregistroDialogComponent, {
+      const dialogRef = this.dialog.open(AltaUsuariosComponent, {
         disableClose: true,
-        width: '1500px',
-        height: '900px'
+//        width: '1500px',
+  //      height: '900px'
       });
   
       dialogRef.afterClosed().subscribe(res => {
