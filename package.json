@@ -29,6 +29,7 @@
     "angular-notifier": "^9.1.0",
     "angular-pdf-viewer": "^0.0.1",
     "angularx-qrcode": "^1.6.4",
+    "chart.js": "^3.7.1",
     "file-saver": "^2.0.5",
     "jspdf": "^2.4.0",
     "jspdf-autotable": "^3.5.23",

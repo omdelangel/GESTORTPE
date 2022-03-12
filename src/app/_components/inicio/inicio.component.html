@@ -1,5 +1,6 @@
 <app-dashboard _nghost-qmw-c246="" class="ng-star-inserted">
     <div _ngcontent-qmw-c246="" fxlayout="row wrap" style="flex-flow: row wrap; box-sizing: border-box; display: flex;">
+        <!--
         <div _ngcontent-qmw-c246="" fxflex.sm="100" fxflex.xs="100" fxflex.md="33.33" fxflex.lg="25"
             fxflex.xl="33.33" fxflex="100" class="m-gap p-gap"
             style="flex: 1 1 33.33%; box-sizing: border-box; max-width: 25%;">
@@ -17,7 +18,8 @@
                 </div>
             </mat-card>
         </div>
-
+        -->
+        <app-dashboard-cards></app-dashboard-cards>
         <div _ngcontent-qmw-c246="" fxflex.sm="100" fxflex.xs="100" fxflex.md="33.33" fxflex.lg="25"
         fxflex.xl="33.33" fxflex="100" class="m-gap p-gap"
         style="flex: 1 1 33.33%; box-sizing: border-box; max-width: 25%;">
@@ -95,15 +97,9 @@ style="flex: 1 1 33.33%; box-sizing: border-box; max-width: 25%;">
             </mat-menu>
             <hr _ngcontent-qmw-c246="">
             <mat-card-content _ngcontent-qmw-c246="" class="mat-card-content">
-                <div class="chartjs-size-monitor">
-                    <div class="chartjs-size-monitor-expand">
-                        <div class=""></div>
-                    </div>
-                    <div class="chartjs-size-monitor-shrink">
-                        <div class=""></div>
-                    </div>
-                </div><canvas _ngcontent-qmw-c246="" height="364" basechart="" class="chart chartjs-render-monitor"
-                    width="546" style="display: block; width: 546px; height: 364px;"></canvas>
+
+                <app-pie-chart></app-pie-chart>
+                
             </mat-card-content>
         </mat-card>
     </div>

@@ -65,6 +65,9 @@ import { DialogoOperadorEditaComponent } from './_components/dialogo-operador-ed
 import { AltaUsuariosComponent } from './_catalogos/alta-usuarios/alta-usuarios.component';
 import { EdicionUsuariosComponent } from './_catalogos/edicion-usuarios/edicion-usuarios.component'; 
 
+import { PieChartComponent } from './_components/pie-chart/pie-chart.component'; 
+import { DashboardCardsComponent } from './_components/dashboard-cards/dashboard-cards.component'; 
+
 
 /**
  * Custom angular notifier options
@@ -162,7 +165,9 @@ FullCalendarModule.registerPlugins([
     DialogoOperadorAltaComponent,
     DialogoOperadorEditaComponent,
     AltaUsuariosComponent,
-    EdicionUsuariosComponent
+    EdicionUsuariosComponent,
+    DashboardCardsComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,

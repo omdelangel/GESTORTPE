@@ -11,3 +11,4 @@ export * from './documentos.service';
 export * from './citas.service';
 export * from './talleres.service';
 export * from './operador.service';
+export * from './dashboard.service';
