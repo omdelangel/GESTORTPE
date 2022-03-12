@@ -39,8 +39,7 @@
         <app-menu-list-item *ngFor="let item of navItems" [item]="item"></app-menu-list-item>
       </mat-nav-list>
       <mat-divider></mat-divider>
-      <mat-nav-list >
-        
+      <mat-nav-list >       
         <a mat-list-item (click)="onLogout()" routerLinkActive="active-list-item" class="disable_ripple">
           <mat-icon>exit_to_app</mat-icon>Salir
         </a>
