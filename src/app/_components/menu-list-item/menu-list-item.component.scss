@@ -1,10 +1,8 @@
 @import './../../theme';
 
 :host {
-  display: flex;
-  flex-direction: column;
+  display: block;
   outline: none;
-  width: 100%;
 
   .mat-list-item.active {
     background-color: mat-color($app-primary, 50);
@@ -17,13 +15,28 @@
   }
 }
 
+
+.arrow {  
+  
+      width:20px;
+      margin-right: -15px;
+}
+
+.point {
+    position: relative;    
+    width: 0;
+    height: 0; 
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 30px solid mat-color($app-primary, 100) !important;
+     float:right;
+}
+
 .mat-list-item {
-  padding: 8px 0;
-  display: flex;
-  width: auto;
+  //width: auto;
   color: #ffffff;
 
   .routeIcon {
-    margin-right: 20px;
+    margin-right: 5px;
   }
 }

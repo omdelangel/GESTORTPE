@@ -28,25 +28,28 @@
 
   </mat-toolbar>
   <mat-sidenav-container>
-    <mat-sidenav #appDrawer #sidenav="matSidenav" class="mat-elevation-z8" mode="side" opened="true"
+    <mat-sidenav #appDrawer #sidenav="matSidenav" class="mat-elevation-z8" mode="side" opened="true" 
       (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
+     
       <img class="avatar mat-elevation-z8" src="./assets/images/usuario_.jpg" />
       <h4 class="name">{{nombre}}</h4>
       <p class="designation">Bienvenid@</p>
       <mat-divider></mat-divider>
-      <mat-nav-list>
+      <mat-nav-list >
         <app-menu-list-item *ngFor="let item of navItems" [item]="item"></app-menu-list-item>
       </mat-nav-list>
       <mat-divider></mat-divider>
       <mat-nav-list >
+        
         <a mat-list-item (click)="onLogout()" routerLinkActive="active-list-item" class="disable_ripple">
           <mat-icon>exit_to_app</mat-icon>Salir
         </a>
+     
       </mat-nav-list>
       <div id="rec1">
         <img src="./assets/images/rec-1.svg" alt="embed SVG with the image tag" >
       </div>
-     
+      
     </mat-sidenav>
     <mat-sidenav-content>
       <div class="content mat-elevation-z8">

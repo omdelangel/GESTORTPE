@@ -229,7 +229,7 @@ export class EdicionconcesionarioComponent implements OnInit {
 
       },
         error => {
-          this.notifier.notify('error', error, '');
+          this.notifier.notify('error', error);
         });
   }
 

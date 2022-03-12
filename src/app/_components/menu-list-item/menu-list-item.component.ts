@@ -18,8 +18,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     ])
   ]
 })
-export class MenuListItemComponent implements OnInit {
-  expanded!: boolean;
+export class MenuListItemComponent  {
+  expanded: boolean = false;
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
   @Input() item!: NavItem;
   @Input() depth!: number;
@@ -30,25 +30,9 @@ export class MenuListItemComponent implements OnInit {
       if (this.depth === undefined) {
         this.depth = 0;
       }
-     }
-
-     ngOnInit() {
-
-      this.navService.currentUrl.subscribe((url: string) => {      
-        if (this.item.route && url) {
-          // console.log(`Checking '/${this.item.route}' against '${url}'`);
-          this.expanded = url.indexOf(`/${this.item.route}`) === 0;
-          this.ariaExpanded = this.expanded;
-          // console.log(`${this.item.route} is expanded: ${this.expanded}`);
-        }
-      });
-    }
+     }    
   
-    onItemSelected(item: NavItem) {
-
-      this.title = item.displayName;
-
-          
+     onItemSelected(item: NavItem) {
       if (!item.children || !item.children.length) {
         this.router.navigate([item.route]);
         //this.navService.closeNav();
@@ -56,7 +40,7 @@ export class MenuListItemComponent implements OnInit {
       if (item.children && item.children.length) {
         this.expanded = !this.expanded;
       }
-     
     }
+    
   }
   
