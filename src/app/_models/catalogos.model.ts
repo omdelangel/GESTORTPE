@@ -19,14 +19,77 @@ export class CatalogoTpoAsignacion {
 }
 
 export class CatalogoDictamenes {
-    IdDictamen:     string;
-    Nombre:         string;
-    Estatus:        boolean;    
+    IdDictamen    :string;
+    Nombre        :string;
+    Estatus       :boolean;    
 
-    constructor(catalogoGeneral: { IdDictamen: string; Nombre: string; Estatus: boolean}){
+    constructor(catalogoGeneral: {  IdDictamen    : string; 
+                                    Nombre        : string; 
+                                    Estatus       : boolean
+                                }){
         this.IdDictamen      = catalogoGeneral.IdDictamen;
         this.Nombre          = catalogoGeneral.Nombre; 
         this.Estatus         = catalogoGeneral.Estatus; 
+    }    
+}
+
+export class CatalogoPerfiles {
+    IdPerfil         :number;
+    Descripcion      :string;
+    FechaRegistro    :Date;    
+    Estatus          :string;    
+
+
+    constructor(catalogoGeneral: { IdPerfil         :number;
+                                   Descripcion      :string;
+                                   FechaRegistro    :Date;    
+                                   Estatus          :string;    
+    
+                                }){
+        this.IdPerfil          = catalogoGeneral.IdPerfil;
+        this.Descripcion       = catalogoGeneral.Descripcion; 
+        this.FechaRegistro     = catalogoGeneral.FechaRegistro; 
+        this.Estatus           = catalogoGeneral.Estatus; 
+    }    
+}
+
+
+export class UsuariosAltaEdicion {
+    IdUsuario        :string;
+    Nombre           :string;
+    Contrasenia      :string;
+    IdEmpleado       :number;
+    IdPerfil         :number;
+    FechaRegistro    :Date;
+    Estatus          :string;
+    email            :string;
+    Bloqueado        :number;
+    Intentos         :number;
+    UltimaTransaccion:Date;
+
+    constructor(catalogoGeneral: { IdUsuario        :string; 
+                                   Nombre           :string; 
+                                   Contrasenia      :string; 
+                                   IdEmpleado       :number; 
+                                   IdPerfil         :number; 
+                                   FechaRegistro    :Date; 
+                                   Estatus          :string; 
+                                   email            :string; 
+                                   Bloqueado        :number; 
+                                   Intentos         :number; 
+                                   UltimaTransaccion:Date;
+    }){
+        this.IdUsuario             = catalogoGeneral.IdUsuario        ; 
+        this.Nombre                = catalogoGeneral.Nombre           ; 
+        this.Contrasenia           = catalogoGeneral.Contrasenia      ; 
+        this.IdEmpleado            = catalogoGeneral.IdEmpleado       ; 
+        this.IdPerfil              = catalogoGeneral.IdPerfil         ; 
+        this.FechaRegistro         = catalogoGeneral.FechaRegistro    ; 
+        this.Estatus               = catalogoGeneral.Estatus          ; 
+        this.email                 = catalogoGeneral.email            ; 
+        this.Bloqueado             = catalogoGeneral.Bloqueado        ; 
+        this.Intentos              = catalogoGeneral.Intentos         ; 
+        this.UltimaTransaccion     = catalogoGeneral.UltimaTransaccion; 
     }    
 }
 
