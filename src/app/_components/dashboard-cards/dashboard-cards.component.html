@@ -1,17 +1,72 @@
+<div _ngcontent-qmw-c246="" fxlayout="row wrap" style="flex-flow: row wrap; box-sizing: border-box; display: flex;">
+
+    
     <div _ngcontent-qmw-c246="" fxflex.sm="100" fxflex.xs="100" fxflex.md="33.33" fxflex.lg="25"
         fxflex.xl="33.33" fxflex="100" class="m-gap p-gap"
         style="flex: 1 1 33.33%; box-sizing: border-box; max-width: 25%;">
         <mat-card _ngcontent-qmw-c246="" class="mat-card mat-focus-indicator">
             <div _ngcontent-qmw-c246="" class="card-wheather grad-blue">
-                <div _ngcontent-qmw-c246="" class="city">Contratos Vigentes : {{this.totalContratos}}</div>
-                <div _ngcontent-qmw-c246="" class="date">Contratos del Periodo : {{this.contratosNuevos}}</div>
-                <div _ngcontent-qmw-c246="" class="weather">
+                <div _ngcontent-qmw-c246="" class="city">Instalaciones</div>
+                <div _ngcontent-qmw-c246="" class="date">Contratos Vigentes </div>
+                <div _ngcontent-qmw-c246="" class="weather">  
                     <div _ngcontent-qmw-c246="" class="sun d-flex justify-content-between">
                         <mat-icon  role="img" class="mat-icon notranslate routeIcon material-icons mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">account_circle</mat-icon>
                         
-                        <div _ngcontent-qmw-c246="" class="temp align-self-center">190</div>
+                        <div _ngcontent-qmw-c246="" class="temp align-self-center">{{this.totalContratos}} </div>
                     </div>
                 </div>
             </div>
         </mat-card>
     </div>
+
+    <div _ngcontent-qmw-c246="" fxflex.sm="100" fxflex.xs="100" fxflex.md="33.33" fxflex.lg="25"
+        fxflex.xl="33.33" fxflex="100" class="m-gap p-gap"
+        style="flex: 1 1 33.33%; box-sizing: border-box; max-width: 25%;">
+        <mat-card _ngcontent-qmw-c246="" class="mat-card mat-focus-indicator">
+            <div _ngcontent-qmw-c246="" class="card-wheather grad-blue">
+                <div _ngcontent-qmw-c246="" class="city">Consumo </div>
+                <div _ngcontent-qmw-c246="" class="date">litros  </div>
+                <div _ngcontent-qmw-c246="" class="weather">
+                    <div _ngcontent-qmw-c246="" class="sun d-flex justify-content-between">
+                        <mat-icon  role="img" class="mat-icon notranslate routeIcon material-icons mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">local_car_wash</mat-icon>
+                        <div _ngcontent-qmw-c246="" class="temp align-self-center">{{this.litrosConsumo}} lts.<br> $ {{this.importeConsumo}}</div>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+      
+    <div _ngcontent-qmw-c246="" fxflex.sm="100" fxflex.xs="100" fxflex.md="33.33" fxflex.lg="25"
+    fxflex.xl="33.33" fxflex="100" class="m-gap p-gap"
+    style="flex: 1 1 33.33%; box-sizing: border-box; max-width: 25%;">
+        <mat-card _ngcontent-qmw-c246="" class="mat-card mat-focus-indicator">
+            <div _ngcontent-qmw-c246="" class="card-wheather grad-blue">
+                <div _ngcontent-qmw-c246="" class="city">Ahorro</div>
+                <div _ngcontent-qmw-c246="" class="date">Total </div>
+                <div _ngcontent-qmw-c246="" class="weather">
+                    <div _ngcontent-qmw-c246="" class="sun d-flex justify-content-between">
+                        <mat-icon  role="img" class="mat-icon notranslate routeIcon material-icons mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">local_gas_station</mat-icon>
+                        <div _ngcontent-qmw-c246="" class="temp align-self-center">$ {{this.totalAhorro}} </div>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+    <div _ngcontent-qmw-c246="" fxflex.sm="100" fxflex.xs="100" fxflex.md="33.33" fxflex.lg="25"
+    fxflex.xl="33.33" fxflex="100" class="m-gap p-gap"
+    style="flex: 1 1 33.33%; box-sizing: border-box; max-width: 25%;">
+        <mat-card _ngcontent-qmw-c246="" class="mat-card mat-focus-indicator">
+            <div _ngcontent-qmw-c246="" class="card-wheather grad-blue">
+                <div _ngcontent-qmw-c246="" class="city">Fondo reserva</div>
+                <div _ngcontent-qmw-c246="" class="date">Ahorro acumulado</div>
+                <div _ngcontent-qmw-c246="" class="weather">
+                    <div _ngcontent-qmw-c246="" class="sun d-flex justify-content-between">
+                        <mat-icon  role="img" class="mat-icon notranslate routeIcon material-icons mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">local_atm</mat-icon>
+                        <div _ngcontent-qmw-c246="" class="temp align-self-center">$ {{this.totalAhorroFR}}</div>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+
+</div>
