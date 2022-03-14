@@ -1,16 +1,17 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Optional, Inject } from '@angular/core';
 import { FormGroup,FormControl, FormBuilder, FormGroupDirective, NgForm , Validators} from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotifierService } from 'angular-notifier';
 import { OperadorService } from 'src/app/_services';
 import { DialogoOperadorAltaComponent } from '../dialogo-operador-alta';
 import { DialogoOperadorEditaComponent } from '../dialogo-operador-edita';
 import { Operador } from 'src/app/_models';
+import { FormalizacionComponent } from '../formalizacion';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -45,13 +46,20 @@ export class OperadoresComponent implements OnInit {
   idVehiculo: number = 0;
   idOperador: number = 0;
   estatus: string = "";
+  value: boolean = false;
 
   constructor(public dialog: MatDialog,
     private operadorService: OperadorService,
     private formBuilder: FormBuilder,
-    notifierService: NotifierService) {
+    notifierService: NotifierService,
+    public dialogRef: MatDialogRef<FormalizacionComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
 
       this.notifier = notifierService; 
+      this.placa = data.Placa;
+     this.getConsultaOperadores(this.placa);
+
+     
      }
 
   ngOnInit(): void {
@@ -204,6 +212,10 @@ export class OperadoresComponent implements OnInit {
         });
 
 
+      }
+
+      onNoClick(): void {
+        this.dialogRef.close();
       }
 
       

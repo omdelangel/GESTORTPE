@@ -69,7 +69,6 @@ export class RevisiondocumentosComponent implements OnInit {
       'Sindicato': [''],
       'IdAsignacionSindicato': [''],
     });
-
   }
 
   get g() { return this.reactiveForm.controls; }

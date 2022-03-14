@@ -66,7 +66,8 @@ import { AltaUsuariosComponent } from './_catalogos/alta-usuarios/alta-usuarios.
 import { EdicionUsuariosComponent } from './_catalogos/edicion-usuarios/edicion-usuarios.component'; 
 
 import { PieChartComponent } from './_components/pie-chart/pie-chart.component'; 
-import { DashboardCardsComponent } from './_components/dashboard-cards/dashboard-cards.component'; 
+import { DashboardCardsComponent } from './_components/dashboard-cards/dashboard-cards.component';
+import { FormalizacionComponent } from './_components/formalizacion/formalizacion.component'; 
 
 
 /**
@@ -167,7 +168,8 @@ FullCalendarModule.registerPlugins([
     AltaUsuariosComponent,
     EdicionUsuariosComponent,
     DashboardCardsComponent,
-    PieChartComponent
+    PieChartComponent,
+    FormalizacionComponent
   ],
   imports: [
     BrowserModule,
