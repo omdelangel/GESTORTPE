@@ -10,6 +10,7 @@ import { DashboardService } from './../../_services/dashboard.service';
 export class DashboardCardsComponent implements OnInit {
   public totalContratos : number;
   public contratosNuevos : number;
+  public porcentajeNuevos : number;
   public vehiculosConsumo : number;
   public litrosConsumo : number;
   public importeConsumo : number;
@@ -29,6 +30,7 @@ export class DashboardCardsComponent implements OnInit {
   constructor(private dash: DashboardService) { 
     this.totalContratos = 0;
     this.contratosNuevos = 0;
+    this.porcentajeNuevos = 0;
     this.vehiculosConsumo = 0;
     this.litrosConsumo = 0;
     this.importeConsumo = 0;
@@ -54,7 +56,8 @@ export class DashboardCardsComponent implements OnInit {
       console.log("Respuesta : "+ JSON.stringify(dataList['datos']));
       this.totalContratos = dataList['datos'][0][0].Acumulados;    //map((res : any) => res.Citas);
       this.contratosNuevos =  dataList['datos'][0][0].Nuevos;
-
+      this.porcentajeNuevos = this.contratosNuevos / this.totalContratos;
+      
       console.log("totalContratos: " + this.totalContratos);
       console.log("contratosNuevos: " + this.contratosNuevos);
 
