@@ -15,6 +15,7 @@ import { RevisiondocumentosComponent } from './_components/revisiondocumentos';
 import { OperadoresComponent } from './_components/operadores';
 import { CatDictamenesComponent } from './_catalogos/cat-dictamenes';
 import { ConsultaUsuariosComponent } from './_catalogos/consulta-usuarios'
+import { FormalizacionComponent } from './_components/formalizacion/formalizacion.component';
 
 
 
@@ -34,7 +35,8 @@ const routes: Routes = [
                { path: 'revisaDocumentos', component: RevisiondocumentosComponent},
                { path: 'operadores', component: OperadoresComponent},
                { path: 'dictamenes', component: CatDictamenesComponent},
-               { path: 'usuarios', component: ConsultaUsuariosComponent}
+               { path: 'usuarios', component: ConsultaUsuariosComponent},
+               { path: 'formalizacion', component: FormalizacionComponent}
                ]},  
  
  

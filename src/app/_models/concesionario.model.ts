@@ -6,12 +6,12 @@ export class ConcesionarioConsulta {
     detalleOperador: DetalleOperador[] = [];
 
 
-    constructor(concesionarioConsulta: { nombreConcesionario: string; modeloAnio: string; serie: string, placa: string}){
+    constructor(concesionarioConsulta: { nombreConcesionario: string; modeloAnio: string; serie: string, placa: string }) {
         this.nombreConcesionario = concesionarioConsulta.nombreConcesionario;
         this.modeloAnio = concesionarioConsulta.modeloAnio;
         this.serie = concesionarioConsulta.serie;
         this.placa = concesionarioConsulta.placa;
-    }    
+    }
 }
 
 export class DetalleOperador {
@@ -69,7 +69,8 @@ export class ConcesionarioAltaEdicion {
         FolioIdentificacion: string;
         IdSindicato: number;
         IdAsignacionSindicato: number;
-        NumeroConcesion: string;}) {   
+        NumeroConcesion: string;
+    }) {
         this.IdConcesionario = concesionarioAltaEdicion.IdConcesionario;
         this.Nombre = concesionarioAltaEdicion.Nombre;
         this.Paterno = concesionarioAltaEdicion.Paterno;
@@ -93,13 +94,29 @@ export class ConcesionarioAltaEdicion {
         this.IdSindicato = concesionarioAltaEdicion.IdSindicato;
         this.IdAsignacionSindicato = concesionarioAltaEdicion.IdAsignacionSindicato;
         this.NumeroConcesion = concesionarioAltaEdicion.NumeroConcesion;
-        
+
     }
-        
+
 }
 
 
 export class ConcesionarioRegistro {
+    IdConcesionario: number;
+    NombreConcesionario: string;
+    FechaRegistro: string;
+    IdVehiculo: number;
+    Marca: number;
+    Submarca: number;
+    Modelo: number;
+    Placa: string;
+    Estatus: string;
+    IdSindicato: number;
+    Sindicato: string;
+    IdAsignacionSindicato: number;
+    EditaContrato: boolean;
+    EditaDocumentos: boolean;
+    EditaOperador: boolean;
+    constructor(concesionarioRegistro: {
         IdConcesionario: number;
         NombreConcesionario: string;
         FechaRegistro: string;
@@ -115,22 +132,7 @@ export class ConcesionarioRegistro {
         EditaContrato: boolean;
         EditaDocumentos: boolean;
         EditaOperador: boolean;
-    constructor(concesionarioRegistro: { 
-        IdConcesionario: number;
-        NombreConcesionario: string;
-        FechaRegistro: string;
-        IdVehiculo: number;
-        Marca: number;
-        Submarca: number;
-        Modelo: number;
-        Placa: string;
-        Estatus: string;
-        IdSindicato: number;
-        Sindicato: string;
-        IdAsignacionSindicato: number;
-        EditaContrato: boolean;
-        EditaDocumentos: boolean;
-        EditaOperador: boolean;}){
+    }) {
         this.IdConcesionario = concesionarioRegistro.IdConcesionario;
         this.NombreConcesionario = concesionarioRegistro.NombreConcesionario;
         this.FechaRegistro = concesionarioRegistro.FechaRegistro;
@@ -140,13 +142,58 @@ export class ConcesionarioRegistro {
         this.Modelo = concesionarioRegistro.Modelo;
         this.Placa = concesionarioRegistro.Placa;
         this.Estatus = concesionarioRegistro.Estatus;
-        this.IdSindicato = concesionarioRegistro.IdSindicato; 
+        this.IdSindicato = concesionarioRegistro.IdSindicato;
         this.Sindicato = concesionarioRegistro.Sindicato;
         this.IdAsignacionSindicato = concesionarioRegistro.IdAsignacionSindicato;
         this.EditaContrato = concesionarioRegistro.EditaContrato;
         this.EditaDocumentos = concesionarioRegistro.EditaDocumentos;
-        this.EditaOperador = concesionarioRegistro.EditaOperador;          
-    }    
+        this.EditaOperador = concesionarioRegistro.EditaOperador;
+    }
+}
+
+export class ConcesionarioInstalacion {
+    IdConcesionario: number;
+    NombreConcesionario: string;
+    FechaRegistro: string;
+    IdVehiculo: number;
+    Marca: number;
+    Submarca: number;
+    Modelo: number;
+    Placa: string;
+    TipoVehiculo: string;
+    TipoConvertidor: string;
+    FechaCitaInstalacion: string;
+    EstatusCitaInstalacion: string;
+    ConfirmaCita: boolean;
+    constructor(concesionarioInstalacion: {
+        IdConcesionario: number;
+        NombreConcesionario: string;
+        FechaRegistro: string;
+        IdVehiculo: number;
+        Marca: number;
+        Submarca: number;
+        Modelo: number;
+        Placa: string;
+        TipoVehiculo: string;
+        TipoConvertidor: string;
+        FechaCitaInstalacion: string;
+        EstatusCitaInstalacion: string;
+        ConfirmaCita: boolean;
+    }) {
+        this.IdConcesionario = concesionarioInstalacion.IdConcesionario;
+        this.NombreConcesionario = concesionarioInstalacion.NombreConcesionario;
+        this.FechaRegistro = concesionarioInstalacion.FechaRegistro;
+        this.IdVehiculo = concesionarioInstalacion.IdVehiculo;
+        this.Marca = concesionarioInstalacion.Marca;
+        this.Submarca = concesionarioInstalacion.Submarca;
+        this.Modelo = concesionarioInstalacion.Modelo;
+        this.Placa = concesionarioInstalacion.Placa;
+        this.TipoVehiculo = concesionarioInstalacion.TipoVehiculo;
+        this.TipoConvertidor = concesionarioInstalacion.TipoConvertidor;
+        this.FechaCitaInstalacion = concesionarioInstalacion.FechaCitaInstalacion;
+        this.EstatusCitaInstalacion = concesionarioInstalacion.EstatusCitaInstalacion;
+        this.ConfirmaCita = concesionarioInstalacion.ConfirmaCita;
+    }
 }
 
 

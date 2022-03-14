@@ -91,7 +91,6 @@ export class ConcesionarioService {
   }
 
 
-
   //Registra concesionarios
   postRegistraConcesionario(concesionario: ConcesionarioAltaEdicion): Observable<any> {
 
@@ -143,6 +142,18 @@ export class ConcesionarioService {
         catchError(this.handleError)
       )
   }
+
+     //Consulta los datos de Concesionario para la instalación del convertidor
+     getConcesionarioInstalacion(): Observable<any> {   
+
+      return this.http.get<any>(`${environment.SERVER_URL}/concesionario-instalacion`)
+        .pipe(map((res: Response) => {    
+  
+          return res || {}
+        }),
+          catchError(this.handleError)
+        )
+    }
 
 
   // Error 

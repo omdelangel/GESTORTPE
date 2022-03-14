@@ -2,7 +2,12 @@
   <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
       <div fxFlex="30">
           <mat-card>    
-              <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="100px" >
+            <div class="example-button-container">
+              <button mat-mini-fab  class="close-button" style="outline: none;" (click)="onNoClick()">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+              <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="100px" *ngIf="value">
                   <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Filtros de búsqueda
                   </mat-card-title>
                   <button mat-fab style="background-color: #2d4248; outline: none;" matTooltip="Buscar placa" outline:none;>
