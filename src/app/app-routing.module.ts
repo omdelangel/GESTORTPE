@@ -16,6 +16,8 @@ import { OperadoresComponent } from './_components/operadores';
 import { CatDictamenesComponent } from './_catalogos/cat-dictamenes';
 import { ConsultaUsuariosComponent } from './_catalogos/consulta-usuarios'
 import { RepoTaxiVanConvComponent } from './_components/repo-taxi-van-conv/repo-taxi-van-conv.component';
+import { FormalizacionComponent } from './_components/formalizacion/formalizacion.component';
+
 
 
 const routes: Routes = [
@@ -36,6 +38,7 @@ const routes: Routes = [
                { path: 'dictamenes', component: CatDictamenesComponent},
                { path: 'usuarios', component: ConsultaUsuariosComponent},
                { path: 'repoAutosConvertidos', component: RepoTaxiVanConvComponent },
+               { path: 'formalizacion', component: FormalizacionComponent}
                ]},  
  
  

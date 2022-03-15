@@ -7,7 +7,10 @@
   .mat-list-item.active {
     background-color: mat-color($app-primary, 50);
   }
-  &:hover,
+  &:hover
+  {
+    background-color: #4f60939e !important;
+  }
   &:focus {
     >.mat-list-item:not(.expanded) {
       background-color: mat-color($app-primary, 100) !important;

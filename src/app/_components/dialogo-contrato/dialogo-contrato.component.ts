@@ -47,7 +47,10 @@ export class DialogoContratoComponent implements OnInit {
       this.idVehiculoValue = data.IdVehiculo;
       this.sindicatoValue = data.sindicato;
 
-  this.getContratoVehiculo(this.idVehiculoValue);
+      console.log("ENTRA A LA POANTALLE DE CONTRATOS");
+      console.log(this.idVehiculoValue);
+
+      this.getContratoVehiculo(this.idVehiculoValue);
 
      }
 
@@ -86,13 +89,15 @@ export class DialogoContratoComponent implements OnInit {
 
         this.contrato = data.contrato;
 
+
         this.f.Concesionario.setValue(this.concesionarioValue);
         this.f.Sindicato.setValue(this.sindicatoValue);
         this.f.TipoConvertidor.setValue(data.contrato[0].Convertidor);
         this.f.CostoConvertidor.setValue(this.currencyPipe.transform(data.contrato[0].ConsumoRequerido));
         this.f.ConsumoMensualLTS.setValue(this.currencyPipe.transform(data.contrato[0].ConsumoMensual));
         this.f.Periodo.setValue(data.contrato[0].NumeroPeriodos);
-        this.f.TipoVehiculo.setValue(data.contrato[0].TipoVehiculo);       
+        this.f.TipoVehiculo.setValue(data.contrato[0].TipoVehiculo);  
+      
 
       },
         error => {
