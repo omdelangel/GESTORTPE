@@ -40,6 +40,7 @@ export class EdicionCitaComponent implements OnInit {
   submarca: string = "";
   modelo: string = "";
   estatusCita: string = "";
+  causaValue: string = "";
 
   constructor(private citaService: CitasService,
     private alertService: AlertService,
@@ -59,6 +60,7 @@ export class EdicionCitaComponent implements OnInit {
     this.submarca = data.submarca;
     this.modelo = data.modelo;
     this.estatusCita = data.estatusCita;
+    this.causaValue = data.causa;
 
     switch (this.estatusCita) {
       case 'A':
@@ -187,10 +189,10 @@ export class EdicionCitaComponent implements OnInit {
       .subscribe((confirmado: Boolean) => {
         if (confirmado) {
 
-          this.cancelarCita();
+          //this.cancelarCita();
 
           const dialogRef = this.dialog.open(DialogoTalleresComponent, {
-            data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo },
+            data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo, causa: this.causaValue },
           });
       
           dialogRef.afterClosed().subscribe(res => {
@@ -206,7 +208,7 @@ export class EdicionCitaComponent implements OnInit {
         } else {
 
           const dialogRef = this.dialog.open(DialogoTalleresComponent, {
-            data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo },
+            data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo, causa: this.causaValue },
           });
       
           dialogRef.afterClosed().subscribe(res => {

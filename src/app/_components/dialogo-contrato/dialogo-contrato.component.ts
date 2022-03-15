@@ -47,9 +47,6 @@ export class DialogoContratoComponent implements OnInit {
       this.idVehiculoValue = data.IdVehiculo;
       this.sindicatoValue = data.sindicato;
 
-      console.log("ENTRA A LA POANTALLE DE CONTRATOS");
-      console.log(this.idVehiculoValue);
-
       this.getContratoVehiculo(this.idVehiculoValue);
 
      }
