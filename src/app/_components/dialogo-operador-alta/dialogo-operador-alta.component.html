@@ -2,45 +2,45 @@
     <div fxLayout="row wrap" fxLayoutGap="20px" style="width: 100%;">
         <div fxFlex="100">
             <mat-card>
-				<div class="example-button-container">
-					<button mat-mini-fab  class="close-button" style="outline: none;" (click)="onNoClick()">
-					  <mat-icon>close</mat-icon>
-					</button>
-				  </div>
+                <div class="example-button-container">
+                    <button mat-mini-fab class="close-button" style="outline: none;" (click)="onNoClick()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
                 <mat-card-content>
                     <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
                         <div fxLayout="row wrap" fxLayoutGap="30px grid">
                             <div fxFlex="25" fxFlex.lt-md="100" fxl>
-								<mat-form-field>
-									<mat-label>RFC</mat-label>
-									<input matInput placeholder="RFC" formControlName="RFC" maxlength="13" fxFlex="100"
-										onkeyup="javascript:this.value=this.value.toUpperCase();"
-										pattern="^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})\d{2}((0[1-9]|1[012])(0[1-9]|1\d|2[0-8])|(0[13456789]|1[012])(29|30)|(0[13578]|1[02])31)(\w{2})([A|a|0-9]{1}))$|^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})([02468][048]|[13579][26])0229)(\w{2})([A|a|0-9]{1})$"
-										required (change)="onChangeEvent($event)">
-									<mat-error *ngIf="reactiveForm.get('RFC')!.hasError('required')">
-										El dato es obligatorio
-									</mat-error>
-								</mat-form-field>
-							</div>
+                                <mat-form-field>
+                                    <mat-label>RFC</mat-label>
+                                    <input matInput placeholder="RFC" formControlName="RFC" maxlength="13" fxFlex="100"
+                                        onkeyup="javascript:this.value=this.value.toUpperCase();" 
+                                        pattern="^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})\d{2}((0[1-9]|1[012])(0[1-9]|1\d|2[0-8])|(0[13456789]|1[012])(29|30)|(0[13578]|1[02])31)(\w{2})([A|a|0-9]{1}))$|^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})([02468][048]|[13579][26])0229)(\w{2})([A|a|0-9]{1})$"
+                                        required (change)="onChangeEvent($event)">
+                                    <mat-error *ngIf="reactiveForm.get('RFC')!.hasError('required')">
+                                        El dato es obligatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
 
 
-							<div fxFlex="25" fxFlex.lt-md="100" fxl>
+                            <div fxFlex="25" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>CURP</mat-label>
                                     <input matInput placeholder="CURP" formControlName="CURP" maxlength="18"
                                         onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                        pattern="^[A-Z]{1}[AEIOU]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$"
-                                        >
+                                        pattern="^[A-Z]{1}[AEIOU]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$">
                                 </mat-form-field>
-                            </div>  
+                            </div>
 
-							<div fxFlex="50" fxFlex.lt-md="100" fxl></div>
+                            <div fxFlex="50" fxFlex.lt-md="100" fxl></div>
 
 
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Nombre</mat-label>
-                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="45" required>
+                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="45"
+                                        required>
                                     <mat-error *ngIf="reactiveForm.get('Nombre')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -49,7 +49,8 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Apellido Paterno</mat-label>
-                                    <input matInput placeholder="Apellido Paterno" formControlName="Paterno" maxlength="45" required>
+                                    <input matInput placeholder="Apellido Paterno" formControlName="Paterno"
+                                        maxlength="45" required>
                                     <mat-error *ngIf="reactiveForm.get('Paterno')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -58,13 +59,16 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Apellido Materno</mat-label>
-                                    <input matInput placeholder="Apellido Materno" formControlName="Materno" maxlength="45">
+                                    <input matInput placeholder="Apellido Materno" formControlName="Materno"
+                                        maxlength="45">
                                 </mat-form-field>
-                            </div>                      
+                            </div>
                             <div fxFlex="25" fxFlex.lt-md="100" fxl>
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="Tipo Persona" formControlName="TipoPersona" required [errorStateMatcher]="matcher">
-                                        <mat-option *ngFor="let tipoPersona of tiposPersona" [value]="tipoPersona.TipoPersona">
+                                    <mat-select placeholder="Tipo Persona" formControlName="TipoPersona" required
+                                        [errorStateMatcher]="matcher">
+                                        <mat-option *ngFor="let tipoPersona of tiposPersona"
+                                            [value]="tipoPersona.TipoPersona">
                                             {{tipoPersona.viewValue}}
                                         </mat-option>
                                     </mat-select>
@@ -75,7 +79,8 @@
                             </div>
                             <div fxFlex="25" fxFlex.lt-md="100" fxl>
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="Género" formControlName="Genero" required [errorStateMatcher]="matcher">
+                                    <mat-select placeholder="Género" formControlName="Genero" required
+                                        [errorStateMatcher]="matcher">
                                         <mat-option *ngFor="let genero of genero" [value]="genero.Genero">
                                             {{genero.viewValue}}
                                         </mat-option>
@@ -84,11 +89,13 @@
                                         El dato es obligatorio
                                     </mat-error>
                                 </mat-form-field>
-                            </div>                      
+                            </div>
                             <div fxFlex="25" fxFlex.lt-md="100" fxl>
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="Estado Civil" formControlName="EstadoCivil"  [errorStateMatcher]="matcher">
-                                        <mat-option *ngFor="let estadoCivil of estadoCivil" [value]="estadoCivil.EstadoCivil">
+                                    <mat-select placeholder="Estado Civil" formControlName="EstadoCivil"
+                                        [errorStateMatcher]="matcher">
+                                        <mat-option *ngFor="let estadoCivil of estadoCivil"
+                                            [value]="estadoCivil.EstadoCivil">
                                             {{estadoCivil.viewValue}}
                                         </mat-option>
                                     </mat-select>
@@ -99,22 +106,22 @@
                                     <mat-label>Fecha de Nacimiento</mat-label>
                                     <input matInput [matDatepicker]="picker" formControlName="FechaNacimiento">
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker style="outline: none;" ></mat-datepicker>
-   
+                                    <mat-datepicker #picker style="outline: none;"></mat-datepicker>
+
                                 </mat-form-field>
-                            </div>                      
+                            </div>
                             <div fxFlex="25" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>CP</mat-label>
-                                    <input matInput placeholder="CP" formControlName="cp" maxlength="5"  (keypress)="keyPress($event)"
-                                        (change)="changeCP()">
+                                    <input matInput placeholder="CP" formControlName="cp" maxlength="5"
+                                        (keypress)="keyPress($event)" (change)="changeCP()">
 
                                 </mat-form-field>
                             </div>
                             <div fxFlex="25" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Municipio</mat-label>
-                                    <input matInput placeholder="Municipio" formControlName="municipio" maxlength="45" 
+                                    <input matInput placeholder="Municipio" formControlName="municipio" maxlength="45"
                                         [value]="municipio">
 
                                 </mat-form-field>
@@ -122,13 +129,14 @@
                             <div fxFlex="25" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Entidad</mat-label>
-                                    <input matInput placeholder="Entidad" formControlName="entidad" maxlength="45" >
+                                    <input matInput placeholder="Entidad" formControlName="entidad" maxlength="45">
 
                                 </mat-form-field>
                             </div>
                             <div fxFlex="25" fxFlex.lt-md="100" fxl>
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="Colonia" formControlName="IdColonia"  [errorStateMatcher]="matcher">
+                                    <mat-select placeholder="Colonia" formControlName="IdColonia"
+                                        [errorStateMatcher]="matcher">
                                         <mat-option *ngFor="let col of colonias" [value]="col.IdColonia">
                                             {{col.Colonia}}
                                         </mat-option>
@@ -139,27 +147,30 @@
                             <div fxFlex="50" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Calle</mat-label>
-                                    <input matInput placeholder="Calle" formControlName="Calle" maxlength="60" >
+                                    <input matInput placeholder="Calle" formControlName="Calle" maxlength="60">
                                 </mat-form-field>
                             </div>
                             <div fxFlex="25" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Número Exterior</mat-label>
-                                    <input matInput placeholder="Número Exterior" formControlName="Exterior" maxlength="10" >
+                                    <input matInput placeholder="Número Exterior" formControlName="Exterior"
+                                        maxlength="10">
                                 </mat-form-field>
                             </div>
                             <div fxFlex="25" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Número Interior</mat-label>
-                                    <input matInput placeholder="Número Interior" formControlName="Interior" maxlength="10">
+                                    <input matInput placeholder="Número Interior" formControlName="Interior"
+                                        maxlength="10">
                                 </mat-form-field>
                             </div>
-                                            
+
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Teléfono</mat-label>
-                                    <input matInput placeholder="Teléfono Contacto" formControlName="Telefono" mask="(000) 000-0000" required>
-									<mat-error *ngIf="reactiveForm.get('Telefono')!.hasError('required')">
+                                    <input matInput placeholder="Teléfono Contacto" formControlName="Telefono"
+                                        mask="(000) 000-0000" required>
+                                    <mat-error *ngIf="reactiveForm.get('Telefono')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
                                 </mat-form-field>
@@ -167,21 +178,23 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Celular</mat-label>
-                                    <input matInput placeholder="Celular" formControlName="Celular" mask="(000) 000-0000" >
+                                    <input matInput placeholder="Celular" formControlName="Celular"
+                                        mask="(000) 000-0000">
                                 </mat-form-field>
                             </div>
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Correo</mat-label>
-                                    <input matInput placeholder="Correo" formControlName="email" maxlength="75" >
+                                    <input matInput placeholder="Correo" formControlName="email" maxlength="75">
                                 </mat-form-field>
                             </div>
-                        
+
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="Tipo Identificación" formControlName="IdIdentificacion" 
+                                    <mat-select placeholder="Tipo Identificación" formControlName="IdIdentificacion"
                                         [errorStateMatcher]="matcher">
-                                        <mat-option *ngFor="let identificacion of identificaciones" [value]="identificacion.IdIdentificacion">
+                                        <mat-option *ngFor="let identificacion of identificaciones"
+                                            [value]="identificacion.IdIdentificacion">
                                             {{identificacion.Nombre}}
                                         </mat-option>
                                     </mat-select>
@@ -190,34 +203,243 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Folio</mat-label>
-                                    <input matInput placeholder="Folio" formControlName="FolioIdentificacion" maxlength="25" >
+                                    <input matInput placeholder="Folio" formControlName="FolioIdentificacion"
+                                        maxlength="25">
                                 </mat-form-field>
                             </div>
 
-							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Licencia</mat-label>
-                                    <input matInput placeholder="Licencia" formControlName="Licencia" maxlength="10" required>
+                                    <input matInput placeholder="Licencia" formControlName="Licencia" maxlength="10"
+                                        required>
                                     <mat-error *ngIf="reactiveForm.get('Licencia')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
                                 </mat-form-field>
                             </div>
-                           
+
                         </div>
-						<div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-							<button mat-mini-fab  style="background-color: #80BC00; outline:none;" matTooltip="Guardar"
-							(click)="guardaOperador()">
-								<mat-icon>save</mat-icon>
-							</button>
-						  </div>
+                        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+                            <button mat-mini-fab style="background-color: #80BC00; outline:none;" matTooltip="Guardar"
+                                (click)="guardaOperador()">
+                                <mat-icon>save</mat-icon>
+                            </button>
+                        </div>
 
                     </form>
                 </mat-card-content>
-                <notifier-container></notifier-container>	
+                <notifier-container></notifier-container>
             </mat-card>
-   <!--       <br>
-            <alert></alert>-->  
         </div>
+    </div>
+
+
+    <div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100" id="htmlData">
+        <mat-table [dataSource]="dataSource" matSort>
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="NombreCompleto">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.NombreCompleto}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Nombre">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Nombre}} </mat-cell>
+            </ng-container>
+
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="Paterno">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Paterno
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Paterno}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="Materno">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Materno
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Materno}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="RFC">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> RFC
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.RFC}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="CURP">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> CURP
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.CURP}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="IdIdentificacion">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Id Identificacion
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.IdIdentificacion }} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="FolioIdentificacion">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>FolioIdentificacion
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.FolioIdentificacion }} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="FechaNacimiento">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> FechaNacimiento
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaNacimiento | date: 'dd-MM-YYYY'}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="TipoPersona">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Persona
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.TipoPersona}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="Genero">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Genero
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Genero}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="EstadoCivil">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> EstadoCivil
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.EstadoCivil}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="Calle">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Calle
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Calle}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="Exterior">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Exterior
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Exterior}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="Interior">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Interior
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Interior}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="CP">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> CP
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.CP }} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="IdColonia">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> IdColonia
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.IdColonia}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="Colonia">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Colonia
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Colonia}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="Municipio">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Municipio
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Municipio}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="EntidadFederativa">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> EntidadFederativa
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.EntidadFederativa}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="Telefono">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Telefono
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Telefono}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="Celular">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Celular
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Celular}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="email">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> email
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="IdOperador">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> IdOperador
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.IdOperador}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="Licencia">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Licencia
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Licencia}} </mat-cell>
+            </ng-container>
+
+            <!--toggle column -->
+            <ng-container matColumnDef="Estatus">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus</mat-header-cell>
+                <mat-cell *matCellDef="let row;let i = index; " [formGroup]="reactiveForm">
+                    <div>
+                        <mat-slide-toggle [checked]="row.Estatus == 'A' ? true : false" (change)="changeEstatus(row)">
+                        </mat-slide-toggle>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <button mat-mini-fab class="button-edit" (click)="editar(row)"
+                        [disabled]="row.Estatus == 'A' ? false : true" matTooltip="Editar">
+                        <mat-icon class="iconSize">edit</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+
+
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;">
+            </mat-row>
+        </mat-table>
+       <!-- <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>-->
     </div>
 </div>
