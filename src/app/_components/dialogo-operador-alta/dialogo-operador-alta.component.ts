@@ -196,6 +196,8 @@ export class DialogoOperadorAltaComponent implements OnInit {
         data => {
 
           if (data.estatus) {
+            this.f.RFC.enable();
+            this.f.CURP.enable();
             this.getConsultaOperadores(this.placa);
             this.f.Nombre.setValue("");
             this.f.Paterno.setValue("");
@@ -387,9 +389,10 @@ export class DialogoOperadorAltaComponent implements OnInit {
     //   dialogRef.afterClosed().subscribe(res => {
     ////   });
 
+    this.f.RFC.disable();
     this.idOperador = e.IdOperador;
     this.f.RFC.setValue(e.RFC);
-    this.f.RFC.disable;
+    this.f.CURP.disable();
     this.f.CURP.setValue(e.CURP);
     this.f.Nombre.setValue(e.Nombre);
     this.f.Paterno.setValue(e.Paterno);
