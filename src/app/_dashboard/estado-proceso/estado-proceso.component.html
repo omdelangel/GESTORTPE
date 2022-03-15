@@ -2,34 +2,33 @@
 
     <!-- ID Column -->
     <ng-container matColumnDef="Flujo">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Id Usuario
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Flujo
         </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.Flujo}} </mat-cell>
     </ng-container>
 
     <!-- ID Column -->
     <ng-container matColumnDef="Estado">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Estado
         </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.Estado}} </mat-cell>
     </ng-container>
 
     <!-- ID Column -->
     <ng-container matColumnDef="Estatus">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Contraseña
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus
         </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.Estatus} </mat-cell>
+        <mat-cell *matCellDef="let row"> {{row.Estatus}} </mat-cell>
     </ng-container>
 
     <!-- ID Column -->
     <ng-container matColumnDef="Tramites">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Id Empleado
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tramites
         </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.Tramite}} </mat-cell>
+        <mat-cell *matCellDef="let row"> {{row.Tramites}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;">
-    </mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
-<mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+<mat-paginator [pageSizeOptions]="[5, 25, 50]"></mat-paginator>
