@@ -30,7 +30,8 @@ margin-bottom: 1.5rem;
 
 
 .grad-blue[_ngcontent-qmw-c246] {
-background: linear-gradient(58deg, #001a70, #002bbb);
+background: #E6E9F4;
+
 
 color: #fff;
 }
@@ -59,9 +60,9 @@ line-height: 40px;
 
 .card-wheather[_ngcontent-qmw-c246] {
 padding: 1.5rem;
-height: 150px;
-color: #fff;
-font-size: 1.2rem;
+height: 135px;
+color: #001C71;
+font-size: 1.4rem;
 }
 
 
@@ -86,6 +87,7 @@ fill: currentColor;
 height: 44px;
 width: 44px;
 font-size: 50px;
+color:#80bc00;
 }
 
 [mat-icon-button][mat-button-sm] mat-icon {
@@ -115,7 +117,8 @@ display: block;
 }
 
 p {
-font-size: .875rem;
+font-size: 1.2rem;
+TEXT-ALIGN: end;
 }
 
 .grad-green[_ngcontent-cmm-c246] {
@@ -123,3 +126,6 @@ background: linear-gradient(58deg, #001a70, #002bbb);
 color: #fff;
 }
 
+.dashboard-cards-title{
+margin-bottom: 13px;
+}

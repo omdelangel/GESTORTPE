@@ -40,7 +40,7 @@
   padding-left: 1rem;
   padding-right: 1rem;
   line-height: 1;
-  font-size: .8rem;
+  font-size: 1rem;
   font-weight: 400;
 }
 
@@ -121,5 +121,11 @@ p {
 .grad-green[_ngcontent-cmm-c246] {
   background: linear-gradient(58deg, #001a70, #002bbb);
   color: #fff;
+}
+
+
+app-pie-chart{
+  display: flex;
+  justify-content: center;
 }
 
