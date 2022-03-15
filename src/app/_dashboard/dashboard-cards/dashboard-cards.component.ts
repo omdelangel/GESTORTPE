@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-import { DashboardService } from './../../_services/dashboard.service';
+import { DashboardService } from '../../_services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard-cards',

@@ -10,6 +10,7 @@ import { ConcesionarioService } from 'src/app/_services';
 import { MatDialog } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
 import { OperadoresComponent } from '../operadores';
+import { DialogoOperadorAltaComponent } from '../dialogo-operador-alta';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -113,7 +114,7 @@ export class FormalizacionComponent implements OnInit {
     //Edita el concesionario/preregistro
     operadores(e: any) {
 
-      const dialogRef = this.dialog.open(OperadoresComponent, {
+      const dialogRef = this.dialog.open(DialogoOperadorAltaComponent, {
         data: { Placa: e.Placa},
         disableClose: true,
         width: '1500px',

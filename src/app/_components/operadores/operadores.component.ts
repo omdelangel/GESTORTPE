@@ -57,9 +57,10 @@ export class OperadoresComponent implements OnInit {
 
       this.notifier = notifierService; 
       this.placa = data.Placa;
-     this.getConsultaOperadores(this.placa);
 
-     
+      this.getConsultaOperadores(this.placa);
+
+
      }
 
   ngOnInit(): void {
@@ -161,15 +162,59 @@ export class OperadoresComponent implements OnInit {
         this.operadorService.getOperadorVehiculo(placa)
         .pipe(first())
         .subscribe(data => {   
+
+          
  
-          this.operadores = data.operadores;   
-          this.dataSource = new MatTableDataSource(this.operadores);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
+          if (data.estatus == true && data.operadores != "") {
+  
+            // Assign the data to the data source for the table to render
+            this.operadores = data.operadores;
+            this.idConcesionario = data.IdConcesionario;
+            this.idVehiculo = data.IdVehiculo;
+  
+  
+            this.dataSource = new MatTableDataSource(this.operadores);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+    
+            var elemDiv = document.getElementById('divTitle');
+            elemDiv!.style.visibility = "visible";
+    
+            var elemTable = document.getElementById('htmlData');
+            elemTable!.style.visibility = "visible";
+    
+    
+          }  else if (data.estatus == false ){
+           
+             var elemDiv = document.getElementById('divTitle');
+              elemDiv!.style.visibility = "hidden";
+    
+              var elemTable = document.getElementById('htmlData');
+              elemTable!.style.visibility = "hidden";            
+  
+              this.notifier.notify('warning', data.mensaje);
+    
+          } else if (data.estatus == true && data.operadores == ""){
+  
+            var elemDiv = document.getElementById('divTitle');
+            elemDiv!.style.visibility = "hidden";
+  
+            var elemTable = document.getElementById('htmlData');
+            elemTable!.style.visibility = "hidden";            
+  
+            this.notifier.notify('warning', data.mensaje);
+  
+            this.idConcesionario = data.IdConcesionario;
+            this.idVehiculo = data.IdVehiculo;
+            //this.openDialog();
+            
+  
+          }
               
  
         },
           error => {
+            this.notifier.notify('success',error);
   
           });
 
