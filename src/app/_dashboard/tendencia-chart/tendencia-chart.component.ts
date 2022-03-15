@@ -47,7 +47,7 @@ export class TendenciaChartComponent implements OnInit {
             type: 'line',
             label: 'Litros consumo',
             data: this.dataLitros,
-            borderColor: 'rgb(0,255,0)',
+            borderColor: 'rgb(24 70 209)',
             yAxisID : 'secundario'
           },
           {
