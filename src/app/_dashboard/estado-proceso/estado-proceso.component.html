@@ -1,0 +1,35 @@
+<mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="Flujo">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Id Usuario
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.Flujo}} </mat-cell>
+    </ng-container>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="Estado">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.Estado}} </mat-cell>
+    </ng-container>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="Estatus">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Contraseña
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.Estatus} </mat-cell>
+    </ng-container>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="Tramites">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Id Empleado
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.Tramite}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+</mat-table>
+<mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>

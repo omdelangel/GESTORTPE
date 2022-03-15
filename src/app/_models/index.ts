@@ -8,3 +8,4 @@ export * from './documentos.model';
 export * from './talleres.model';
 export * from './cita.model';
 export * from './operador.model';
+export * from './estadoProceso.model';

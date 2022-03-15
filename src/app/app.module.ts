@@ -67,7 +67,10 @@ import { EdicionUsuariosComponent } from './_catalogos/edicion-usuarios/edicion-
 
 import { PieChartComponent } from './_components/pie-chart/pie-chart.component'; 
 import { DashboardCardsComponent } from './_components/dashboard-cards/dashboard-cards.component';
-import { FormalizacionComponent } from './_components/formalizacion/formalizacion.component'; 
+import { FormalizacionComponent } from './_components/formalizacion/formalizacion.component';
+import { TendenciaChartComponent } from './_dashboard/tendencia-chart/tendencia-chart.component';
+import { InstalacionesTipoVehiculoChartComponent } from './_dashboard/instalaciones-tipo-vehiculo-chart/instalaciones-tipo-vehiculo-chart.component';
+import { EstadoProcesoComponent } from './_dashboard/estado-proceso/estado-proceso.component'; 
 
 
 /**
@@ -169,7 +172,10 @@ FullCalendarModule.registerPlugins([
     EdicionUsuariosComponent,
     DashboardCardsComponent,
     PieChartComponent,
-    FormalizacionComponent
+    FormalizacionComponent,
+    TendenciaChartComponent,
+    InstalacionesTipoVehiculoChartComponent,
+    EstadoProcesoComponent
   ],
   imports: [
     BrowserModule,

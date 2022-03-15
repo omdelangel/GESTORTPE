@@ -38,7 +38,7 @@ export class PieChartComponent implements OnInit {
           {
             label: "Distribusión de vehículos aprobados por tipo de vehículo",
             data: this.dataPie,
-            backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
+            backgroundColor: ["rgb(28, 15, 250)", "rgb(86, 224, 52)"],
             hoverOffset: 4,
         
           },
