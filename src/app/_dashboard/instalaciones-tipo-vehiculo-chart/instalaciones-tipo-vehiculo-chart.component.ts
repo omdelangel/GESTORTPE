@@ -24,7 +24,6 @@ export class InstalacionesTipoVehiculoChartComponent implements OnInit {
   ngOnInit(): void {
     this.dash.obtenDashboard(4)
     .pipe(first()).subscribe((dataList : any) => {
-       console.log(JSON.stringify(dataList));
       this.dataAutos = dataList['datos'][0].map((res : any) => res.Autos);
       this.dataVans = dataList['datos'][0].map((res : any) => res.Vans);
       this.dim = dataList['datos'][0].map((res : any) => res.Periodo);
