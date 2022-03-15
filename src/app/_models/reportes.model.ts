@@ -61,3 +61,82 @@ export class RepoSitActualConcesionario {
     }    
 }
 
+export class RepoTipoAutoConvertido {
+    NombreConcesionario        :string;
+    PaternoConcesionario       :string;
+    MaternoConcesionario       :string;
+    NombreOperador             :string;
+    PaternoOperador            :string;
+    MaternoOperador            :string;
+    Telefono                   :string;
+    Celular                    :string;
+    email                      :string;
+    Calle                      :string;
+    Exterior                   :string;
+    Interior                   :string;
+    Colonia                    :string;
+    CP                         :string;
+    Municipio                  :string;
+    EntidadFederativa          :string;
+    Sindicato                  :string;
+    Marca                      :string;
+    Submarca                   :string;
+    Modelo                     :number;
+    NumeroEconomico            :number;
+    Placa                      :string;
+    ConsumoTotal               :string;
+    ConsumoMes                 :string;
+
+
+
+    constructor(RepoTipoAutoConvertido: {   
+        NombreConcesionario        :string;
+        PaternoConcesionario       :string;
+        MaternoConcesionario       :string;
+        NombreOperador             :string;
+        PaternoOperador            :string;
+        MaternoOperador            :string;
+        Telefono                   :string;
+        Celular                    :string;
+        email                      :string;
+        Calle                      :string;
+        Exterior                   :string;
+        Interior                   :string;
+        Colonia                    :string;
+        CP                         :string;
+        Municipio                  :string;
+        EntidadFederativa          :string;
+        Sindicato                  :string;
+        Marca                      :string;
+        Submarca                   :string;
+        Modelo                     :number;
+        NumeroEconomico            :number;
+        Placa                      :string;
+        ConsumoTotal               :string;
+        ConsumoMes                 :string}){
+            this.NombreConcesionario   = RepoTipoAutoConvertido.NombreConcesionario  ;
+            this.PaternoConcesionario  = RepoTipoAutoConvertido.PaternoConcesionario ;
+            this.MaternoConcesionario  = RepoTipoAutoConvertido.MaternoConcesionario ;
+            this.NombreOperador        = RepoTipoAutoConvertido.NombreOperador       ;
+            this.PaternoOperador       = RepoTipoAutoConvertido.PaternoOperador      ;
+            this.MaternoOperador       = RepoTipoAutoConvertido.MaternoOperador      ;
+            this.Telefono              = RepoTipoAutoConvertido.Telefono             ;
+            this.Celular               = RepoTipoAutoConvertido.Celular              ;
+            this.email                 = RepoTipoAutoConvertido.email                ;
+            this.Calle                 = RepoTipoAutoConvertido.Calle                ;
+            this.Exterior              = RepoTipoAutoConvertido.Exterior             ;
+            this.Interior              = RepoTipoAutoConvertido.Interior             ;
+            this.Colonia               = RepoTipoAutoConvertido.Colonia              ;
+            this.CP                    = RepoTipoAutoConvertido.CP                   ;
+            this.Municipio             = RepoTipoAutoConvertido.Municipio            ;
+            this.EntidadFederativa     = RepoTipoAutoConvertido.EntidadFederativa    ;
+            this.Sindicato             = RepoTipoAutoConvertido.Sindicato            ;
+            this.Marca                 = RepoTipoAutoConvertido.Marca                ;
+            this.Submarca              = RepoTipoAutoConvertido.Submarca             ;
+            this.Modelo                = RepoTipoAutoConvertido.Modelo               ;
+            this.NumeroEconomico       = RepoTipoAutoConvertido.NumeroEconomico      ;
+            this.Placa                 = RepoTipoAutoConvertido.Placa                ;
+            this.ConsumoTotal          = RepoTipoAutoConvertido.ConsumoTotal         ;
+            this.ConsumoMes            = RepoTipoAutoConvertido.ConsumoMes           ;
+    }    
+}
