@@ -1,5 +1,5 @@
 import { first } from 'rxjs/operators';
-import { DashboardService } from './../../_services/dashboard.service';
+import { DashboardService } from '../../_services/dashboard.service';
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'node_modules/chart.js';
 

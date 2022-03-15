@@ -25,10 +25,9 @@
     <ng-container matColumnDef="Tramites">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Tramites
         </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.Tramites}} </mat-cell>
+        <mat-cell *matCellDef="let row" class="centre"> {{row.Tramites}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
-<mat-paginator [pageSizeOptions]="[5, 25, 50]"></mat-paginator>

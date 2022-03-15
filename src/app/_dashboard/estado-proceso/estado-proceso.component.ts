@@ -30,10 +30,7 @@ export class EstadoProcesoComponent implements OnInit {
   constructor(private dash : DashboardService) {
     this.dash.obtenDashboard(5)
     .pipe(first()).subscribe((dataList : any) => {
-      console.log('estado-proceso')
-      console.log(dataList['datos'][0])
       this.dataSource           = new MatTableDataSource(dataList['datos'][0]);
-      //console.log(this.dataSource);
       
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort      = this.sort;
@@ -48,22 +45,7 @@ export class EstadoProcesoComponent implements OnInit {
   ngOnInit(): void {
     
   }  
-    /*
     
-    var userdata : EstadoProceso[] = [];
-    var  edoProc : EstadoProceso ;
-
-    for (let i = 1; i <= 15; i++) { 
-      edoProc = new EstadoProceso({"Flujo" : 'Solicitud',"Estado": 'Preregistro',"Estatus": 'Activo',"Tramites":i});
-      userdata.push(edoProc);
-      
-     };
-     this.dataSource           = new MatTableDataSource(userdata);
-     //console.log(this.dataSource);
-     this.dataSource.paginator = this.paginator;
-     this.dataSource.sort      = this.sort;
-    */
-  
   
 
 }
