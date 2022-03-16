@@ -177,7 +177,7 @@ export class ConsultaPreregistroComponent implements OnInit {
 
           const dialogRef = this.dialog.open(DialogoTalleresComponent, {
             disableClose: true,
-            data: { nombreConcesionario: e.NombreCompleto, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo},
+            data: { nombreConcesionario: e.NombreCompleto, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo, causa: "Verificacion"},
           });
       
           dialogRef.afterClosed().subscribe(res => {
@@ -192,7 +192,7 @@ export class ConsultaPreregistroComponent implements OnInit {
         const dialogRef = this.dialog.open(EdicionCitaComponent, {
           disableClose: true,
           data: { idCita: e.IdCita, NombreConcesionario: e.NombreCompleto, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo,
-          marca: e.Marca, submarca: e.Submarca, modelo: e.Modelo, estatusCita: e.EstatusCita },
+          marca: e.Marca, submarca: e.Submarca, modelo: e.Modelo, estatusCita: e.EstatusCita, causa: "Verificacion"},
         });
     
         dialogRef.afterClosed().subscribe(res => {

@@ -9,8 +9,10 @@ import { ConcesionarioInstalacion } from '../../_models';
 import { ConcesionarioService } from 'src/app/_services';
 import { MatDialog } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
-import { OperadoresComponent } from '../operadores';
 import { DialogoOperadorAltaComponent } from '../dialogo-operador-alta';
+import { DialogoTalleresComponent } from '../dialogo-talleres';
+import { EdicionCitaComponent } from '../edicion-cita';
+import { DialogoConfirmaInstalacionComponent } from '../dialogo-confirma-instalacion';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -29,8 +31,8 @@ export class FormalizacionComponent implements OnInit {
   private readonly notifier: NotifierService;
 
   //Columnas en Tabla de consulta
-  displayedColumns = ['IdConcesionario', 'NombreConcesionario', 'FechaRegistro', 'Marca', 'SubMarca', 'Modelo', 'Placa', 
-  'TipoVehiculo', 'TipoConvertidor', 'FechaCitaInstalacion', 'EstatusCitaInstalacion', 'ConfirmaCita', 'actions'];
+  displayedColumns = ['NombreConcesionario', 'FechaRegistro', 'Marca', 'SubMarca', 'Modelo', 'Placa', 
+  'TipoVehiculo', 'TipoConvertidor', 'FechaCitaInstalacion', 'actions'];
   dataSource!: MatTableDataSource<ConcesionarioInstalacion>;
 
   //@ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -91,6 +93,8 @@ export class FormalizacionComponent implements OnInit {
       this.concesionarioService.getConcesionarioInstalacion()
         .pipe(first())
         .subscribe(data => {   
+
+          console.log(data);
  
           this.formalizacion = data.concesionario;   
           this.dataSource = new MatTableDataSource(this.formalizacion);
@@ -111,7 +115,7 @@ export class FormalizacionComponent implements OnInit {
     }
 
 
-    //Edita el concesionario/preregistro
+    //Mantenimiento a operadores
     operadores(e: any) {
 
       const dialogRef = this.dialog.open(DialogoOperadorAltaComponent, {
@@ -127,30 +131,46 @@ export class FormalizacionComponent implements OnInit {
 
     }
 
-     //Edita el concesionario/preregistro
-     cita(e: any) {
+      //Registro de Citas para la instalacion
+      cita(e: any) {
 
-      const dialogRef = this.dialog.open(OperadoresComponent, {
-        data: { IdVehiculo: e.IdVehiculo, nombreConcesionario: e.NombreConcesionario, sindicato: e.Sindicato},
-        disableClose: true,
-        width: '1500px',
-        height: '900px'
-      });
+        if(e.IdCitaInstalacion == null || e.EstatusCitaInstalacion == "D" || e.EstatusCitaInstalacion == "V"){
+
+          const dialogRef = this.dialog.open(DialogoTalleresComponent, {
+            disableClose: true,
+            data: { nombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo, causa: "Instalacion"},
+          });
+      
+          dialogRef.afterClosed().subscribe(res => {
+            this.getConsultaFormalizacion();
+          });
+
+
+        } else {
+        
+        const dialogRef = this.dialog.open(EdicionCitaComponent, {
+          disableClose: true,
+          data: { idCita: e.IdCitaInstalacion, NombreConcesionario: e.NombreCompleto, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo,
+          marca: e.Marca, submarca: e.Submarca, modelo: e.Modelo, estatusCita: e.EstatusCitaInstalacion, causa: "Instalacion" },
+        });
+    
+        dialogRef.afterClosed().subscribe(res => {
+          this.getConsultaFormalizacion();
+        });
+
+      }
   
-      dialogRef.afterClosed().subscribe(res => {
-        this.getConsultaFormalizacion();
-      });
+      }
 
-    }
-
-     //Edita el concesionario/preregistro
+     //Confirma la instalacion del convertidor
      confirmacion(e: any) {
 
-      const dialogRef = this.dialog.open(OperadoresComponent, {
-        data: { IdVehiculo: e.IdVehiculo, nombreConcesionario: e.NombreConcesionario, sindicato: e.Sindicato},
+      const dialogRef = this.dialog.open(DialogoConfirmaInstalacionComponent, {
+        data: { IdVehiculo: e.IdVehiculo, IdConcesionario: e.IdConcesionario, NombreConcesionario: e.NombreConcesionario, Placa: e.Placa,
+        TipoVehiculo: e.TipoVehiculo, TipoConvertidor: e.TipoConvertidor, FechaInstalacion: e.FechaCitaInstalacion},
         disableClose: true,
-        width: '1500px',
-        height: '900px'
+        //width: '1500px',
+       // height: '900px'
       });
   
       dialogRef.afterClosed().subscribe(res => {

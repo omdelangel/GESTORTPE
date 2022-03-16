@@ -56,12 +56,10 @@ import { DialogoContratoComponent } from './_components/dialogo-contrato/dialogo
 import { DialogoDocumentosRegistroComponent } from './_components/dialogo-documentos-registro';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { RevisiondocumentosComponent } from './_components/revisiondocumentos/revisiondocumentos.component';
-import { OperadoresComponent } from './_components/operadores/operadores.component';
 import { CatDictamenesComponent  } from './_catalogos/cat-dictamenes';
 import { CurrencyPipe } from '@angular/common';
 import { ConsultaUsuariosComponent } from './_catalogos/consulta-usuarios/consulta-usuarios.component'; 
 import { DialogoOperadorAltaComponent } from './_components/dialogo-operador-alta/dialogo-operador-alta.component';
-import { DialogoOperadorEditaComponent } from './_components/dialogo-operador-edita/dialogo-operador-edita.component';
 import { AltaUsuariosComponent } from './_catalogos/alta-usuarios/alta-usuarios.component';
 import { EdicionUsuariosComponent } from './_catalogos/edicion-usuarios/edicion-usuarios.component'; 
 import { RepoTaxiVanConvComponent } from './_components/repo-taxi-van-conv/repo-taxi-van-conv.component'; 
@@ -72,6 +70,7 @@ import { TendenciaChartComponent } from './_dashboard/tendencia-chart/tendencia-
 import { InstalacionesTipoVehiculoChartComponent } from './_dashboard/instalaciones-tipo-vehiculo-chart/instalaciones-tipo-vehiculo-chart.component';
 import { EstadoProcesoComponent } from './_dashboard/estado-proceso/estado-proceso.component';
 import { RepoSinConcluirComponent } from './_components/repo-sin-concluir/repo-sin-concluir.component'; 
+import { DialogoConfirmaInstalacionComponent } from './_components/dialogo-confirma-instalacion/dialogo-confirma-instalacion.component'; 
 
 
 /**
@@ -164,11 +163,9 @@ FullCalendarModule.registerPlugins([
     DialogoContratoComponent,
     DialogoDocumentosRegistroComponent,
     RevisiondocumentosComponent,
-    OperadoresComponent,
     CatDictamenesComponent,
     ConsultaUsuariosComponent,
     DialogoOperadorAltaComponent,
-    DialogoOperadorEditaComponent,
     AltaUsuariosComponent,
     EdicionUsuariosComponent,
     DashboardCardsComponent,
@@ -178,7 +175,8 @@ FullCalendarModule.registerPlugins([
     TendenciaChartComponent,
     InstalacionesTipoVehiculoChartComponent,
     EstadoProcesoComponent,
-    RepoSinConcluirComponent
+    RepoSinConcluirComponent,
+    DialogoConfirmaInstalacionComponent
   ],
   imports: [
     BrowserModule,

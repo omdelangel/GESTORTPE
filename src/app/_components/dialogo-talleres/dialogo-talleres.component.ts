@@ -52,6 +52,7 @@ export class DialogoTalleresComponent implements OnInit {
    telefonoValue: string = "";
    diaValue: string = ""; 
    horaValue: string = "";  
+   causaValue: string = "";
  
    constructor(public dialog: MatDialog,
      private alertService: AlertService,
@@ -67,6 +68,12 @@ export class DialogoTalleresComponent implements OnInit {
         this.nombreConcesionario = data.nombreConcesionario;
         this.idConcesionario = data.idConcesionario;       
         this.idVehiculo = data.idVehiculo;
+
+        //Determina si viene del registro o de la formalización
+        this.causaValue = data.causa;
+
+        console.log("this.causaValue");
+        console.log(this.causaValue);
 
      }
  
@@ -112,12 +119,15 @@ export class DialogoTalleresComponent implements OnInit {
      const dialogRef = this.dialog.open(AltacitaComponent, {
        data: { idTaller: row.IdTaller, nombreTaller: row.Nombre, domicilio: row.Domicilio + " " + row.Colonia + " " + "CP: " +row.CP + " " + 
        row.Municipio + " " + row.EntidadFederativa, telefono: row.Telefono, contacto: row.Contacto, nombreConce: this.nombreConcesionario,
-       idConce: this.idConcesionario, idVehi: this.idVehiculo},
-       width: '1500px',
-       height: '900px'
+       idConce: this.idConcesionario, idVehi: this.idVehiculo, causa: this.causaValue},
+       //width: '1500px',
+       //height: '900px'
      });
  
      dialogRef.afterClosed().subscribe(res => {
+
+      console.log("RESPUESTA DE LA CITA");
+      console.log(res);
  
        if(res.idCita > 0){
  
@@ -132,7 +142,7 @@ export class DialogoTalleresComponent implements OnInit {
          this.horaValue = res.hora;
          sessionStorage.setItem("NuevaCita", res.idCita);
  
-       } else if (res.idCita == undefined || res.idCita == 0){
+       } else if (res.idCita == undefined || res.idCita == 0 ){
  
          this.divTalleres = true;
          this.divCitas = false;

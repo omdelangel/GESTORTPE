@@ -44,7 +44,7 @@ getColorDisponibles(idTaller: number, dia: any): Observable<any> {
   )
 }
 
-//Registra la Cita
+//Registra la Cita para la revisión del auto
 postRegistraCita(citas: Citas): Observable<any> {
 
   return this.http.post<any>(`${environment.SERVER_URL}/cita-registro`, {'IdVehiculo': citas.IdVehiculo, 
@@ -73,7 +73,7 @@ getCitaConcesionario(idCita: number): Observable<any> {
 }
 
 
-//Cancela la Cita
+//Cancela la Cita de revisión
 postCancelaCita(idVehiculo: number, idCita: number): Observable<any> {
 
   return this.http.post<any>(`${environment.SERVER_URL}/cita-cancelacion`, {'IdVehiculo': idVehiculo, 
@@ -99,6 +99,50 @@ postDictamenCita(dictamenCita: DictamenCita): Observable<any> {
     catchError(this.handleError)
   )
 }
+
+//Registra la Cita para la instalación del convertidor
+postRegistraCitaInstalacion(citas: Citas): Observable<any> {
+
+  return this.http.post<any>(`${environment.SERVER_URL}/cita-convertidor-registro`, {'IdVehiculo': citas.IdVehiculo, 
+  'IdConcesionario': citas.IdConcesionario, 'Fecha': citas.Fecha, 'IdTaller': citas.IdTaller})
+  .pipe(map((res: Response) => { 
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Cancela la Cita de instalación
+postCancelaCitaInstalacion(idVehiculo: number, idCita: number): Observable<any> {
+
+  return this.http.post<any>(`${environment.SERVER_URL}/cita-convertidor-cancelacion`, {'IdVehiculo': idVehiculo, 
+  'IdCita': idCita})
+  .pipe(map((res: Response) => { 
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+
+//Confirma la instalación del convertidor
+postConfirmaInstalacionCita(citas: Citas): Observable<any> {
+
+
+  
+
+  return this.http.post<any>(`${environment.SERVER_URL}/instalacion`, {'IdVehiculo': citas.IdVehiculo, 
+  'IdConcesionario': citas.IdConcesionario, 'FechaInstalacion': citas.Fecha})
+  .pipe(map((res: Response) => { 
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
 
 // Error 
 handleError(error: HttpErrorResponse) {

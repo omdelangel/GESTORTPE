@@ -31,6 +31,13 @@
 								</ng-container>
 
 								<!-- ID Column -->
+								<ng-container matColumnDef="IdCitaInstalacion">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Id Cita Instalacion
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.IdCitaInstalacion}} </mat-cell>
+								</ng-container>
+
+								<!-- ID Column -->
 								<ng-container matColumnDef="NombreConcesionario">
 									<mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Concesionario
 									</mat-header-cell>
@@ -102,9 +109,9 @@
 
 								<!-- ID Column -->
 								<ng-container matColumnDef="FechaCitaInstalacion">
-									<mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Instalación
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Cita Instalación
 									</mat-header-cell>
-									<mat-cell *matCellDef="let row"> {{row.FechaCitaInstalacion}} </mat-cell>
+									<mat-cell *matCellDef="let row"> {{row.FechaCitaInstalacion | date: 'dd-MM-YYYY'}} </mat-cell>
 								</ng-container>
 
 								<!-- ID Column -->
@@ -135,7 +142,7 @@
 											<mat-icon class="iconSize">calendar_today</mat-icon>
 										</button> &nbsp; &nbsp;
                                         <button mat-mini-fab class="button-instalacion" (click)="confirmacion(row)" 	
-                                        matTooltip="Confirmar Instalación">
+                                        matTooltip="Confirmar Instalación" [disabled]="!row.ConfirmaCita">
                                         <mat-icon class="iconSize">directions_car</mat-icon>
                                     </button> &nbsp; &nbsp;
 

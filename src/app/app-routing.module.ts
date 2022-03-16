@@ -12,7 +12,6 @@ import { RepoSitActualConceComponent } from './_components/repo-sit-actual-conce
 import { ConsultaPreregistroComponent } from './_components/consulta-preregistro';
 import { ConsultaRegistroComponent } from './_components/consulta-registro';
 import { RevisiondocumentosComponent } from './_components/revisiondocumentos';
-import { OperadoresComponent } from './_components/operadores';
 import { CatDictamenesComponent } from './_catalogos/cat-dictamenes';
 import { ConsultaUsuariosComponent } from './_catalogos/consulta-usuarios'
 import { RepoTaxiVanConvComponent } from './_components/repo-taxi-van-conv/repo-taxi-van-conv.component';
@@ -35,7 +34,6 @@ const routes: Routes = [
                { path: 'preRegistro', component: ConsultaPreregistroComponent},
                { path: 'registro', component: ConsultaRegistroComponent},
                { path: 'revisaDocumentos', component: RevisiondocumentosComponent},
-               { path: 'operadores', component: OperadoresComponent},
                { path: 'dictamenes', component: CatDictamenesComponent},
                { path: 'usuarios', component: ConsultaUsuariosComponent},
                { path: 'repoAutosConvertidos', component: RepoTaxiVanConvComponent },

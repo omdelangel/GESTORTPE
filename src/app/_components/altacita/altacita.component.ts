@@ -18,12 +18,12 @@ import { NotifierService } from 'angular-notifier';
   templateUrl: './altacita.component.html',
   styleUrls: ['./altacita.component.scss']
 })
-export class AltacitaComponent  implements OnInit {
+export class AltacitaComponent implements OnInit {
   private readonly notifier: NotifierService;
 
   frmStepFour!: FormGroup;
   submitted = false;
-  dia: string = ""; 
+  dia: string = "";
   hora: string = "";
   idTallerValue: number = 0;
   nombreValue: string = "";
@@ -36,6 +36,9 @@ export class AltacitaComponent  implements OnInit {
   idVehiculoValue: number = 0;
   idConcesionarioValue: number = 0;
   diaHora: any;
+
+  //Determina si viene del registro o de la formalización
+  causaValue: string = "";
 
   events = [
     {
@@ -68,7 +71,7 @@ export class AltacitaComponent  implements OnInit {
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth'      
+      right: 'dayGridMonth'
     },
     dayMaxEvents: true, // allow "more" link when too many events
     events: [
@@ -101,29 +104,31 @@ export class AltacitaComponent  implements OnInit {
     private citasService: CitasService,
     notifierService: NotifierService,
     public dialogRef: MatDialogRef<AltacitaComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any)  {   
+    @Inject(MAT_DIALOG_DATA) public data: any) {
 
-      dialogRef.disableClose = true;
-      this.notifier = notifierService; 
-      this.idTallerValue = data.idTaller;
-      this.nombreValue = data.nombreTaller;
-      this.domicilioValue = data.domicilio;
-      this.telefonoValue = data.telefono;
-      this.contactoValue = data.contacto;   
-      this.nombreConcesionario = data.nombreConce;
-      this.idConcesionarioValue = data.idConce;
-      this.idVehiculoValue = data.idVehi;
- }
+    dialogRef.disableClose = true;
+    this.notifier = notifierService;
+    this.idTallerValue = data.idTaller;
+    this.nombreValue = data.nombreTaller;
+    this.domicilioValue = data.domicilio;
+    this.telefonoValue = data.telefono;
+    this.contactoValue = data.contacto;
+    this.nombreConcesionario = data.nombreConce;
+    this.idConcesionarioValue = data.idConce;
+    this.idVehiculoValue = data.idVehi;
+    this.causaValue = data.causa;
+
+  }
 
 
   ngOnInit(): void {
 
     this.getColorDisponibles();
 
-     //Validación de campos en pantalla
-     this.frmStepFour = this.formBuilder.group({
+    //Validación de campos en pantalla
+    this.frmStepFour = this.formBuilder.group({
 
-    }); 
+    });
 
     //throw new Error('Method not implemented.');
   }
@@ -145,47 +150,74 @@ export class AltacitaComponent  implements OnInit {
     if (this.dia != undefined && this.hora != undefined && this.dia != "" && this.hora != "") {
 
       this.diaHora = moment(this.dia + " " + this.hora).format('YYYY-MM-DD HH:mm:ss');
-      this.citas = {IdVehiculo: this.idVehiculoValue, IdConcesionario: this.idConcesionarioValue, Fecha: this.diaHora, IdTaller: this.idTallerValue }
-       
+      this.citas = { IdVehiculo: this.idVehiculoValue, IdConcesionario: this.idConcesionarioValue, Fecha: this.diaHora, IdTaller: this.idTallerValue }
+
+      if (this.causaValue == "Verificacion") {
 
         this.citasService.postRegistraCita(this.citas)
-            .pipe(first())
-            .subscribe(
-              data => {  
-                                
-                if (data.estatus) {                 
-                  //this.success(data.mensaje);  
-                  this.notifier.notify('success', data.mensaje, ''); 
-                  this.dialogRef.close({idCita: data.IdCita, dia: this.dia, hora: this.hora});
-                } else  {
-                  //this.warn(data.mensaje);
-                  this.notifier.notify('warning', data.mensaje, ''); 
-                }
+          .pipe(first())
+          .subscribe(
+            data => {
+
+              if (data.estatus) {
+                //this.success(data.mensaje);  
+                this.notifier.notify('success', data.mensaje, '');
+                this.dialogRef.close({ idCita: data.IdCita, dia: this.dia, hora: this.hora });
+              } else {
+                //this.warn(data.mensaje);
+                this.notifier.notify('warning', data.mensaje, '');
+                this.dialogRef.close({ idCita: 0 });
+              }
             },
             error => {
-              this.notifier.notify('error', error, ''); 
+              this.notifier.notify('error', error, '');
             });
-      
-       
+
+      } else if (this.causaValue == "Instalacion") {
+
+        this.citasService.postRegistraCitaInstalacion(this.citas)
+          .pipe(first())
+          .subscribe(
+            data => {
+
+              if (data.estatus) {
+                //this.success(data.mensaje);  
+                this.notifier.notify('success', data.mensaje, '');
+                this.dialogRef.close({ idCita: data.IdCita, dia: this.dia, hora: this.hora });
+              } else {
+                //this.warn(data.mensaje);
+                this.notifier.notify('warning', data.mensaje, '');
+                this.dialogRef.close({ idCita: 0 });
+              }
+            },
+            error => {
+              this.notifier.notify('error', error, '');
+            });
+
+
+
+      }
+
+
 
     } else {
-      
+
       //this.info("Seleccione fecha y hora de la cita!!!");
-      this.notifier.notify('info', "Seleccione fecha y hora de la cita!!!", ''); 
+      this.notifier.notify('info', "Seleccione fecha y hora de la cita!!!", '');
     }
   }
 
   //Obtiene colores para mostrar fechas disponibles por color
-  getColorDisponibles(){
+  getColorDisponibles() {
 
     let date = new Date();
-    let primerDia = new Date(date.getFullYear(), date.getMonth(), 1); 
+    let primerDia = new Date(date.getFullYear(), date.getMonth(), 1);
     let fechaOrigen = moment(primerDia).format("YYYY-MM-DD");
 
     this.citasService.getColorDisponibles(this.idTallerValue, fechaOrigen)
       .pipe(first())
-      .subscribe(data => {  
-        
+      .subscribe(data => {
+
         this.disponibles = data.FechasDisponibles;
       },
         error => {
@@ -194,39 +226,39 @@ export class AltacitaComponent  implements OnInit {
   }
 
 
-    //Guarda la cita
-    mostrarDialogoConfirmacion(): void {
-      this.dialog
-        .open(DialogoConfirmacionComponent, {
-          data: `¿Desea confirmar la cita?`,
-          width: '25%'
-        })
-        .afterClosed()
-        .subscribe((confirmado: Boolean) => {
-          if (confirmado) {
-  
-           this.guardarCita();
-  
-          } else {
-  
-          }
-        });
-    }
+  //Guarda la cita
+  mostrarDialogoConfirmacion(): void {
+    this.dialog
+      .open(DialogoConfirmacionComponent, {
+        data: `¿Desea confirmar la cita?`,
+        width: '25%'
+      })
+      .afterClosed()
+      .subscribe((confirmado: Boolean) => {
+        if (confirmado) {
 
-//Muestra las horas disponibles del día seleccionado
-handleDateClick(arg: any) {
+          this.guardarCita();
 
-  const dialogRef = this.dialog.open(HoracitaDialogComponent, {
-    width: '40%',
-    height: '30%',
-    data: { fecha: arg.dateStr, idTaller: this.idTallerValue}
-  });
+        } else {
 
-  dialogRef.afterClosed().subscribe(result => {
-    this.hora = result;
-    this.dia = moment(arg.dateStr).format('YYYY-MM-DD');
-    //this.clear();
-  });
+        }
+      });
+  }
+
+  //Muestra las horas disponibles del día seleccionado
+  handleDateClick(arg: any) {
+
+    const dialogRef = this.dialog.open(HoracitaDialogComponent, {
+      //width: '40%',
+      //height: '30%',
+      data: { fecha: arg.dateStr, idTaller: this.idTallerValue }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.hora = result;
+      this.dia = moment(arg.dateStr).format('YYYY-MM-DD');
+      //this.clear();
+    });
 
   }
 
