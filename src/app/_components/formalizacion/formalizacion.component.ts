@@ -32,7 +32,7 @@ export class FormalizacionComponent implements OnInit {
 
   //Columnas en Tabla de consulta
   displayedColumns = ['NombreConcesionario', 'FechaRegistro', 'Marca', 'SubMarca', 'Modelo', 'Placa', 
-  'TipoVehiculo', 'TipoConvertidor', 'FechaCitaInstalacion', 'actions'];
+  'TipoVehiculo', 'TipoConvertidor', 'FechaCitaInstalacion', 'EstatusCitaInstalacion', 'actions'];
   dataSource!: MatTableDataSource<ConcesionarioInstalacion>;
 
   //@ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -93,8 +93,6 @@ export class FormalizacionComponent implements OnInit {
       this.concesionarioService.getConcesionarioInstalacion()
         .pipe(first())
         .subscribe(data => {   
-
-          console.log(data);
  
           this.formalizacion = data.concesionario;   
           this.dataSource = new MatTableDataSource(this.formalizacion);
@@ -134,7 +132,7 @@ export class FormalizacionComponent implements OnInit {
       //Registro de Citas para la instalacion
       cita(e: any) {
 
-        if(e.IdCitaInstalacion == null || e.EstatusCitaInstalacion == "D" || e.EstatusCitaInstalacion == "V"){
+        if(e.IdCitaInstalacion == null  || e.EstatusCitaInstalacion == "V"){
 
           const dialogRef = this.dialog.open(DialogoTalleresComponent, {
             disableClose: true,
@@ -150,7 +148,7 @@ export class FormalizacionComponent implements OnInit {
         
         const dialogRef = this.dialog.open(EdicionCitaComponent, {
           disableClose: true,
-          data: { idCita: e.IdCitaInstalacion, NombreConcesionario: e.NombreCompleto, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo,
+          data: { idCita: e.IdCitaInstalacion, NombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo,
           marca: e.Marca, submarca: e.Submarca, modelo: e.Modelo, estatusCita: e.EstatusCitaInstalacion, causa: "Instalacion" },
         });
     

@@ -35,9 +35,11 @@ export class MenuListItemComponent  {
      onItemSelected(item: NavItem) {
       if (!item.children || !item.children.length) {
         this.router.navigate([item.route]);
-        //this.navService.closeNav();
+        //this.navService.closeNav();      
       }
       if (item.children && item.children.length) {
+
+        console.log("ENTRA A PADRE");
         this.expanded = !this.expanded;
       }
     }

@@ -50,6 +50,7 @@ export class EdicionCitaComponent implements OnInit {
     public dialogRef: MatDialogRef<EdicionCitaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
+
     this.notifier = notifierService;   
     dialogRef.disableClose = true;
     this.idCita = data.idCita;
@@ -115,6 +116,7 @@ export class EdicionCitaComponent implements OnInit {
   obtieneCita(idCita: number) {
     //this.clear();
 
+    if(this.causaValue == "Verificacion"){
     this.citaService.getCitaConcesionario(idCita)
       .pipe(first())
       .subscribe(data => {
@@ -129,13 +131,53 @@ export class EdicionCitaComponent implements OnInit {
       },
         error => {
         });
+      } else if (this.causaValue == "Instalacion" ) {
+
+        this.citaService.getCitaInstalacion(idCita)
+      .pipe(first())
+      .subscribe(data => {
+
+        console.log(data);
+
+        this.f.Concesionario.setValue(this.Concesionario);
+        this.f.Taller.setValue(data.citaInstalacion[0].Taller);
+        this.f.Domicilio.setValue(data.citaInstalacion[0].Domicilio + " " + data.citaInstalacion[0].Colonia + " " + data.citaInstalacion[0].CP + " " + data.citaInstalacion[0].Municipio + " " + data.citaInstalacion[0].EntidadFederativa);
+        this.f.Telefono.setValue(data.citaInstalacion[0].Telefono);
+        this.f.Contacto.setValue(data.citaInstalacion[0].Contacto);
+        this.f.Fecha.setValue(data.citaInstalacion[0].Fecha);
+        this.f.Hora.setValue(data.citaInstalacion[0].Hora);
+      },
+        error => {
+        });
+
+      }
   }
 
-  //Registra el vehículo
+  //Cancela de cita
   cancelarCita() {
     //this.clear();
+    if (this.causaValue == "Verificacion") {
+      this.citaService.postCancelaCita(this.idVehiculo, this.idCita)
+        .pipe(first())
+        .subscribe(
+          data => {
 
-    this.citaService.postCancelaCita(this.idVehiculo, this.idCita)
+            if (data.estatus) {
+              this.valorCancel = true;
+              //this.success(data.mensaje);
+              this.notifier.notify('success', data.mensaje, '');
+            } else {
+              this.valorCancel = false;
+              //this.warn(data.mensaje);
+              this.notifier.notify('warning', data.mensaje, '');
+            }
+          },
+          error => {
+            //this.error(error);
+            this.notifier.notify('error', error, '');
+          });
+    } else if (this.causaValue == "Instalacion") {
+      this.citaService.postCancelaCitaInstalacion(this.idVehiculo, this.idCita)
       .pipe(first())
       .subscribe(
         data => {
@@ -154,6 +196,8 @@ export class EdicionCitaComponent implements OnInit {
           //this.error(error);
           this.notifier.notify('error', error, '');
         });
+
+    }
   }
 
   //Cancela la cita
