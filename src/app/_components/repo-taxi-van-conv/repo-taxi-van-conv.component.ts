@@ -1,14 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core'; 
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AlertService } from '../../_alert';
-import { CatalogoSindicatos, RepoSitActualConcesionario } from '../../_models';
+import { CatalogoSindicatos, RepoTipoAutoConvertido } from '../../_models';
 import { CatalogosService, ReportesService, ExcelService } from '../../_services';
 import { first } from 'rxjs/operators';
 import { isEmpty } from 'lodash';
+import * as moment from 'moment';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export default class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -17,18 +18,44 @@ export default class MyErrorStateMatcher implements ErrorStateMatcher {
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
+interface Convertidos {
+  tipoConvertido : string;
+  viewValue      : string;
+}
 
 @Component({
-  selector: 'app-repo-sit-actual-conce',
-  templateUrl: './repo-sit-actual-conce.component.html',
-  styleUrls: ['./repo-sit-actual-conce.component.scss']
+  selector: 'app-repo-taxi-van-conv',
+  templateUrl: './repo-taxi-van-conv.component.html',
+  styleUrls: ['./repo-taxi-van-conv.component.scss']
 })
-export class RepoSitActualConceComponent implements OnInit {
+export class RepoTaxiVanConvComponent implements OnInit {
 
-  displayedColumns = ['concesionario', 'marca', 'placa', 'porcAhorroConcesion', 'porcAhorroPropietario', 
-  'porcAhorroOperador', 'fechaInicio', 'fechaTermino', 'totalLitrosConsumir', 'totalLitrosMes', 'litrosConsumidos',
-  'litrosXConsumir', 'importeBeneficiosConversion', 'totalAhorro', 'totalUtilizadoAhorro', 'totalAhorroRestante'];
-  dataSource!: MatTableDataSource<RepoSitActualConcesionario>;
+  displayedColumns = ['NombreConcesionario', 
+                      'PaternoConcesionario', 
+                      'MaternoConcesionario', 
+                      'NombreOperador', 
+                      'PaternoOperador', 
+                      'MaternoOperador', 
+                      'Telefono', 
+                      'Celular', 
+                      'email', 
+                      'Calle', 
+                      'Exterior', 
+                      'Interior', 
+                      'Colonia', 
+                      'CP', 
+                      'Municipio', 
+                      'EntidadFederativa', 
+                      'Sindicato'  , 
+                      'Marca', 
+                      'Submarca', 
+                      'Modelo', 
+                      'NumeroEconomico', 
+                      'Placa', 
+                      'ConsumoTotal', 
+                      'ConsumoMes', 
+                      ];
+  dataSource!: MatTableDataSource<RepoTipoAutoConvertido>;
 
     //@ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -36,10 +63,16 @@ export class RepoSitActualConceComponent implements OnInit {
 
     reactiveForm!: FormGroup;
     sindicatos: CatalogoSindicatos[] = [];
-    repoSitActualConce: RepoSitActualConcesionario[] = [];
+    repoTipoAutoConvertido: RepoTipoAutoConvertido[] = [];
     matcher = new MyErrorStateMatcher();
     submitted = false;
     fileName: string = "";
+
+    tipoConvertidos: Convertidos[] = [
+      { tipoConvertido: 'A', viewValue: 'Taxis Convertidos' },
+      { tipoConvertido: 'V', viewValue: 'Vans Convertidas' },
+      { tipoConvertido: 'S', viewValue: 'Suburbano Convertidos' },
+    ];
 
   constructor(private formBuilder: FormBuilder,
     private catalogoService: CatalogosService,
@@ -50,25 +83,16 @@ export class RepoSitActualConceComponent implements OnInit {
   ngOnInit(): void {
 
     //Llena combos
-    this.getCatalogoSindicatos();
-
+    
    this.reactiveForm = this.formBuilder.group({
-     'sindicato': ['', Validators.required]
+      'Convertidos'      : ['', Validators.required],
+      'FechaInicio'      : ['', Validators.required],
+      'FechaFin'         : ['', Validators.required],
    });
   }
 
   get f() { return this.reactiveForm.controls; }
 
-  getCatalogoSindicatos() {
-    this.catalogoService.getCatalogoSindicatos()
-      .pipe(first())
-      .subscribe(data => {
-        this.sindicatos = data.sindicatos;
-      },
-        error => {
-
-        });
-  }
 
     applyFilter(filterValue: string) {
 
@@ -79,8 +103,8 @@ export class RepoSitActualConceComponent implements OnInit {
 
     exportAsXLSX():void {
 
-      this.fileName = "ReporteSitActConcesionario" + "-" + this.f.sindicato.value;
-      this.excelService.exportAsExcelFile(this.repoSitActualConce, this.fileName);
+      this.fileName = "ReporteSitActConcesionario" + "-" + this.f.Convertidos.value + this.f.FechaInicio.value;
+      this.excelService.exportAsExcelFile(this.repoTipoAutoConvertido, this.fileName);
     }
 
     onSubmit(){
@@ -91,17 +115,23 @@ export class RepoSitActualConceComponent implements OnInit {
     if (this.reactiveForm.invalid) {
      return;
     }
+      console.log("Parámetros")
+      console.log(this.f.Convertidos.value)
+      console.log( this.f.FechaInicio.value)
+      console.log(this.f.FechaFin.value)
 
-      this.repoService.getReporteSitActualConce(this.f.sindicato.value)
+      this.repoService.getReporteAutosConvertidos(this.f.Convertidos.value, moment(this.f.FechaInicio.value).format('YYYY-MM-DD'), moment(this.f.FechaFin.value).format('YYYY-MM-DD')) 
       .pipe(first())
       .subscribe(data => {
  
+        console.log("regresé del reporte")
+        console.log(data)
         if (data.estatus && !isEmpty(data.reporte[0])) {
   
           // Assign the data to the data source for the table to render
-          this.repoSitActualConce = data.reporte;
+          this.repoTipoAutoConvertido = data.reporte;
   
-          this.dataSource = new MatTableDataSource(this.repoSitActualConce);
+          this.dataSource = new MatTableDataSource(this.repoTipoAutoConvertido);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
   

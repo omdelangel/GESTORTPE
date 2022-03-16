@@ -17,8 +17,8 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Id Usuario</mat-label>
-                                    <input matInput placeholder="Id Usuario" formControlName="idUsuario" maxlength="13" fxFlex="100" onkeyup="javascript:this.value=this.value.toUpperCase();" pattern="^([A-Z|a-z])" required>
-                                    <mat-error *ngIf="frmAltaUsr.get('idUsuario')!.hasError('required')">
+                                    <input matInput placeholder="Id Usuario" formControlName="IdUsuario" maxlength="13" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                                    <mat-error *ngIf="frmAltaUsr.get('IdUsuario')!.hasError('required')">
                                         El dato es obligatorio
                                     </mat-error>
                                 </mat-form-field>
@@ -36,7 +36,7 @@
 
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="Perfil" formControlName="IdPerfil" [errorStateMatcher]="matcher" required (selectionChange)="onSelectionChanged($event)">
+                                    <mat-select placeholder="Perfil" formControlName="IdPerfil" [errorStateMatcher]="matcher" required>
                                         <mat-option *ngFor="let perfil of perfiles" [value]="perfil.IdPerfil">
                                             {{perfil.Descripcion}}
                                         </mat-option>
@@ -75,7 +75,7 @@
                             </div>
                         </div>
                         <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-                            <button mat-mini-fab style="background-color: #80BC00; outline:none;" matTooltip="Guardar" (click)="guardarConcesionario()">
+                            <button mat-mini-fab style="background-color: #80BC00; outline:none;" matTooltip="Guardar" (click)="guardarUsuario()">
 								<mat-icon>save</mat-icon>
 							</button>
                         </div>

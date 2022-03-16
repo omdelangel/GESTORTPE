@@ -62,14 +62,14 @@ import { ConsultaUsuariosComponent } from './_catalogos/consulta-usuarios/consul
 import { DialogoOperadorAltaComponent } from './_components/dialogo-operador-alta/dialogo-operador-alta.component';
 import { AltaUsuariosComponent } from './_catalogos/alta-usuarios/alta-usuarios.component';
 import { EdicionUsuariosComponent } from './_catalogos/edicion-usuarios/edicion-usuarios.component'; 
-
+import { RepoTaxiVanConvComponent } from './_components/repo-taxi-van-conv/repo-taxi-van-conv.component'; 
 import { FormalizacionComponent } from './_components/formalizacion/formalizacion.component';
-
 import { PieChartComponent } from './_dashboard/pie-chart/pie-chart.component'; 
 import { DashboardCardsComponent } from './_dashboard/dashboard-cards/dashboard-cards.component';
 import { TendenciaChartComponent } from './_dashboard/tendencia-chart/tendencia-chart.component';
 import { InstalacionesTipoVehiculoChartComponent } from './_dashboard/instalaciones-tipo-vehiculo-chart/instalaciones-tipo-vehiculo-chart.component';
 import { EstadoProcesoComponent } from './_dashboard/estado-proceso/estado-proceso.component';
+import { RepoSinConcluirComponent } from './_components/repo-sin-concluir/repo-sin-concluir.component'; 
 import { DialogoConfirmaInstalacionComponent } from './_components/dialogo-confirma-instalacion/dialogo-confirma-instalacion.component'; 
 
 
@@ -170,10 +170,12 @@ FullCalendarModule.registerPlugins([
     EdicionUsuariosComponent,
     DashboardCardsComponent,
     PieChartComponent,
+    RepoTaxiVanConvComponent,
     FormalizacionComponent,
     TendenciaChartComponent,
     InstalacionesTipoVehiculoChartComponent,
     EstadoProcesoComponent,
+    RepoSinConcluirComponent,
     DialogoConfirmaInstalacionComponent
   ],
   imports: [
@@ -200,3 +202,5 @@ FullCalendarModule.registerPlugins([
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+

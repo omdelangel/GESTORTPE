@@ -38,4 +38,34 @@ getReporteSitActualConce(sindicato: number): Observable<any> {
    }
    return throwError(msg);
  }
+
+ //Obtiene información de Autos Convertidos
+getReporteAutosConvertidos(tipoVehiculo: string, fechaIni: string, fechaFin: string): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('TipoVehiculo', tipoVehiculo);
+  params = params.append('FechaInicio', fechaIni);
+  params = params.append('FechaFin', fechaFin);
+
+  return this.http.get<any>(`${environment.SERVER_URL}/reporte-vehiculos-convertidos`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Obtiene información de Autos Sin concluir 
+getReporteSinConcluir(): Observable<any> {
+
+  return this.http.get<any>(`${environment.SERVER_URL}/reporte-vehiculos-sinconcluir`, {})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
  }

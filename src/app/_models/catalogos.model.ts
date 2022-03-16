@@ -60,24 +60,24 @@ export class UsuariosAltaEdicion {
     Contrasenia      :string;
     IdEmpleado       :number;
     IdPerfil         :number;
-    FechaRegistro    :Date;
+    FechaRegistro    :string;
     Estatus          :string;
     email            :string;
-    Bloqueado        :number;
+    Bloqueado        :boolean;
     Intentos         :number;
-    UltimaTransaccion:Date;
+    UltimaTransaccion:string;
 
     constructor(catalogoGeneral: { IdUsuario        :string; 
                                    Nombre           :string; 
                                    Contrasenia      :string; 
                                    IdEmpleado       :number; 
                                    IdPerfil         :number; 
-                                   FechaRegistro    :Date; 
+                                   FechaRegistro    :string; 
                                    Estatus          :string; 
                                    email            :string; 
-                                   Bloqueado        :number; 
+                                   Bloqueado        :boolean; 
                                    Intentos         :number; 
-                                   UltimaTransaccion:Date;
+                                   UltimaTransaccion:string;
     }){
         this.IdUsuario             = catalogoGeneral.IdUsuario        ; 
         this.Nombre                = catalogoGeneral.Nombre           ; 

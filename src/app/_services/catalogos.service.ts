@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { CatalogoDictamenes, CatalogoUsuarios } from 'src/app/_models';
+import { CatalogoDictamenes, CatalogoUsuarios, UsuariosAltaEdicion } from 'src/app/_models';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ import { CatalogoDictamenes, CatalogoUsuarios } from 'src/app/_models';
 export class CatalogosService {
 
   constructor(private http: HttpClient) {}
+
 
 //Llena catálogo de Sindicatos
 getCatalogoSindicatos(): Observable<any> {
@@ -23,6 +24,9 @@ getCatalogoSindicatos(): Observable<any> {
   )
 }
 
+
+
+
 //Llena catálogo Tipos de Asignación
 getCatalogoTposAsignacion(sindicato: any): Observable<any> {
 
@@ -30,6 +34,18 @@ getCatalogoTposAsignacion(sindicato: any): Observable<any> {
   params = params.append('IdSindicato', sindicato);
 
   return this.http.get<any>(`${environment.SERVER_URL}/tipos-asignacion-lista`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+
+//Llena catálogo de Perfiles
+getCatalogoPerfiles(): Observable<any> {
+  return this.http.get<any>(`${environment.SERVER_URL}/perfiles`)
   .pipe(map((res: Response) => {
 
       return res || {}
@@ -171,4 +187,29 @@ getCatUsuBloqueado(catalogoUsuarios: CatalogoUsuarios): Observable<any> {
     catchError(this.handleError)
   )
 }
+
+  //Registra usuarios
+  postRegistraUsuario(usuario: UsuariosAltaEdicion): Observable<any> {
+
+    return this.http.post<any>(`${environment.SERVER_URL}/Alta-Usuario`, {
+      'IdUsuario'        :usuario.IdUsuario,
+      'Nombre'           :usuario.Nombre,
+      'Contrasenia'      :usuario.Contrasenia,
+      'IdEmpleado'       :usuario.IdEmpleado,
+      'IdPerfil'         :usuario.IdPerfil,
+      'FechaRegistro'    :usuario.FechaRegistro,
+      'Estatus'          :usuario.Estatus,
+      'email'            :usuario.email,
+      'Bloqueado'        :usuario.Bloqueado,
+      'Intentos'         :usuario.Intentos,
+      'UltimaTransaccion':usuario.UltimaTransaccion,    
+    })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }
+
 }
