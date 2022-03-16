@@ -130,9 +130,6 @@ postCancelaCitaInstalacion(idVehiculo: number, idCita: number): Observable<any> 
 //Confirma la instalación del convertidor
 postConfirmaInstalacionCita(citas: Citas): Observable<any> {
 
-
-  
-
   return this.http.post<any>(`${environment.SERVER_URL}/instalacion`, {'IdVehiculo': citas.IdVehiculo, 
   'IdConcesionario': citas.IdConcesionario, 'FechaInstalacion': citas.Fecha})
   .pipe(map((res: Response) => { 
@@ -142,6 +139,22 @@ postConfirmaInstalacionCita(citas: Citas): Observable<any> {
     catchError(this.handleError)
   )
 }
+
+//Obtiene los datos de la cita de instalación
+getCitaInstalacion(idCita: number): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('IdCitaInstalacion', idCita);
+
+  return this.http.get<any>(`${environment.SERVER_URL}/cita-instalacion-id`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
 
 
 // Error 
