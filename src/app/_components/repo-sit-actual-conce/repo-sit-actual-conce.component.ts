@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core'; 
 import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatTableDataSource } from '@angular/material/table';
@@ -52,7 +52,6 @@ export class RepoSitActualConceComponent implements OnInit {
     //Llena combos
     this.getCatalogoSindicatos();
 
-
    this.reactiveForm = this.formBuilder.group({
      'sindicato': ['', Validators.required]
    });
@@ -70,7 +69,6 @@ export class RepoSitActualConceComponent implements OnInit {
 
         });
   }
-
 
     applyFilter(filterValue: string) {
 

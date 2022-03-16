@@ -64,10 +64,14 @@ import { DialogoOperadorAltaComponent } from './_components/dialogo-operador-alt
 import { DialogoOperadorEditaComponent } from './_components/dialogo-operador-edita/dialogo-operador-edita.component';
 import { AltaUsuariosComponent } from './_catalogos/alta-usuarios/alta-usuarios.component';
 import { EdicionUsuariosComponent } from './_catalogos/edicion-usuarios/edicion-usuarios.component'; 
-
-import { PieChartComponent } from './_components/pie-chart/pie-chart.component'; 
-import { DashboardCardsComponent } from './_components/dashboard-cards/dashboard-cards.component';
 import { RepoTaxiVanConvComponent } from './_components/repo-taxi-van-conv/repo-taxi-van-conv.component'; 
+import { FormalizacionComponent } from './_components/formalizacion/formalizacion.component';
+import { PieChartComponent } from './_dashboard/pie-chart/pie-chart.component'; 
+import { DashboardCardsComponent } from './_dashboard/dashboard-cards/dashboard-cards.component';
+import { TendenciaChartComponent } from './_dashboard/tendencia-chart/tendencia-chart.component';
+import { InstalacionesTipoVehiculoChartComponent } from './_dashboard/instalaciones-tipo-vehiculo-chart/instalaciones-tipo-vehiculo-chart.component';
+import { EstadoProcesoComponent } from './_dashboard/estado-proceso/estado-proceso.component';
+import { RepoSinConcluirComponent } from './_components/repo-sin-concluir/repo-sin-concluir.component'; 
 
 
 /**
@@ -169,7 +173,12 @@ FullCalendarModule.registerPlugins([
     EdicionUsuariosComponent,
     DashboardCardsComponent,
     PieChartComponent,
-    RepoTaxiVanConvComponent
+    RepoTaxiVanConvComponent,
+    FormalizacionComponent,
+    TendenciaChartComponent,
+    InstalacionesTipoVehiculoChartComponent,
+    EstadoProcesoComponent,
+    RepoSinConcluirComponent
   ],
   imports: [
     BrowserModule,
@@ -195,3 +204,5 @@ FullCalendarModule.registerPlugins([
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+

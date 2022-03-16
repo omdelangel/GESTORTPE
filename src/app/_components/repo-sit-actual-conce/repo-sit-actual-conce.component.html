@@ -2,19 +2,18 @@
     <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
         <div fxFlex="30">
             <mat-card>
-                <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px" >
+                <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
                     <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Filtros de búsqueda
                     </mat-card-title>
                     <button mat-fab style="background-color: #2d4248; outline: none;" matTooltip="Buscar sindicato" outline:none;>
                       <mat-icon>search</mat-icon>
                     </button>
-                  </mat-card-actions>
+                </mat-card-actions>
                 <mat-card-content>
                     <div fxLayout="row wrap" fxLayoutGap="30px grid">
                         <div fxFlex="100" fxFlex.lt-md="100" fxl>
                             <mat-form-field class="example-full-width">
-                                <mat-select placeholder="Sindicato" formControlName="sindicato" [errorStateMatcher]="matcher"
-                                    required >
+                                <mat-select placeholder="Sindicato" formControlName="sindicato" [errorStateMatcher]="matcher" required>
                                     <mat-option *ngFor="let sindicato of sindicatos" [value]="sindicato.IdSindicato">
                                         {{sindicato.Nombre}}
                                     </mat-option>
@@ -31,18 +30,18 @@
         <alert style="font-size: small; height: 30px;"></alert>
     </div>
 
-    <div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="30">	
+    <div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="30">
         <h2 mat-raised-button>Reporte Situación Actual Concesionario</h2>
         <mat-form-field>
             <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
         </mat-form-field>
     </div>
 
-    <div id="divReport" class="example-header" fxFlex="100" fxFlex.gt-md="30">	
+    <div id="divReport" class="example-header" fxFlex="100" fxFlex.gt-md="30">
         <button (click)="exportAsXLSX()" style="border-style: none; outline: none;" matTooltip="Exportar a Excel"><img src="./assets/iconos/excel.png" /></button>&nbsp;&nbsp;
     </div>
-    <div  class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100"  id="htmlData" >
-        <mat-table [dataSource]="dataSource" matSort >
+    <div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100" id="htmlData">
+        <mat-table [dataSource]="dataSource" matSort>
 
             <!-- ID Column -->
             <ng-container matColumnDef="idPersona">
@@ -52,131 +51,129 @@
 
             <!-- Progress Column -->
             <ng-container matColumnDef="concesionario">
-                <mat-header-cell *matHeaderCellDef mat-sort-header > Concesionario
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Concesionario
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row" > {{row.Concesionario}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.Concesionario}} </mat-cell>
             </ng-container>
-
 
             <!-- Color Column -->
             <ng-container matColumnDef="marca">
-                <mat-header-cell *matHeaderCellDef mat-sort-header > Marca
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Marca
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row" > {{row.Marca}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.Marca}} </mat-cell>
             </ng-container>
 
             <!-- Color Column -->
             <ng-container matColumnDef="modelo">
-                <mat-header-cell *matHeaderCellDef mat-sort-header > Modelo
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Modelo
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row" > {{row.Modelo}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.Modelo}} </mat-cell>
             </ng-container>
 
-             <!-- Color Column -->
-             <ng-container matColumnDef="vin">
-                <mat-header-cell *matHeaderCellDef mat-sort-header > VIN
+            <!-- Color Column -->
+            <ng-container matColumnDef="vin">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> VIN
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row" > {{row.VIN}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.VIN}} </mat-cell>
             </ng-container>
 
-             <!-- Color Column -->
-             <ng-container matColumnDef="placa">
-                <mat-header-cell *matHeaderCellDef mat-sort-header > Placa
+            <!-- Color Column -->
+            <ng-container matColumnDef="placa">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Placa
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row" > {{row.Placa}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.Placa}} </mat-cell>
             </ng-container>
 
-             <!-- Color Column -->
-             <ng-container matColumnDef="porcAhorroConcesion">
-                <mat-header-cell *matHeaderCellDef mat-sort-header > % Ahorro Concesionario
+            <!-- Color Column -->
+            <ng-container matColumnDef="porcAhorroConcesion">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> % Ahorro Concesionario
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row" > {{row.PorcAhorroConcesion }} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.PorcAhorroConcesion }} </mat-cell>
             </ng-container>
 
-              <!-- Color Column -->
-              <ng-container matColumnDef="porcAhorroPropietario">
-                <mat-header-cell *matHeaderCellDef mat-sort-header > % Ahorro Propietario
+            <!-- Color Column -->
+            <ng-container matColumnDef="porcAhorroPropietario">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> % Ahorro Propietario
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row" > {{row.PorcAhorroPropietario }} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.PorcAhorroPropietario }} </mat-cell>
             </ng-container>
 
-              <!-- Color Column -->
-              <ng-container matColumnDef="porcAhorroOperador">
-                <mat-header-cell *matHeaderCellDef mat-sort-header > % Ahorro Operador
+            <!-- Color Column -->
+            <ng-container matColumnDef="porcAhorroOperador">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> % Ahorro Operador
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row" > {{row.PorcAhorroOperador }} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.PorcAhorroOperador }} </mat-cell>
             </ng-container>
-
 
             <!-- Color Column -->
             <ng-container matColumnDef="fechaInicio">
-                <mat-header-cell *matHeaderCellDef mat-sort-header > Fecha Inicio
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Inicio
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.FechaInicio |  date: 'dd/MM/yyyy'}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaInicio | date: 'dd/MM/yyyy'}} </mat-cell>
             </ng-container>
 
-             <!-- Color Column -->
-             <ng-container matColumnDef="fechaTermino">
-                <mat-header-cell *matHeaderCellDef mat-sort-header > Fecha Termino
+            <!-- Color Column -->
+            <ng-container matColumnDef="fechaTermino">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Termino
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row" > {{row.FechaTermino | date: 'dd/MM/yyyy'}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaTermino | date: 'dd/MM/yyyy'}} </mat-cell>
             </ng-container>
 
-             <!-- Color Column -->
-             <ng-container matColumnDef="totalLitrosConsumir">
-                <mat-header-cell *matHeaderCellDef mat-sort-header > Total Litros Consumir
+            <!-- Color Column -->
+            <ng-container matColumnDef="totalLitrosConsumir">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Total Litros Consumir
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row" > {{row.TotalLitrosConsumir | number}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.TotalLitrosConsumir | number}} </mat-cell>
             </ng-container>
 
-             <!-- Color Column -->
-             <ng-container matColumnDef="totalLitrosMes">
-                <mat-header-cell *matHeaderCellDef mat-sort-header > Total Litros Mes
+            <!-- Color Column -->
+            <ng-container matColumnDef="totalLitrosMes">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Total Litros Mes
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row" > {{row.TotalLitrosMes | number}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.TotalLitrosMes | number}} </mat-cell>
             </ng-container>
 
-        <!-- Color Column -->
-        <ng-container matColumnDef="litrosConsumidos">
-            <mat-header-cell *matHeaderCellDef mat-sort-header > Litros Consumidos
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row" > {{row.LitrosConsumidos | number}} </mat-cell>
-        </ng-container>     
-        
-         <!-- Color Column -->
-         <ng-container matColumnDef="litrosXConsumir">
-            <mat-header-cell *matHeaderCellDef mat-sort-header > Litros por Consumir
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row" > {{row.LitrosXConsumir | number}} </mat-cell>
-        </ng-container>   
-        
-          <!-- Color Column -->
-          <ng-container matColumnDef="importeBeneficiosConversion">
-            <mat-header-cell *matHeaderCellDef mat-sort-header > Imp. Beneficios Conversion
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row" > {{row.ImporteBeneficiosConversion | currency}} </mat-cell>
-        </ng-container>      
+            <!-- Color Column -->
+            <ng-container matColumnDef="litrosConsumidos">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Litros Consumidos
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidos | number}} </mat-cell>
+            </ng-container>
 
-         <!-- Color Column -->
-         <ng-container matColumnDef="totalAhorro">
-            <mat-header-cell *matHeaderCellDef mat-sort-header > Total de Ahorro
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row" > {{row.TotalAhorro | currency}} </mat-cell>
-        </ng-container>  
-        
-         <!-- Color Column -->
-         <ng-container matColumnDef="totalUtilizadoAhorro">
-            <mat-header-cell *matHeaderCellDef mat-sort-header > Total Utilizado Ahorro
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row" > {{row.TotalUtilizadoAhorro | currency}} </mat-cell>
-        </ng-container>    
+            <!-- Color Column -->
+            <ng-container matColumnDef="litrosXConsumir">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Litros por Consumir
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosXConsumir | number}} </mat-cell>
+            </ng-container>
 
-        <!-- Color Column -->
-        <ng-container matColumnDef="totalAhorroRestante">
-            <mat-header-cell *matHeaderCellDef mat-sort-header > Total Ahorro Restante
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row" > {{row.TotalAhorroRestante | currency}} </mat-cell>
-        </ng-container>    
+            <!-- Color Column -->
+            <ng-container matColumnDef="importeBeneficiosConversion">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Imp. Beneficios Conversion
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.ImporteBeneficiosConversion | currency}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="totalAhorro">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Total de Ahorro
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.TotalAhorro | currency}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="totalUtilizadoAhorro">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Total Utilizado Ahorro
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.TotalUtilizadoAhorro | currency}} </mat-cell>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="totalAhorroRestante">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Total Ahorro Restante
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.TotalAhorroRestante | currency}} </mat-cell>
+            </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;">
@@ -185,4 +182,3 @@
         <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
     </div>
 </div>
-

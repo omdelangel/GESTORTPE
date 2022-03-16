@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AlertService } from '../../_alert';
-import { CatalogoSindicatos, RepoTipoAutoConvertido } from '../../_models';
+import { CatalogoSindicatos, RepoSinConcluir } from '../../_models';
 import { CatalogosService, ReportesService, ExcelService } from '../../_services';
 import { first } from 'rxjs/operators';
 import { isEmpty } from 'lodash';
@@ -18,24 +18,20 @@ export default class MyErrorStateMatcher implements ErrorStateMatcher {
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
-interface Convertidos {
-  tipoConvertido : string;
-  viewValue      : string;
-}
 
 @Component({
-  selector: 'app-repo-taxi-van-conv',
-  templateUrl: './repo-taxi-van-conv.component.html',
-  styleUrls: ['./repo-taxi-van-conv.component.scss']
+  selector: 'app-repo-sin-concluir',
+  templateUrl: './repo-sin-concluir.component.html',
+  styleUrls: ['./repo-sin-concluir.component.scss']
 })
-export class RepoTaxiVanConvComponent implements OnInit {
+
+export class RepoSinConcluirComponent implements OnInit {
+  
+  hoyDate      : Date = new Date();
 
   displayedColumns = ['NombreConcesionario', 
                       'PaternoConcesionario', 
                       'MaternoConcesionario', 
-                      'NombreOperador', 
-                      'PaternoOperador', 
-                      'MaternoOperador', 
                       'Telefono', 
                       'Celular', 
                       'email', 
@@ -52,27 +48,22 @@ export class RepoTaxiVanConvComponent implements OnInit {
                       'Modelo', 
                       'NumeroEconomico', 
                       'Placa', 
-                      'ConsumoTotal', 
-                      'ConsumoMes', 
+                      'Estatus', 
+                      'Documento', 
+                      'NombreArchivo', 
                       ];
-  dataSource!: MatTableDataSource<RepoTipoAutoConvertido>;
+  dataSource!: MatTableDataSource<RepoSinConcluir>;
 
     //@ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
-    reactiveForm!: FormGroup;
-    sindicatos: CatalogoSindicatos[] = [];
-    repoTipoAutoConvertido: RepoTipoAutoConvertido[] = [];
-    matcher = new MyErrorStateMatcher();
-    submitted = false;
-    fileName: string = "";
+    reactiveForm!    : FormGroup;
+    repoSinConcluir  : RepoSinConcluir[] = [];
+    matcher          = new MyErrorStateMatcher();
+    submitted        = false;
+    fileName         : string = "";
 
-    tipoConvertidos: Convertidos[] = [
-      { tipoConvertido: 'A', viewValue: 'Taxis Convertidos' },
-      { tipoConvertido: 'V', viewValue: 'Vans Convertidas' },
-      { tipoConvertido: 'S', viewValue: 'Suburbano Convertidos' },
-    ];
 
   constructor(private formBuilder: FormBuilder,
     private catalogoService: CatalogosService,
@@ -82,45 +73,28 @@ export class RepoTaxiVanConvComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //Llena combos
-    
-   this.reactiveForm = this.formBuilder.group({
-      'Convertidos'      : ['', Validators.required],
-      'FechaInicio'      : ['', Validators.required],
-      'FechaFin'         : ['', Validators.required],
-   });
+    this.getReporteSinConcluir();
   }
 
-  get f() { return this.reactiveForm.controls; }
 
-
-    applyFilter(filterValue: string) {
+  applyFilter(filterValue: string) {
 
       filterValue = filterValue.trim(); // Remove whitespace
       filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
       this.dataSource.filter = filterValue;
     }
 
-    exportAsXLSX():void {
+  exportAsXLSX():void {
 
-      this.fileName = "ReporteSitActConcesionario" + "-" + this.f.Convertidos.value + this.f.FechaInicio.value;
-      this.excelService.exportAsExcelFile(this.repoTipoAutoConvertido, this.fileName);
+      this.fileName = "ReporteSinConcluir" + "-" + moment(this.hoyDate).format('YYYY-MM-DD');
+      this.excelService.exportAsExcelFile(this.repoSinConcluir, this.fileName);
     }
 
-    onSubmit(){
+  getReporteSinConcluir(){
       this.clear();
       this.submitted = true;  
-    
-    // stop here if form is invalid
-    if (this.reactiveForm.invalid) {
-     return;
-    }
-      console.log("Parámetros")
-      console.log(this.f.Convertidos.value)
-      console.log( this.f.FechaInicio.value)
-      console.log(this.f.FechaFin.value)
-
-      this.repoService.getReporteAutosConvertidos(this.f.Convertidos.value, moment(this.f.FechaInicio.value).format('YYYY-MM-DD'), moment(this.f.FechaFin.value).format('YYYY-MM-DD')) 
+   
+      this.repoService.getReporteSinConcluir() 
       .pipe(first())
       .subscribe(data => {
  
@@ -129,9 +103,9 @@ export class RepoTaxiVanConvComponent implements OnInit {
         if (data.estatus && !isEmpty(data.reporte[0])) {
   
           // Assign the data to the data source for the table to render
-          this.repoTipoAutoConvertido = data.reporte;
+          this.repoSinConcluir = data.reporte;
   
-          this.dataSource = new MatTableDataSource(this.repoTipoAutoConvertido);
+          this.dataSource = new MatTableDataSource(this.repoSinConcluir);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
   
@@ -179,6 +153,6 @@ export class RepoTaxiVanConvComponent implements OnInit {
     clear() {
       this.alertService.clear();
     }
-  
+ 
 
 }

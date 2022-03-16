@@ -87,8 +87,6 @@ export class RepoTipoAutoConvertido {
     ConsumoTotal               :string;
     ConsumoMes                 :string;
 
-
-
     constructor(RepoTipoAutoConvertido: {   
         NombreConcesionario        :string;
         PaternoConcesionario       :string;
@@ -138,5 +136,78 @@ export class RepoTipoAutoConvertido {
             this.Placa                 = RepoTipoAutoConvertido.Placa                ;
             this.ConsumoTotal          = RepoTipoAutoConvertido.ConsumoTotal         ;
             this.ConsumoMes            = RepoTipoAutoConvertido.ConsumoMes           ;
+    }    
+}
+
+
+export class RepoSinConcluir {
+    NombreConcesionario        :string;
+    PaternoConcesionario       :string;
+    MaternoConcesionario       :string;
+    Telefono                   :string;
+    Celular                    :string;
+    email                      :string;
+    Calle                      :string;
+    Exterior                   :string;
+    Interior                   :string;
+    Colonia                    :string;
+    CP                         :string;
+    Municipio                  :string;
+    EntidadFederativa          :string;
+    Sindicato                  :string;
+    Marca                      :string;
+    Submarca                   :string;
+    Modelo                     :number;
+    NumeroEconomico            :number;
+    Placa                      :string;
+    Estatus					   :string;
+    Documento				   :string;
+    NombreArchivo              :string;
+
+    constructor(RepoSinConcluir: {   
+        NombreConcesionario        :string;
+        PaternoConcesionario       :string;
+        MaternoConcesionario       :string;
+        Telefono                   :string;
+        Celular                    :string;
+        email                      :string;
+        Calle                      :string;
+        Exterior                   :string;
+        Interior                   :string;
+        Colonia                    :string;
+        CP                         :string;
+        Municipio                  :string;
+        EntidadFederativa          :string;
+        Sindicato                  :string;
+        Marca                      :string;
+        Submarca                   :string;
+        Modelo                     :number;
+        NumeroEconomico            :number;
+        Placa                      :string;
+        Estatus					   :string;
+        Documento				   :string;
+        NombreArchivo              :string}){
+            this.NombreConcesionario   = RepoSinConcluir.NombreConcesionario  ;
+            this.PaternoConcesionario  = RepoSinConcluir.PaternoConcesionario ;
+            this.MaternoConcesionario  = RepoSinConcluir.MaternoConcesionario ;
+            this.Telefono              = RepoSinConcluir.Telefono             ;
+            this.Celular               = RepoSinConcluir.Celular              ;
+            this.email                 = RepoSinConcluir.email                ;
+            this.Calle                 = RepoSinConcluir.Calle                ;
+            this.Exterior              = RepoSinConcluir.Exterior             ;
+            this.Interior              = RepoSinConcluir.Interior             ;
+            this.Colonia               = RepoSinConcluir.Colonia              ;
+            this.CP                    = RepoSinConcluir.CP                   ;
+            this.Municipio             = RepoSinConcluir.Municipio            ;
+            this.EntidadFederativa     = RepoSinConcluir.EntidadFederativa    ;
+            this.Sindicato             = RepoSinConcluir.Sindicato            ;
+            this.Marca                 = RepoSinConcluir.Marca                ;
+            this.Submarca              = RepoSinConcluir.Submarca             ;
+            this.Modelo                = RepoSinConcluir.Modelo               ;
+            this.NumeroEconomico       = RepoSinConcluir.NumeroEconomico      ;
+            this.Placa                 = RepoSinConcluir.Placa                ;
+            this.Estatus               = RepoSinConcluir.Estatus              ;
+            this.Documento             = RepoSinConcluir.Documento            ;
+            this.NombreArchivo         = RepoSinConcluir.NombreArchivo        ;
     }    
 }
