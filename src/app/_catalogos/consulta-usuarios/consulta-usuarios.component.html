@@ -80,8 +80,8 @@
                                     <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus</mat-header-cell>
                                     <mat-cell *matCellDef="let row;let i = index; " [formGroup]="reactiveForm">
                                         <mat-chip-list>
-                                            <mat-chip *ngIf="row.Estatus=='A'" style="background-color:#80bc006b">Activo</mat-chip>
-                                            <mat-chip *ngIf="row.Estatus=='I'" color="primary" style="background-color:#ff000073">Inactivo</mat-chip>
+                                            <mat-chip *ngIf="row.Estatus=='A'" style="background-color:#80bc006b" color="primary" selected>Activo</mat-chip>
+                                            <mat-chip *ngIf="row.Estatus=='I'" color="primary" style="background-color:#ff000073" color="primary" selected>Inactivo</mat-chip>
                                         </mat-chip-list>
                                     </mat-cell>
                                 </ng-container>
