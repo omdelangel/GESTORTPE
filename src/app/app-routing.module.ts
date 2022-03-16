@@ -17,6 +17,10 @@ import { ConsultaUsuariosComponent } from './_catalogos/consulta-usuarios'
 import { RepoTaxiVanConvComponent } from './_components/repo-taxi-van-conv/repo-taxi-van-conv.component';
 import { RepoSinConcluirComponent } from './_components/repo-sin-concluir/repo-sin-concluir.component';
 import { FormalizacionComponent } from './_components/formalizacion/formalizacion.component';
+import { InicioBienvenidosComponent } from './_components/inicio-bienvenidos/inicio-bienvenidos.component';
+
+
+
 
 
 
@@ -38,7 +42,9 @@ const routes: Routes = [
                { path: 'usuarios', component: ConsultaUsuariosComponent},
                { path: 'repoAutosConvertidos', component: RepoTaxiVanConvComponent },
                { path: 'repoSinConcluir', component: RepoSinConcluirComponent },
-               { path: 'formalizacion', component: FormalizacionComponent}
+               { path: 'formalizacion', component: FormalizacionComponent},
+               { path: 'bienvenidos', component: InicioBienvenidosComponent},
+                            
                ]},  
  
  
