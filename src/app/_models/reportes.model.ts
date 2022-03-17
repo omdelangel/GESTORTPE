@@ -305,3 +305,100 @@ export class RepoAhorroPeriodo {
             this.LitrosConsumidosAcumuladoGeneral = RepoAhorroPeriodo.LitrosConsumidosAcumuladoGeneral;        
     }    
 }
+
+
+export class RepoNoConsumen {
+    NombreConcesionario              :string;
+    PaternoConcesionario             :string;
+    MaternoConcesionario             :string;
+    Telefono                         :string;
+    Celular                          :string;
+    email                            :string;
+    Calle                            :string;
+    Exterior                         :string;
+    Interior                         :string;
+    Colonia                          :string;
+    CP                               :string;
+    Municipio                        :string;
+    EntidadFederativa                :string;
+    Sindicato                        :string;
+    Marca                            :string;
+    Submarca                         :string;
+    Modelo                           :number;
+    NumeroEconomico                  :number;
+    Placa                            :string;
+    NombreOperador                   :string;
+    PaternoOperador                  :string;
+    MaternoOperador                  :string;
+    FechaInicio                      :string;
+    FechaCorte                       :string;
+    ImporteAhorroConcesionario       :string;
+    ImporteAhorroPropietario         :string;
+    LitrosConsumirMes                :string;
+    LitrosConsumidosOperador         :string;
+    LitrosConsumidosVehiculo         :string;
+    LitrosConsumidosPendiente        :string;
+
+    constructor(RepoNoConsumen: {   
+        NombreConcesionario              :string;
+        PaternoConcesionario             :string;
+        MaternoConcesionario             :string;
+        Telefono                         :string;
+        Celular                          :string;
+        email                            :string;
+        Calle                            :string;
+        Exterior                         :string;
+        Interior                         :string;
+        Colonia                          :string;
+        CP                               :string;
+        Municipio                        :string;
+        EntidadFederativa                :string;
+        Sindicato                        :string;
+        Marca                            :string;
+        Submarca                         :string;
+        Modelo                           :number;
+        NumeroEconomico                  :number;
+        Placa                            :string;
+        NombreOperador                   :string;
+        PaternoOperador                  :string;
+        MaternoOperador                  :string;
+        FechaInicio                      :string;
+        FechaCorte                       :string;
+        ImporteAhorroConcesionario       :string;
+        ImporteAhorroPropietario         :string;
+        LitrosConsumirMes                :string;
+        LitrosConsumidosOperador         :string;
+        LitrosConsumidosVehiculo         :string;
+        LitrosConsumidosPendiente        :string;}){
+            this.NombreConcesionario              = RepoNoConsumen.NombreConcesionario         ;
+            this.PaternoConcesionario             = RepoNoConsumen.PaternoConcesionario        ;
+            this.MaternoConcesionario             = RepoNoConsumen.MaternoConcesionario        ;
+            this.Telefono                         = RepoNoConsumen.Telefono                    ;
+            this.Celular                          = RepoNoConsumen.Celular                     ;
+            this.email                            = RepoNoConsumen.email                       ;
+            this.Calle                            = RepoNoConsumen.Calle                       ;
+            this.Exterior                         = RepoNoConsumen.Exterior                    ;
+            this.Interior                         = RepoNoConsumen.Interior                    ;
+            this.Colonia                          = RepoNoConsumen.Colonia                     ;
+            this.CP                               = RepoNoConsumen.CP                          ;
+            this.Municipio                        = RepoNoConsumen.Municipio                   ;
+            this.EntidadFederativa                = RepoNoConsumen.EntidadFederativa           ;
+            this.Sindicato                        = RepoNoConsumen.Sindicato                   ;
+            this.Marca                            = RepoNoConsumen.Marca                       ;
+            this.Submarca                         = RepoNoConsumen.Submarca                    ;
+            this.Modelo                           = RepoNoConsumen.Modelo                      ;
+            this.NumeroEconomico                  = RepoNoConsumen.NumeroEconomico             ;
+            this.Placa                            = RepoNoConsumen.Placa                       ;
+            this.NombreOperador                   = RepoNoConsumen.NombreOperador              ;
+            this.PaternoOperador                  = RepoNoConsumen.PaternoOperador             ;
+            this.MaternoOperador                  = RepoNoConsumen.MaternoOperador             ;
+            this.FechaInicio                      = RepoNoConsumen.FechaInicio                 ;
+            this.FechaCorte                       = RepoNoConsumen.FechaCorte                  ;
+            this.ImporteAhorroConcesionario       = RepoNoConsumen.ImporteAhorroConcesionario  ;
+            this.ImporteAhorroPropietario         = RepoNoConsumen.ImporteAhorroPropietario    ;
+            this.LitrosConsumirMes                = RepoNoConsumen.LitrosConsumirMes           ;
+            this.LitrosConsumidosOperador         = RepoNoConsumen.LitrosConsumidosOperador    ;
+            this.LitrosConsumidosVehiculo         = RepoNoConsumen.LitrosConsumidosVehiculo    ;
+            this.LitrosConsumidosPendiente        = RepoNoConsumen.LitrosConsumidosPendiente   ;               
+    }    
+}

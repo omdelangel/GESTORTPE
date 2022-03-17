@@ -1,27 +1,16 @@
 <div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
     <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
-        <div fxFlex="50">
+        <div fxFlex="30">
             <mat-card>
                 <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
                     <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Filtros de búsqueda
                     </mat-card-title>
-                    <button mat-fab style="background-color: #2d4248; outline: none;" matTooltip="Buscar Ahorro Período " outline:none;>
+                    <button mat-fab style="background-color: #2d4248; outline: none;" matTooltip="Buscar No Consumen" outline:none;>
                       <mat-icon>search</mat-icon>
                     </button>
                 </mat-card-actions>
 
                 <mat-card-content fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-                    <div fxFlex="50" fxFlex.lt-md="100" fxl>
-                        <mat-form-field class="example-full-width">
-                            <mat-select placeholder="Tipo Persona" formControlName="TipoPersona" [errorStateMatcher]="matcher" required>
-                                <mat-option *ngFor="let TipoPersona of tiposPersona" [value]="TipoPersona.TipoPersona">
-                                    {{TipoPersona.viewValue}}
-                                </mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="reactiveForm.get('TipoPersona')!.invalid">Campo requerido</mat-error>
-                        </mat-form-field>
-                    </div>
-
                     <div fxFlex="50" fxFlex.lt-md="100" fxl>
                         <mat-form-field class="example-full-width">
                             <mat-select placeholder="Sindicato" formControlName="sindicato" [errorStateMatcher]="matcher" required>
@@ -32,14 +21,13 @@
                             <mat-error *ngIf="reactiveForm.get('sindicato')!.invalid">Campo requerido</mat-error>
                         </mat-form-field>
                     </div>
-
                 </mat-card-content>
             </mat-card>
         </div>
     </form>
 
     <div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="30">
-        <h2 mat-raised-button>Reporte de Ahorro dueño de vehículo por período </h2>
+        <h2 mat-raised-button>Reporte de vehículos que no consumen GAS </h2>
         <mat-form-field>
             <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
         </mat-form-field>
@@ -52,13 +40,6 @@
         <mat-table [dataSource]="dataSource" matSort>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="IdVehiculo">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Id Vehiculo
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.IdVehiculo}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
             <ng-container matColumnDef="NombreConcesionario">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Conc.
                 </mat-header-cell>
@@ -69,19 +50,19 @@
             <ng-container matColumnDef="PaternoConcesionario">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Paterno Conc.
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.PaternoConcesionario }} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.PaternoConcesionario}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="MaternoConcesionario">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Materno Conc.
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.MaternoConcesionario }} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.MaternoConcesionario}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="Telefono">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Teléfono
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Tel.
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.Telefono}} </mat-cell>
             </ng-container>
@@ -137,7 +118,7 @@
 
             <!-- Progress Column -->
             <ng-container matColumnDef="Municipio">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Municipio
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Mpo.
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.Municipio}} </mat-cell>
             </ng-container>
@@ -227,33 +208,46 @@
             </ng-container>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="LitrosConsumoMensual">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Lts Cons. Mensual
+            <ng-container matColumnDef="ImporteAhorroConcesionario">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Impte. Ahorro Conc.
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.LitrosConsumoMensual}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.ImporteAhorroConcesionario}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="PorcentajeAhorro">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> % Ahorro
+            <ng-container matColumnDef="ImporteAhorroPropietario">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Impte. Ahorro Prop.
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.PorcentajeAhorro}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.ImporteAhorroPropietario}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="LitrosConsumidosPeriodo">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Lts Cons. Período
+            <ng-container matColumnDef="LitrosConsumirMes">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Lts. Cons. Mes
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosPeriodo}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosConsumirMes}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="LitrosConsumidosAcumuladoGeneral">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Lts Cons. Acum.Gral.
+            <ng-container matColumnDef="LitrosConsumidosOperador">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Lts. Cons. Op.
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosAcumuladoGeneral}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosOperador}} </mat-cell>
             </ng-container>
 
+            <!-- Progress Column -->
+            <ng-container matColumnDef="LitrosConsumidosVehiculo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Lts. Cons. Vehiculo
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosVehiculo}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="LitrosConsumidosPendiente">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Lts. Cons. Pend.
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosPendiente}} </mat-cell>
+            </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;">
