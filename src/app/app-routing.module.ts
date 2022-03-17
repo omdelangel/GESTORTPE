@@ -17,6 +17,8 @@ import { ConsultaUsuariosComponent } from './_catalogos/consulta-usuarios'
 import { RepoTaxiVanConvComponent } from './_components/repo-taxi-van-conv/repo-taxi-van-conv.component';
 import { RepoSinConcluirComponent } from './_components/repo-sin-concluir/repo-sin-concluir.component';
 import { FormalizacionComponent } from './_components/formalizacion/formalizacion.component';
+import { PrecioGasComponent } from './_catalogos/precio-gas';
+import { PrecioGasolinaComponent } from './_catalogos/precio-gasolina';
 import { InicioBienvenidosComponent } from './_components/inicio-bienvenidos/inicio-bienvenidos.component';
 import { RepoAhorroPeriodoComponent } from './_components/repo-ahorro-periodo/repo-ahorro-periodo.component';
 
@@ -43,6 +45,8 @@ const routes: Routes = [
                { path: 'repoAutosConvertidos', component: RepoTaxiVanConvComponent },
                { path: 'repoSinConcluir', component: RepoSinConcluirComponent },
                { path: 'formalizacion', component: FormalizacionComponent},
+               { path: 'precioGas', component: PrecioGasComponent},
+               { path: 'precioGasolina', component: PrecioGasolinaComponent},
                { path: 'bienvenidos', component: InicioBienvenidosComponent},
                { path: 'repoAhorroPeriodo', component: RepoAhorroPeriodoComponent },
                             

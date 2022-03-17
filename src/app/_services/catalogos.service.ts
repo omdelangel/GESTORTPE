@@ -118,6 +118,34 @@ getCatalogoDictamen(): Observable<any> {
   )
 }
 
+//Llena catálogo de entidades
+getCatalogoEntidades(): Observable<any> {
+  return this.http.get<any>(`${environment.SERVER_URL}/entidades`)
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Consulta los precios del gas
+getPreciosGas(fechaDesde: string, fechaHasta: string, idEntidadFederal: string): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('FechaDesde', fechaDesde);
+  params = params.append('FechaHasta', fechaHasta);
+  params = params.append('IdEntidadFederal', idEntidadFederal);
+
+  return this.http.get<any>(`${environment.SERVER_URL}/hgas`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
 
 // Error 
 handleError(error: HttpErrorResponse) {
