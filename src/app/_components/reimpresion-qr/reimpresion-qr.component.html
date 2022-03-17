@@ -14,7 +14,7 @@
             <div fxFlex="100" fxFlex.lt-md="100" fxl>
               <mat-form-field class="example-full-width">
                 <mat-label>Placa</mat-label>
-                <input matInput placeholder="Placa" maxlength="10" formControlName="placa">
+                <input matInput placeholder="Placa" maxlength="10" formControlName="placa" onkeyup="javascript:this.value=this.value.toUpperCase();" >
                 <mat-error *ngIf="reactiveForm.get('placa')!.invalid">Campo requerido
                 </mat-error>
               </mat-form-field>

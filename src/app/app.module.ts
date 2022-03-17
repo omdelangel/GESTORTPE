@@ -70,7 +70,9 @@ import { TendenciaChartComponent } from './_dashboard/tendencia-chart/tendencia-
 import { InstalacionesTipoVehiculoChartComponent } from './_dashboard/instalaciones-tipo-vehiculo-chart/instalaciones-tipo-vehiculo-chart.component';
 import { EstadoProcesoComponent } from './_dashboard/estado-proceso/estado-proceso.component';
 import { RepoSinConcluirComponent } from './_components/repo-sin-concluir/repo-sin-concluir.component'; 
-import { DialogoConfirmaInstalacionComponent } from './_components/dialogo-confirma-instalacion/dialogo-confirma-instalacion.component'; 
+import { DialogoConfirmaInstalacionComponent } from './_components/dialogo-confirma-instalacion/dialogo-confirma-instalacion.component';
+import { PrecioGasComponent } from './_catalogos/precio-gas/precio-gas.component';
+import { PrecioGasolinaComponent } from './_catalogos/precio-gasolina/precio-gasolina.component'; 
 
 
 /**
@@ -176,7 +178,9 @@ FullCalendarModule.registerPlugins([
     InstalacionesTipoVehiculoChartComponent,
     EstadoProcesoComponent,
     RepoSinConcluirComponent,
-    DialogoConfirmaInstalacionComponent
+    DialogoConfirmaInstalacionComponent,
+    PrecioGasComponent,
+    PrecioGasolinaComponent
   ],
   imports: [
     BrowserModule,

@@ -175,3 +175,49 @@ export class Dictamen {
     Nombre: string = "";
 }
 
+export class Entidades {
+    IdEntidadFederal: string;
+    Nombre: string;
+    Abreviacion: string;
+    constructor(entidades: {
+        IdEntidadFederal: string;
+        Nombre: string;
+        Abreviacion: string;
+    }) {
+        this.IdEntidadFederal = entidades.IdEntidadFederal;
+        this.Nombre = entidades.Nombre;
+        this.Abreviacion = entidades.Abreviacion;
+    }
+}
+
+export class PreciosGas { 
+    IdHistoricoGas: number;
+    FechaAlta: string;
+    FechaDesde: string;
+    FechaHasta: string;
+    IdEntidadFederal: string;
+    IdMunicipio: string;
+    PrecioKg: number;
+    PrecioLtr: number;
+    constructor(preciosGas: {
+        IdHistoricoGas: number;
+        FechaAlta: string;
+        FechaDesde: string;
+        FechaHasta: string;
+        IdEntidadFederal: string;
+        IdMunicipio: string;
+        PrecioKg: number;
+        PrecioLtr: number;
+    }) {
+        this.IdHistoricoGas = preciosGas.IdHistoricoGas;
+        this.FechaAlta = preciosGas.FechaAlta;
+        this.FechaDesde = preciosGas.FechaDesde;
+        this.FechaHasta = preciosGas.FechaHasta;
+        this.IdEntidadFederal = preciosGas.IdEntidadFederal;
+        this.IdMunicipio = preciosGas.IdMunicipio;
+        this.PrecioKg = preciosGas.PrecioKg;
+        this.PrecioLtr = preciosGas.PrecioLtr;
+    }
+
+}
+
