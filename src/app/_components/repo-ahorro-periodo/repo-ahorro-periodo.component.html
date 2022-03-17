@@ -11,47 +11,35 @@
                 </mat-card-actions>
 
                 <mat-card-content fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-                    <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                    <div fxFlex="50" fxFlex.lt-md="100" fxl>
                         <mat-form-field class="example-full-width">
-                            <mat-select placeholder="Tipo Convertido" formControlName="Convertidos" [errorStateMatcher]="matcher" required>
-                                <mat-option *ngFor="let Convertidos of tipoConvertidos" [value]="Convertidos.tipoConvertido">
-                                    {{Convertidos.viewValue}}
+                            <mat-select placeholder="Tipo Persona" formControlName="TipoPersona" [errorStateMatcher]="matcher" required>
+                                <mat-option *ngFor="let TipoPersona of tiposPersona" [value]="TipoPersona.TipoPersona">
+                                    {{TipoPersona.viewValue}}
                                 </mat-option>
                             </mat-select>
-                            <mat-error *ngIf="reactiveForm.get('Convertidos')!.invalid">Campo requerido</mat-error>
+                            <mat-error *ngIf="reactiveForm.get('TipoPersona')!.invalid">Campo requerido</mat-error>
                         </mat-form-field>
                     </div>
 
-                    <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
-                        <mat-form-field>
-                            <mat-label>Fecha de Inicio</mat-label>
-                            <input matInput [matDatepicker]="picker" formControlName="FechaInicio">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker style="outline: none;" required></mat-datepicker>
-                            <mat-error *ngIf="reactiveForm.get('FechaInicio')!.hasError('required')">
-                                El dato es oblgatorio
-                            </mat-error>
+                    <div fxFlex="50" fxFlex.lt-md="100" fxl>
+                        <mat-form-field class="example-full-width">
+                            <mat-select placeholder="Sindicato" formControlName="sindicato" [errorStateMatcher]="matcher" required>
+                                <mat-option *ngFor="let sindicato of sindicatos" [value]="sindicato.IdSindicato">
+                                    {{sindicato.Nombre}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="reactiveForm.get('sindicato')!.invalid">Campo requerido</mat-error>
                         </mat-form-field>
                     </div>
 
-                    <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
-                        <mat-form-field>
-                            <mat-label>Fecha de Termino</mat-label>
-                            <input matInput [matDatepicker]="pickerF" formControlName="FechaFin">
-                            <mat-datepicker-toggle matSuffix [for]="pickerF"></mat-datepicker-toggle>
-                            <mat-datepicker #pickerF style="outline: none;" required></mat-datepicker>
-                            <mat-error *ngIf="reactiveForm.get('FechaFin')!.hasError('required')">
-                                El dato es oblgatorio
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
                 </mat-card-content>
             </mat-card>
         </div>
     </form>
 
     <div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="30">
-        <h2 mat-raised-button>Reporte de Autos/Vans/Suburbano Convertidos </h2>
+        <h2 mat-raised-button>Reporte de Ahorro dueño de vehículo por período </h2>
         <mat-form-field>
             <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
         </mat-form-field>
@@ -62,6 +50,13 @@
     </div>
     <div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100" id="htmlData">
         <mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="IdVehiculo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Id Vehiculo
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.IdVehiculo}} </mat-cell>
+            </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="NombreConcesionario">
@@ -82,27 +77,6 @@
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Materno Conc.
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.MaternoConcesionario }} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="NombreOperador">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Operador
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.NombreOperador}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="PaternoOperador">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Paterno Operador
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.PaternoOperador}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="MaternoOperador">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Materno Operador
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.MaternoOperador}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
@@ -170,7 +144,7 @@
 
             <!-- Progress Column -->
             <ng-container matColumnDef="EntidadFederativa">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Entidad Federativa
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Ent. Fed.
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.EntidadFederativa}} </mat-cell>
             </ng-container>
@@ -218,18 +192,68 @@
             </ng-container>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="ConsumoTotal">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Consumo Total
+            <ng-container matColumnDef="NombreOperador">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Op.
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.ConsumoTotal}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.NombreOperador}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="ConsumoMes">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Consumo Mes
+            <ng-container matColumnDef="PaternoOperador">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Paterno Op.
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.ConsumoMes}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.PaternoOperador}} </mat-cell>
             </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="MaternoOperador">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Materno Op.
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.MaternoOperador}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="FechaInicio">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Inicio
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaInicio}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="FechaCorte">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Corte
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaCorte}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="LitrosConsumoMensual">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Lts Cons. Mensual
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosConsumoMensual}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="PorcentajeAhorro">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> % Ahorro
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.PorcentajeAhorro}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="LitrosConsumidosPeriodo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Lts Cons. Período
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosPeriodo}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="LitrosConsumidosAcumuladoGeneral">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Lts Cons. Acum.Gral.
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosAcumuladoGeneral}} </mat-cell>
+            </ng-container>
+
 
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;">

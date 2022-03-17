@@ -4,7 +4,7 @@ import { CatalogosService, ConcesionarioService} from '../../_services';
 import { first } from 'rxjs/operators';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { AlertService } from '../../_alert';
-import { CatalogoPerfiles, UsuariosAltaEdicion,CatalogoSindicatos, CatalogoTpoAsignacion, ConcesionarioAltaEdicion, CP, Asentamientos, Identificaciones } from '../../_models';
+import { CatalogoPerfiles, UsuariosAltaEdicion,  CP, Asentamientos, Identificaciones } from '../../_models';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { NotifierService } from 'angular-notifier';
@@ -17,20 +17,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
-/*
-interface Genero {
-  Genero: string;
-  viewValue: string;
-}
-interface TipoPersona {
-  TipoPersona: string;
-  viewValue: string;
-}
-interface EstadoCivil {
-  EstadoCivil: string;
-  viewValue: string;
-}
-*/
 @Component({
   selector: 'app-edicion-usuarios',
   templateUrl: './edicion-usuarios.component.html',
@@ -41,23 +27,31 @@ interface EstadoCivil {
 export class EdicionUsuariosComponent implements OnInit {
   private readonly notifier: NotifierService;
   hoyDate : Date = new Date();
+  usuario    :UsuariosAltaEdicion;
   todayNumber: number = Date.now();
   todayString : string = new Date().toDateString();
   todayISOString : string = new Date().toISOString();
+  IdUsuario        :string;
+  Nombre           :string;
+  Contrasenia      :string;
+  IdEmpleado       :number;
+  IdPerfil         :number;
+  FechaRegistro    :string;
+//  Estatus          :string;
+  email            :string;
+ // Bloqueado        :boolean;
+ // Intentos         :number;
+  UltimaTransaccion:string;
   Estatus    :string='A';
   Intentos   :number=0;
   Bloqueado  :boolean=false; 
-  frmAltaUsr!: FormGroup;
+  frmEditUsr!: FormGroup;
   submitted = false;
   matcher = new MyErrorStateMatcher();
   rfc: string = "";
   nombre: string = "";
   tipo: string = "";
-  concesionario!: ConcesionarioAltaEdicion;
-  usuarios!: UsuariosAltaEdicion;
-  sindicatos: CatalogoSindicatos[] = [];
   perfiles: CatalogoPerfiles[] = [];
-  asignaciones: CatalogoTpoAsignacion[] = [];
   idConcesionario: number = 0;
   cp: string = "";
   asentamientos!: CP;
@@ -71,27 +65,6 @@ export class EdicionUsuariosComponent implements OnInit {
   hide = false;
  
 
-  //Catálogos locales
-  /*
-  genero: Genero[] = [
-    { Genero: 'M', viewValue: 'Masculino' },
-    { Genero: 'F', viewValue: 'Femenino' }
-  ];
-
-  tiposPersona: TipoPersona[] = [
-    { TipoPersona: 'F', viewValue: 'Física' },
-    { TipoPersona: 'M', viewValue: 'Moral' },
-  ];
-
-  estadoCivil: EstadoCivil[] = [
-    { EstadoCivil: 'S', viewValue: 'Soltero' },
-    { EstadoCivil: 'C', viewValue: 'Casado' },
-    { EstadoCivil: 'D', viewValue: 'Divorciado' },
-    { EstadoCivil: 'V', viewValue: 'Viudo' },
-  ];
-  */
-
-
   constructor(
     private formBuilder: FormBuilder,
     private alertService: AlertService,
@@ -100,98 +73,86 @@ export class EdicionUsuariosComponent implements OnInit {
     notifierService: NotifierService,
     public dialogRef: MatDialogRef<EdicionUsuariosComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any)   
-    {
-
-      this.notifier = notifierService;   
+    { 
+      console.log("data parametros")
+      console.log(data)
+      console.log(data.IdUsuario)
+      console.log(this.IdUsuario)
+      this.IdUsuario           = data.IdUsuario        ;
+      this.Nombre              = data.Nombre           ;
+      this.Contrasenia         = data.Contrasenia      ;
+      this.IdEmpleado          = data.IdEmpleado       ;
+      this.IdPerfil            = data.IdPerfil         ;
+      this.FechaRegistro       = data.FechaRegistro    ;
+      this.Estatus             = data.Estatus          ;
+      this.email               = data.email            ;
+      this.Bloqueado           = data.Bloqueado        ;
+      this.Intentos            = data.Intentos         ;
+      this.UltimaTransaccion   = data.UltimaTransaccion;
      
-  }
+      this.notifier = notifierService;   
+      this.getCatalogoPerfiles();    
+      this.llenaPantalla();
+    }
 
   ngOnInit(): void {
 
-    this.clear();
-    this.getCatalogoPerfiles();
-    this.getCatalogoSindicatos();
-    this.getCatalogoIdentificaciones();
+    //this.clear();
 
     //Validación de campos en pantalla
-    this.frmAltaUsr = this.formBuilder.group({
-      'idUsuario'       : ['', Validators.required],
+    this.frmEditUsr = this.formBuilder.group({
+      'IdUsuario'       : ['', Validators.required],
       'Nombre'          : ['', Validators.required],
       'IdPerfil'        : ['', Validators.required],
-      'Contrasenia'     : ['', [Validators.required, Validators.min(3) ]],
-      'RepContrasenia'  : ['', [Validators.required, Validators.min(3) ]],
-      'email'           : ['', Validators.required],
+      'Contrasenia'     : ['', Validators.required], 
+      'RepContrasenia'  : ['', Validators.required], 
+      'email'           : ['', Validators.required]
     }); 
   }
 
+  get f() { return this.frmEditUsr.controls; }
 
-  get f() { return this.frmAltaUsr.controls; }
+  //Consulta los datos del concesionario
+  llenaPantalla() {
+
+    console.log("Datos en llena pantalla")
+    console.log(this.IdUsuario)
+    console.log(this.Nombre)
+    console.log(this.Contrasenia)
+    console.log(this.IdPerfil)
+    console.log(this.email)
+
+    this.f.IdUsuario.setValue(this.IdUsuario);                
+    this.f.Nombre.setValue(this.Nombre);                
+    this.f.Contrasenia.setValue(this.Contrasenia);                
+    this.f.RepContrasenia.setValue(this.Contrasenia);                
+    this.f.IdPerfil.setValue(this.IdPerfil);                
+    this.f.email.setValue(this.email);                
+  }
+
 
   onSubmit() {
-    if (this.frmAltaUsr.valid) {
+    if (this.frmEditUsr.valid) {
 
     } else {
       return
     }
   }
 
-   //Llena catálogo de Perfiles
+     //Llena catálogo de Perfiles
    getCatalogoPerfiles() {
-    this.catalogoService.getCatalogoSindicatos()
+    this.catalogoService.getCatalogoPerfiles()
       .pipe(first())
       .subscribe(data => {
-        this.perfiles = data.sindicatos;
+        console.log("Catálogo de Perfiles")
+        console.log(data)
+        this.perfiles   = data.listaDat.perfiles;
+        console.log(this.perfiles)
       },
         error => {
-
-        });
-  }  
-   //Llena catálogo de Sindicatos
-  getCatalogoSindicatos() {
-    this.catalogoService.getCatalogoSindicatos()
-      .pipe(first())
-      .subscribe(data => {
-        this.sindicatos = data.sindicatos;
-      },
-        error => {
-
         });
   }
 
-  //Llena catálogo de Identificaciones
-  getCatalogoIdentificaciones() {
-    this.catalogoService.getCatalogoIdentificacion()
-      .pipe(first())
-      .subscribe(data => {
-        this.identificaciones = data.identificaciones;
-      },
-        error => {
-
-        });
-  }
-
-  //Llena catálogo de Tipos de Asignación
-  getCatalogoTposAsignacion(sindicato: any) {
-    this.catalogoService.getCatalogoTposAsignacion(sindicato)
-      .pipe(first())
-      .subscribe(data => {
-        this.asignaciones = data.asignaciones;
-      },
-        error => {
-          
-        });
-  }
-
-  //Evento en cambio de Sindicato
-  onSelectionChanged(value: any) {
-
-    if (value.value == 0) {
-//      this.frmAltaUsr.get('IdAsignacionSindicato')?.disable();
-    } else {
-//      this.frmAltaUsr.get('IdAsignacionSindicato')?.enable();
-      this.getCatalogoTposAsignacion(value.value);
-    }
-  }
 
   //Evento para ocultar y mostrar la pestaña de propietario
   onSelectionAsignacion(value: any) {
@@ -231,60 +192,54 @@ export class EdicionUsuariosComponent implements OnInit {
     }
   }
 
-  //Registra el concesionario
-  guardarConcesionario() {
+  guardarUsuario() {
 
-   //this.clear();
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.frmAltaUsr.invalid) {
-      return;
-    }
-    
-    this.fechaNacimiento = moment(this.f.FechaNacimiento.value).format('YYYY/MM/DD');
-    if (this.idConcesionario == 0) {
-      this.idConcesionario == 0;
-    } else {
-      this.idConcesionario == this.idConcesionario;
-    }
-    
-/*
-    this.usuarios = {
-      IdUsuario        :this.f.idUsuario.value,
-      Nombre           :this.f.Nombre.value,
-      Contrasenia      :this.f.Contrasenia.value,
-      IdEmpleado       :number,
-      IdPerfil         :this.f.IdPerfil.value,
-      FechaRegistro    :this.todayISOString,
-      Estatus          :this.Estatus,
-      email            :this.f.email.value,
-      Bloqueado        :this.Bloqueado,
-      Intentos         :this.Intentos,
-      UltimaTransaccion:this.todayISOString,
-    }
-*/
-    this.concesionarioService.postRegistraConcesionario(this.concesionario)
-      .pipe(first())
-      .subscribe(
-        data => {
-          if (data.estatus) {
-            this.idConcesionario = data.IdConcesionario;
-//jasg            this.nombreConcesionario = this.f.Nombre.value + " " + this.f.Paterno.value + " " + this.f.Materno.value;
-            this.concesionarioService.sendIdConce(this.idConcesionario, this.nombreConcesionario);          
-            //this.success(data.mensaje);
-            this.notifier.notify('success', data.mensaje, '');    
-          } else {
-            //this.warn(data.mensaje);
-            this.notifier.notify('warning', data.mensaje, '');
-          }
-        },
-        error => {
-          //this.error(error);
-          this.notifier.notify('error', error, '');
-        });
-  }
-
+    //this.clear();
+     this.submitted = true;
+ 
+     // stop here if form is invalid
+     if (this.frmEditUsr.invalid) {
+       return;
+     }
+ 
+     this.usuario = {
+       IdUsuario        :this.f.IdUsuario.value,
+       Nombre           :this.f.Nombre.value,
+       Contrasenia      :this.f.Contrasenia.value,
+       IdEmpleado       :0,
+       IdPerfil         :this.f.IdPerfil.value,
+       FechaRegistro    :moment(this.hoyDate).format('YYYY-MM-DD'),
+       Estatus          :this.Estatus,
+       email            :this.f.email.value,
+       Bloqueado        :this.Bloqueado,
+       Intentos         :this.Intentos,
+       UltimaTransaccion:moment(this.hoyDate).format('YYYY-MM-DD'),
+     }
+ 
+     this.catalogoService.postRegistraUsuario(this.usuario)
+       .pipe(first())
+       .subscribe(
+         data => {
+           console.log("Se intentó Alta Usuario")
+           console.log(data)
+                 
+           if (data.estatus) {
+             this.notifier.notify('success', data.mensaje, '');    
+             this.dialogRef.close();
+           } else {
+             //this.warn(data.mensaje);
+             this.notifier.notify('warning', data.mensaje, '');
+           }
+         },
+         error => {
+           //this.error(error);
+           this.notifier.notify('error', error, '');
+         });
+   }
+ 
+ 
+ 
+ 
   //Obtiene los datos de Municipio, Entidad y Colonia
   changeCP(): void {
     //this.clear();
@@ -297,14 +252,14 @@ export class EdicionUsuariosComponent implements OnInit {
         data => {
           if (data.estatus && data.cp != "") {
             this.asentamientos = data.cp;
-            this.frmAltaUsr.patchValue({
+            this.frmEditUsr.patchValue({
               municipio: this.asentamientos.Municipio,
               entidad: this.asentamientos.EntidadFederativa
             });
             this.colonias = this.asentamientos.asentamientos;
           } else {
             this.info(data.mensaje);
-            this.frmAltaUsr.patchValue({
+            this.frmEditUsr.patchValue({
               municipio: "",
               entidad: ""
             });
