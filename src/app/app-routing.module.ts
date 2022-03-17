@@ -18,7 +18,7 @@ import { RepoTaxiVanConvComponent } from './_components/repo-taxi-van-conv/repo-
 import { RepoSinConcluirComponent } from './_components/repo-sin-concluir/repo-sin-concluir.component';
 import { FormalizacionComponent } from './_components/formalizacion/formalizacion.component';
 import { InicioBienvenidosComponent } from './_components/inicio-bienvenidos/inicio-bienvenidos.component';
-
+import { RepoAhorroPeriodoComponent } from './_components/repo-ahorro-periodo/repo-ahorro-periodo.component';
 
 
 
@@ -44,6 +44,7 @@ const routes: Routes = [
                { path: 'repoSinConcluir', component: RepoSinConcluirComponent },
                { path: 'formalizacion', component: FormalizacionComponent},
                { path: 'bienvenidos', component: InicioBienvenidosComponent},
+               { path: 'repoAhorroPeriodo', component: RepoAhorroPeriodoComponent },
                             
                ]},  
  

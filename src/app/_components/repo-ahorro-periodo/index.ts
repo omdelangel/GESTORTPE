@@ -1,0 +1,1 @@
+export * from './repo-ahorro-periodo.component';

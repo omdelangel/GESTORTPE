@@ -117,7 +117,7 @@ export class AltaUsuariosComponent implements OnInit {
     }
   }
 
-  //Registra el concesionario
+  //Registra el Usuario
   guardarUsuario() {
 
    //this.clear();

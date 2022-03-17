@@ -68,4 +68,22 @@ getReporteSinConcluir(): Observable<any> {
   )
 }
 
+//Obtiene información de Autos con Ahorro por Período 
+getReporteAhorroPeriodo(tipoPersona: string, sindicato: number): Observable<any> {
+
+  console.log("Parametros dentro")
+  console.log(tipoPersona)
+  console.log(sindicato)
+  let params = new HttpParams();
+  params = params.append('TipoPersona', tipoPersona);
+  params = params.append('IdSindicato', sindicato);
+ 
+  return this.http.get<any>(`${environment.SERVER_URL}/reporte-ahorro-periodo`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
  }

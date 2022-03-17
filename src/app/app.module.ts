@@ -72,6 +72,7 @@ import { EstadoProcesoComponent } from './_dashboard/estado-proceso/estado-proce
 import { RepoSinConcluirComponent } from './_components/repo-sin-concluir/repo-sin-concluir.component'; 
 import { DialogoConfirmaInstalacionComponent } from './_components/dialogo-confirma-instalacion/dialogo-confirma-instalacion.component';
 import { InicioBienvenidosComponent } from './_components/inicio-bienvenidos/inicio-bienvenidos.component';
+import { RepoAhorroPeriodoComponent } from './_components/repo-ahorro-periodo/repo-ahorro-periodo.component';
 
 
 
@@ -179,7 +180,8 @@ FullCalendarModule.registerPlugins([
     EstadoProcesoComponent,
     RepoSinConcluirComponent,
     DialogoConfirmaInstalacionComponent,
-    InicioBienvenidosComponent
+    InicioBienvenidosComponent,
+    RepoAhorroPeriodoComponent
   ],
   imports: [
     BrowserModule,

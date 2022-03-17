@@ -211,3 +211,97 @@ export class RepoSinConcluir {
             this.NombreArchivo         = RepoSinConcluir.NombreArchivo        ;
     }    
 }
+
+
+export class RepoAhorroPeriodo {
+    IdVehiculo                       :number;
+    NombreConcesionario              :string;
+    PaternoConcesionario             :string;
+    MaternoConcesionario             :string;
+    Telefono                         :string;
+    Celular                          :string;
+    email                            :string;
+    Calle                            :string;
+    Exterior                         :string;
+    Interior                         :string;
+    Colonia                          :string;
+    CP                               :string;
+    Municipio                        :string;
+    EntidadFederativa                :string;
+    Sindicato                        :string;
+    Marca                            :string;
+    Submarca                         :string;
+    Modelo                           :number;
+    NumeroEconomico                  :number;
+    Placa                            :string;
+    NombreOperador                   :string;
+    PaternoOperador                  :string;
+    MaternoOperador                  :string;
+    FechaInicio                      :string;
+    FechaCorte                       :string;
+    LitrosConsumoMensual             :string;
+    PorcentajeAhorro                 :string;
+    LitrosConsumidosPeriodo          :string;
+    LitrosConsumidosAcumuladoGeneral :string;
+
+    constructor(RepoAhorroPeriodo: {   
+        IdVehiculo                       :number;
+        NombreConcesionario              :string;
+        PaternoConcesionario             :string;
+        MaternoConcesionario             :string;
+        Telefono                         :string;
+        Celular                          :string;
+        email                            :string;
+        Calle                            :string;
+        Exterior                         :string;
+        Interior                         :string;
+        Colonia                          :string;
+        CP                               :string;
+        Municipio                        :string;
+        EntidadFederativa                :string;
+        Sindicato                        :string;
+        Marca                            :string;
+        Submarca                         :string;
+        Modelo                           :number;
+        NumeroEconomico                  :number;
+        Placa                            :string;
+        NombreOperador                   :string;
+        PaternoOperador                  :string;
+        MaternoOperador                  :string;
+        FechaInicio                      :string;
+        FechaCorte                       :string;
+        LitrosConsumoMensual             :string;
+        PorcentajeAhorro                 :string;
+        LitrosConsumidosPeriodo          :string;
+        LitrosConsumidosAcumuladoGeneral :string;}){
+            this.IdVehiculo                       = RepoAhorroPeriodo.IdVehiculo                      ;
+            this.NombreConcesionario              = RepoAhorroPeriodo.NombreConcesionario             ;
+            this.PaternoConcesionario             = RepoAhorroPeriodo.PaternoConcesionario            ;
+            this.MaternoConcesionario             = RepoAhorroPeriodo.MaternoConcesionario            ;
+            this.Telefono                         = RepoAhorroPeriodo.Telefono                        ;
+            this.Celular                          = RepoAhorroPeriodo.Celular                         ;
+            this.email                            = RepoAhorroPeriodo.email                           ;
+            this.Calle                            = RepoAhorroPeriodo.Calle                           ;
+            this.Exterior                         = RepoAhorroPeriodo.Exterior                        ;
+            this.Interior                         = RepoAhorroPeriodo.Interior                        ;
+            this.Colonia                          = RepoAhorroPeriodo.Colonia                         ;
+            this.CP                               = RepoAhorroPeriodo.CP                              ;
+            this.Municipio                        = RepoAhorroPeriodo.Municipio                       ;
+            this.EntidadFederativa                = RepoAhorroPeriodo.EntidadFederativa               ;
+            this.Sindicato                        = RepoAhorroPeriodo.Sindicato                       ;
+            this.Marca                            = RepoAhorroPeriodo.Marca                           ;
+            this.Submarca                         = RepoAhorroPeriodo.Submarca                        ;
+            this.Modelo                           = RepoAhorroPeriodo.Modelo                          ;
+            this.NumeroEconomico                  = RepoAhorroPeriodo.NumeroEconomico                 ;
+            this.Placa                            = RepoAhorroPeriodo.Placa                           ;
+            this.NombreOperador                   = RepoAhorroPeriodo.NombreOperador                  ;
+            this.PaternoOperador                  = RepoAhorroPeriodo.PaternoOperador                 ;
+            this.MaternoOperador                  = RepoAhorroPeriodo.MaternoOperador                 ;
+            this.FechaInicio                      = RepoAhorroPeriodo.FechaInicio                     ;
+            this.FechaCorte                       = RepoAhorroPeriodo.FechaCorte                      ;
+            this.LitrosConsumoMensual             = RepoAhorroPeriodo.LitrosConsumoMensual            ;
+            this.PorcentajeAhorro                 = RepoAhorroPeriodo.PorcentajeAhorro                ;
+            this.LitrosConsumidosPeriodo          = RepoAhorroPeriodo.LitrosConsumidosPeriodo         ;
+            this.LitrosConsumidosAcumuladoGeneral = RepoAhorroPeriodo.LitrosConsumidosAcumuladoGeneral;        
+    }    
+}

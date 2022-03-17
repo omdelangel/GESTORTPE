@@ -130,7 +130,19 @@ export class ConsultaUsuariosComponent implements OnInit {
     editar(e: any) {
       const dialogRef = this.dialog.open(EdicionUsuariosComponent, {
         disableClose: true,
-        data: { IdConcesionario: e.IdConcesionario, IdVehiculo: e.IdVehiculo, IdPropietario: e.IdPropietario},
+        data: { 
+          IdUsuario            :e.IdUsuario        ,           
+          Nombre               :e.Nombre           ,           
+          Contrasenia          :e.Contrasenia      ,           
+          IdEmpleado           :e.IdEmpleado       ,           
+          IdPerfil             :e.IdPerfil         ,           
+          FechaRegistro        :e.FechaRegistro    ,           
+          Estatus              :e.Estatus          ,           
+          email                :e.email            ,           
+          Bloqueado            :e.Bloqueado        ,           
+          Intentos             :e.Intentos         ,           
+          UltimaTransaccion    :e.UltimaTransaccion,           
+          },
         width: '1500px',
         height: '900px'
       });
