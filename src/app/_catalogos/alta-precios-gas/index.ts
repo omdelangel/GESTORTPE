@@ -1,0 +1,1 @@
+export * from './alta-precios-gas.component';

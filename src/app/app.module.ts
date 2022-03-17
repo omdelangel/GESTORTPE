@@ -74,6 +74,7 @@ import { DialogoConfirmaInstalacionComponent } from './_components/dialogo-confi
 import { PrecioGasComponent } from './_catalogos/precio-gas/precio-gas.component';
 import { PrecioGasolinaComponent } from './_catalogos/precio-gasolina/precio-gasolina.component'; 
 import { InicioBienvenidosComponent } from './_components/inicio-bienvenidos/inicio-bienvenidos.component';
+import { AltaPreciosGasComponent } from './_catalogos/alta-precios-gas/alta-precios-gas.component';
 import { RepoAhorroPeriodoComponent } from './_components/repo-ahorro-periodo/repo-ahorro-periodo.component';
 import { RepoNoConsumenComponent } from './_components/repo-no-consumen/repo-no-consumen.component';
 
@@ -187,7 +188,8 @@ FullCalendarModule.registerPlugins([
     PrecioGasComponent,
     PrecioGasolinaComponent,
     InicioBienvenidosComponent,
-    RepoNoConsumenComponent
+    RepoNoConsumenComponent,
+    AltaPreciosGasComponent
   ],
   imports: [
     BrowserModule,
