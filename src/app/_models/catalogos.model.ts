@@ -199,6 +199,8 @@ export class PreciosGas {
     IdMunicipio: string;
     PrecioKg: number;
     PrecioLtr: number;
+    NombreE: string;
+    NombreM: string;
     constructor(preciosGas: {
         IdHistoricoGas: number;
         FechaAlta: string;
@@ -208,6 +210,8 @@ export class PreciosGas {
         IdMunicipio: string;
         PrecioKg: number;
         PrecioLtr: number;
+        NombreE: string;
+        NombreM: string;
     }) {
         this.IdHistoricoGas = preciosGas.IdHistoricoGas;
         this.FechaAlta = preciosGas.FechaAlta;
@@ -217,6 +221,8 @@ export class PreciosGas {
         this.IdMunicipio = preciosGas.IdMunicipio;
         this.PrecioKg = preciosGas.PrecioKg;
         this.PrecioLtr = preciosGas.PrecioLtr;
+        this.NombreE = preciosGas.NombreE;
+        this.NombreM = preciosGas.NombreM;
     }
 
 }

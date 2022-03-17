@@ -9,6 +9,8 @@ import { CatalogosService } from 'src/app/_services';
 import { NotifierService } from 'angular-notifier';
 import { first } from 'rxjs/operators';
 import * as moment from 'moment';
+import { MatDialog } from '@angular/material/dialog';
+import { AltaPreciosGasComponent } from '../alta-precios-gas';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export default class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -26,8 +28,7 @@ export default class MyErrorStateMatcher implements ErrorStateMatcher {
 export class PrecioGasComponent implements OnInit {
   private readonly notifier: NotifierService;
 
-  displayedColumns = ['IdHistoricoGas', 'FechaAlta', 'FechaDesde', 'FechaHasta', 'IdEntidadFederal', 
-  'IdMunicipio', 'PrecioKg', 'PrecioLtr'];
+  displayedColumns = ['FechaAlta', 'FechaDesde', 'FechaHasta', 'NombreE', 'NombreM', 'PrecioKg', 'PrecioLtr'];
   dataSource!: MatTableDataSource<PreciosGas>;
 
     //@ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -43,7 +44,8 @@ export class PrecioGasComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private catalogoService: CatalogosService,
-    notifierService: NotifierService) { 
+    notifierService: NotifierService,
+    public dialog: MatDialog,) { 
 
       this.notifier = notifierService; 
     }
@@ -112,6 +114,7 @@ export class PrecioGasComponent implements OnInit {
           elemTable!.style.visibility = "visible";
   
         } else {
+
           this.notifier.notify('warning', data.mensaje);
   
           var elemDiv = document.getElementById('divTitle');
@@ -127,6 +130,18 @@ export class PrecioGasComponent implements OnInit {
   
         });
   
+    }
+
+     //Abre modal para Alta de precios
+     openDialog(): void {
+      const dialogRef = this.dialog.open(AltaPreciosGasComponent, {
+        disableClose: true,
+
+      });
+  
+      dialogRef.afterClosed().subscribe(res => {
+        this.onSubmit();
+      });
     }
 
 }

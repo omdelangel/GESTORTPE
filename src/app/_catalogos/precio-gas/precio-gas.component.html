@@ -50,11 +50,16 @@
         </div>
     </form>
 
-    <div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="30">
+    <div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="space-between end" >
+        <div fxFlex="100" fxFlex.gt-md="30">
         <h2 mat-raised-button>Lista de precios de gas LP por entidad</h2>
         <mat-form-field>
             <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
         </mat-form-field>
+    </div>
+    <button mat-fab style="background-color: #80BC00; outline: none;" matTooltip="Alta de precios Gas" outline:none; (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+    </button>
     </div>
 
     <div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100" id="htmlData">
@@ -94,11 +99,25 @@
                 <mat-cell *matCellDef="let row"> {{row.IdEntidadFederal}} </mat-cell>
             </ng-container>
 
+             <!-- Color Column -->
+             <ng-container matColumnDef="NombreE">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Entidad Federal
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.NombreE}} </mat-cell>
+            </ng-container>
+
             <!-- Color Column -->
             <ng-container matColumnDef="IdMunicipio">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Id Municipio
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.IdMunicipio}} </mat-cell>
+            </ng-container>
+
+             <!-- Color Column -->
+             <ng-container matColumnDef="NombreM">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Municipio
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.NombreM}} </mat-cell>
             </ng-container>
 
             <!-- Color Column -->
