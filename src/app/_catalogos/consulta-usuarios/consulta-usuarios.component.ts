@@ -10,7 +10,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertService } from '../../_alert';
 import { AltaUsuariosComponent } from '../alta-usuarios';
-import { PreregistroEdicionDialogComponent } from '../../_components/preregistro-edicion-dialog';
+import { EdicionUsuariosComponent } from '../../_catalogos/edicion-usuarios/edicion-usuarios.component';
 import { NotifierService } from 'angular-notifier';
 
 
@@ -128,7 +128,7 @@ export class ConsultaUsuariosComponent implements OnInit {
 
   //Edita el registro de Dictamen
     editar(e: any) {
-      const dialogRef = this.dialog.open(PreregistroEdicionDialogComponent, {
+      const dialogRef = this.dialog.open(EdicionUsuariosComponent, {
         disableClose: true,
         data: { IdConcesionario: e.IdConcesionario, IdVehiculo: e.IdVehiculo, IdPropietario: e.IdPropietario},
         width: '1500px',

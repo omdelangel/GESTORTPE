@@ -19,6 +19,10 @@ import { RepoSinConcluirComponent } from './_components/repo-sin-concluir/repo-s
 import { FormalizacionComponent } from './_components/formalizacion/formalizacion.component';
 import { PrecioGasComponent } from './_catalogos/precio-gas';
 import { PrecioGasolinaComponent } from './_catalogos/precio-gasolina';
+import { InicioBienvenidosComponent } from './_components/inicio-bienvenidos/inicio-bienvenidos.component';
+
+
+
 
 
 
@@ -42,7 +46,9 @@ const routes: Routes = [
                { path: 'repoSinConcluir', component: RepoSinConcluirComponent },
                { path: 'formalizacion', component: FormalizacionComponent},
                { path: 'precioGas', component: PrecioGasComponent},
-               { path: 'precioGasolina', component: PrecioGasolinaComponent}
+               { path: 'precioGasolina', component: PrecioGasolinaComponent},
+               { path: 'bienvenidos', component: InicioBienvenidosComponent},
+                            
                ]},  
  
  

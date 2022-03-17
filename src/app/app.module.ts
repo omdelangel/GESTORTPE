@@ -73,6 +73,8 @@ import { RepoSinConcluirComponent } from './_components/repo-sin-concluir/repo-s
 import { DialogoConfirmaInstalacionComponent } from './_components/dialogo-confirma-instalacion/dialogo-confirma-instalacion.component';
 import { PrecioGasComponent } from './_catalogos/precio-gas/precio-gas.component';
 import { PrecioGasolinaComponent } from './_catalogos/precio-gasolina/precio-gasolina.component'; 
+import { InicioBienvenidosComponent } from './_components/inicio-bienvenidos/inicio-bienvenidos.component';
+
 
 
 /**
@@ -180,7 +182,8 @@ FullCalendarModule.registerPlugins([
     RepoSinConcluirComponent,
     DialogoConfirmaInstalacionComponent,
     PrecioGasComponent,
-    PrecioGasolinaComponent
+    PrecioGasolinaComponent,
+    InicioBienvenidosComponent
   ],
   imports: [
     BrowserModule,
