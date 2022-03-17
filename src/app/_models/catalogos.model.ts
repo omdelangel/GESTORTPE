@@ -190,6 +190,27 @@ export class Entidades {
     }
 }
 
+export class Municipios {
+    IdEntidadFederal: string;
+    IdMunicipio: string;
+    Nombre: string;
+    Abreviacion: string;
+    IdRegion: number;
+    constructor(municipios: {
+        IdEntidadFederal: string;
+        IdMunicipio: string;
+        Nombre: string;
+        Abreviacion: string;
+        IdRegion: number;
+    }) {
+        this.IdEntidadFederal = municipios.IdEntidadFederal;
+        this.IdMunicipio = municipios.IdMunicipio;
+        this.Nombre = municipios.Nombre;
+        this.Abreviacion = municipios.Abreviacion;
+        this.IdRegion = municipios.IdRegion;
+    }
+}
+
 export class PreciosGas { 
     IdHistoricoGas: number;
     FechaAlta: string;
@@ -223,6 +244,41 @@ export class PreciosGas {
         this.PrecioLtr = preciosGas.PrecioLtr;
         this.NombreE = preciosGas.NombreE;
         this.NombreM = preciosGas.NombreM;
+    }
+
+}
+
+
+export class PreciosGasolina { 
+    IdHistoricoGasolina: number;
+    FechaAlta: string;
+    FechaDesde: string;
+    FechaHasta: string;
+    IdEntidadFederal: string;
+    IdMunicipio: string;
+    PrecioLtr: number;
+    NombreE: string;
+    NombreM: string;
+    constructor(preciosGasolina: {
+        IdHistoricoGasolina: number;
+        FechaAlta: string;
+        FechaDesde: string;
+        FechaHasta: string;
+        IdEntidadFederal: string;
+        IdMunicipio: string;
+        PrecioLtr: number;
+        NombreE: string;
+        NombreM: string;
+    }) {
+        this.IdHistoricoGasolina = preciosGasolina.IdHistoricoGasolina;
+        this.FechaAlta = preciosGasolina.FechaAlta;
+        this.FechaDesde = preciosGasolina.FechaDesde;
+        this.FechaHasta = preciosGasolina.FechaHasta;
+        this.IdEntidadFederal = preciosGasolina.IdEntidadFederal;
+        this.IdMunicipio = preciosGasolina.IdMunicipio;
+        this.PrecioLtr = preciosGasolina.PrecioLtr;
+        this.NombreE = preciosGasolina.NombreE;
+        this.NombreM = preciosGasolina.NombreM;
     }
 
 }
