@@ -240,12 +240,16 @@ export class AltapropietarioComponent implements OnInit {
 
   //Valida el RFC del propietario
   onChangeEvent(event: any) {
-    this.clear();
+
+    console.log("ENTRA A CHANGE");
 
     this.propietarioService.getPropietarioRFC(event.target.value)
       .pipe(first())
       .subscribe(
         data => {
+
+          console.log("data");
+          console.log(data);
 
           if (data.estatus && data.propietario[0].IdPropietario != 0) {
             this.idPropietario = data.propietario[0].IdPropietario;

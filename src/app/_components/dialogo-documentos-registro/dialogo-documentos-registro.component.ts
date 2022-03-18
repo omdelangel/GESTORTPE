@@ -169,9 +169,6 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
       .pipe(first())
       .subscribe(dataList => {
 
-        console.log("REGRESA DE LA CONSULTA");
-        console.log(dataList);
-
         this.dataSource = new MatTableDataSource(dataList.documentos);
 
         // Assign the data to the data source for the table to render
@@ -307,6 +304,9 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
   //Guarda la calificación del documento
   salvar(e: any, valor: number) {
 
+    console.log("valor");
+    console.log(valor);
+
     if (valor == 1) {
       this.calificaDocumento(e, valor);
       this.edit = true;
@@ -329,6 +329,10 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
       return;
     }
 
+    if(cal == 1){
+      e.Observaciones = "";
+    }
+
     this.documento = {
       IdVehiculo: e.IdVehiculo, IdConcesionario: this.idConcesionario, IdDocumento: e.IdDocumento,
       Correcto: cal, Observaciones: e.Observaciones
@@ -338,8 +342,6 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
 
-        console.log("REGRESA DE LA CAL");
-        console.log(data);
 
         if (data.estatus) {
           this.getDocumentosContrato(this.idVehiculo);

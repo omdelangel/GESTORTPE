@@ -152,7 +152,7 @@ export class AltacitaComponent implements OnInit {
       this.diaHora = moment(this.dia + " " + this.hora).format('YYYY-MM-DD HH:mm:ss');
       this.citas = { IdVehiculo: this.idVehiculoValue, IdConcesionario: this.idConcesionarioValue, Fecha: this.diaHora, IdTaller: this.idTallerValue }
 
-      if (this.causaValue == "Verificacion") {
+      if (this.causaValue == "Verificacion" || this.causaValue == undefined) {
 
         this.citasService.postRegistraCita(this.citas)
           .pipe(first())
@@ -266,24 +266,5 @@ export class AltacitaComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  //Manejo de errores
-  success(message: string) {
-    this.alertService.success(message, 'success');
-  }
 
-  error(message: string) {
-    this.alertService.error(message, 'error');
-  }
-
-  info(message: string) {
-    this.alertService.info(message, 'info');
-  }
-
-  warn(message: string) {
-    this.alertService.warn(message, 'warn');
-  }
-
-  clear() {
-    this.alertService.clear();
-  }
 }
