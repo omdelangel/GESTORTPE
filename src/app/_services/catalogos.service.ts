@@ -147,6 +147,24 @@ getPreciosGas(fechaDesde: string, fechaHasta: string, idEntidadFederal: string):
 }
 
 
+//Consulta los precios del gas
+getPreciosGasolina(fechaDesde: string, fechaHasta: string, idEntidadFederal: string): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('FechaDesde', fechaDesde);
+  params = params.append('FechaHasta', fechaHasta);
+  params = params.append('IdEntidadFederal', idEntidadFederal);
+
+  return this.http.get<any>(`${environment.SERVER_URL}/hgasolina`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+
 // Error 
 handleError(error: HttpErrorResponse) {
   let msg = '';

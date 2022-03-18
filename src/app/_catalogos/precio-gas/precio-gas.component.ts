@@ -40,6 +40,8 @@ export class PrecioGasComponent implements OnInit {
     preciosGas: PreciosGas[] = [];
     matcher = new MyErrorStateMatcher();
     submitted = false;
+    idEntidad: string = "";
+    nombreEntidad: string = "";
 
 
   constructor(private formBuilder: FormBuilder,
@@ -58,7 +60,7 @@ export class PrecioGasComponent implements OnInit {
    this.reactiveForm = this.formBuilder.group({
      'FechaDesde': ['', Validators.required],
      'FechaHasta': ['', Validators.required],
-     'IdEntidadFederal': ['', Validators.required]
+     'IdEntidadFederal': ['', Validators.required],
    });
   }
 
@@ -92,8 +94,9 @@ export class PrecioGasComponent implements OnInit {
     }
 
 
+    console.log();
 
-      this.catalogoService.getPreciosGas(moment(this.f.FechaDesde.value).format('YYYY/MM/DD') , moment(this.f.FechaHasta.value).format('YYYY/MM/DD'), this.f.IdEntidadFederal.value)
+      this.catalogoService.getPreciosGas(moment(this.f.FechaDesde.value).format('YYYY/MM/DD') , moment(this.f.FechaHasta.value).format('YYYY/MM/DD'), this.idEntidad)
       .pipe(first())
       .subscribe(data => {
  
@@ -132,10 +135,19 @@ export class PrecioGasComponent implements OnInit {
   
     }
 
+    onSelection(value: any){
+
+      this.idEntidad = value[0];
+      this.nombreEntidad = value[1];
+
+    }
+
      //Abre modal para Alta de precios
      openDialog(): void {
+
       const dialogRef = this.dialog.open(AltaPreciosGasComponent, {
         disableClose: true,
+        data: {idEntidad: this.idEntidad, nombreE: this.nombreEntidad}
 
       });
   

@@ -13,14 +13,17 @@
                 
                     <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                         <mat-form-field class="example-full-width">
-                            <mat-select placeholder="Entidad" formControlName="IdEntidadFederal" [errorStateMatcher]="matcher" required>
-                                <mat-option *ngFor="let entidad of entidades" [value]="entidad.IdEntidadFederal">
+                            <mat-select placeholder="Entidad" formControlName="IdEntidadFederal" [errorStateMatcher]="matcher" required
+                            (ngModelChange)="onSelection($event)">
+                                <mat-option *ngFor="let entidad of entidades" [value]="[entidad.IdEntidadFederal, entidad.Nombre]" >
                                     {{entidad.Nombre}}
                                 </mat-option>
                             </mat-select>
                             <mat-error *ngIf="reactiveForm.get('IdEntidadFederal')!.invalid">Campo requerido</mat-error>
                         </mat-form-field>
                     </div>
+
+                    
                 
                     <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                         <mat-form-field>

@@ -166,7 +166,7 @@ export class DialogoOperadorAltaComponent implements OnInit {
     }
   }
 
-  //Registro de propietario
+  //Registro de operador
   guardaOperador() {
 
     //this.clear();
@@ -371,22 +371,15 @@ export class DialogoOperadorAltaComponent implements OnInit {
         });
   }
 
+  //Cierra la pantalla
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+  //Recupera los datos del registro para la edición del operador
   editar(e: any) {
 
     this.condition = false;
-    // const dialogRef = this.dialog.open(DialogoOperadorEditaComponent, {
-    //     disableClose: true,
-    //    data: { data: e, IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo},
-    //width: '1500px',
-    //height: '900px'
-    //    });
-
-    //   dialogRef.afterClosed().subscribe(res => {
-    ////   });
 
     this.f.RFC.disable();
     this.idOperador = e.IdOperador;
@@ -471,6 +464,7 @@ export class DialogoOperadorAltaComponent implements OnInit {
 
   }
 
+  //Cambia el estatus del operador Activo / Inactivo
   changeEstatus(e: any) {
 
     this.idOperador = e.IdOperador;
