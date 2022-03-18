@@ -402,3 +402,46 @@ export class RepoNoConsumen {
             this.LitrosConsumidosPendiente        = RepoNoConsumen.LitrosConsumidosPendiente   ;               
     }    
 }
+
+
+export class RepoVtasRecaudadas {
+    Estacion                         :string;
+    Localidad                        :string;
+    NombreEmpleado                   :string;
+    PaternoEmpleado                  :string;
+    MaternoEmpleado                  :string;
+    FechaConsumo                     :string;
+    PrecioGas                        :string;
+    LitrosVendidos                   :string;
+    AhorroConcesionario              :string;
+    AhorroPropietario                :string;
+    TotalRetencionAhorros            :string;
+    AhorroOperadores                 :string;
+
+    constructor(RepoVtasRecaudadas: {   
+        Estacion                         :string;
+        Localidad                        :string;
+        NombreEmpleado                   :string;
+        PaternoEmpleado                  :string;
+        MaternoEmpleado                  :string;
+        FechaConsumo                     :string;
+        PrecioGas                        :string;
+        LitrosVendidos                   :string;
+        AhorroConcesionario              :string;
+        AhorroPropietario                :string;
+        TotalRetencionAhorros            :string;
+        AhorroOperadores                 :string;}){
+            this.Estacion                      = RepoVtasRecaudadas.Estacion             ;
+            this.Localidad                     = RepoVtasRecaudadas.Localidad            ;
+            this.NombreEmpleado                = RepoVtasRecaudadas.NombreEmpleado       ;
+            this.PaternoEmpleado               = RepoVtasRecaudadas.PaternoEmpleado      ;
+            this.MaternoEmpleado               = RepoVtasRecaudadas.MaternoEmpleado      ;
+            this.FechaConsumo                  = RepoVtasRecaudadas.FechaConsumo         ;
+            this.PrecioGas                     = RepoVtasRecaudadas.PrecioGas            ;
+            this.LitrosVendidos                = RepoVtasRecaudadas.LitrosVendidos       ;
+            this.AhorroConcesionario           = RepoVtasRecaudadas.AhorroConcesionario  ;
+            this.AhorroPropietario             = RepoVtasRecaudadas.AhorroPropietario    ;
+            this.TotalRetencionAhorros         = RepoVtasRecaudadas.TotalRetencionAhorros;
+            this.AhorroOperadores              = RepoVtasRecaudadas.AhorroOperadores     ;                         
+    }    
+}

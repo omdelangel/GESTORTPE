@@ -22,6 +22,7 @@ import { PrecioGasolinaComponent } from './_catalogos/precio-gasolina';
 import { InicioBienvenidosComponent } from './_components/inicio-bienvenidos/inicio-bienvenidos.component';
 import { RepoAhorroPeriodoComponent } from './_components/repo-ahorro-periodo/repo-ahorro-periodo.component';
 import { RepoNoConsumenComponent } from './_components/repo-no-consumen/repo-no-consumen.component';
+import { RepoVtasRecaudadasComponent } from './_components/repo-vtas-recaudadas/repo-vtas-recaudadas.component';
 
 
 
@@ -49,7 +50,8 @@ const routes: Routes = [
                { path: 'precioGasolina', component: PrecioGasolinaComponent},
                { path: 'bienvenidos', component: InicioBienvenidosComponent},
                { path: 'repoAhorroPeriodo', component: RepoAhorroPeriodoComponent},
-               { path: 'repoNoConsumen', component: RepoNoConsumenComponent}
+               { path: 'repoNoConsumen', component: RepoNoConsumenComponent},
+               { path: 'repoVtasRecaudadas', component: RepoVtasRecaudadasComponent},
                ]},  
  
  

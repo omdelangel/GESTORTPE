@@ -124,8 +124,6 @@ export class ConsultaUsuariosComponent implements OnInit {
     }
 
 
-
-
   //Edita el registro de Dictamen
     editar(e: any) {
       const dialogRef = this.dialog.open(EdicionUsuariosComponent, {
@@ -143,8 +141,8 @@ export class ConsultaUsuariosComponent implements OnInit {
           Intentos             :e.Intentos         ,           
           UltimaTransaccion    :e.UltimaTransaccion,           
           },
-        width: '1500px',
-        height: '900px'
+//        width: '1500px',
+//        height: '900px'
       });
   
       dialogRef.afterClosed().subscribe(res => {
