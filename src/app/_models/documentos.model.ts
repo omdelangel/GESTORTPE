@@ -27,6 +27,7 @@ export class DocumentosVehiculo {
 }
 
 export class VehiculoContrato {
+    IdContrato: number;
     IdTipoConvertidor: number;
     Convertidor: string;
     ConsumoRequerido: number;
@@ -36,6 +37,7 @@ export class VehiculoContrato {
     TipoVehiculo: string;
 
     constructor(vehiculoContrato: { 
+        IdContrato: number;
         IdTipoConvertidor: number;
         Convertidor: string;
         ConsumoRequerido: number;
@@ -43,6 +45,7 @@ export class VehiculoContrato {
         NumeroPeriodos: number;
         IdTipoVehiculo: string;
         TipoVehiculo: string;}){
+        this.IdContrato = vehiculoContrato.IdContrato;
         this.IdTipoConvertidor = vehiculoContrato.IdTipoConvertidor;
         this.Convertidor = vehiculoContrato.Convertidor;
         this.ConsumoRequerido = vehiculoContrato.ConsumoRequerido;

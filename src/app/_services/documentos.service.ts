@@ -48,6 +48,8 @@ postGuardaDocumentoPDF(formData: any): Observable<any> {
   let params = new HttpParams();
   params = params.append('IdVehiculo', IdVehiculo);
 
+  console.log(IdVehiculo);
+
   return this.http.get<any>(`${environment.SERVER_URL}/contrato`, { params: params })
     .pipe(map((res: Response) => {
 
@@ -90,6 +92,21 @@ postDocumentoVerifica(documento: DocumentoVerificacion): Observable<any> {
   return this.http.post<any>(`${environment.SERVER_URL}/documento-verificacion`, {
     'IdVehiculo': documento.IdVehiculo, 'IdConcesionario': documento.IdConcesionario, 
     'IdDocumento': documento.IdDocumento, 'Correcto': documento.Correcto, 'Observaciones': documento.Observaciones})
+    .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+      catchError(this.handleError)
+    )
+}
+
+//Consulta los datos de contrato
+getContratoId(idContrato: number): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('IdContrato', idContrato);
+
+  return this.http.get<any>(`${environment.SERVER_URL}/contratoDocumento`, { params: params })
     .pipe(map((res: Response) => {
 
       return res || {}

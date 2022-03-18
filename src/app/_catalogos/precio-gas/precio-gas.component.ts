@@ -93,9 +93,6 @@ export class PrecioGasComponent implements OnInit {
      return;
     }
 
-
-    console.log();
-
       this.catalogoService.getPreciosGas(moment(this.f.FechaDesde.value).format('YYYY/MM/DD') , moment(this.f.FechaHasta.value).format('YYYY/MM/DD'), this.idEntidad)
       .pipe(first())
       .subscribe(data => {

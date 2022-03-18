@@ -31,6 +31,10 @@ export class DialogoContratoComponent implements OnInit {
   value: boolean = false;
   tituloContrato: string = "";
   contrato!: VehiculoContrato;
+  pdfSrc!: string;
+  idContrato: number = 0;
+  nombreContratoMembresia: string = "";
+  nombreContratoSuministro: string = "";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -86,7 +90,7 @@ export class DialogoContratoComponent implements OnInit {
 
         this.contrato = data.contrato;
 
-
+        this.idContrato = data.contrato[0].IdContrato;
         this.f.Concesionario.setValue(this.concesionarioValue);
         this.f.Sindicato.setValue(this.sindicatoValue);
         this.f.TipoConvertidor.setValue(data.contrato[0].Convertidor);
@@ -108,7 +112,20 @@ export class DialogoContratoComponent implements OnInit {
   //Genera contrato de membresia
   generarContratoMembresia() {
 
-    console.log("ENTRA A CONTRATO 1");
+    this.documentosService.getContratoId(this.idContrato)
+      .pipe(first())
+      .subscribe(data => {
+
+        this.nombreContratoMembresia = data.archivo;
+        console.log("this.nombreContratoMembresia");
+        console.log(this.nombreContratoMembresia);
+      
+      },
+        error => {
+          this.notifier.notify('error', error, '');
+        });
+
+    this.pdfSrc = "./assets/ContratosPDF/" + this.nombreContratoMembresia;
     this.value = true;
     this.tituloContrato = "Contrato de membresía al programa de beneficios";
 }
@@ -117,7 +134,20 @@ export class DialogoContratoComponent implements OnInit {
  //Genera contrato de membresia
  generarContratoSuministro() {
 
-  console.log("ENTRA A CONTRATO 2");
+  this.documentosService.getContratoId(this.idContrato)
+  .pipe(first())
+  .subscribe(data => {
+
+    this.nombreContratoSuministro = data.archivo;
+    console.log("this.nombreContratoSuministro");
+    console.log(this.nombreContratoSuministro);
+  
+  },
+    error => {
+      this.notifier.notify('error', error, '');
+    });
+
+  this.pdfSrc = "./assets/ContratosPDF/" + this.nombreContratoSuministro;
   this.value = true;
   this.tituloContrato = "Contrato de suministro y compra venta a plazos del equipo de conversión";
 }
