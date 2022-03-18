@@ -1,0 +1,1 @@
+export * from './repo-vtas-recaudadas.component'

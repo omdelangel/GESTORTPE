@@ -92,13 +92,12 @@ export class EdicionUsuariosComponent implements OnInit {
      
       this.notifier = notifierService;   
       this.getCatalogoPerfiles();    
-      this.llenaPantalla();
+      //this.llenaPantalla();
     }
 
   ngOnInit(): void {
 
     //this.clear();
-
     //Validación de campos en pantalla
     this.frmEditUsr = this.formBuilder.group({
       'IdUsuario'       : ['', Validators.required],
@@ -108,8 +107,10 @@ export class EdicionUsuariosComponent implements OnInit {
       'RepContrasenia'  : ['', Validators.required], 
       'email'           : ['', Validators.required]
     }); 
+    //this.llenaPantalla();
   }
 
+ 
   get f() { return this.frmEditUsr.controls; }
 
   //Consulta los datos del concesionario
@@ -148,6 +149,7 @@ export class EdicionUsuariosComponent implements OnInit {
         console.log(data)
         this.perfiles   = data.listaDat.perfiles;
         console.log(this.perfiles)
+        this.llenaPantalla();
       },
         error => {
         });

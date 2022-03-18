@@ -1,0 +1,145 @@
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+        <div fxFlex="30">
+            <mat-card>
+                <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+                    <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Filtros de búsqueda
+                    </mat-card-title>
+                    <button mat-fab style="background-color: #2d4248; outline: none;" matTooltip="Buscar Vtas Recaudadas" outline:none;>
+                      <mat-icon>search</mat-icon>
+                    </button>
+                </mat-card-actions>
+
+                <mat-card-content fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+                    <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                        <mat-form-field>
+                            <mat-label>Fecha de Inicio</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="FechaInicio">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker style="outline: none;" required></mat-datepicker>
+                            <mat-error *ngIf="reactiveForm.get('FechaInicio')!.hasError('required')">
+                                El dato es oblgatorio
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                        <mat-form-field>
+                            <mat-label>Fecha de Termino</mat-label>
+                            <input matInput [matDatepicker]="pickerF" formControlName="FechaFin">
+                            <mat-datepicker-toggle matSuffix [for]="pickerF"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerF style="outline: none;" required></mat-datepicker>
+                            <mat-error *ngIf="reactiveForm.get('FechaFin')!.hasError('required')">
+                                El dato es oblgatorio
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </form>
+
+    <div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="30">
+        <h2 mat-raised-button>Reporte de Ventas Recaudadas </h2>
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
+        </mat-form-field>
+    </div>
+
+    <div id="divReport" class="example-header" fxFlex="100" fxFlex.gt-md="30">
+        <button (click)="exportAsXLSX()" style="border-style: none; outline: none;" matTooltip="Exportar a Excel"><img src="./assets/iconos/excel.png" /></button>&nbsp;&nbsp;
+    </div>
+    <div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100" id="htmlData">
+        <mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Estacion">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Estacion
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Estacion}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Localidad">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Localidad
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Localidad}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="NombreEmpleado">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Empl.
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.NombreEmpleado}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="PaternoEmpleado">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Paterno Empl.
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.PaternoEmpleado}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="MaternoEmpleado">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Materno Empl.
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.MaternoEmpleado}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="FechaConsumo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Consumo
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaConsumo}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="PrecioGas">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Precio Gas
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.PrecioGas}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="LitrosVendidos">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Litros Vendidos
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosVendidos}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="AhorroConcesionario">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Ahorro Conc.
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.AhorroConcesionario}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="AhorroPropietario">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Ahorro Prop.
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.AhorroPropietario}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="TotalRetencionAhorros">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Total Ret. Ahorros
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.TotalRetencionAhorros}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="AhorroOperadores">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Ahorro Oper.
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.AhorroOperadores}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;">
+            </mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+    </div>
+</div>

@@ -99,4 +99,21 @@ getReporteNoConsumen(sindicato: number): Observable<any> {
     catchError(this.handleError)
   )
 }
+
+
+//Obtiene información de Ventas Recaudadas 
+getReporteVtasRecaudadas(fechaIni: string, fechaFin: string): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('FechaInicio', fechaIni);
+  params = params.append('FechaFin', fechaFin);
+ 
+  return this.http.get<any>(`${environment.SERVER_URL}/reporte-ventas-recauda`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
  }
