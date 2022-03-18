@@ -33,7 +33,6 @@ interface TipoPersona {
 export class RepoAhorroPeriodoComponent implements OnInit {
 
   displayedColumns = [
-                      'IdVehiculo',
                       'NombreConcesionario', 
                       'PaternoConcesionario', 
                       'MaternoConcesionario', 

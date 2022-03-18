@@ -17,6 +17,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
+//Catálogos locales
+interface Estatus {
+  Estatus: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-edicion-usuarios',
   templateUrl: './edicion-usuarios.component.html',
@@ -63,6 +69,11 @@ export class EdicionUsuariosComponent implements OnInit {
   asigna: boolean = false;
   nombreConcesionario: string = "";
   hide = false;
+
+  estatus: Estatus[] = [
+    { Estatus: 'A', viewValue: 'Activo' },
+    { Estatus: 'I', viewValue: 'Inactivo' },
+  ];
  
 
   constructor(
@@ -74,7 +85,7 @@ export class EdicionUsuariosComponent implements OnInit {
     public dialogRef: MatDialogRef<EdicionUsuariosComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any)   
     { 
-      console.log("data parametros")
+      console.log("data parametros1")
       console.log(data)
       console.log(data.IdUsuario)
       console.log(this.IdUsuario)
@@ -92,22 +103,20 @@ export class EdicionUsuariosComponent implements OnInit {
      
       this.notifier = notifierService;   
       this.getCatalogoPerfiles();    
-      //this.llenaPantalla();
     }
 
   ngOnInit(): void {
-
+    console.log("Entre al OnInit")
     //this.clear();
     //Validación de campos en pantalla
     this.frmEditUsr = this.formBuilder.group({
-      'IdUsuario'       : ['', Validators.required],
+      'IdUsuario'       : [({ value: "", disabled: true }), Validators.required],
       'Nombre'          : ['', Validators.required],
       'IdPerfil'        : ['', Validators.required],
-      'Contrasenia'     : ['', Validators.required], 
-      'RepContrasenia'  : ['', Validators.required], 
+      'Estatus'         : ['', Validators.required],
       'email'           : ['', Validators.required]
     }); 
-    //this.llenaPantalla();
+    this.llenaPantalla();
   }
 
  
@@ -125,8 +134,7 @@ export class EdicionUsuariosComponent implements OnInit {
 
     this.f.IdUsuario.setValue(this.IdUsuario);                
     this.f.Nombre.setValue(this.Nombre);                
-    this.f.Contrasenia.setValue(this.Contrasenia);                
-    this.f.RepContrasenia.setValue(this.Contrasenia);                
+    this.f.Estatus.setValue(this.Estatus);                
     this.f.IdPerfil.setValue(this.IdPerfil);                
     this.f.email.setValue(this.email);                
   }
@@ -178,25 +186,9 @@ export class EdicionUsuariosComponent implements OnInit {
     }
   }
 
-  //Valida que las contraseñas sean Iguales 
-  validarContrasenia(e: any){
-    console.log("valida contraseña")
-    console.log(e.target.value)
-    console.log(this.f.Contrasenia.value,)
-    console.log("fecha de hoy")
-    console.log(this.hoyDate)
-    console.log(this.todayNumber)
-    console.log(this.todayString)
-    console.log(this.todayISOString)
-    if (e.target.value != this.f.Contrasenia.value){
-      console.log("Diferentes")
-      this.notifier.notify('error', "Las contraseñas deben ser iguales", '');
-    }
-  }
 
   guardarUsuario() {
-
-    //this.clear();
+     
      this.submitted = true;
  
      // stop here if form is invalid
@@ -205,20 +197,23 @@ export class EdicionUsuariosComponent implements OnInit {
      }
  
      this.usuario = {
-       IdUsuario        :this.f.IdUsuario.value,
-       Nombre           :this.f.Nombre.value,
-       Contrasenia      :this.f.Contrasenia.value,
-       IdEmpleado       :0,
-       IdPerfil         :this.f.IdPerfil.value,
-       FechaRegistro    :moment(this.hoyDate).format('YYYY-MM-DD'),
-       Estatus          :this.Estatus,
-       email            :this.f.email.value,
-       Bloqueado        :this.Bloqueado,
-       Intentos         :this.Intentos,
-       UltimaTransaccion:moment(this.hoyDate).format('YYYY-MM-DD'),
+       IdUsuario          :this.IdUsuario,
+       Nombre             :this.f.Nombre.value,
+       Contrasenia        :this.Contrasenia,
+//       IdEmpleado         :this.IdEmpleado,
+       IdEmpleado         :0,
+       IdPerfil           :this.f.IdPerfil.value,
+       FechaRegistro      :this.FechaRegistro,
+       Estatus            :this.f.Estatus.value,
+       email              :this.f.email.value,
+       Bloqueado          :this.Bloqueado,
+       Intentos           :this.Intentos,
+       UltimaTransaccion  :this.UltimaTransaccion,
      }
+     console.log("guarda USUARIO")
+     console.log(this.usuario)
  
-     this.catalogoService.postRegistraUsuario(this.usuario)
+     this.catalogoService.postModificaUsuario(this.usuario)
        .pipe(first())
        .subscribe(
          data => {
@@ -239,164 +234,10 @@ export class EdicionUsuariosComponent implements OnInit {
          });
    }
  
- 
- 
- 
-  //Obtiene los datos de Municipio, Entidad y Colonia
-  changeCP(): void {
-    //this.clear();
-
-    this.cp = this.f.cp.value;
-
-    this.catalogoService.getConsultaCP(this.cp)
-      .pipe(first())
-      .subscribe(
-        data => {
-          if (data.estatus && data.cp != "") {
-            this.asentamientos = data.cp;
-            this.frmEditUsr.patchValue({
-              municipio: this.asentamientos.Municipio,
-              entidad: this.asentamientos.EntidadFederativa
-            });
-            this.colonias = this.asentamientos.asentamientos;
-          } else {
-            this.info(data.mensaje);
-            this.frmEditUsr.patchValue({
-              municipio: "",
-              entidad: ""
-            });
-            this.colonias = [];
-          }
-        },
-        error => {
-          //this.error(error);
-          this.notifier.notify('error', error, '');
-        });
-  }
-
-  //Valida el RCF del Concesionario
-  onChangeEvent(event: any) {
-    //this.clear();
-
-    this.concesionarioService.getConsecionarioRFC(event.target.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-/*
-          if (data.estatus && data.concesionario["IdConcesionario"] != 0) {
-
-            this.idConcesionario = data.concesionario["IdConcesionario"];
-            this.f.Nombre.setValue(data.concesionario["Nombre"]);
-            this.f.Paterno.setValue(data.concesionario["Paterno"]);
-            this.f.Materno.setValue(data.concesionario["Materno"]);
-            this.f.CURP.setValue(data.concesionario["CURP"]);
-            this.f.IdIdentificacion.setValue(data.concesionario["IdIdentificacion"]);
-            this.f.FolioIdentificacion.setValue(data.concesionario["FolioIdentificacion"]);
-            this.f.FechaNacimiento.setValue(data.concesionario["FechaNacimiento"]);
-            this.f.TipoPersona.setValue(data.concesionario["TipoPersona"]);
-            this.f.Genero.setValue(data.concesionario["Genero"]);
-            this.f.EstadoCivil.setValue(data.concesionario["EstadoCivil"]);
-            this.f.Calle.setValue(data.concesionario["Calle"]);
-            this.f.Exterior.setValue(data.concesionario["Exterior"]);
-            this.f.Interior.setValue(data.concesionario["Interior"]);
-            this.f.cp.setValue(data.concesionario["CP"]);
-            this.changeCP();
-            this.f.IdColonia.setValue(data.concesionario["IdColonia"]);
-            this.f.municipio.setValue(data.concesionario["Municipio"]);
-            this.f.entidad.setValue(data.concesionario["EntidadFederativa"]);
-            this.f.Telefono.setValue(data.concesionario["Telefono"]);
-            this.f.Celular.setValue(data.concesionario["Celular"]);
-            this.f.email.setValue(data.concesionario["email"]);
-            this.f.IdSindicato.setValue(data.concesionario["IdSindicato"]);
-            this.getCatalogoTposAsignacion(data.concesionario["IdSindicato"]);
-            this.f.IdAsignacionSindicato.setValue(data.concesionario["IdAsignacionSindicato"]);
-            this.f.NumeroConcesion.setValue(data.concesionario["NumeroConcesion"]);
-          } else if (data.estatus && data.concesionario["IdConcesionario"] == 0) {
-            //this.info(data.mensaje);
-            this.idConcesionario = 0;
-            this.f.Nombre.setValue("");
-            this.f.Paterno.setValue("");
-            this.f.Materno.setValue("");
-            this.f.CURP.setValue("");
-            this.f.IdIdentificacion.setValue(0);
-            this.f.FolioIdentificacion.setValue("");
-            this.f.FechaNacimiento.setValue("");
-            //this.f.TipoPersona.setValue(0);
-            this.f.TipoPersona.setValue("F");
-            this.f.Genero.setValue(0);
-            this.f.EstadoCivil.setValue(0);
-            this.f.Calle.setValue("");
-            this.f.Exterior.setValue("");
-            this.f.Interior.setValue("");
-            this.f.cp.setValue("");
-            this.f.IdColonia.setValue(0);
-            this.f.municipio.setValue("");
-            this.f.entidad.setValue("");
-            this.f.Telefono.setValue("");
-            this.f.Celular.setValue("");
-            this.f.email.setValue("");
-            this.f.IdSindicato.setValue(0);
-            this.f.IdAsignacionSindicato.setValue(0);
-            this.f.NumeroConcesion.setValue("");
-          } else if (!data.estatus) {
-            //this.info(data.mensaje);
-            this.notifier.notify('info', data.mensaje, '');
-            this.idConcesionario = 0;
-            this.f.Nombre.setValue("");
-            this.f.Paterno.setValue("");
-            this.f.Materno.setValue("");
-            this.f.CURP.setValue("");
-            this.f.IdIdentificacion.setValue(0);
-            this.f.FolioIdentificacion.setValue("");
-            this.f.FechaNacimiento.setValue("");
-            //this.f.TipoPersona.setValue(0);
-            this.f.TipoPersona.setValue("F");
-            this.f.Genero.setValue(0);
-            this.f.EstadoCivil.setValue(0);
-            this.f.Calle.setValue("");
-            this.f.Exterior.setValue("");
-            this.f.Interior.setValue("");
-            this.f.cp.setValue("");
-            this.f.IdColonia.setValue(0);
-            this.f.municipio.setValue("");
-            this.f.entidad.setValue("");
-            this.f.Telefono.setValue("");
-            this.f.Celular.setValue("");
-            this.f.email.setValue("");
-            this.f.IdSindicato.setValue(0);
-            this.f.IdAsignacionSindicato.setValue(0);
-            this.f.NumeroConcesion.setValue("");          
-          }
-          */
-        },
-        error => {
-          this.notifier.notify('error', error, '');
-        });
-  }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  //Manejo de Alertas
-  success(message: string) {
-    this.alertService.success(message, 'success');
-  }
-
-  error(message: string) {
-    this.alertService.error(message, 'error');
-  }
-
-  info(message: string) {
-    this.alertService.info(message, 'info');
-  }
-
-  warn(message: string) {
-    this.alertService.warn(message, 'warn');
-  }
-
-  clear() {
-    this.alertService.clear();
-  }
 }
 

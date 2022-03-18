@@ -258,4 +258,28 @@ getCatUsuBloqueado(catalogoUsuarios: CatalogoUsuarios): Observable<any> {
       )
   }
 
+    //Registra usuarios
+    postModificaUsuario(usuario: UsuariosAltaEdicion): Observable<any> {
+
+      return this.http.post<any>(`${environment.SERVER_URL}/Modifica-Usuario`, {
+        'IdUsuario'        :usuario.IdUsuario,
+        'Nombre'           :usuario.Nombre,
+        'Contrasenia'      :usuario.Contrasenia,
+        'IdEmpleado'       :usuario.IdEmpleado,
+        'IdPerfil'         :usuario.IdPerfil,
+        'FechaRegistro'    :usuario.FechaRegistro,
+        'Estatus'          :usuario.Estatus,
+        'email'            :usuario.email,
+        'Bloqueado'        :usuario.Bloqueado,
+        'Intentos'         :usuario.Intentos,
+        'UltimaTransaccion':usuario.UltimaTransaccion,    
+      })
+        .pipe(map((res: Response) => {
+  
+          return res || {}
+        }),
+          catchError(this.handleError)
+        )
+    }
+
 }

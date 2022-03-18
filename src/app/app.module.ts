@@ -78,6 +78,11 @@ import { AltaPreciosGasComponent } from './_catalogos/alta-precios-gas/alta-prec
 import { RepoAhorroPeriodoComponent } from './_components/repo-ahorro-periodo/repo-ahorro-periodo.component';
 import { RepoNoConsumenComponent } from './_components/repo-no-consumen/repo-no-consumen.component';
 import { RepoVtasRecaudadasComponent } from './_components/repo-vtas-recaudadas/repo-vtas-recaudadas.component';
+import { RepoConsumoEstacionesComponent } from './_components/repo-consumo-estaciones/repo-consumo-estaciones.component';
+import { RepoContratosSinCitaComponent } from './_components/repo-contratos-sin-cita/repo-contratos-sin-cita.component';
+import { RepoAnalisisSinCitaComponent } from './_components/repo-analisis-sin-cita/repo-analisis-sin-cita.component';
+import { RepoConsumoItAhorroComponent } from './_components/repo-consumo-it-ahorro/repo-consumo-it-ahorro.component';
+import { RepoConsumoItIncompletoComponent } from './_components/repo-consumo-it-incompleto/repo-consumo-it-incompleto.component';
 
 
 /**
@@ -191,7 +196,12 @@ FullCalendarModule.registerPlugins([
     InicioBienvenidosComponent,
     RepoNoConsumenComponent,
     AltaPreciosGasComponent,
-    RepoVtasRecaudadasComponent
+    RepoVtasRecaudadasComponent,
+    RepoConsumoEstacionesComponent,
+    RepoContratosSinCitaComponent,
+    RepoAnalisisSinCitaComponent,
+    RepoConsumoItAhorroComponent,
+    RepoConsumoItIncompletoComponent
   ],
   imports: [
     BrowserModule,

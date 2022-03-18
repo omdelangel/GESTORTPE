@@ -5,7 +5,7 @@
                 <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
                     <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Filtros de búsqueda
                     </mat-card-title>
-                    <button mat-fab style="background-color: #2d4248; outline: none;" matTooltip="Buscar Vtas Recaudadas" outline:none;>
+                    <button mat-fab style="background-color: #2d4248; outline: none;" matTooltip="Buscar Consumo Estaciones" outline:none;>
                       <mat-icon>search</mat-icon>
                     </button>
                 </mat-card-actions>
@@ -40,7 +40,7 @@
     </form>
 
     <div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="30">
-        <h2 mat-raised-button>Reporte de Ventas Recaudadas </h2>
+        <h2 mat-raised-button>Reporte Consumo Estaciones </h2>
         <mat-form-field>
             <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
         </mat-form-field>
@@ -53,87 +53,45 @@
         <mat-table [dataSource]="dataSource" matSort>
 
             <!-- Progress Column -->
+            <ng-container matColumnDef="Empresa">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Empresa
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Empresa}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
             <ng-container matColumnDef="Estacion">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Estacion
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Estación
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.Estacion}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="Localidad">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Localidad
+            <ng-container matColumnDef="Periodo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Período
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Localidad}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.Periodo}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="NombreEmpleado">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Empl.
+            <ng-container matColumnDef="TotalMovimientos">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Total Movimientos
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.NombreEmpleado}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.TotalMovimientos | number}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="PaternoEmpleado">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Paterno Empl.
+            <ng-container matColumnDef="Litros">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Litros
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.PaternoEmpleado}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.Litros | number}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="MaternoEmpleado">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Materno Empl.
+            <ng-container matColumnDef="ImporteCobrado">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Importe Cobrado
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.MaternoEmpleado}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="FechaConsumo">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Consumo
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.FechaConsumo}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="PrecioGas">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Precio Gas
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.PrecioGas}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="LitrosVendidos">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Litros Vendidos
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.LitrosVendidos}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="AhorroConcesionario">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Ahorro Conc.
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.AhorroConcesionario}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="AhorroPropietario">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Ahorro Prop.
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.AhorroPropietario}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="TotalRetencionAhorros">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Total Ret. Ahorros
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.TotalRetencionAhorros}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="AhorroOperadores">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Ahorro Oper.
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.AhorroOperadores}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.ImporteCobrado | currency}} </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
