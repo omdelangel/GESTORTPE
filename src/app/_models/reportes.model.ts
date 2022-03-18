@@ -445,3 +445,27 @@ export class RepoVtasRecaudadas {
             this.AhorroOperadores              = RepoVtasRecaudadas.AhorroOperadores     ;                         
     }    
 }
+
+export class RepoConsumoEstaciones {
+    Empresa                          :string;    
+    Estacion                         :string;
+    Periodo                          :string;
+    TotalMovimientos                 :string;
+    Litros                           :string;
+    ImporteCobrado                   :string;
+
+    constructor(RepoConsumoEstaciones: {   
+        Empresa                          :string;    
+        Estacion                         :string;
+        Periodo                          :string;
+        TotalMovimientos                 :string;
+        Litros                           :string;
+        ImporteCobrado                   :string;}){
+            this.Empresa                 = RepoConsumoEstaciones.Empresa          ;
+            this.Estacion                = RepoConsumoEstaciones.Estacion         ;
+            this.Periodo                 = RepoConsumoEstaciones.Periodo          ;
+            this.TotalMovimientos        = RepoConsumoEstaciones.TotalMovimientos ;
+            this.Litros                  = RepoConsumoEstaciones.Litros           ;
+            this.ImporteCobrado          = RepoConsumoEstaciones.ImporteCobrado   ;                                     
+    }    
+}

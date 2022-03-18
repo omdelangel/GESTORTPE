@@ -92,10 +92,10 @@ export class ConsultaUsuariosComponent implements OnInit {
       this.catalogosService.getCatalogoUsuarios()
         .pipe(first())
         .subscribe(data => {   
-          console.log("Consulta Usuarios")
+          console.log("Consulta Usuarios 1")
           console.log(data)
           this.catalogoUsuarios     = data.listaDat.usuarios;   
-          console.log("Consulta catalogoUsuarios")
+          console.log("Consulta catalogoUsuarios 1")
           console.log(this.catalogoUsuarios)
           this.dataSource           = new MatTableDataSource(this.catalogoUsuarios);
           this.dataSource.paginator = this.paginator;
@@ -126,6 +126,8 @@ export class ConsultaUsuariosComponent implements OnInit {
 
   //Edita el registro de Dictamen
     editar(e: any) {
+      console.log("consulta-editar constrasenia  1")
+      console.log(e.contrasenia)
       const dialogRef = this.dialog.open(EdicionUsuariosComponent, {
         disableClose: true,
         data: { 

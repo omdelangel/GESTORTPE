@@ -60,21 +60,21 @@
 
             <!-- Progress Column -->
             <ng-container matColumnDef="NombreConcesionario">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Conc.
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Concecionario
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.NombreConcesionario}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="PaternoConcesionario">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Paterno Conc.
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.PaternoConcesionario }} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="MaternoConcesionario">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Materno Conc.
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.MaternoConcesionario }} </mat-cell>
             </ng-container>
@@ -216,42 +216,42 @@
             <ng-container matColumnDef="FechaInicio">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Inicio
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.FechaInicio}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaInicio | date: 'dd/MM/yyyy'}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="FechaCorte">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Corte
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.FechaCorte}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaCorte | date: 'dd/MM/yyyy'}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="LitrosConsumoMensual">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Lts Cons. Mensual
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.LitrosConsumoMensual}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosConsumoMensual | number}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="PorcentajeAhorro">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> % Ahorro
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.PorcentajeAhorro}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.PorcentajeAhorro | number }} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="LitrosConsumidosPeriodo">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Lts Cons. Período
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosPeriodo}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosPeriodo | number}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="LitrosConsumidosAcumuladoGeneral">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Lts Cons. Acum.Gral.
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosAcumuladoGeneral}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosAcumuladoGeneral | number}} </mat-cell>
             </ng-container>
 
 

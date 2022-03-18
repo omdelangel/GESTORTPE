@@ -116,4 +116,20 @@ getReporteVtasRecaudadas(fechaIni: string, fechaFin: string): Observable<any> {
     catchError(this.handleError)
   )
 }
+
+//Obtiene información de Ventas Recaudadas 
+getReporteConsumoEstaciones(fechaIni: string, fechaFin: string): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('FechaIni', fechaIni);
+  params = params.append('FechaFin', fechaFin);
+ 
+  return this.http.get<any>(`${environment.SERVER_URL}/reporte-consumo-estaciones`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
  }

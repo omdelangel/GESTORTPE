@@ -23,6 +23,7 @@ import { InicioBienvenidosComponent } from './_components/inicio-bienvenidos/ini
 import { RepoAhorroPeriodoComponent } from './_components/repo-ahorro-periodo/repo-ahorro-periodo.component';
 import { RepoNoConsumenComponent } from './_components/repo-no-consumen/repo-no-consumen.component';
 import { RepoVtasRecaudadasComponent } from './_components/repo-vtas-recaudadas/repo-vtas-recaudadas.component';
+import { RepoConsumoEstacionesComponent } from './_components/repo-consumo-estaciones/repo-consumo-estaciones.component';
 
 
 
@@ -52,6 +53,7 @@ const routes: Routes = [
                { path: 'repoAhorroPeriodo', component: RepoAhorroPeriodoComponent},
                { path: 'repoNoConsumen', component: RepoNoConsumenComponent},
                { path: 'repoVtasRecaudadas', component: RepoVtasRecaudadasComponent},
+               { path: 'repoConsumoEstaciones', component: RepoConsumoEstacionesComponent},               
                ]},  
  
  

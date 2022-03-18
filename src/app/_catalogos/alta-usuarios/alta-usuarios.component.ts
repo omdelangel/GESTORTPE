@@ -70,7 +70,6 @@ export class AltaUsuariosComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.clear();
     this.getCatalogoPerfiles();
 
     //Validación de campos en pantalla
@@ -166,27 +165,6 @@ export class AltaUsuariosComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  //Manejo de Alertas
-  success(message: string) {
-    this.alertService.success(message, 'success');
-  }
-
-  error(message: string) {
-    this.alertService.error(message, 'error');
-  }
-
-  info(message: string) {
-    this.alertService.info(message, 'info');
-  }
-
-  warn(message: string) {
-    this.alertService.warn(message, 'warn');
-  }
-
-  clear() {
-    this.alertService.clear();
   }
 }
 

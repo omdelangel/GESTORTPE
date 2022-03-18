@@ -8,7 +8,7 @@
                     </button>
                 </div>
                 <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-                    <mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Usuarios
+                    <mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Usuarios1
                     </mat-card-title>
                 </mat-card-actions>
                 <mat-card-content>
@@ -47,23 +47,16 @@
                             </div>
 
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
-                                <mat-form-field>
-                                    <mat-label>Contraseña</mat-label>
-                                    <input matInput placeholder="Contraseña" type="password" formControlName="Contrasenia" maxlength="45" required>
-                                    <mat-error *ngIf="frmEditUsr.get('Contrasenia')!.hasError('required')">
-                                        El dato es oblgatorio
-                                    </mat-error>
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="Estatus" formControlName="Estatus" [errorStateMatcher]="matcher" required>
+                                        <mat-option *ngFor="let estatus of estatus" [value]="estatus.Estatus">
+                                            {{estatus.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="frmEditUsr.get('Estatus')!.invalid">Campo requerido</mat-error>
                                 </mat-form-field>
                             </div>
-                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
-                                <mat-form-field>
-                                    <mat-label>Repetir Contraseña</mat-label>
-                                    <input matInput placeholder="Repetir Contraseña" type="password" formControlName="RepContrasenia" maxlength="45" required (change)="validarContrasenia($event)">
-                                    <mat-error *ngIf="frmEditUsr.get('RepContrasenia')!.hasError('required')">
-                                        El dato es oblgatorio
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
+
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Correo</mat-label>
