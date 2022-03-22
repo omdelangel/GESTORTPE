@@ -113,7 +113,7 @@ export class EdicionpropietarioComponent implements OnInit {
       'Interior':  [''],
       'Telefono':  ['', Validators.required],
       'Celular': [''],
-      'email':  [''],
+      'email':   ['', [Validators.required, Validators.email]],
       'IdIdentificacion':  [''],
       'FolioIdentificacion':  [''],
     });  

@@ -185,7 +185,10 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Correo</mat-label>
-                                    <input matInput placeholder="Correo" formControlName="email" maxlength="75">
+                                    <input matInput placeholder="Correo" formControlName="email" maxlength="75" required>
+                                    <mat-error *ngIf="reactiveForm.get('email')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
 

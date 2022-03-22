@@ -87,7 +87,7 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
       this.displayedColumns = ['Documento', 'NombreArchivo', 'Faltante', 'archivoPDF', 'actions', 'Calificacion', 'Observaciones'];
 
     } else {
-      this.displayedColumns = ['Documento', 'NombreArchivo', 'Faltante', 'archivoPDF', 'actions', 'Correcto', 'Incorrecto', 'Calificacion', 'Observaciones'];
+      this.displayedColumns = ['Documento', 'NombreArchivo', 'Faltante', 'actions', 'Correcto', 'Incorrecto', 'Calificacion', 'Observaciones'];
 
     }
 

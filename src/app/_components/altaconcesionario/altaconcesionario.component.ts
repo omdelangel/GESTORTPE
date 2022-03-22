@@ -120,7 +120,7 @@ export class AltaconcesionarioComponent implements OnInit {
       'Interior': [''],
       'Telefono': ['', Validators.required],
       'Celular': ['', Validators.required],
-      'email': ['', Validators.required],
+      'email':  ['', [Validators.required, Validators.email]],
       'IdIdentificacion': ['', Validators.required],
       'FolioIdentificacion': ['', Validators.required]
     });

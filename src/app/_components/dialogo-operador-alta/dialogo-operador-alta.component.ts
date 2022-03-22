@@ -135,7 +135,7 @@ export class DialogoOperadorAltaComponent implements OnInit {
       'entidad': [{ value: "", disabled: true }],
       'Telefono': ['', Validators.required],
       'Celular': [''],
-      'email': [''],
+      'email': ['', [Validators.required, Validators.email]],
       'IdIdentificacion': [''],
       'FolioIdentificacion': [''],
       'Licencia': ['', Validators.required],

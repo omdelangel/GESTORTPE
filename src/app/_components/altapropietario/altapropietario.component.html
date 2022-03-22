@@ -178,8 +178,11 @@
 							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>
 								<mat-form-field>
 									<mat-label>Correo</mat-label>
-									<input matInput placeholder="Correo" formControlName="email" maxlength="75">
+									<input matInput placeholder="Correo" formControlName="email" maxlength="75" pattern="/^([da-z_.-]+)@([da-z.-]+).([a-z.]{2,6})$/">
 								</mat-form-field>
+								<mat-error *ngIf="frmStepThree.get('email')!.hasError('required')">
+									Verificar el dato ingresado
+								</mat-error>
 							</div>
 
 							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>

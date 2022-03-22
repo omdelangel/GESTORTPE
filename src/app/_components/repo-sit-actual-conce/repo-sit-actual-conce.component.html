@@ -1,8 +1,9 @@
 <div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+    <p class="title-header-content">Reporte - Situación Actual del Concesionario</p> 
     <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
-        <div fxFlex="30">
-            <mat-card>
-                <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+        <div fxFlex="30">                   
+            <mat-card>          
+                <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">          
                     <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Filtros de búsqueda
                     </mat-card-title>
                     <button mat-fab style="background-color: #2d4248; outline: none;" matTooltip="Buscar sindicato" outline:none;>

@@ -109,7 +109,7 @@ export class AltapropietarioComponent implements OnInit {
       'Interior': [''],
       'Telefono': ['', Validators.required],
       'Celular': [''],
-      'email': [''],
+      'email':  ['', [Validators.required, Validators.email]],
       'IdIdentificacion': [''],
       'FolioIdentificacion': [''],
     });
