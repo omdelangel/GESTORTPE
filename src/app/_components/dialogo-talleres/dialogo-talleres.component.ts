@@ -72,9 +72,6 @@ export class DialogoTalleresComponent implements OnInit {
         //Determina si viene del registro o de la formalización
         this.causaValue = data.causa;
 
-        console.log("this.causaValue");
-        console.log(this.causaValue);
-
      }
  
    ngOnInit(): void {
@@ -126,8 +123,8 @@ export class DialogoTalleresComponent implements OnInit {
  
      dialogRef.afterClosed().subscribe(res => {
 
-      console.log("RESPUESTA DE LA CITA");
-      console.log(res);
+
+      if (res != undefined) {
  
        if(res.idCita > 0){
  
@@ -148,6 +145,12 @@ export class DialogoTalleresComponent implements OnInit {
          this.divCitas = false;
         this.getTalleres();
        } 
+      } else {
+        this.divTalleres = true;
+        this.divCitas = false;
+       this.getTalleres();
+
+      }
      });
  
    }
@@ -155,7 +158,6 @@ export class DialogoTalleresComponent implements OnInit {
  
    //Obtiene la lista de talleres
      getTalleres(){
-       this.clear()
        this.tallerService.getTalleres()
          .pipe(first())
          .subscribe(data => {  
@@ -186,26 +188,7 @@ export class DialogoTalleresComponent implements OnInit {
      }
    
    
-     //Manejo de alertas
-     success(message: string) {
-       this.alertService.success(message, 'success');
-     }
-   
-     error(message: string) {
-       this.alertService.error(message, 'error');
-     }
-   
-     info(message: string) {
-       this.alertService.info(message, 'info');
-     }
-   
-     warn(message: string) {
-       this.alertService.warn(message, 'warn');
-     }
-   
-     clear() {
-       this.alertService.clear();
-     }
+
    
  }
  

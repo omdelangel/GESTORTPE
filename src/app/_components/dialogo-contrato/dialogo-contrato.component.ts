@@ -117,17 +117,17 @@ export class DialogoContratoComponent implements OnInit {
       .subscribe(data => {
 
         this.nombreContratoMembresia = data.archivo;
-        console.log("this.nombreContratoMembresia");
-        console.log(this.nombreContratoMembresia);
+
+        this.pdfSrc = "./assets/ContratosPDF/" + this.nombreContratoMembresia;
+        this.value = true;
+        this.tituloContrato = "Contrato de membresía al programa de beneficios";
       
       },
         error => {
           this.notifier.notify('error', error, '');
         });
 
-    this.pdfSrc = "./assets/ContratosPDF/" + this.nombreContratoMembresia;
-    this.value = true;
-    this.tituloContrato = "Contrato de membresía al programa de beneficios";
+
 }
 
 
@@ -139,17 +139,17 @@ export class DialogoContratoComponent implements OnInit {
   .subscribe(data => {
 
     this.nombreContratoSuministro = data.archivo;
-    console.log("this.nombreContratoSuministro");
-    console.log(this.nombreContratoSuministro);
+
+    this.pdfSrc = "./assets/ContratosPDF/" + this.nombreContratoSuministro;
+    this.value = true;
+    this.tituloContrato = "Contrato de suministro y compra venta a plazos del equipo de conversión";
   
   },
     error => {
       this.notifier.notify('error', error, '');
     });
 
-  this.pdfSrc = "./assets/ContratosPDF/" + this.nombreContratoSuministro;
-  this.value = true;
-  this.tituloContrato = "Contrato de suministro y compra venta a plazos del equipo de conversión";
+
 }
 
 onNoClick(): void {

@@ -46,7 +46,8 @@ export class FormalizacionComponent implements OnInit {
   constructor(public dialog: MatDialog,
     private concesionarioService: ConcesionarioService,
     private formBuilder: FormBuilder,
-    notifierService: NotifierService) { 
+    notifierService: NotifierService,
+    ) { 
 
       this.notifier = notifierService;   
     }

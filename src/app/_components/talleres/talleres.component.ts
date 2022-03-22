@@ -58,7 +58,8 @@ export class TalleresComponent implements OnInit {
     private alertService: AlertService,
     private tallerService: TalleresService,
     private formBuilder: FormBuilder,
-    notifierService: NotifierService) { 
+    notifierService: NotifierService,
+    ) { 
 
       this.notifier = notifierService; 
     }
@@ -100,36 +101,49 @@ export class TalleresComponent implements OnInit {
   }
 
   //Selecciona un registro de la tabla de consulta
-  selectRecord(row: any){
+  selectRecord(row: any) {
 
     const dialogRef = this.dialog.open(AltacitaComponent, {
-      data: { idTaller: row.IdTaller, nombreTaller: row.Nombre, domicilio: row.Domicilio + " " + row.Colonia + " " + "CP: " +row.CP + " " + 
-      row.Municipio + " " + row.EntidadFederativa, telefono: row.Telefono, contacto: row.Contacto, nombreConce: this.nombreConcesionario,
-      idConce: this.idConcesionario, idVehi: this.idVehiculo},
+      data: {
+        idTaller: row.IdTaller, nombreTaller: row.Nombre, domicilio: row.Domicilio + " " + row.Colonia + " " + "CP: " + row.CP + " " +
+          row.Municipio + " " + row.EntidadFederativa, telefono: row.Telefono, contacto: row.Contacto, nombreConce: this.nombreConcesionario,
+        idConce: this.idConcesionario, idVehi: this.idVehiculo
+      },
       width: '1500px',
       height: '900px'
     });
 
     dialogRef.afterClosed().subscribe(res => {
 
-      if(res.idCita > 0){
+      console.log("RESPUESTA DE CITA");
+      console.log(res);
+    
+      if (res != undefined) {
 
-        this.divTalleres = false;
-        this.divCitas = true;
-        this.tallerValue = row.Nombre;
-        this.domicilioValue = row.Domicilio + " " + row.Colonia + " " + "CP: " +row.CP + " " + 
-        row.Municipio + " " + row.EntidadFederativa
-        this.contactoValue = row.Contacto;
-        this.telefonoValue = row.Telefono;
-        this.diaValue = res.dia;
-        this.horaValue = res.hora;
+        if (res.idCita > 0) {
 
-      } else if (res.idCita == undefined || res.idCita == 0){
+          this.divTalleres = false;
+          this.divCitas = true;
+          this.tallerValue = row.Nombre;
+          this.domicilioValue = row.Domicilio + " " + row.Colonia + " " + "CP: " + row.CP + " " +
+            row.Municipio + " " + row.EntidadFederativa
+          this.contactoValue = row.Contacto;
+          this.telefonoValue = row.Telefono;
+          this.diaValue = res.dia;
+          this.horaValue = res.hora;
 
+        } else if (res == undefined) {
+
+          this.divTalleres = true;
+          this.divCitas = false;
+          this.getTalleres();
+        }
+      } else {
         this.divTalleres = true;
         this.divCitas = false;
         this.getTalleres();
-      } 
+
+      }
     });
 
   }

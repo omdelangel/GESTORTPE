@@ -94,7 +94,6 @@ export class AltaconcesionarioComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.clear();
     this.getCatalogoSindicatos();
     this.getCatalogoIdentificaciones();
 
@@ -246,7 +245,7 @@ export class AltaconcesionarioComponent implements OnInit {
             //this.success(data.mensaje);
             this.notifier.notify('success', data.mensaje, '');    
           } else {
-            //this.warn(data.mensaje);
+            //this.warn(data.mensaje);            
             this.notifier.notify('warning', data.mensaje, '');
           }
         },
@@ -274,7 +273,7 @@ export class AltaconcesionarioComponent implements OnInit {
             });
             this.colonias = this.asentamientos.asentamientos;
           } else {
-            this.info(data.mensaje);
+  
             this.frmStepOne.patchValue({
               municipio: "",
               entidad: ""
@@ -296,6 +295,8 @@ export class AltaconcesionarioComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+
+          console.log(data);
 
           if (data.estatus && data.concesionario["IdConcesionario"] != 0) {
 
@@ -352,60 +353,19 @@ export class AltaconcesionarioComponent implements OnInit {
             this.f.IdSindicato.setValue(0);
             this.f.IdAsignacionSindicato.setValue(0);
             this.f.NumeroConcesion.setValue("");
-          } else if (!data.estatus) {
+          } else if (data.estatus == false) {           
             //this.info(data.mensaje);
-            this.notifier.notify('info', data.mensaje, '');
-            this.idConcesionario = 0;
-            this.f.Nombre.setValue("");
-            this.f.Paterno.setValue("");
-            this.f.Materno.setValue("");
-            this.f.CURP.setValue("");
-            this.f.IdIdentificacion.setValue(0);
-            this.f.FolioIdentificacion.setValue("");
-            this.f.FechaNacimiento.setValue("");
-            //this.f.TipoPersona.setValue(0);
-            this.f.TipoPersona.setValue("F");
-            this.f.Genero.setValue(0);
-            this.f.EstadoCivil.setValue(0);
-            this.f.Calle.setValue("");
-            this.f.Exterior.setValue("");
-            this.f.Interior.setValue("");
-            this.f.cp.setValue("");
-            this.f.IdColonia.setValue(0);
-            this.f.municipio.setValue("");
-            this.f.entidad.setValue("");
-            this.f.Telefono.setValue("");
-            this.f.Celular.setValue("");
-            this.f.email.setValue("");
-            this.f.IdSindicato.setValue(0);
-            this.f.IdAsignacionSindicato.setValue(0);
-            this.f.NumeroConcesion.setValue("");
+            console.log("entra a else if");
+            this.f.RFC.setValue("");
+            this.notifier.notify('info', data.mensaje);
+            
           }
         },
         error => {
-          this.notifier.notify('error', error, '');
+          this.notifier.notify('error', error);
         });
   }
 
 
-  //Manejo de Alertas
-  success(message: string) {
-    this.alertService.success(message, 'success');
-  }
 
-  error(message: string) {
-    this.alertService.error(message, 'error');
-  }
-
-  info(message: string) {
-    this.alertService.info(message, 'info');
-  }
-
-  warn(message: string) {
-    this.alertService.warn(message, 'warn');
-  }
-
-  clear() {
-    this.alertService.clear();
-  }
 }
