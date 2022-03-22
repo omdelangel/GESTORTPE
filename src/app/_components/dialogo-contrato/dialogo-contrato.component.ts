@@ -116,9 +116,13 @@ export class DialogoContratoComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
 
+        console.log(data);
+
         this.nombreContratoMembresia = data.archivo;
 
-        this.pdfSrc = "./assets/ContratosPDF/" + this.nombreContratoMembresia;
+        console.log( this.nombreContratoMembresia);
+
+        this.pdfSrc = "/assets/ContratosPDF/" + this.nombreContratoMembresia;
         this.value = true;
         this.tituloContrato = "Contrato de membresía al programa de beneficios";
       
