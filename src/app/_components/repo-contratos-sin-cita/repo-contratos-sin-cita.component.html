@@ -1,1 +1,100 @@
 <p>repo-contratos-sin-cita works!</p>
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+
+    <div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="30">
+        <h2 mat-raised-button>Reporte de trámites sin Concluir </h2>
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
+        </mat-form-field>
+    </div>
+
+    <div id="divReport" class="example-header" fxFlex="100" fxFlex.gt-md="30">
+        <button (click)="exportAsXLSX()" style="border-style: none; outline: none;" matTooltip="Exportar a Excel"><img src="./assets/iconos/excel.png" /></button>&nbsp;&nbsp;
+    </div>
+    <div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100" id="htmlData">
+        <mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="IdConcesionario">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Id Concesionario
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.IdConcesionario}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Concesionario">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Concesionario
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Concesionario }} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Marca">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Marca
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Marca }} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Submarca">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Submarca
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Submarca}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Modelo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Modelo
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Modelo}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="VIN">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> VIN
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.VIN}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Placa">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Placa
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Placa}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Sindicato">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Sindicato
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Sindicato}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="FechaContrato">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> FechaContrato
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaContrato}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="DiasTranscurridos">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> DiasTranscurridos
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.DiasTranscurridos}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Aviso">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Aviso
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Aviso}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;">
+            </mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+    </div>
+</div>

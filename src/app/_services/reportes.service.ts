@@ -117,7 +117,7 @@ getReporteVtasRecaudadas(fechaIni: string, fechaFin: string): Observable<any> {
   )
 }
 
-//Obtiene información de Ventas Recaudadas 
+//Obtiene información de Consumo de Estaciones 
 getReporteConsumoEstaciones(fechaIni: string, fechaFin: string): Observable<any> {
 
   let params = new HttpParams();
@@ -125,6 +125,18 @@ getReporteConsumoEstaciones(fechaIni: string, fechaFin: string): Observable<any>
   params = params.append('FechaFin', fechaFin);
  
   return this.http.get<any>(`${environment.SERVER_URL}/reporte-consumo-estaciones`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Obtiene información para Reporte de Contratos sin Cita
+getReporteContratosSinCita(): Observable<any> {
+
+  return this.http.get<any>(`${environment.SERVER_URL}/reporte-consumo-estaciones`, {})
   .pipe(map((res: Response) => {
 
       return res || {}

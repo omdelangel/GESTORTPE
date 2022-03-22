@@ -469,3 +469,43 @@ export class RepoConsumoEstaciones {
             this.ImporteCobrado          = RepoConsumoEstaciones.ImporteCobrado   ;                                     
     }    
 }
+
+export class RepoContratosSinCita {
+    IdConcesionario               :number;
+    Concesionario                 :string;
+    Marca                         :string;
+    Submarca                      :string;
+    Modelo                        :number;
+    VIN                           :string;
+    Placa                         :string;
+    Sindicato                     :string;
+    FechaContrato                 :string;
+    DiasTranscurridos             :number;
+    Aviso                         :string;
+
+    constructor(RepoContratosSinCita: {
+        IdConcesionario               :number;
+        Concesionario                 :string;
+        Marca                         :string;
+        Submarca                      :string;
+        Modelo                        :number;
+        VIN                           :string;
+        Placa                         :string;
+        Sindicato                     :string;
+        FechaContrato                 :string;
+        DiasTranscurridos             :number;
+        Aviso                         :string;}){
+            this.IdConcesionario          = RepoContratosSinCita.IdConcesionario     ;
+            this.Concesionario            = RepoContratosSinCita.Concesionario       ;
+            this.Marca                    = RepoContratosSinCita.Marca               ;
+            this.Submarca                 = RepoContratosSinCita.Submarca            ;
+            this.Modelo                   = RepoContratosSinCita.Modelo              ;
+            this.VIN                      = RepoContratosSinCita.VIN                 ;
+            this.Placa                    = RepoContratosSinCita.Placa               ;
+            this.Sindicato                = RepoContratosSinCita.Sindicato           ;
+            this.FechaContrato            = RepoContratosSinCita.FechaContrato       ;
+            this.DiasTranscurridos        = RepoContratosSinCita.DiasTranscurridos   ;
+            this.Aviso                    = RepoContratosSinCita.Aviso               ;
+                                               
+    }    
+}
