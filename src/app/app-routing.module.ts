@@ -29,6 +29,7 @@ import { RepoAnalisisSitCitaComponent } from './_components/repo-analisis-sit-ci
 import { RepoConsumoItAhorroComponent } from './_components/repo-consumo-it-ahorro/repo-consumo-it-ahorro.component';
 import { RepoConsumoItIncompletoComponent } from './_components/repo-consumo-it-incompleto/repo-consumo-it-incompleto.component';
 import { RepoBeneficioSaludComponent } from './_components/repo-beneficio-salud/repo-beneficio-salud.component';
+import { OperadoresComponent } from './_components/operadores/operadores.component';
 
 
 
@@ -64,6 +65,8 @@ const routes: Routes = [
                { path: 'ConsumoItAhorro', component: RepoConsumoItAhorroComponent},
                { path: 'ConsumoItIncompleto', component: RepoConsumoItIncompletoComponent},
                { path: 'BeneficioSalud', component: RepoBeneficioSaludComponent},
+               { path: 'repoConsumoEstaciones', component: RepoConsumoEstacionesComponent},   
+               { path: 'operadores', component: OperadoresComponent}        
                ]},  
  
  

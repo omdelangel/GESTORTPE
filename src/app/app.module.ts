@@ -84,6 +84,9 @@ import { RepoConsumoItAhorroComponent } from './_components/repo-consumo-it-ahor
 import { RepoConsumoItIncompletoComponent } from './_components/repo-consumo-it-incompleto/repo-consumo-it-incompleto.component';
 import { RepoAnalisisSitCitaComponent } from './_components/repo-analisis-sit-cita/repo-analisis-sit-cita.component';
 import { RepoBeneficioSaludComponent } from './_components/repo-beneficio-salud/repo-beneficio-salud.component';
+import { OperadoresComponent } from './_components/operadores/operadores.component';
+import { DialogoOperadorEditaComponent } from './_components/dialogo-operador-edita/dialogo-operador-edita.component';
+import { OperadoresAltaComponent } from './_components/operadores-alta/operadores-alta.component';
 
 
 /**
@@ -204,6 +207,9 @@ FullCalendarModule.registerPlugins([
     RepoConsumoItIncompletoComponent,
     RepoAnalisisSitCitaComponent,
     RepoBeneficioSaludComponent
+    OperadoresComponent,
+    DialogoOperadorEditaComponent,
+    OperadoresAltaComponent
   ],
   imports: [
     BrowserModule,
