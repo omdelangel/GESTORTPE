@@ -206,7 +206,7 @@ FullCalendarModule.registerPlugins([
     RepoConsumoItAhorroComponent,
     RepoConsumoItIncompletoComponent,
     RepoAnalisisSitCitaComponent,
-    RepoBeneficioSaludComponent
+    RepoBeneficioSaludComponent,
     OperadoresComponent,
     DialogoOperadorEditaComponent,
     OperadoresAltaComponent
