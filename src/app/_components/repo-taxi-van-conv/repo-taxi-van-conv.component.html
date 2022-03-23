@@ -1,4 +1,5 @@
 <div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+    <h2 class="title-header-content" mat-raised-button>Reporte de Autos/Vans/Suburbano Convertidos </h2>
     <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
         <div fxFlex="50">
             <mat-card>
@@ -51,7 +52,6 @@
     </form>
 
     <div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="30">
-        <h2 mat-raised-button>Reporte de Autos/Vans/Suburbano Convertidos </h2>
         <mat-form-field>
             <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
         </mat-form-field>
@@ -137,7 +137,7 @@
             <ng-container matColumnDef="Exterior">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Exterior
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Exterior}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.Exterior | number}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
@@ -158,7 +158,7 @@
             <ng-container matColumnDef="CP">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> CP
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.CP}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.CP | number}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
@@ -221,14 +221,14 @@
             <ng-container matColumnDef="ConsumoTotal">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Consumo Total
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.ConsumoTotal}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.ConsumoTotal | number}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="ConsumoMes">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Consumo Mes
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.ConsumoMes}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.ConsumoMes | number}} </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
@@ -237,4 +237,5 @@
         </mat-table>
         <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
     </div>
+    <notifier-container></notifier-container>
 </div>

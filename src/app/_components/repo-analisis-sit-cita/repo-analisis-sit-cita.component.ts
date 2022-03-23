@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AlertService } from '../../_alert';
-import { CatalogoSindicatos, RepoConsumoItAhorro } from '../../_models';
+import { CatalogoSindicatos, RepoAnalisisSitCita } from '../../_models';
 import { CatalogosService, ReportesService, ExcelService } from '../../_services';
 import { first } from 'rxjs/operators';
 import { isEmpty } from 'lodash';
@@ -21,30 +21,18 @@ export default class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-repo-consumo-it-incompleto',
-  templateUrl: './repo-consumo-it-incompleto.component.html',
-  styleUrls: ['./repo-consumo-it-incompleto.component.scss']
+  selector: 'app-repo-analisis-sit-cita',
+  templateUrl: './repo-analisis-sit-cita.component.html',
+  styleUrls: ['./repo-analisis-sit-cita.component.scss']
 })
-export class RepoConsumoItIncompletoComponent implements OnInit {
+export class RepoAnalisisSitCitaComponent implements OnInit {
   private readonly notifier: NotifierService;
-
- 
   displayedColumns = [
-                      'Concesionario',
-                      'Marca',
-                      'Modelo',
-                      'Serie',
-                      'Placa',
-                      'Sindicato',
-                      'PorcAhorroConcesion',
-                      'PorcAhorroPropietario',
-                      'FechaInicio',
-                      'FechaCorte',
-                      'ConsumoMes',
-                      'ConsumoTotal',
-                      'AhorroUtilizado',
-                     ];
-dataSource!: MatTableDataSource<RepoConsumoItAhorro>;
+    'Fecha',
+    'Registros',
+    'Alerta',
+   ];
+dataSource!: MatTableDataSource<RepoAnalisisSitCita>;
 
 //@ViewChild(MatPaginator) paginator!: MatPaginator;
 @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -52,7 +40,7 @@ dataSource!: MatTableDataSource<RepoConsumoItAhorro>;
 
 reactiveForm!          : FormGroup;
 sindicatos             : CatalogoSindicatos[] = [];
-repoConsumoItAhorro    : RepoConsumoItAhorro[] = [];
+repoAnalisisSitCita    : RepoAnalisisSitCita[] = [];
 matcher                = new MyErrorStateMatcher();
 submitted              = false;
 fileName               : string = "";
@@ -70,13 +58,14 @@ private excelService     : ExcelService) {
 ngOnInit(): void {
 
 //Llena combos
-
 this.reactiveForm = this.formBuilder.group({
-  'Fecha'      : ['', Validators.required],
+'FechaInicio'      : ['', Validators.required],
+'FechaFin'         : ['', Validators.required],
 });
 }
 
 get f() { return this.reactiveForm.controls; }
+
 
 
 applyFilter(filterValue: string) {
@@ -88,11 +77,12 @@ this.dataSource.filter = filterValue;
 
 exportAsXLSX():void {
 
-this.fileName = "ReporteConsumoItIncompleto" + "-" + this.f.Fecha.value;
-this.excelService.exportAsExcelFile(this.repoConsumoItAhorro, this.fileName);
+this.fileName = "ReporteAnalisisSitCita" + "-" + this.f.FechaInicio.value;
+this.excelService.exportAsExcelFile(this.repoAnalisisSitCita, this.fileName);
 }
 
 onSubmit(){
+
 this.submitted = true;  
 
 // stop here if form is invalid
@@ -100,20 +90,21 @@ if (this.reactiveForm.invalid) {
 return;
 }
 console.log("Parámetros")
-console.log((this.f.Fecha.value))
+console.log((this.f.FechaInicio.value))
+console.log((this.f.FechaFin.value))
 
-this.repoService.getReporteConsumoItIncompleto(moment(this.f.Fecha.value).format('YYYY-MM-DD')) 
+this.repoService.getReporteAnalisisSitCita(moment(this.f.FechaInicio.value).format('YYYY-MM-DD'), moment(this.f.FechaFin.value).format('YYYY-MM-DD')) 
 .pipe(first())
 .subscribe(data => {
 
 console.log("regresé del reporte")
 console.log(data)
-if (data.estatus && !isEmpty(data.reporte[0])) {
+if (data.estatus) {
 
 // Assign the data to the data source for the table to render
-this.repoConsumoItAhorro = data.reporte;
+this.repoAnalisisSitCita = data.reporte;
 
-this.dataSource = new MatTableDataSource(this.repoConsumoItAhorro);
+this.dataSource = new MatTableDataSource(this.repoAnalisisSitCita);
 this.dataSource.paginator = this.paginator;
 this.dataSource.sort = this.sort;
 
@@ -127,6 +118,7 @@ var elemReport = document.getElementById('divReport');
 elemReport!.style.visibility = "visible";
 
 } else {
+
 var elemDiv = document.getElementById('divTitle');
 elemDiv!.style.visibility = "hidden";
 
@@ -146,5 +138,5 @@ error => {
 
 }
 
-}
 
+}

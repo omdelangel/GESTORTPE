@@ -24,6 +24,11 @@ import { RepoAhorroPeriodoComponent } from './_components/repo-ahorro-periodo/re
 import { RepoNoConsumenComponent } from './_components/repo-no-consumen/repo-no-consumen.component';
 import { RepoVtasRecaudadasComponent } from './_components/repo-vtas-recaudadas/repo-vtas-recaudadas.component';
 import { RepoConsumoEstacionesComponent } from './_components/repo-consumo-estaciones/repo-consumo-estaciones.component';
+import { RepoContratosSinCitaComponent } from './_components/repo-contratos-sin-cita/repo-contratos-sin-cita.component';
+import { RepoAnalisisSitCitaComponent } from './_components/repo-analisis-sit-cita/repo-analisis-sit-cita.component';
+import { RepoConsumoItAhorroComponent } from './_components/repo-consumo-it-ahorro/repo-consumo-it-ahorro.component';
+import { RepoConsumoItIncompletoComponent } from './_components/repo-consumo-it-incompleto/repo-consumo-it-incompleto.component';
+import { RepoBeneficioSaludComponent } from './_components/repo-beneficio-salud/repo-beneficio-salud.component';
 
 
 
@@ -53,7 +58,12 @@ const routes: Routes = [
                { path: 'repoAhorroPeriodo', component: RepoAhorroPeriodoComponent},
                { path: 'repoNoConsumen', component: RepoNoConsumenComponent},
                { path: 'repoVtasRecaudadas', component: RepoVtasRecaudadasComponent},
-               { path: 'repoConsumoEstaciones', component: RepoConsumoEstacionesComponent},               
+               { path: 'repoConsumoEstaciones', component: RepoConsumoEstacionesComponent}, 
+               { path: 'CtosSinCita', component: RepoContratosSinCitaComponent},
+               { path: 'AnalisisCita', component: RepoAnalisisSitCitaComponent},
+               { path: 'ConsumoItAhorro', component: RepoConsumoItAhorroComponent},
+               { path: 'ConsumoItIncompleto', component: RepoConsumoItIncompletoComponent},
+               { path: 'BeneficioSalud', component: RepoBeneficioSaludComponent},
                ]},  
  
  

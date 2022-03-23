@@ -10,6 +10,7 @@ import { CatalogosService, ReportesService, ExcelService } from '../../_services
 import { first } from 'rxjs/operators';
 import { isEmpty } from 'lodash';
 import * as moment from 'moment';
+import { NotifierService } from 'angular-notifier';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export default class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -25,6 +26,7 @@ export default class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./repo-vtas-recaudadas.component.scss']
 })
 export class RepoVtasRecaudadasComponent implements OnInit {
+  private readonly notifier: NotifierService;
 
  
   displayedColumns = [
@@ -59,7 +61,10 @@ private formBuilder      : FormBuilder,
 private catalogoService  : CatalogosService,
 private repoService      : ReportesService,
 private alertService     : AlertService,
-private excelService     : ExcelService) { }
+notifierService          : NotifierService,
+private excelService     : ExcelService) {
+  this.notifier          = notifierService;
+ }
 
 ngOnInit(): void {
 
@@ -99,7 +104,6 @@ this.excelService.exportAsExcelFile(this.repoVtasRecaudadas, this.fileName);
 }
 
 onSubmit(){
-this.clear();
 this.submitted = true;  
 
 // stop here if form is invalid
@@ -135,8 +139,6 @@ var elemReport = document.getElementById('divReport');
 elemReport!.style.visibility = "visible";
 
 } else {
-this.warn(data.mensaje);
-
 var elemDiv = document.getElementById('divTitle');
 elemDiv!.style.visibility = "hidden";
 
@@ -146,28 +148,14 @@ elemTable!.style.visibility = "hidden";
 var elemReport = document.getElementById('divReport');
 elemReport!.style.visibility = "hidden";
 
+this.notifier.notify('info', data.mensaje, '');    
+
 }
 },
 error => {        
 
 });
 
-}
-
-error(message: string) {
-this.alertService.error(message, 'error');
-}
-
-info(message: string) {
-this.alertService.info(message, 'info');
-}
-
-warn(message: string) {
-this.alertService.warn(message, 'warn');
-}
-
-clear() {
-this.alertService.clear();
 }
 
 }

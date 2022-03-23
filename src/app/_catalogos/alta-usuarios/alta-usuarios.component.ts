@@ -77,9 +77,9 @@ export class AltaUsuariosComponent implements OnInit {
       'IdUsuario'       : ['', Validators.required],
       'Nombre'          : ['', Validators.required],
       'IdPerfil'        : ['', Validators.required],
-      'Contrasenia'     : ['', [Validators.required, Validators.min(3) ]],
-      'RepContrasenia'  : ['', [Validators.required, Validators.min(3) ]],
-      'email'           : ['', Validators.required],
+      'Contrasenia'     : ['', [Validators.required, Validators.min(9) ]],
+      'RepContrasenia'  : ['', [Validators.required, Validators.min(9) ]],
+      'email'           : ['', [Validators.required, Validators.email]],
     }); 
   }
 

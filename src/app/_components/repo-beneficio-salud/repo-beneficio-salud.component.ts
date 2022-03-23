@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AlertService } from '../../_alert';
-import { CatalogoSindicatos, RepoConsumoItAhorro } from '../../_models';
+import { CatalogoSindicatos, RepoBeneficioSalud } from '../../_models';
 import { CatalogosService, ReportesService, ExcelService } from '../../_services';
 import { first } from 'rxjs/operators';
 import { isEmpty } from 'lodash';
@@ -20,12 +20,14 @@ export default class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
+
+
 @Component({
-  selector: 'app-repo-consumo-it-incompleto',
-  templateUrl: './repo-consumo-it-incompleto.component.html',
-  styleUrls: ['./repo-consumo-it-incompleto.component.scss']
+  selector: 'app-repo-beneficio-salud',
+  templateUrl: './repo-beneficio-salud.component.html',
+  styleUrls: ['./repo-beneficio-salud.component.scss']
 })
-export class RepoConsumoItIncompletoComponent implements OnInit {
+export class RepoBeneficioSaludComponent implements OnInit {
   private readonly notifier: NotifierService;
 
  
@@ -35,16 +37,9 @@ export class RepoConsumoItIncompletoComponent implements OnInit {
                       'Modelo',
                       'Serie',
                       'Placa',
-                      'Sindicato',
-                      'PorcAhorroConcesion',
-                      'PorcAhorroPropietario',
-                      'FechaInicio',
-                      'FechaCorte',
-                      'ConsumoMes',
-                      'ConsumoTotal',
-                      'AhorroUtilizado',
+                      'Operador',
                      ];
-dataSource!: MatTableDataSource<RepoConsumoItAhorro>;
+dataSource!: MatTableDataSource<RepoBeneficioSalud>;
 
 //@ViewChild(MatPaginator) paginator!: MatPaginator;
 @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -52,7 +47,7 @@ dataSource!: MatTableDataSource<RepoConsumoItAhorro>;
 
 reactiveForm!          : FormGroup;
 sindicatos             : CatalogoSindicatos[] = [];
-repoConsumoItAhorro    : RepoConsumoItAhorro[] = [];
+repoBeneficioSalud     : RepoBeneficioSalud[] = [];
 matcher                = new MyErrorStateMatcher();
 submitted              = false;
 fileName               : string = "";
@@ -88,8 +83,8 @@ this.dataSource.filter = filterValue;
 
 exportAsXLSX():void {
 
-this.fileName = "ReporteConsumoItIncompleto" + "-" + this.f.Fecha.value;
-this.excelService.exportAsExcelFile(this.repoConsumoItAhorro, this.fileName);
+this.fileName = "ReporteBenficioSalud" + "-" + this.f.Fecha.value;
+this.excelService.exportAsExcelFile(this.repoBeneficioSalud, this.fileName);
 }
 
 onSubmit(){
@@ -102,7 +97,7 @@ return;
 console.log("Parámetros")
 console.log((this.f.Fecha.value))
 
-this.repoService.getReporteConsumoItIncompleto(moment(this.f.Fecha.value).format('YYYY-MM-DD')) 
+this.repoService.getReporteBeneficioSalud(moment(this.f.Fecha.value).format('YYYY-MM-DD')) 
 .pipe(first())
 .subscribe(data => {
 
@@ -111,9 +106,9 @@ console.log(data)
 if (data.estatus && !isEmpty(data.reporte[0])) {
 
 // Assign the data to the data source for the table to render
-this.repoConsumoItAhorro = data.reporte;
+this.repoBeneficioSalud = data.reporte;
 
-this.dataSource = new MatTableDataSource(this.repoConsumoItAhorro);
+this.dataSource = new MatTableDataSource(this.repoBeneficioSalud);
 this.dataSource.paginator = this.paginator;
 this.dataSource.sort = this.sort;
 

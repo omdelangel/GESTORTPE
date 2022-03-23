@@ -1,12 +1,12 @@
 <div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
-    <h2 class="title-header-content" mat-raised-button>Reporte de Consumo It Incompleto </h2>
+    <h2 class="title-header-content" mat-raised-button>Reporte de Beneficio Salud </h2>
     <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
         <div fxFlex="30">
             <mat-card>
                 <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
                     <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Filtros de búsqueda
                     </mat-card-title>
-                    <button mat-fab style="background-color: #2d4248; outline: none;" matTooltip="Buscar Consumo It Incompleto" outline:none;>
+                    <button mat-fab style="background-color: #2d4248; outline: none;" matTooltip="Buscar Beneficio Salud" outline:none;>
                       <mat-icon>search</mat-icon>
                     </button>
                 </mat-card-actions>
@@ -76,59 +76,10 @@
             </ng-container>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="Sindicato">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Sindicato
+            <ng-container matColumnDef="Operador">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Operador
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Sindicato}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="PorcAhorroConcesion">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Porc Ahorro Concesión
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.PorcAhorroConcesion | number}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="PorcAhorroPropietario">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Porc Ahorro Propietario
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.PorcAhorroPropietario | number}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="FechaInicio">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Inicio
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.FechaInicio | date: 'dd/MM/yyyy'}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="FechaCorte">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Corte
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.FechaCorte | date: 'dd/MM/yyyy'}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="ConsumoMes">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Consumo Mes
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.ConsumoMes | number}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="ConsumoTotal">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Consumo Total
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.ConsumoTotal | number}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="AhorroUtilizado">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Ahorro Utilizado
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.AhorroUtilizado | number}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.Operador}} </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>

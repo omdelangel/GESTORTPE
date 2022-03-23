@@ -49,7 +49,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Contraseña</mat-label>
-                                    <input matInput placeholder="Contraseña" type="password" formControlName="Contrasenia" maxlength="45" required>
+                                    <input matInput placeholder="Contraseña" type="password" formControlName="Contrasenia" minlength="6" maxlength="45" required>
                                     <mat-error *ngIf="frmAltaUsr.get('Contrasenia')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -58,7 +58,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Repetir Contraseña</mat-label>
-                                    <input matInput placeholder="Repetir Contraseña" type="password" formControlName="RepContrasenia" maxlength="45" required (change)="validarContrasenia($event)">
+                                    <input matInput placeholder="Repetir Contraseña" type="password" formControlName="RepContrasenia" minlength="6" maxlength="45" required (change)="validarContrasenia($event)">
                                     <mat-error *ngIf="frmAltaUsr.get('RepContrasenia')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -67,7 +67,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Correo</mat-label>
-                                    <input matInput placeholder="Correo" formControlName="email" maxlength="75" required>
+                                    <input matInput placeholder="Correo" formControlName="email" formControlName="email" maxlength="75" required>
                                     <mat-error *ngIf="frmAltaUsr.get('email')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>

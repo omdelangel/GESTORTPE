@@ -505,7 +505,92 @@ export class RepoContratosSinCita {
             this.Sindicato                = RepoContratosSinCita.Sindicato           ;
             this.FechaContrato            = RepoContratosSinCita.FechaContrato       ;
             this.DiasTranscurridos        = RepoContratosSinCita.DiasTranscurridos   ;
-            this.Aviso                    = RepoContratosSinCita.Aviso               ;
-                                               
+            this.Aviso                    = RepoContratosSinCita.Aviso               ;                                               
+    }    
+}
+
+
+export class RepoAnalisisSitCita{
+    Fecha                            :string;    
+    Registros                        :number;
+    Alerta                           :string;
+
+    constructor(RepoAnalisisSitCita: {   
+        Fecha                           :string;    
+        Registros                       :number;
+        Alerta                          :string;}){
+            this.Fecha                   = RepoAnalisisSitCita.Fecha          ;
+            this.Registros               = RepoAnalisisSitCita.Registros         ;
+            this.Alerta                  = RepoAnalisisSitCita.Alerta          ;
+    }    
+}
+
+export class RepoConsumoItAhorro {
+    Concesionario                 :string;
+    Marca                         :string;
+    Modelo                        :number;
+    Serie                         :string;
+    Placa                         :string;
+    Sindicato                     :string;
+    PorcAhorroConcesion           :string;
+    PorcAhorroPropietario         :string;
+    FechaInicio                   :string;
+    FechaCorte                    :string;
+    ConsumoMes                    :string;
+    ConsumoTotal                  :string;
+    AhorroUtilizado               :string;
+    constructor(RepoConsumoItAhorro: {   
+        Concesionario                 :string;
+        Marca                         :string;
+        Modelo                        :number;
+        Serie                         :string;
+        Placa                         :string;
+        Sindicato                     :string;
+        PorcAhorroConcesion           :string;
+        PorcAhorroPropietario         :string;
+        FechaInicio                   :string;
+        FechaCorte                    :string;
+        ConsumoMes                    :string;
+        ConsumoTotal                  :string;
+        AhorroUtilizado               :string;
+    }){
+        this.Concesionario                 = RepoConsumoItAhorro.Concesionario            ;
+        this.Marca                         = RepoConsumoItAhorro.Marca                    ;
+        this.Modelo                        = RepoConsumoItAhorro.Modelo                   ;
+        this.Serie                         = RepoConsumoItAhorro.Serie                    ;
+        this.Placa                         = RepoConsumoItAhorro.Placa                    ;
+        this.Sindicato                     = RepoConsumoItAhorro.Sindicato                ;
+        this.PorcAhorroConcesion           = RepoConsumoItAhorro.PorcAhorroConcesion      ;
+        this.PorcAhorroPropietario         = RepoConsumoItAhorro.PorcAhorroPropietario    ;
+        this.FechaInicio                   = RepoConsumoItAhorro.FechaInicio              ;
+        this.FechaCorte                    = RepoConsumoItAhorro.FechaCorte               ;
+        this.ConsumoMes                    = RepoConsumoItAhorro.ConsumoMes               ;
+        this.ConsumoTotal                  = RepoConsumoItAhorro.ConsumoTotal             ;
+        this.AhorroUtilizado               = RepoConsumoItAhorro.AhorroUtilizado          ;                                
+    }    
+}
+
+export class RepoBeneficioSalud {
+    Concesionario                 :string;
+    Marca                         :string;
+    Modelo                        :number;
+    Serie                         :string;
+    Placa                         :string;
+    Operador                      :string;
+    constructor(RepoBeneficioSalud: {   
+        Concesionario                 :string;
+        Marca                         :string;
+        Modelo                        :number;
+        Serie                         :string;
+        Placa                         :string;
+        Operador                      :string;
+    }){
+        this.Concesionario                 = RepoBeneficioSalud.Concesionario            ;
+        this.Marca                         = RepoBeneficioSalud.Marca                    ;
+        this.Modelo                        = RepoBeneficioSalud.Modelo                   ;
+        this.Serie                         = RepoBeneficioSalud.Serie                    ;
+        this.Placa                         = RepoBeneficioSalud.Placa                    ;
+        this.Operador                      = RepoBeneficioSalud.Operador                 ;
+                                
     }    
 }

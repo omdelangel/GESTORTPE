@@ -1,0 +1,1 @@
+export * from './repo-consumo-it-incompleto.component';

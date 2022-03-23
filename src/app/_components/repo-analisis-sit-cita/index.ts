@@ -1,0 +1,1 @@
+export * from './repo-analisis-sit-cita.component';

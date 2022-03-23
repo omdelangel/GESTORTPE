@@ -1,4 +1,5 @@
 <div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+    <h2 class="title-header-content" mat-raised-button>Reporte de vehículos que no consumen GAS </h2>
     <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
         <div fxFlex="30">
             <mat-card>
@@ -27,7 +28,6 @@
     </form>
 
     <div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="30">
-        <h2 mat-raised-button>Reporte de vehículos que no consumen GAS </h2>
         <mat-form-field>
             <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
         </mat-form-field>
@@ -197,56 +197,56 @@
             <ng-container matColumnDef="FechaInicio">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Inicio
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.FechaInicio}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaInicio | date: 'dd/MM/yyyy'}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="FechaCorte">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Corte
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.FechaCorte}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaCorte | date: 'dd/MM/yyyy'}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="ImporteAhorroConcesionario">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Impte. Ahorro Conc.
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.ImporteAhorroConcesionario}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.ImporteAhorroConcesionario | currency}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="ImporteAhorroPropietario">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Impte. Ahorro Prop.
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.ImporteAhorroPropietario}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.ImporteAhorroPropietario | currency}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="LitrosConsumirMes">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Lts. Cons. Mes
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.LitrosConsumirMes}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosConsumirMes | number}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="LitrosConsumidosOperador">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Lts. Cons. Op.
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosOperador}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosOperador | number}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="LitrosConsumidosVehiculo">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Lts. Cons. Vehiculo
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosVehiculo}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosVehiculo | number}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="LitrosConsumidosPendiente">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Lts. Cons. Pend.
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosPendiente}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.LitrosConsumidosPendiente | number}} </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
@@ -255,4 +255,5 @@
         </mat-table>
         <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
     </div>
+    <notifier-container></notifier-container>
 </div>

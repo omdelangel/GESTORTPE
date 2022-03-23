@@ -10,6 +10,7 @@ import { CatalogosService, ReportesService, ExcelService } from '../../_services
 import { first } from 'rxjs/operators';
 import { isEmpty } from 'lodash';
 import * as moment from 'moment';
+import { NotifierService } from 'angular-notifier';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export default class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -26,6 +27,7 @@ export default class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class RepoSinConcluirComponent implements OnInit {
+  private readonly notifier: NotifierService;
   
   hoyDate      : Date = new Date();
 
@@ -66,10 +68,13 @@ export class RepoSinConcluirComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder,
-    private catalogoService: CatalogosService,
-    private repoService: ReportesService,
-    private alertService: AlertService,
-    private excelService: ExcelService) { }
+    private catalogoService  : CatalogosService,
+    private repoService      : ReportesService,
+    private alertService     : AlertService,
+    notifierService          : NotifierService,
+    private excelService     : ExcelService) { 
+      this.notifier          = notifierService;
+    }
 
   ngOnInit(): void {
 
@@ -91,7 +96,6 @@ export class RepoSinConcluirComponent implements OnInit {
     }
 
   getReporteSinConcluir(){
-      this.clear();
       this.submitted = true;  
    
       this.repoService.getReporteSinConcluir() 
@@ -119,8 +123,6 @@ export class RepoSinConcluirComponent implements OnInit {
           elemReport!.style.visibility = "visible";
   
         } else {
-          this.warn(data.mensaje);
-  
           var elemDiv = document.getElementById('divTitle');
             elemDiv!.style.visibility = "hidden";
   
@@ -129,7 +131,8 @@ export class RepoSinConcluirComponent implements OnInit {
   
             var elemReport = document.getElementById('divReport');
             elemReport!.style.visibility = "hidden";
-  
+
+            this.notifier.notify('info', data.mensaje, '');    
         }
       },
         error => {        
@@ -137,22 +140,4 @@ export class RepoSinConcluirComponent implements OnInit {
         });
   
     }
-
-    error(message: string) {
-      this.alertService.error(message, 'error');
-    }
-  
-    info(message: string) {
-      this.alertService.info(message, 'info');
-    }
-  
-    warn(message: string) {
-      this.alertService.warn(message, 'warn');
-    }
-  
-    clear() {
-      this.alertService.clear();
-    }
- 
-
 }

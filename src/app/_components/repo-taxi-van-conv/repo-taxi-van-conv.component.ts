@@ -10,6 +10,7 @@ import { CatalogosService, ReportesService, ExcelService } from '../../_services
 import { first } from 'rxjs/operators';
 import { isEmpty } from 'lodash';
 import * as moment from 'moment';
+import { NotifierService } from 'angular-notifier';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export default class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -29,6 +30,7 @@ interface Convertidos {
   styleUrls: ['./repo-taxi-van-conv.component.scss']
 })
 export class RepoTaxiVanConvComponent implements OnInit {
+  private readonly notifier: NotifierService;
 
   displayedColumns = ['NombreConcesionario', 
                       'PaternoConcesionario', 
@@ -78,7 +80,10 @@ export class RepoTaxiVanConvComponent implements OnInit {
     private catalogoService: CatalogosService,
     private repoService: ReportesService,
     private alertService: AlertService,
-    private excelService: ExcelService) { }
+    notifierService: NotifierService,
+    private excelService: ExcelService) {
+      this.notifier = notifierService;
+     }
 
   ngOnInit(): void {
 
@@ -108,7 +113,6 @@ export class RepoTaxiVanConvComponent implements OnInit {
     }
 
     onSubmit(){
-      this.clear();
       this.submitted = true;  
     
     // stop here if form is invalid
@@ -128,6 +132,7 @@ export class RepoTaxiVanConvComponent implements OnInit {
         console.log(data)
         if (data.estatus && !isEmpty(data.reporte[0])) {
   
+          console.log("true")
           // Assign the data to the data source for the table to render
           this.repoTipoAutoConvertido = data.reporte;
   
@@ -145,8 +150,7 @@ export class RepoTaxiVanConvComponent implements OnInit {
           elemReport!.style.visibility = "visible";
   
         } else {
-          this.warn(data.mensaje);
-  
+          console.log("false")
           var elemDiv = document.getElementById('divTitle');
             elemDiv!.style.visibility = "hidden";
   
@@ -155,6 +159,8 @@ export class RepoTaxiVanConvComponent implements OnInit {
   
             var elemReport = document.getElementById('divReport');
             elemReport!.style.visibility = "hidden";
+
+            this.notifier.notify('info', data.mensaje, '');    
   
         }
       },
@@ -163,22 +169,4 @@ export class RepoTaxiVanConvComponent implements OnInit {
         });
   
     }
-
-    error(message: string) {
-      this.alertService.error(message, 'error');
-    }
-  
-    info(message: string) {
-      this.alertService.info(message, 'info');
-    }
-  
-    warn(message: string) {
-      this.alertService.warn(message, 'warn');
-    }
-  
-    clear() {
-      this.alertService.clear();
-    }
-  
-
 }

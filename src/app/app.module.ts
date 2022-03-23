@@ -80,9 +80,10 @@ import { RepoNoConsumenComponent } from './_components/repo-no-consumen/repo-no-
 import { RepoVtasRecaudadasComponent } from './_components/repo-vtas-recaudadas/repo-vtas-recaudadas.component';
 import { RepoConsumoEstacionesComponent } from './_components/repo-consumo-estaciones/repo-consumo-estaciones.component';
 import { RepoContratosSinCitaComponent } from './_components/repo-contratos-sin-cita/repo-contratos-sin-cita.component';
-import { RepoAnalisisSinCitaComponent } from './_components/repo-analisis-sin-cita/repo-analisis-sin-cita.component';
 import { RepoConsumoItAhorroComponent } from './_components/repo-consumo-it-ahorro/repo-consumo-it-ahorro.component';
 import { RepoConsumoItIncompletoComponent } from './_components/repo-consumo-it-incompleto/repo-consumo-it-incompleto.component';
+import { RepoAnalisisSitCitaComponent } from './_components/repo-analisis-sit-cita/repo-analisis-sit-cita.component';
+import { RepoBeneficioSaludComponent } from './_components/repo-beneficio-salud/repo-beneficio-salud.component';
 
 
 /**
@@ -199,9 +200,10 @@ FullCalendarModule.registerPlugins([
     RepoVtasRecaudadasComponent,
     RepoConsumoEstacionesComponent,
     RepoContratosSinCitaComponent,
-    RepoAnalisisSinCitaComponent,
     RepoConsumoItAhorroComponent,
-    RepoConsumoItIncompletoComponent
+    RepoConsumoItIncompletoComponent,
+    RepoAnalisisSitCitaComponent,
+    RepoBeneficioSaludComponent
   ],
   imports: [
     BrowserModule,

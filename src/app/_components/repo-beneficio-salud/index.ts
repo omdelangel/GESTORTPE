@@ -1,0 +1,1 @@
+export * from './repo-beneficio-salud.component';

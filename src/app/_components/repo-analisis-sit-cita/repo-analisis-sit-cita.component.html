@@ -1,12 +1,12 @@
 <div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
-    <h2 class="title-header-content" mat-raised-button>Reporte Consumo Estaciones </h2>
+    <h2 class="title-header-content" mat-raised-button>Reporte de Análisis Situación cita </h2>
     <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
         <div fxFlex="30">
             <mat-card>
                 <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
                     <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Filtros de búsqueda
                     </mat-card-title>
-                    <button mat-fab style="background-color: #2d4248; outline: none;" matTooltip="Buscar Consumo Estaciones" outline:none;>
+                    <button mat-fab style="background-color: #2d4248; outline: none;" matTooltip="Buscar Análisis Situación Citas" outline:none;>
                       <mat-icon>search</mat-icon>
                     </button>
                 </mat-card-actions>
@@ -53,45 +53,24 @@
         <mat-table [dataSource]="dataSource" matSort>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="Empresa">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Empresa
+            <ng-container matColumnDef="Fecha">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Empresa}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.Fecha | date: 'dd/MM/yyyy'}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="Estacion">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Estación
+            <ng-container matColumnDef="Registros">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Total Registros
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Estacion}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.Registros | number}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="Periodo">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Período
+            <ng-container matColumnDef="Alerta">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Alerta
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Periodo}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="TotalMovimientos">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Total Movimientos
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.TotalMovimientos | number}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="Litros">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Litros
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Litros | number}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="ImporteCobrado">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Importe Cobrado
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.ImporteCobrado | currency}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.Alerta}} </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>

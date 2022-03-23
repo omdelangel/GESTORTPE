@@ -10,6 +10,7 @@ import { CatalogosService, ReportesService, ExcelService } from '../../_services
 import { first } from 'rxjs/operators';
 import { isEmpty } from 'lodash';
 import * as moment from 'moment';
+import { NotifierService } from 'angular-notifier';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export default class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -31,6 +32,7 @@ interface TipoPersona {
   styleUrls: ['./repo-ahorro-periodo.component.scss']
 })
 export class RepoAhorroPeriodoComponent implements OnInit {
+  private readonly notifier: NotifierService;
 
   displayedColumns = [
                       'NombreConcesionario', 
@@ -80,11 +82,15 @@ export class RepoAhorroPeriodoComponent implements OnInit {
       { TipoPersona: 'P', viewValue: 'Propietario' },
     ];
 
-  constructor(private formBuilder: FormBuilder,
-    private catalogoService: CatalogosService,
-    private repoService: ReportesService,
-    private alertService: AlertService,
-    private excelService: ExcelService) { }
+  constructor(
+    private formBuilder      : FormBuilder,
+    private catalogoService  : CatalogosService,
+    private repoService      : ReportesService,
+    private alertService     : AlertService,
+    notifierService          : NotifierService,
+    private excelService     : ExcelService) {
+      this.notifier          = notifierService;
+     }
 
   ngOnInit(): void {
 
@@ -124,7 +130,6 @@ export class RepoAhorroPeriodoComponent implements OnInit {
     }
 
     onSubmit(){
-      this.clear();
       this.submitted = true;  
     
     // stop here if form is invalid
@@ -161,8 +166,6 @@ export class RepoAhorroPeriodoComponent implements OnInit {
           elemReport!.style.visibility = "visible";
   
         } else {
-          this.warn(data.mensaje);
-  
           var elemDiv = document.getElementById('divTitle');
             elemDiv!.style.visibility = "hidden";
   
@@ -171,6 +174,8 @@ export class RepoAhorroPeriodoComponent implements OnInit {
   
             var elemReport = document.getElementById('divReport');
             elemReport!.style.visibility = "hidden";
+
+            this.notifier.notify('info', data.mensaje, '');  
   
         }
       },
@@ -179,22 +184,4 @@ export class RepoAhorroPeriodoComponent implements OnInit {
         });
   
     }
-
-    error(message: string) {
-      this.alertService.error(message, 'error');
-    }
-  
-    info(message: string) {
-      this.alertService.info(message, 'info');
-    }
-  
-    warn(message: string) {
-      this.alertService.warn(message, 'warn');
-    }
-  
-    clear() {
-      this.alertService.clear();
-    }
-  
-
 }

@@ -136,7 +136,68 @@ getReporteConsumoEstaciones(fechaIni: string, fechaFin: string): Observable<any>
 //Obtiene información para Reporte de Contratos sin Cita
 getReporteContratosSinCita(): Observable<any> {
 
-  return this.http.get<any>(`${environment.SERVER_URL}/reporte-consumo-estaciones`, {})
+  return this.http.get<any>(`${environment.SERVER_URL}/reporte-contratos-sin-cita`, {})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Obtiene información para Reporte de Análisis Situción Cita
+  getReporteAnalisisSitCita(fechaIni: string, fechaFin: string): Observable<any> {
+
+    let params = new HttpParams();
+    params = params.append('FechaIni', fechaIni);
+    params = params.append('FechaFin', fechaFin);
+   
+    return this.http.get<any>(`${environment.SERVER_URL}/reporte-analisis-sit-citas`, {params: params})
+    .pipe(map((res: Response) => {
+  
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+//Obtiene información para Reporte Consumo It Ahorro
+getReporteConsumoItAhorro(fecha: string): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('Fecha', fecha);
+ 
+  return this.http.get<any>(`${environment.SERVER_URL}/reporte-consumo-lt-ahorro`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Obtiene información para Reporte Consumo It Incompleto
+getReporteConsumoItIncompleto(fecha: string): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('Fecha', fecha);
+ 
+  return this.http.get<any>(`${environment.SERVER_URL}/reporte-consumo-lt-incompletos`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Obtiene información para Reporte Consumo It Incompleto
+getReporteBeneficioSalud(fecha: string): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('Fecha', fecha);
+ 
+  return this.http.get<any>(`${environment.SERVER_URL}/reporte-beneficio-salud`, {params: params})
   .pipe(map((res: Response) => {
 
       return res || {}

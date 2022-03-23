@@ -5,11 +5,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AlertService } from '../../_alert';
-import { CatalogoSindicatos, RepoContratosSinCita } from '../../_models';
+import { RepoContratosSinCita } from '../../_models';
 import { CatalogosService, ReportesService, ExcelService } from '../../_services';
 import { first } from 'rxjs/operators';
 import { isEmpty } from 'lodash';
 import * as moment from 'moment';
+import { NotifierService } from 'angular-notifier';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export default class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -26,6 +27,8 @@ export default class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./repo-contratos-sin-cita.component.scss']
 })
 export class RepoContratosSinCitaComponent implements OnInit {
+  private readonly notifier: NotifierService;
+  
  
   hoyDate      : Date = new Date();
 
@@ -55,15 +58,18 @@ export class RepoContratosSinCitaComponent implements OnInit {
     fileName              : string = "";
 
 
-  constructor(private formBuilder: FormBuilder,
-    private catalogoService: CatalogosService,
-    private repoService: ReportesService,
-    private alertService: AlertService,
-    private excelService: ExcelService) { }
+  constructor(private formBuilder  : FormBuilder,
+    private catalogoService        : CatalogosService,
+    private repoService            : ReportesService,
+    private alertService           : AlertService,
+    notifierService                : NotifierService,
+    private excelService           : ExcelService) {
+      this.notifier                = notifierService;
+     }
 
   ngOnInit(): void {
 
-    this.getReporteSinConcluir();
+    this.getReporteSinCita();
   }
 
 
@@ -76,12 +82,11 @@ export class RepoContratosSinCitaComponent implements OnInit {
 
   exportAsXLSX():void {
 
-      this.fileName = "ReporteSinConcluir" + "-" + moment(this.hoyDate).format('YYYY-MM-DD');
+      this.fileName = "ReporteSinCita" + "-" + moment(this.hoyDate).format('YYYY-MM-DD');
       this.excelService.exportAsExcelFile(this.repoContratosSinCita, this.fileName);
     }
 
-  getReporteSinConcluir(){
-      this.clear();
+  getReporteSinCita(){
       this.submitted = true;  
    
       this.repoService.getReporteContratosSinCita() 
@@ -109,8 +114,6 @@ export class RepoContratosSinCitaComponent implements OnInit {
           elemReport!.style.visibility = "visible";
   
         } else {
-          this.warn(data.mensaje);
-  
           var elemDiv = document.getElementById('divTitle');
             elemDiv!.style.visibility = "hidden";
   
@@ -119,6 +122,8 @@ export class RepoContratosSinCitaComponent implements OnInit {
   
             var elemReport = document.getElementById('divReport');
             elemReport!.style.visibility = "hidden";
+
+            this.notifier.notify('info', data.mensaje, '');  
   
         }
       },
@@ -127,22 +132,5 @@ export class RepoContratosSinCitaComponent implements OnInit {
         });
   
     }
-
-    error(message: string) {
-      this.alertService.error(message, 'error');
-    }
-  
-    info(message: string) {
-      this.alertService.info(message, 'info');
-    }
-  
-    warn(message: string) {
-      this.alertService.warn(message, 'warn');
-    }
-  
-    clear() {
-      this.alertService.clear();
-    }
- 
 
 }
