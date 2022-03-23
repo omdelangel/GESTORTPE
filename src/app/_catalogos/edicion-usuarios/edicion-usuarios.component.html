@@ -60,7 +60,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Correo</mat-label>
-                                    <input matInput placeholder="Correo" formControlName="email" formControlName="email" maxlength="75" pattern="/^([da-z_.-]+)@([da-z.-]+).([a-z.]{2,6})$/" required>
+                                    <input matInput placeholder="Correo" formControlName="email" formControlName="email" maxlength="75" required>
                                     <mat-error *ngIf="frmEditUsr.get('email')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
