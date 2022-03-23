@@ -9,6 +9,7 @@ import { NotifierService } from 'angular-notifier';
 import { CurrencyPipe } from '@angular/common';  
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
+
 declare var require: any
 const FileSaver = require('file-saver');
 
@@ -39,6 +40,7 @@ export class DialogoContratoComponent implements OnInit {
   idContrato: number = 0;
   nombreContratoMembresia: string = "";
   nombreContratoSuministro: string = "";
+
 
 
   constructor(
@@ -121,13 +123,19 @@ export class DialogoContratoComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
 
+        if(data.estatus){
+
         this.nombreContratoMembresia = data.archivo;
-
         this.pdfSrc = "./assets/ContratosPDF/" + this.nombreContratoMembresia;
-        this.value = true;
-        this.tituloContrato = "Contrato de membresía al programa de beneficios";
+        //this.value = true;
+        //this.tituloContrato = "Contrato de membresía al programa de beneficios";
 
-        window.open(this.pdfSrc + '#page=' + 1, '_blank', '');
+        window.open(this.pdfSrc + '?page=' + 1, '_blank', '');
+        } else {
+
+          this.notifier.notify('error', data.mensaje, '');
+
+        }
       
       },
         error => {
@@ -145,14 +153,18 @@ export class DialogoContratoComponent implements OnInit {
   .pipe(first())
   .subscribe(data => {
 
+    if(data.estatus){
+
     this.nombreContratoSuministro = data.archivo;
+    this.pdfSrc = "./assets/ContratosPDF/" + this.nombreContratoSuministro ;
+    //this.value = true;
+    //this.tituloContrato = "Contrato de suministro y compra venta a plazos del equipo de conversión";
 
-    this.pdfSrc = "./assets/ContratosPDF/" + this.nombreContratoSuministro;
-    this.value = true;
-    this.tituloContrato = "Contrato de suministro y compra venta a plazos del equipo de conversión";
+    window.open(this.pdfSrc + '?page=' + 1, '_blank', '');
+    } else {
 
-
-    window.open(this.pdfSrc + '#page=' + 1, '_blank', '');
+      this.notifier.notify('error', data.mensaje, '');
+    }
   
   },
     error => {
