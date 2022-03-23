@@ -7,6 +7,7 @@ import { DocumentosService } from 'src/app/_services';
 import { VehiculoContrato } from 'src/app/_models';
 import { NotifierService } from 'angular-notifier';
 import { CurrencyPipe } from '@angular/common';  
+import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -116,13 +117,15 @@ export class DialogoContratoComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
 
+        console.log("data");
         console.log(data);
 
         this.nombreContratoMembresia = data.archivo;
 
+        console.log("this.nombreContratoMembresia");
         console.log( this.nombreContratoMembresia);
 
-        this.pdfSrc = "/assets/ContratosPDF/" + this.nombreContratoMembresia;
+        this.pdfSrc = "./assets/ContratosPDF/" + this.nombreContratoMembresia;
         this.value = true;
         this.tituloContrato = "Contrato de membresía al programa de beneficios";
       
@@ -142,7 +145,13 @@ export class DialogoContratoComponent implements OnInit {
   .pipe(first())
   .subscribe(data => {
 
+    console.log("data");
+    console.log(data);
+
     this.nombreContratoSuministro = data.archivo;
+
+    console.log("this.nombreContratoMembresia");
+    console.log( this.nombreContratoSuministro);
 
     this.pdfSrc = "./assets/ContratosPDF/" + this.nombreContratoSuministro;
     this.value = true;
