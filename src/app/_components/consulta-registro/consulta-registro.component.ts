@@ -120,8 +120,8 @@ export class ConsultaRegistroComponent implements OnInit {
       const dialogRef = this.dialog.open(DialogoContratoComponent, {
         data: { IdVehiculo: e.IdVehiculo, nombreConcesionario: e.NombreConcesionario, sindicato: e.Sindicato},
         disableClose: true,
-        width: '1500px',
-        height: '900px'
+        //width: '1500px',
+        //height: '900px'
       });
   
       dialogRef.afterClosed().subscribe(res => {

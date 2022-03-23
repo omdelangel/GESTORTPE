@@ -9,6 +9,9 @@ import { NotifierService } from 'angular-notifier';
 import { CurrencyPipe } from '@angular/common';  
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
+declare var require: any
+const FileSaver = require('file-saver');
+
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -36,6 +39,7 @@ export class DialogoContratoComponent implements OnInit {
   idContrato: number = 0;
   nombreContratoMembresia: string = "";
   nombreContratoSuministro: string = "";
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -117,17 +121,13 @@ export class DialogoContratoComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
 
-        console.log("data");
-        console.log(data);
-
         this.nombreContratoMembresia = data.archivo;
-
-        console.log("this.nombreContratoMembresia");
-        console.log( this.nombreContratoMembresia);
 
         this.pdfSrc = "./assets/ContratosPDF/" + this.nombreContratoMembresia;
         this.value = true;
         this.tituloContrato = "Contrato de membresía al programa de beneficios";
+
+        window.open(this.pdfSrc + '#page=' + 1, '_blank', '');
       
       },
         error => {
@@ -145,17 +145,14 @@ export class DialogoContratoComponent implements OnInit {
   .pipe(first())
   .subscribe(data => {
 
-    console.log("data");
-    console.log(data);
-
     this.nombreContratoSuministro = data.archivo;
-
-    console.log("this.nombreContratoMembresia");
-    console.log( this.nombreContratoSuministro);
 
     this.pdfSrc = "./assets/ContratosPDF/" + this.nombreContratoSuministro;
     this.value = true;
     this.tituloContrato = "Contrato de suministro y compra venta a plazos del equipo de conversión";
+
+
+    window.open(this.pdfSrc + '#page=' + 1, '_blank', '');
   
   },
     error => {
