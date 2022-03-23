@@ -114,7 +114,7 @@ export class EdicionUsuariosComponent implements OnInit {
       'Nombre'          : ['', Validators.required],
       'IdPerfil'        : ['', Validators.required],
       'Estatus'         : ['', Validators.required],
-      'email'           : ['', Validators.required]
+      'email'           : ['', [Validators.required, Validators.email]],
     }); 
     this.llenaPantalla();
   }
@@ -221,6 +221,7 @@ export class EdicionUsuariosComponent implements OnInit {
            console.log(data)
                  
            if (data.estatus) {
+             console.log("edición alta ok")
              this.notifier.notify('success', data.mensaje, '');    
              this.dialogRef.close();
            } else {
