@@ -7,13 +7,16 @@
                 <mat-card-content>
                     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                         <alert></alert>
+
                             <mat-form-field>
+                                <mat-label>Usuario</mat-label>
                                 <input matInput placeholder="&nbsp; Usuario" formControlName="username" required maxlength="50">
                                 <mat-icon matPrefix>person</mat-icon>
                                 <mat-error *ngIf="loginForm.get('username')!.invalid">Campo requerido</mat-error>
                               </mat-form-field>
-                                            
+                                                                                   
                             <mat-form-field>
+                                <mat-label>Contraseña</mat-label>
                                 <input matInput placeholder="&nbsp; Contraseña" formControlName="password" required type="Password" maxlength="15">
                                 <mat-icon matPrefix>lock</mat-icon>
                                 <mat-error *ngIf="loginForm.get('password')!.invalid">Campo requerido</mat-error>
