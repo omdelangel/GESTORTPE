@@ -26,6 +26,11 @@ export class DashboardCardsComponent implements OnInit {
   public totalAhorroFR : number;
   public litrosPeriodoFR : number;
   public ahorroPeriodoFR : number;
+  //
+  public precioGasKg : number;
+  public precioGasLtr : number;
+  public precioGasolina : number;
+
 
   constructor(private dash: DashboardService) { 
     this.totalContratos = 0;
@@ -47,6 +52,9 @@ export class DashboardCardsComponent implements OnInit {
     this.litrosFR = 0;
     this.litrosPeriodoFR = 0;
     this.ahorroPeriodoFR = 0;
+    this.precioGasKg = 0;
+    this.precioGasLtr = 0;
+    this.precioGasolina = 0;
 
   }
 
@@ -77,7 +85,9 @@ export class DashboardCardsComponent implements OnInit {
       this.litrosPeriodoFR =  dataList['datos'][2][0].LitrosPeriodo;
       this.ahorroPeriodoFR =  dataList['datos'][2][0].AhorroPeriodo;
 
-
+      this.precioGasKg =  dataList['datos'][3][0].PrecioGasKg;
+      this.precioGasLtr =  dataList['datos'][3][0].PrecioGasLtr;
+      this.precioGasolina =  dataList['datos'][3][0].PrecioGasolina;
           
 
     })
