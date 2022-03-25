@@ -205,4 +205,21 @@ getReporteBeneficioSalud(fecha: string): Observable<any> {
     catchError(this.handleError)
   )
 }
+
+//Obtiene información de Registros Vigentes
+getRegistrosVigentes(sindicato: number): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('Empresa', sindicato);
+
+ 
+  return this.http.get<any>(`${environment.SERVER_URL}/Formalizados`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
  }

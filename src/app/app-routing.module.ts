@@ -4,8 +4,6 @@ import { LoginComponent } from './_components/login';
 import { SidenavComponent } from './_components/sidenav/sidenav.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { QRComponent } from './_components/qr/qr.component';
-import { EstacionesComponent } from './_components/estaciones';
-import { SindicatosComponent } from './_components/sindicatos';
 import { InicioComponent } from './_components/inicio';
 import { ReimpresionQRComponent } from './_components/reimpresion-qr';
 import { RepoSitActualConceComponent } from './_components/repo-sit-actual-conce';
@@ -30,7 +28,10 @@ import { RepoConsumoItAhorroComponent } from './_components/repo-consumo-it-ahor
 import { RepoConsumoItIncompletoComponent } from './_components/repo-consumo-it-incompleto/repo-consumo-it-incompleto.component';
 import { RepoBeneficioSaludComponent } from './_components/repo-beneficio-salud/repo-beneficio-salud.component';
 import { OperadoresComponent } from './_components/operadores/operadores.component';
-
+import { ConsultaSindicatosComponent } from './_catalogos/consulta-sindicatos/consulta-sindicatos.component';
+import { ConsultaEstacionesComponent } from './_catalogos/consulta-estaciones/consulta-estaciones.component';
+import { ConsultaTalleresComponent } from './_catalogos/consulta-talleres/consulta-talleres.component';
+import { VigentesComponent } from './_components/vigentes/vigentes.component'
 
 
 
@@ -41,8 +42,6 @@ const routes: Routes = [
      children: [{ path: '', redirectTo: 'inicio', pathMatch: 'full'},
                { path: 'inicio', component: InicioComponent},
                { path: 'qr', component: QRComponent},
-               { path: 'estaciones', component: EstacionesComponent},
-               { path: 'sindicatos', component: SindicatosComponent},
                { path: 'reimpresionQR', component: ReimpresionQRComponent },
                { path: 'repoSitActConce', component: RepoSitActualConceComponent },
                { path: 'preRegistro', component: ConsultaPreregistroComponent},
@@ -66,7 +65,11 @@ const routes: Routes = [
                { path: 'ConsumoItIncompleto', component: RepoConsumoItIncompletoComponent},
                { path: 'BeneficioSalud', component: RepoBeneficioSaludComponent},
                { path: 'repoConsumoEstaciones', component: RepoConsumoEstacionesComponent},   
-               { path: 'operadores', component: OperadoresComponent}        
+               { path: 'operadores', component: OperadoresComponent},
+               { path: 'sindicatos', component: ConsultaSindicatosComponent},        
+               { path: 'estaciones', component: ConsultaEstacionesComponent},        
+               { path: 'talleres', component: ConsultaTalleresComponent},  
+               { path: 'vigentes', component: VigentesComponent },      
                ]},  
  
  

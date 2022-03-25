@@ -594,3 +594,68 @@ export class RepoBeneficioSalud {
                                 
     }    
 }
+
+export class RepoVigentes {
+
+    IdContrato	 					:number;
+    IdConcesionario	                :number;
+    NumeroConcesion					:string;
+    Concesionario					:string;
+    email							:string;
+    Telefono						:string;
+    FechaInicio						:string;
+    FechaTermino					:string;
+    ConsumoMes	                    :number;
+    Periodos						:number;
+    FechaContrato					:string;
+    Empresa							:string;
+    TipoConvertidor					:string;
+    Convertidor						:string;
+    TipoVehiculo					:string;
+    Vehiculo						:number;
+    LitrosConsumidos				:number;
+    LitroXConsumir                  :number;
+    PorcentajeConsumo				:number;
+    
+    constructor(repoVigentes: {   
+        IdContrato	 					:number;
+        IdConcesionario	                :number;
+        NumeroConcesion					:string;
+        Concesionario					:string;
+        email							:string;
+        Telefono						:string;
+        FechaInicio						:string;
+        FechaTermino					:string;
+        ConsumoMes	                    :number;
+        Periodos						:number;
+        FechaContrato					:string;
+        Empresa							:string;
+        TipoConvertidor					:string;
+        Convertidor						:string;
+        TipoVehiculo					:string;
+        Vehiculo						:number;
+        LitrosConsumidos				:number;
+        LitroXConsumir                  :number;
+        PorcentajeConsumo				:number;
+    }){
+        this.IdContrato	 							= repoVigentes.IdContrato	 	  ;
+        this.IdConcesionario						= repoVigentes.IdConcesionario	  ;
+        this.NumeroConcesion						= repoVigentes.NumeroConcesion	  ;
+        this.Concesionario							= repoVigentes.Concesionario	  ;
+        this.email									= repoVigentes.email			  ;
+        this.Telefono								= repoVigentes.Telefono			  ;
+        this.FechaInicio							= repoVigentes.FechaInicio		  ;
+        this.FechaTermino							= repoVigentes.FechaTermino		  ;
+        this.ConsumoMes	      				    	= repoVigentes.ConsumoMes	      ;
+        this.Periodos								= repoVigentes.Periodos			  ;
+        this.FechaContrato							= repoVigentes.FechaContrato	  ;
+        this.Empresa								= repoVigentes.Empresa			  ;
+        this.TipoConvertidor						= repoVigentes.TipoConvertidor	  ;
+        this.Convertidor							= repoVigentes.Convertidor		  ;
+        this.TipoVehiculo							= repoVigentes.TipoVehiculo		  ;
+        this.Vehiculo								= repoVigentes.Vehiculo			  ;
+        this.LitrosConsumidos						= repoVigentes.LitrosConsumidos	  ;
+        this.LitroXConsumir   					    = repoVigentes.LitroXConsumir     ;
+        this.PorcentajeConsumo					    = repoVigentes.PorcentajeConsumo  ;                               
+    }    
+}
