@@ -1,3 +1,5 @@
+import { Time } from "@angular/common";
+
 export class CatalogoSindicatos {
     IdSindicato: number;
     Nombre: string;
@@ -67,7 +69,7 @@ export class UsuariosAltaEdicion {
     Intentos         :number;
     UltimaTransaccion:string;
 
-    constructor(catalogoGeneral: { IdUsuario        :string; 
+    constructor(usuariosAltaEdicion: { IdUsuario        :string; 
                                    Nombre           :string; 
                                    Contrasenia      :string; 
                                    IdEmpleado       :number; 
@@ -79,17 +81,17 @@ export class UsuariosAltaEdicion {
                                    Intentos         :number; 
                                    UltimaTransaccion:string;
     }){
-        this.IdUsuario             = catalogoGeneral.IdUsuario        ; 
-        this.Nombre                = catalogoGeneral.Nombre           ; 
-        this.Contrasenia           = catalogoGeneral.Contrasenia      ; 
-        this.IdEmpleado            = catalogoGeneral.IdEmpleado       ; 
-        this.IdPerfil              = catalogoGeneral.IdPerfil         ; 
-        this.FechaRegistro         = catalogoGeneral.FechaRegistro    ; 
-        this.Estatus               = catalogoGeneral.Estatus          ; 
-        this.email                 = catalogoGeneral.email            ; 
-        this.Bloqueado             = catalogoGeneral.Bloqueado        ; 
-        this.Intentos              = catalogoGeneral.Intentos         ; 
-        this.UltimaTransaccion     = catalogoGeneral.UltimaTransaccion; 
+        this.IdUsuario             = usuariosAltaEdicion.IdUsuario        ; 
+        this.Nombre                = usuariosAltaEdicion.Nombre           ; 
+        this.Contrasenia           = usuariosAltaEdicion.Contrasenia      ; 
+        this.IdEmpleado            = usuariosAltaEdicion.IdEmpleado       ; 
+        this.IdPerfil              = usuariosAltaEdicion.IdPerfil         ; 
+        this.FechaRegistro         = usuariosAltaEdicion.FechaRegistro    ; 
+        this.Estatus               = usuariosAltaEdicion.Estatus          ; 
+        this.email                 = usuariosAltaEdicion.email            ; 
+        this.Bloqueado             = usuariosAltaEdicion.Bloqueado        ; 
+        this.Intentos              = usuariosAltaEdicion.Intentos         ; 
+        this.UltimaTransaccion     = usuariosAltaEdicion.UltimaTransaccion; 
     }    
 }
 
@@ -107,7 +109,7 @@ export class CatalogoUsuarios {
     Intentos         :number;
     UltimaTransaccion:Date;
 
-    constructor(catalogoGeneral: { IdUsuario        :string; 
+    constructor(catalogoUsuarios: { IdUsuario        :string; 
                                    Nombre           :string; 
                                    Contrasenia      :string; 
                                    IdEmpleado       :number; 
@@ -120,18 +122,140 @@ export class CatalogoUsuarios {
                                    Intentos         :number; 
                                    UltimaTransaccion:Date;
     }){
-        this.IdUsuario             = catalogoGeneral.IdUsuario        ; 
-        this.Nombre                = catalogoGeneral.Nombre           ; 
-        this.Contrasenia           = catalogoGeneral.Contrasenia      ; 
-        this.IdEmpleado            = catalogoGeneral.IdEmpleado       ; 
-        this.IdPerfil              = catalogoGeneral.IdPerfil         ; 
-        this.Perfil                = catalogoGeneral.Perfil           ; 
-        this.FechaRegistro         = catalogoGeneral.FechaRegistro    ; 
-        this.Estatus               = catalogoGeneral.Estatus          ; 
-        this.email                 = catalogoGeneral.email            ; 
-        this.Bloqueado             = catalogoGeneral.Bloqueado        ; 
-        this.Intentos              = catalogoGeneral.Intentos         ; 
-        this.UltimaTransaccion     = catalogoGeneral.UltimaTransaccion; 
+        this.IdUsuario             = catalogoUsuarios.IdUsuario        ; 
+        this.Nombre                = catalogoUsuarios.Nombre           ; 
+        this.Contrasenia           = catalogoUsuarios.Contrasenia      ; 
+        this.IdEmpleado            = catalogoUsuarios.IdEmpleado       ; 
+        this.IdPerfil              = catalogoUsuarios.IdPerfil         ; 
+        this.Perfil                = catalogoUsuarios.Perfil           ; 
+        this.FechaRegistro         = catalogoUsuarios.FechaRegistro    ; 
+        this.Estatus               = catalogoUsuarios.Estatus          ; 
+        this.email                 = catalogoUsuarios.email            ; 
+        this.Bloqueado             = catalogoUsuarios.Bloqueado        ; 
+        this.Intentos              = catalogoUsuarios.Intentos         ; 
+        this.UltimaTransaccion     = catalogoUsuarios.UltimaTransaccion; 
+    }    
+}
+
+export class CatalogoSindicato {
+    IdSindicato            :number;
+    Nombre                 :string;
+    Seccion                :string;
+    Responsable            :string;
+    Direccion              :string;
+    IdRegion               :number;
+    IdTipoConvertidor      :number;
+    Estatus                :string;
+
+    constructor(catalogoSindicato: {
+                                    IdSindicato            :number;
+                                    Nombre                 :string;
+                                    Seccion                :string;
+                                    Responsable            :string;
+                                    Direccion              :string;
+                                    IdRegion               :number;
+                                    IdTipoConvertidor      :number;
+                                    Estatus                :string;
+    }){
+        this.IdSindicato            = catalogoSindicato.IdSindicato        ;
+        this.Nombre                 = catalogoSindicato.Nombre             ;
+        this.Seccion                = catalogoSindicato.Seccion            ;
+        this.Responsable            = catalogoSindicato.Responsable        ;
+        this.Direccion              = catalogoSindicato.Direccion          ;
+        this.IdRegion               = catalogoSindicato.IdRegion           ;
+        this.IdTipoConvertidor      = catalogoSindicato.IdTipoConvertidor  ;
+        this.Estatus                = catalogoSindicato.Estatus            ;        
+    }    
+}
+
+export class CatalogoEstaciones {
+    IdEstacion                    :number;
+    Nombre                        :string;
+    Domicilio                     :string;
+    Colonia                       :string;
+    CP	                          :string;
+    IdEntidadFederal              :string;
+    IdMunicipio				      :string;
+    Telefono					  :string;
+    Ubicacion	                  :string;
+    Empresa		                  :string;
+    RFC			                  :string;
+    Contacto		              :string;
+    Region					      :string;
+    Estatus					      :string;
+
+    constructor(catalogoEstaciones: {
+                                        IdEstacion                    :number;
+                                        Nombre                        :string;
+                                        Domicilio                     :string;
+                                        Colonia                       :string;
+                                        CP	                          :string;
+                                        IdEntidadFederal              :string;
+                                        IdMunicipio				      :string;
+                                        Telefono					  :string;
+                                        Ubicacion	                  :string;
+                                        Empresa		                  :string;
+                                        RFC			                  :string;
+                                        Contacto		              :string;
+                                        Region					      :string;
+                                        Estatus					      :string;    
+    }){
+        this.IdEstacion               = catalogoEstaciones.IdEstacion           ;
+        this.Nombre                   = catalogoEstaciones.Nombre               ;
+        this.Domicilio                = catalogoEstaciones.Domicilio            ;
+        this.Colonia                  = catalogoEstaciones.Colonia              ;
+        this.CP	                      = catalogoEstaciones.CP	                ;
+        this.IdEntidadFederal         = catalogoEstaciones.IdEntidadFederal     ;
+        this.IdMunicipio			  = catalogoEstaciones.IdMunicipio		    ;
+        this.Telefono				  = catalogoEstaciones.Telefono			    ;
+        this.Ubicacion	              = catalogoEstaciones.Ubicacion	        ;
+        this.Empresa		          = catalogoEstaciones.Empresa		        ;
+        this.RFC			          = catalogoEstaciones.RFC			        ;
+        this.Contacto		          = catalogoEstaciones.Contacto		        ;
+        this.Region					  = catalogoEstaciones.Region			    ;
+        this.Estatus				  = catalogoEstaciones.Estatus			    ;                
+    }    
+}
+
+export class CatalogoTalleres {
+    IdTaller                      :number;
+    Nombre                        :string;
+    RFC                           :string;
+    Contacto                      :string;
+    Domicilio	                  :string;
+    IdColonia                     :string;
+    Telefono					  :string;
+    HorarioIni                    :Time;
+    HorarioFin		              :Time;
+    Concurrencia			      :string;
+    DuracionCita		          :Time;
+    Estatus					      :string;
+    constructor(catalogoTalleres: {
+                                    IdTaller                      :number;
+                                    Nombre                        :string;
+                                    RFC                           :string;
+                                    Contacto                      :string;
+                                    Domicilio	                  :string;
+                                    IdColonia                     :string;
+                                    Telefono					  :string;
+                                    HorarioIni                    :Time;
+                                    HorarioFin		              :Time;
+                                    Concurrencia			      :string;
+                                    DuracionCita		          :Time;
+                                    Estatus					      :string;
+        }){
+            this.IdTaller     				= catalogoTalleres.IdTaller            ;
+            this.Nombre       				= catalogoTalleres.Nombre              ;
+            this.RFC          				= catalogoTalleres.RFC                 ;
+            this.Contacto     				= catalogoTalleres.Contacto            ;
+            this.Domicilio	  				= catalogoTalleres.Domicilio	       ;
+            this.IdColonia    				= catalogoTalleres.IdColonia           ;
+            this.Telefono		  			= catalogoTalleres.Telefono		       ;
+            this.HorarioIni   				= catalogoTalleres.HorarioIni          ;
+            this.HorarioFin	  				= catalogoTalleres.HorarioFin	       ;
+            this.Concurrencia 				= catalogoTalleres.Concurrencia        ;
+            this.DuracionCita 				= catalogoTalleres.DuracionCita        ;
+            this.Estatus					= catalogoTalleres.Estatus			   ;                           
     }    
 }
 

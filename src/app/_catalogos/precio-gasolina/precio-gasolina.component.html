@@ -1,4 +1,5 @@
 <div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+    <h2 class="title-header-content" mat-raised-button>Lista de precios de gasolina por entidad </h2>
     <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
         <div fxFlex="50">
             <mat-card>
@@ -10,12 +11,11 @@
                     </button>
                 </mat-card-actions>
                 <mat-card-content fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-                
+
                     <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                         <mat-form-field class="example-full-width">
-                            <mat-select placeholder="Entidad" formControlName="IdEntidadFederal" [errorStateMatcher]="matcher" required
-                            (ngModelChange)="onSelection($event)">
-                                <mat-option *ngFor="let entidad of entidades" [value]="[entidad.IdEntidadFederal, entidad.Nombre]" >
+                            <mat-select placeholder="Entidad" formControlName="IdEntidadFederal" [errorStateMatcher]="matcher" required (ngModelChange)="onSelection($event)">
+                                <mat-option *ngFor="let entidad of entidades" [value]="[entidad.IdEntidadFederal, entidad.Nombre]">
                                     {{entidad.Nombre}}
                                 </mat-option>
                             </mat-select>
@@ -23,8 +23,8 @@
                         </mat-form-field>
                     </div>
 
-                    
-                
+
+
                     <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                         <mat-form-field>
                             <mat-label>Fecha Inicio</mat-label>
@@ -36,7 +36,7 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-                
+
                     <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                         <mat-form-field>
                             <mat-label>Fecha Término</mat-label>
@@ -53,14 +53,13 @@
         </div>
     </form>
 
-    <div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="space-between end" >
+    <div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="space-between end">
         <div fxFlex="100" fxFlex.gt-md="30">
-        <h2 mat-raised-button>Lista de precios de gasolina por entidad</h2>
-        <mat-form-field>
-            <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
-        </mat-form-field>
-    </div>
-    <button mat-fab style="background-color: #80BC00; outline: none;" matTooltip="Alta de precios Gas" outline:none; (click)="openDialog()">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
+            </mat-form-field>
+        </div>
+        <button mat-fab style="background-color: #80BC00; outline: none;" matTooltip="Alta de precios Gas" outline:none; (click)="openDialog()">
         <mat-icon>add</mat-icon>
     </button>
     </div>
@@ -102,8 +101,8 @@
                 <mat-cell *matCellDef="let row"> {{row.IdEntidadFederal}} </mat-cell>
             </ng-container>
 
-             <!-- Color Column -->
-             <ng-container matColumnDef="NombreE">
+            <!-- Color Column -->
+            <ng-container matColumnDef="NombreE">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Entidad Federal
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.NombreE}} </mat-cell>
@@ -116,8 +115,8 @@
                 <mat-cell *matCellDef="let row"> {{row.IdMunicipio}} </mat-cell>
             </ng-container>
 
-             <!-- Color Column -->
-             <ng-container matColumnDef="NombreM">
+            <!-- Color Column -->
+            <ng-container matColumnDef="NombreM">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Municipio
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.NombreM}} </mat-cell>

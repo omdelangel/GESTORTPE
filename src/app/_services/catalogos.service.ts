@@ -282,4 +282,41 @@ getCatUsuBloqueado(catalogoUsuarios: CatalogoUsuarios): Observable<any> {
         )
     }
 
+//Obtiene lso valores de la tabla de Sindicatos
+getCatalogoSindicato(): Observable<any> {
+
+  return this.http.get<any>(`${environment.SERVER_URL}/sindicatos`, {})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}    
+
+//Obtiene lso valores de la tabla de Estaciones
+getCatalogoEstaciones(): Observable<any> {
+
+  return this.http.get<any>(`${environment.SERVER_URL}/estaciones`, {})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}  
+
+//Obtiene los valores de la tabla de Talleres
+getCatalogoTalleres(): Observable<any> {
+
+  return this.http.get<any>(`${environment.SERVER_URL}/talleres`, {})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}  
+
+
 }

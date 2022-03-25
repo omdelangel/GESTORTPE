@@ -14,8 +14,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './_helpers/authconfig.inteceptor';
 import { QrCodeModule } from 'ng-qrcode';
 import { QRComponent } from './_components/qr/qr.component';
-import { EstacionesComponent } from './_components/estaciones/estaciones.component';
-import { SindicatosComponent } from './_components/sindicatos/sindicatos.component';
 import { InicioComponent } from './_components/inicio/inicio.component';
 import { MenuListItemComponent } from './_components/menu-list-item/menu-list-item.component';
 import { SharingService } from './_services';
@@ -87,6 +85,17 @@ import { RepoBeneficioSaludComponent } from './_components/repo-beneficio-salud/
 import { OperadoresComponent } from './_components/operadores/operadores.component';
 import { DialogoOperadorEditaComponent } from './_components/dialogo-operador-edita/dialogo-operador-edita.component';
 import { OperadoresAltaComponent } from './_components/operadores-alta/operadores-alta.component';
+import { ConsultaSindicatosComponent } from './_catalogos/consulta-sindicatos/consulta-sindicatos.component';
+import { AltaSindicatosComponent } from './_catalogos/alta-sindicatos/alta-sindicatos.component';
+import { EdicionSindicatosComponent } from './_catalogos/edicion-sindicatos/edicion-sindicatos.component';
+import { ConsultaEstacionesComponent } from './_catalogos/consulta-estaciones/consulta-estaciones.component';
+import { ConsultaTalleresComponent } from './_catalogos/consulta-talleres/consulta-talleres.component';
+import { AltaEstacionesComponent } from './_catalogos/alta-estaciones/alta-estaciones.component';
+import { AltaTalleresComponent } from './_catalogos/alta-talleres/alta-talleres.component';
+import { EdicionEstacionesComponent } from './_catalogos/edicion-estaciones/edicion-estaciones.component';
+import { EdicionTalleresComponent } from './_catalogos/edicion-talleres/edicion-talleres.component';
+import { VigentesComponent } from './_components/vigentes/vigentes.component';
+
 
 
 /**
@@ -147,8 +156,6 @@ FullCalendarModule.registerPlugins([
     SidenavComponent,
     LoginComponent,
     QRComponent,
-    EstacionesComponent,
-    SindicatosComponent,
     InicioComponent,
     MenuListItemComponent,
     ReimpresionQRComponent,
@@ -209,7 +216,17 @@ FullCalendarModule.registerPlugins([
     RepoBeneficioSaludComponent,
     OperadoresComponent,
     DialogoOperadorEditaComponent,
-    OperadoresAltaComponent
+    OperadoresAltaComponent,
+    ConsultaSindicatosComponent,
+    AltaSindicatosComponent,
+    EdicionSindicatosComponent,
+    ConsultaEstacionesComponent,
+    ConsultaTalleresComponent,
+    AltaEstacionesComponent,
+    AltaTalleresComponent,
+    EdicionEstacionesComponent,
+    EdicionTalleresComponent,
+    VigentesComponent
   ],
   imports: [
     BrowserModule,
