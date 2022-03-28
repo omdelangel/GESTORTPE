@@ -318,5 +318,16 @@ getCatalogoTalleres(): Observable<any> {
   )
 }  
 
+//Obtiene los valores de la tabla de Tiposconvertidor
+getCatalogoTipoConv(): Observable<any> {
+
+  return this.http.get<any>(`${environment.SERVER_URL}/lconvertidores`, {})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+} 
 
 }

@@ -97,9 +97,9 @@ export class ConsultaTalleresComponent implements OnInit {
       this.catalogosService.getCatalogoTalleres()
         .pipe(first())
         .subscribe(data => {   
-          console.log("Consulta Sindicatos ")
+          console.log("Consulta Talleres ")
           console.log(data)
-          this.catalogoTalleres     = data.estacionesLista;   
+          this.catalogoTalleres     = data.talleresLista;   
           console.log("Consulta catalogoTalleres 1")
           console.log(this.catalogoTalleres)
           this.dataSource           = new MatTableDataSource(this.catalogoTalleres);

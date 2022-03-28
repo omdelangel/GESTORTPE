@@ -35,6 +35,43 @@ export class CatalogoDictamenes {
     }    
 }
 
+export class CatalogoRegiones {
+    IdRegion      :number;
+    Nombre        :string;
+    Estatus       :boolean;    
+
+    constructor(catalogoRegiones: { IdRegion      :number; 
+                                    Nombre        :string; 
+                                    Estatus       :boolean
+                                }){
+        this.IdRegion        = catalogoRegiones.IdRegion;
+        this.Nombre          = catalogoRegiones.Nombre; 
+        this.Estatus         = catalogoRegiones.Estatus; 
+    }    
+}
+
+export class CatalogoTipoConvertidor {
+    IdTipoConvertidor   :number;
+    Descripcion         :string;
+    Costo               :number;    
+    Marca               :string;
+    ConsumoRequerido    :number;
+
+    constructor(catalogoTipoConvertidor: { 
+        IdTipoConvertidor   :number;
+        Descripcion         :string;
+        Costo               :number;    
+        Marca               :string;
+        ConsumoRequerido    :number;
+                                }){
+        this.IdTipoConvertidor    = catalogoTipoConvertidor.IdTipoConvertidor  ;
+        this.Descripcion          = catalogoTipoConvertidor.Descripcion        ;
+        this.Costo                = catalogoTipoConvertidor.Costo              ;
+        this.Marca                = catalogoTipoConvertidor.Marca              ;
+        this.ConsumoRequerido     = catalogoTipoConvertidor.ConsumoRequerido   ;
+    }    
+}
+
 export class CatalogoPerfiles {
     IdPerfil         :number;
     Descripcion      :string;
