@@ -31,7 +31,7 @@ getDocumentosVehiculo(vehiculo: number): Observable<any> {
 
 
 //Guarda los documentos PDF
-postGuardaDocumentoPDF(formData: any): Observable<any> {  
+postGuardaDocumentoPDF(formData: any): Observable<any> { 
 
   return this.http.post<any>(this.SERVER_URL, formData)
   .pipe(map((res: Response) => {
@@ -67,6 +67,9 @@ getDocumentosContrato(IdVehiculo: number): Observable<any> {
 
   return this.http.get<any>(`${environment.SERVER_URL}/documentos-contrato`, { params: params })
     .pipe(map((res: Response) => {
+
+      console.log("res");
+      console.log(res);
 
       return res || {}
     }),

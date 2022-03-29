@@ -213,7 +213,7 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
 
     } else {
 
-      this.notifier.notify('warning', 'El archivo no corresponde a la extensión .pdf', '');
+      this.notifier.notify('warning', 'El archivo no corresponde a las extensiones .pdf, .jpeg o .png', '');
       //this.warn("El archivo no corresponde a la extensión .pdf");
     }
   }
@@ -222,7 +222,7 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
   isFileAllowedPDF(fileName: string) {
 
     let isFileAllowed = false;
-    const allowedFiles = ['.pdf'];
+    const allowedFiles = ['.pdf', '.jpeg', '.png'];
     const regex = /(?:\.([^.]+))?$/;
     const extension = regex.exec(fileName);
     if (undefined !== extension && null !== extension) {

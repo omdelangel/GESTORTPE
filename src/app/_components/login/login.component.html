@@ -1,58 +1,64 @@
 <div class="route-sign-in">
     <div class="left">
-            <mat-card>
-                <img mat-card-image src="assets/images/logo-cambia.jpg" alt="">
-                <!--<mat-card-title >GESTOR DE GAS LP</mat-card-title>-->
-                <h2>Bienvenido</h2>   
-                <mat-card-content>
-                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                        <alert></alert>
+        <mat-card>
+            <img mat-card-image src="assets/images/logo-cambia.jpg" alt="">
+            <!--<mat-card-title >GESTOR DE GAS LP</mat-card-title>-->
+            <h2>Bienvenido</h2>
+            <mat-card-content>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <alert></alert>
 
-                            <mat-form-field>
-                                <mat-label>Usuario</mat-label>
-                                <input matInput placeholder="&nbsp; Usuario" formControlName="username" required maxlength="50">
-                                <mat-icon matPrefix>person</mat-icon>
-                                <mat-error *ngIf="loginForm.get('username')!.invalid">Campo requerido</mat-error>
-                              </mat-form-field>
-                                                                                   
-                            <mat-form-field>
-                                <mat-label>Contraseña</mat-label>
-                                <input matInput placeholder="&nbsp; Contraseña" formControlName="password" required type="Password" maxlength="15">
-                                <mat-icon matPrefix>lock</mat-icon>
-                                <mat-error *ngIf="loginForm.get('password')!.invalid">Campo requerido</mat-error>
-                              </mat-form-field>
-                                               
-                            <button [disabled]="loading" mat-raised-button class='w-full login-field'>
-                                <span *ngIf="loading" class="login-field spinner-border spinner-border-sm mr-1"></span>
-                                ACCEDER</button>   
-                            
-                           <!-- <a [routerLink]="['/register']" class="btn btn-link">Registro</a>-->
-                        
-                    </form>
-                </mat-card-content>
-            </mat-card>
-  
+                    <mat-form-field>
+                        <mat-label>Usuario</mat-label>
+                        <input matInput placeholder="&nbsp; Usuario" formControlName="username" required maxlength="50">
+                        <mat-icon matPrefix>person</mat-icon>
+                        <mat-error *ngIf="loginForm.get('username')!.invalid">Campo requerido</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput placeholder="&nbsp; Contraseña" formControlName="password" required
+                            type="Password" maxlength="15">
+                        <mat-icon matPrefix>lock</mat-icon>
+                        <mat-error *ngIf="loginForm.get('password')!.invalid">Campo requerido</mat-error>
+                    </mat-form-field>
+
+                    <button [disabled]="loading" mat-raised-button class='w-full login-field'>
+                        <span *ngIf="loading" class="login-field spinner-border spinner-border-sm mr-1"></span>
+                        ACCEDER</button>
+
+                    <!-- <a [routerLink]="['/register']" class="btn btn-link">Registro</a>-->
+
+                </form>
+            </mat-card-content>
+        </mat-card>
+
     </div>
     <div class='right'>
-
         <div class="clearfix" id="u114276_align_to_page">
-            <div class="SlideShowWidget clearfix HeroFitContent colelem wp-slideshow-playing" id="slideshowu124318" data-contentlayout="stack" data-transitionstyle="fading"><!-- none box -->
-             <div class="popup_anchor" id="u124321popup" style="width: 0px;">
-              <div class="SlideShowContentPanel clearfix" id="u124321" ><!-- stack box -->
-               <div class="SSSlide clip_frame grpelem wp-panel borderbox wp-panel-active" id="u124326" style="width: 100%; display: block;"><!-- image -->
-                <img class="" id="u124326_img" data-src="images/anim2.png?crc=524348302" src="assets/images//anim4.png" alt="" data-width="1200" data-height="500" data-widget-id="slideshowu124318" style="width: 1100px; height: 100%; margin-top: 0px; ">
-               </div>
-       
-              </div>
-             </div>
+            <div class="SlideShowWidget clearfix HeroFitContent colelem wp-slideshow-playing" id="slideshowu124318"
+                data-contentlayout="stack" data-transitionstyle="fading">
+                <!-- none box -->
+                <div class="popup_anchor" id="u124321popup" style="width: 0px;">
+                    <div class="SlideShowContentPanel clearfix" id="u124321">
+                        <!-- stack box -->
+                        <div class="SSSlide clip_frame grpelem wp-panel borderbox wp-panel-active" id="u124326"
+                            style="width: 100%; display: block;">
+                            <!-- image -->
+                            <img class="" id="u124326_img" data-src="images/anim2.png?crc=524348302"
+                                src="assets/images//anim5.png" alt="" >
+                        </div>
+
+                    </div>
+                </div>
             </div>
-        
-     
-
-    </div>
-    <div>
-           <img class="" id="u124326_img" data-src="images/anim2.png?crc=524348302" src="assets/images//cambia.svg" alt="" data-widget-id="slideshowu124318" style="width: 100%; height: 100%; margin-top: 0px; ">
         </div>
+     
+        <div fxFlex="100%" fxFlexAlign="end">             
+            <img class="" id="u124326_img" data-src="images/anim2.png?crc=524348302" src="assets/images//recurso3.svg"
+                alt="" data-widget-id="slideshowu124318" style="width: 100%; height: 100%; ">
+            </div>
+      
     </div>
-</div>
 
+</div>
