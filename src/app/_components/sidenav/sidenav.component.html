@@ -32,8 +32,10 @@
       (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
      
       <img class="avatar mat-elevation-z8" src="./assets/images/userpic.jpg" />
-      <h4 class="name">{{nombre}}</h4>
       <p class="designation">Bienvenid@</p>
+      <h4 class="name">{{nombre}}</h4>
+      <h5 >Quintana Roo</h5>
+     
       <mat-divider></mat-divider>
       <mat-nav-list >
         <app-menu-list-item *ngFor="let item of navItems" [item]="item"></app-menu-list-item>

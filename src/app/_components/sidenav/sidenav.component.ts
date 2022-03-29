@@ -54,8 +54,11 @@ export class SidenavComponent {
     
     this.dataUser = JSON.parse(sessionStorage.getItem('usuario')!);
 
+    console.log("this.dataUser");
+    console.log(this.dataUser);
+
     for (var key in this.dataUser) {
-      if (key == "nombre") {
+      if (key == "Nombre") {
         this.nombre = this.dataUser[key];
       }
     }  
