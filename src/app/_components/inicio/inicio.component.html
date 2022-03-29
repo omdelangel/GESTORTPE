@@ -83,13 +83,13 @@
   
     <div _ngcontent-qmw-c246="" fxlayout="row wrap" style="flex-flow: row wrap; box-sizing: border-box; display: flex;">
        
-        <div _ngcontent-qmw-c246="" fxflex.gt-sm="33.33%" fxflex.gt-xs="50" fxflex="100" class="m-gap p-gap"
-        style="flex: 1 1 33.33%; box-sizing: border-box; max-width: 33.33%;">
+        <div _ngcontent-qmw-c246="" fxflex.gt-sm="25.00%" fxflex.gt-xs="50" fxflex="100" class="m-gap p-gap"
+        style="flex: 1 1 25.00%; box-sizing: border-box; max-width: 25.00%;">
         <mat-card _ngcontent-qmw-c246="" class="mat-card mat-focus-indicator">
             <mat-card-title _ngcontent-qmw-c246="" fxlayout="row" fxlayoutalign="start center"
                 class="mat-card-title"
                 style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center flex-start; align-items: center;">
-                Distribución por tipo de vehículo &nbsp; <span _ngcontent-qmw-c246="" fxflex=""
+                Tipo de vehículo &nbsp; <span _ngcontent-qmw-c246="" fxflex=""
                     style="flex: 1 1 0%; box-sizing: border-box;"></span><button _ngcontent-qmw-c246=""
                     aria-haspopup="true" mat-icon-button="" mat-button-sm="" aria-label="Open card menu"
                     class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base"><span
@@ -115,40 +115,73 @@
         </mat-card>
     </div>
 
-    <div _ngcontent-qmw-c246="" fxflex.gt-sm="66.66%" fxflex.gt-xs="50" fxflex="100" class="m-gap p-gap"
-    style="flex: 1 1 66.66%; box-sizing: border-box; max-width: 66.66%;">
-    <mat-card _ngcontent-qmw-c246="" class="mat-card mat-focus-indicator">
-        <mat-card-title _ngcontent-qmw-c246="" fxlayout="row" fxlayoutalign="start center"
-            class="mat-card-title"
-            style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center flex-start; align-items: center;">
-            Instalaciones por tipo de vehículo &nbsp; <span _ngcontent-qmw-c246="" fxflex=""
-                style="flex: 1 1 0%; box-sizing: border-box;"></span><button _ngcontent-qmw-c246=""
-                aria-haspopup="true" mat-icon-button="" mat-button-sm="" aria-label="Open card menu"
-                class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base"><span
-                    class="mat-button-wrapper">
-                    <mat-icon _ngcontent-qmw-c246="" role="img"
-                        class="mat-icon notranslate material-icons mat-icon-no-color" aria-hidden="true">
-                        more_vert</mat-icon>
-                </span>
-                <div matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></div>
-                <div class="mat-button-focus-overlay"></div>
-            </button>
-            <!---->
-        </mat-card-title>
-        <mat-menu _ngcontent-qmw-c246="" x-position="before" class="ng-tns-c113-10 ng-star-inserted">
-            <!---->
-        </mat-menu>
-        <hr _ngcontent-qmw-c246="">
-        <mat-card-content _ngcontent-qmw-c246="" class="mat-card-content">
-        
-        
-                        <app-instalaciones-tipo-vehiculo-chart></app-instalaciones-tipo-vehiculo-chart>
-                 
-        
-        </mat-card-content>
-    </mat-card>
-</div>
-       
+    <div _ngcontent-qmw-c246="" fxflex.gt-sm="50.00%" fxflex.gt-xs="50" fxflex="100" class="m-gap p-gap"
+    style="flex: 1 1 50.00%; box-sizing: border-box; max-width: 50.00%;">
+        <mat-card _ngcontent-qmw-c246="" class="mat-card mat-focus-indicator">
+            <mat-card-title _ngcontent-qmw-c246="" fxlayout="row" fxlayoutalign="start center"
+                class="mat-card-title"
+                style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center flex-start; align-items: center;">
+                Consumo Vs. Meta del periodo <span _ngcontent-qmw-c246="" fxflex=""
+                    style="flex: 1 1 0%; box-sizing: border-box;"></span><button _ngcontent-qmw-c246=""
+                    aria-haspopup="true" mat-icon-button="" mat-button-sm="" aria-label="Open card menu"
+                    class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base"><span
+                        class="mat-button-wrapper">
+                        <mat-icon _ngcontent-qmw-c246="" role="img"
+                            class="mat-icon notranslate material-icons mat-icon-no-color" aria-hidden="true">
+                            more_vert</mat-icon>
+                    </span>
+                    <div matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></div>
+                    <div class="mat-button-focus-overlay"></div>
+                </button>
+                <!---->
+            </mat-card-title>
+            <mat-menu _ngcontent-qmw-c246="" x-position="before" class="ng-tns-c113-10 ng-star-inserted">
+                <!---->
+            </mat-menu>
+            <hr _ngcontent-qmw-c246="">
+            <mat-card-content _ngcontent-qmw-c246="" class="mat-card-content">
+            
+                <!-- <app-instalaciones-tipo-vehiculo-chart></app-instalaciones-tipo-vehiculo-chart> -->
+                <app-consumo-meta></app-consumo-meta>
+            </mat-card-content>
+        </mat-card>
+    </div>   
+    
+    <div _ngcontent-qmw-c246="" fxflex.gt-sm="25.00%" fxflex.gt-xs="50" fxflex="100" class="m-gap p-gap"
+    style="flex: 1 1 25.00%; box-sizing: border-box; max-width: 25.00%;">
+        <mat-card _ngcontent-qmw-c246="" class="mat-card mat-focus-indicator">
+            <mat-card-title _ngcontent-qmw-c246="" fxlayout="row" fxlayoutalign="start center"
+                class="mat-card-title"
+                style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center flex-start; align-items: center;">
+                Consumo Vs. No consumo <span _ngcontent-qmw-c246="" fxflex=""
+                    style="flex: 1 1 0%; box-sizing: border-box;"></span><button _ngcontent-qmw-c246=""
+                    aria-haspopup="true" mat-icon-button="" mat-button-sm="" aria-label="Open card menu"
+                    class="mat-focus-indicator mat-menu-trigger mat-icon-button mat-button-base"><span
+                        class="mat-button-wrapper">
+                        <mat-icon _ngcontent-qmw-c246="" role="img"
+                            class="mat-icon notranslate material-icons mat-icon-no-color" aria-hidden="true">
+                            more_vert</mat-icon>
+                    </span>
+                    <div matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></div>
+                    <div class="mat-button-focus-overlay"></div>
+                </button>
+                <!---->
+            </mat-card-title>
+            <mat-menu _ngcontent-qmw-c246="" x-position="before" class="ng-tns-c113-10 ng-star-inserted">
+                <!---->
+            </mat-menu>
+            <hr _ngcontent-qmw-c246="">
+            <mat-card-content _ngcontent-qmw-c246="" class="mat-card-content">
+            
+            
+                <!-- <app-instalaciones-tipo-vehiculo-chart></app-instalaciones-tipo-vehiculo-chart> -->
+                <app-contratos-noconsumo></app-contratos-noconsumo>
+                    
+            
+            </mat-card-content>
+        </mat-card>
+    </div>
+
     
         
     </div>
