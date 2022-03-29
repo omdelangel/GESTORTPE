@@ -20,12 +20,9 @@
 							<div fxFlex="50" fxFlex.lt-md="100" fxl></div>
 							<div fxFlex="25" fxFlex.lt-md="100" fxl>
 								<mat-form-field>
-									<mat-label>Número Concesión</mat-label>
+									<mat-label>Número Económico</mat-label>
 									<input matInput placeholder="Número Concesión" formControlName="NumeroConcesion" maxlength="45" 
-                                    onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-									<mat-error *ngIf="frmStepOne.get('NumeroConcesion')!.hasError('required')">
-										El dato es oblgatorio
-									</mat-error>
+                                    onkeyup="javascript:this.value=this.value.toUpperCase();" >
 								</mat-form-field>
 							</div>
 							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>
@@ -62,7 +59,8 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Nombre</mat-label>
-                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="45" required>
+                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="45" required
+                                    onkeydown="return /[a-z, ]/i.test(event.key)">
                                     <mat-error *ngIf="frmStepOne.get('Nombre')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -71,7 +69,8 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Apellido Paterno</mat-label>
-                                    <input matInput placeholder="Apellido Paterno" formControlName="Paterno" maxlength="45" required>
+                                    <input matInput placeholder="Apellido Paterno" formControlName="Paterno" maxlength="45" required
+                                    onkeydown="return /[a-z, ]/i.test(event.key)">
                                     <mat-error *ngIf="frmStepOne.get('Paterno')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -80,7 +79,8 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Apellido Materno</mat-label>
-                                    <input matInput placeholder="Apellido Materno" formControlName="Materno" maxlength="45">
+                                    <input matInput placeholder="Apellido Materno" formControlName="Materno" maxlength="45"
+                                    onkeydown="return /[a-z, ]/i.test(event.key)">
                                 </mat-form-field>
                             </div>                      
                             <div fxFlex="25" fxFlex.lt-md="100" fxl>

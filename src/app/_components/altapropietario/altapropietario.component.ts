@@ -96,7 +96,7 @@ export class AltapropietarioComponent implements OnInit {
       'Nombre': ['', Validators.required],
       'Paterno': ['', Validators.required],
       'Materno': [''],
-      'TipoPersona': ['', Validators.required],
+      'TipoPersona': ['F', Validators.required],
       'Genero': ['', Validators.required],
       'EstadoCivil': [''],
       'FechaNacimiento': [''],
@@ -113,6 +113,8 @@ export class AltapropietarioComponent implements OnInit {
       'IdIdentificacion': [''],
       'FolioIdentificacion': [''],
     });
+
+    this.f.tiposPersona.setValue('F');
 
   }
 
@@ -241,15 +243,10 @@ export class AltapropietarioComponent implements OnInit {
   //Valida el RFC del propietario
   onChangeEvent(event: any) {
 
-    console.log("ENTRA A CHANGE");
-
     this.propietarioService.getPropietarioRFC(event.target.value)
       .pipe(first())
       .subscribe(
         data => {
-
-          console.log("data");
-          console.log(data);
 
           if (data.estatus && data.propietario[0].IdPropietario != 0) {
             this.idPropietario = data.propietario[0].IdPropietario;
@@ -284,7 +281,8 @@ export class AltapropietarioComponent implements OnInit {
             this.f.IdIdentificacion.setValue(0);
             this.f.FolioIdentificacion.setValue("");
             this.f.FechaNacimiento.setValue("");
-            this.f.TipoPersona.setValue(0);
+            //this.f.TipoPersona.setValue(0);
+            this.f.TipoPersona.setValue("F");
             this.f.Genero.setValue(0);
             this.f.EstadoCivil.setValue(0);
             this.f.Calle.setValue("");
@@ -297,57 +295,17 @@ export class AltapropietarioComponent implements OnInit {
             this.f.Telefono.setValue("");
             this.f.Celular.setValue("");
             this.f.email.setValue("");          
-          } else if (!data.estatus) {
+          } else if (data.estatus == false) {
             //this.info(data.mensaje);
-            this.notifier.notify('info', data.mensaje, '');
-            this.idPropietario = 0;
-            this.f.Nombre.setValue("");
-            this.f.Paterno.setValue("");
-            this.f.Materno.setValue("");
-            this.f.CURP.setValue("");
-            this.f.IdIdentificacion.setValue(0);
-            this.f.FolioIdentificacion.setValue("");
-            this.f.FechaNacimiento.setValue("");
-            this.f.TipoPersona.setValue(0);
-            this.f.Genero.setValue(0);
-            this.f.EstadoCivil.setValue(0);
-            this.f.Calle.setValue("");
-            this.f.Exterior.setValue("");
-            this.f.Interior.setValue("");
-            this.f.cp.setValue("");
-            this.f.IdColonia.setValue(0);
-            this.f.municipio.setValue("");
-            this.f.entidad.setValue("");
-            this.f.Telefono.setValue("");
-            this.f.Celular.setValue("");
-            this.f.email.setValue("");
+            this.f.RFC.setValue("");
+            this.f.TipoPersona.setValue('F');
+            this.notifier.notify('info', data.mensaje);         
           }
         },
         error => {
           //this.error(error);
           this.notifier.notify('error', error, '');
         });
-  }
-
-  //manejo de alertas
-  success(message: string) {
-    this.alertService.success(message, 'success');
-  }
-
-  error(message: string) {
-    this.alertService.error(message, 'error');
-  }
-
-  info(message: string) {
-    this.alertService.info(message, 'info');
-  }
-
-  warn(message: string) {
-    this.alertService.warn(message, 'warn');
-  }
-
-  clear() {
-    this.alertService.clear();
   }
 
 

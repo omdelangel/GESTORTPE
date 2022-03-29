@@ -46,7 +46,7 @@
 								<mat-form-field>
 									<mat-label>Modelo</mat-label>
 									<input matInput placeholder="Modelo" formControlName="Modelo"
-										(keypress)="keyPress($event)" maxlength="4" required>
+										(keypress)="keyPress($event)" maxlength="4" minlength="4" required>
 									<mat-error *ngIf="frmStepTwo.get('Modelo')!.hasError('required')">
 										El dato es oblgatorio
 									</mat-error>
