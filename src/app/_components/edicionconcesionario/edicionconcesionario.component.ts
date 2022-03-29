@@ -108,7 +108,7 @@ export class EdicionconcesionarioComponent implements OnInit {
       'RFC': [({ value: "", disabled: true }), Validators.required],
       'IdSindicato': ['', Validators.required],
       'IdAsignacionSindicato': [({ value: 0, disabled: true })],
-      'NumeroConcesion': [({ value: "", disabled: true }), Validators.required],
+      'NumeroConcesion': [''],
       'CURP': [({ value: "", disabled: true })],
       'Nombre': ['', Validators.required],
       'Paterno': ['', Validators.required],

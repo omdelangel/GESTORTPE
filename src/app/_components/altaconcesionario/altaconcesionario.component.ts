@@ -102,12 +102,12 @@ export class AltaconcesionarioComponent implements OnInit {
       'RFC': ['', Validators.required],
       'IdSindicato': ['', Validators.required],
       'IdAsignacionSindicato': [({ value: 0, disabled: true })],
-      'NumeroConcesion': ['', Validators.required],
+      'NumeroConcesion': [''],
       'CURP': [''],
       'Nombre': ['', Validators.required],
       'Paterno': ['', Validators.required],
       'Materno': [''],
-      'TipoPersona': ['', Validators.required],
+      'TipoPersona': ['F', Validators.required],
       'Genero': ['', Validators.required],
       'EstadoCivil': [''],
       'FechaNacimiento': ['', Validators.required],
@@ -124,8 +124,9 @@ export class AltaconcesionarioComponent implements OnInit {
       'IdIdentificacion': ['', Validators.required],
       'FolioIdentificacion': ['', Validators.required]
     });
+
+    this.f.tiposPersona.setValue('F');
    
-    this.f.TipoPersona.setValue("F");
   }
 
 
@@ -296,8 +297,6 @@ export class AltaconcesionarioComponent implements OnInit {
       .subscribe(
         data => {
 
-          console.log(data);
-
           if (data.estatus && data.concesionario["IdConcesionario"] != 0) {
 
             this.idConcesionario = data.concesionario["IdConcesionario"];
@@ -355,8 +354,8 @@ export class AltaconcesionarioComponent implements OnInit {
             this.f.NumeroConcesion.setValue("");
           } else if (data.estatus == false) {           
             //this.info(data.mensaje);
-            console.log("entra a else if");
             this.f.RFC.setValue("");
+            this.f.TipoPersona.setValue('F');
             this.notifier.notify('info', data.mensaje);
             
           }
