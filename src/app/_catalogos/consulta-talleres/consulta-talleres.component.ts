@@ -128,24 +128,26 @@ export class ConsultaTalleresComponent implements OnInit {
     }
 
 
-  //Edita el registro de Dictamen
+  //Edita el registro de Talleres
     editar(e: any) {
-      console.log("consulta-editar constrasenia  1")
-      console.log(e.contrasenia)
-      const dialogRef = this.dialog.open(EdicionTalleresComponent, {
+      console.log("consulta-editar talleres")
+      console.log(e)
+      const dialogRef   = this.dialog.open(EdicionTalleresComponent, {
         disableClose: true,
         data: { 
-          IdUsuario            :e.IdUsuario        ,           
-          Nombre               :e.Nombre           ,           
-          Contrasenia          :e.Contrasenia      ,           
-          IdEmpleado           :e.IdEmpleado       ,           
-          IdPerfil             :e.IdPerfil         ,           
-          FechaRegistro        :e.FechaRegistro    ,           
-          Estatus              :e.Estatus          ,           
-          email                :e.email            ,           
-          Bloqueado            :e.Bloqueado        ,           
-          Intentos             :e.Intentos         ,           
-          UltimaTransaccion    :e.UltimaTransaccion,           
+                IdTaller            :e.IdTaller         , 
+                Nombre              :e.Nombre           , 
+                RFC                 :e.RFC              , 
+                Contacto            :e.Contacto         , 
+                Domicilio           :e.Domicilio        , 
+                IdColonia           :e.IdColonia        , 
+                NombreC             :e.NombreC          , 
+                Telefono            :e.Telefono         , 
+                HorarioIni          :e.HorarioIni       , 
+                HorarioFin          :e.HorarioFin       , 
+                Concurrencia        :e.Concurrencia     , 
+                DuracionCita        :e.DuracionCita     , 
+                Estatus			        :e.Estatus          ,	                
           },
 //        width: '1500px',
 //        height: '900px'

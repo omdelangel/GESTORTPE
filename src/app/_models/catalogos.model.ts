@@ -209,10 +209,7 @@ export class CatalogoEstaciones {
     IdEstacion                    :number;
     Nombre                        :string;
     Domicilio                     :string;
-    Colonia                       :string;
-    CP	                          :string;
-    IdEntidadFederal              :string;
-    IdMunicipio				      :string;
+    IdColonia                     :string;
     Telefono					  :string;
     Ubicacion	                  :string;
     Empresa		                  :string;
@@ -225,10 +222,7 @@ export class CatalogoEstaciones {
                                         IdEstacion                    :number;
                                         Nombre                        :string;
                                         Domicilio                     :string;
-                                        Colonia                       :string;
-                                        CP	                          :string;
-                                        IdEntidadFederal              :string;
-                                        IdMunicipio				      :string;
+                                        IdColonia                     :string;
                                         Telefono					  :string;
                                         Ubicacion	                  :string;
                                         Empresa		                  :string;
@@ -240,10 +234,7 @@ export class CatalogoEstaciones {
         this.IdEstacion               = catalogoEstaciones.IdEstacion           ;
         this.Nombre                   = catalogoEstaciones.Nombre               ;
         this.Domicilio                = catalogoEstaciones.Domicilio            ;
-        this.Colonia                  = catalogoEstaciones.Colonia              ;
-        this.CP	                      = catalogoEstaciones.CP	                ;
-        this.IdEntidadFederal         = catalogoEstaciones.IdEntidadFederal     ;
-        this.IdMunicipio			  = catalogoEstaciones.IdMunicipio		    ;
+        this.IdColonia                = catalogoEstaciones.IdColonia            ;
         this.Telefono				  = catalogoEstaciones.Telefono			    ;
         this.Ubicacion	              = catalogoEstaciones.Ubicacion	        ;
         this.Empresa		          = catalogoEstaciones.Empresa		        ;
@@ -296,6 +287,32 @@ export class CatalogoTalleres {
     }    
 }
 
+export class CodigosPostales {
+    IdColonia            :string;
+    CP                   :string;    
+    IdEntidadFederal     :string;
+    IdMunicipio          :string;
+    IdTipoAsentamiento   :number;
+    Zona                 :string;
+    Nombre               :string;
+    constructor(codigosPostales: {  
+                            IdColonia            :string;
+                            CP                   :string;    
+                            IdEntidadFederal     :string;
+                            IdMunicipio          :string;
+                            IdTipoAsentamiento   :number;
+                            Zona                 :string;
+                            Nombre               :string;
+                          }){
+            this.IdColonia              = codigosPostales.IdColonia            ;
+            this.CP                     = codigosPostales.CP                   ;
+            this.IdEntidadFederal       = codigosPostales.IdEntidadFederal     ;
+            this.IdMunicipio            = codigosPostales.IdMunicipio          ;
+            this.IdTipoAsentamiento     = codigosPostales.IdTipoAsentamiento   ;
+            this.Zona                   = codigosPostales.Zona                 ;
+            this.Nombre                 = codigosPostales.Nombre               ;
+        }
+}
 
 export class CP {
     Municipio: string;

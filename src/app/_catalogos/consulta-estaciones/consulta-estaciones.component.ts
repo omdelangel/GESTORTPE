@@ -31,7 +31,6 @@ export class ConsultaEstacionesComponent implements OnInit {
                       'IdEntidadFederal',
                       'IdMunicipio',
                       'Telefono',
-                      'Ubicacion',
                       'Empresa',
                       'RFC',
                       'Contacto',

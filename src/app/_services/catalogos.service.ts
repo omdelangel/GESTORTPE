@@ -362,10 +362,7 @@ getCatalogoTipoConv(): Observable<any> {
       'IdEstacion'              :catalogoEstaciones.IdEstacion      ,
       'Nombre'                  :catalogoEstaciones.Nombre          ,
       'Domicilio'               :catalogoEstaciones.Domicilio       ,
-      'Colonia'                 :catalogoEstaciones.Colonia         ,
-      'CP'                      :catalogoEstaciones.CP	            ,
-      'IdEntidadFederal'        :catalogoEstaciones.IdEntidadFederal,
-      'IdMunicipio'             :catalogoEstaciones.IdMunicipio		  ,
+      'IdColonia'               :catalogoEstaciones.IdColonia       ,
       'Telefono'                :catalogoEstaciones.Telefono			  ,
       'Ubicacion'               :catalogoEstaciones.Ubicacion	      ,
       'Empresa'                 :catalogoEstaciones.Empresa		      ,
@@ -381,6 +378,49 @@ getCatalogoTipoConv(): Observable<any> {
         catchError(this.handleError)
       )
   }
+
+  
+  //Obtiene CP con base a la Colonia
+  getObtenCP(IdColonia: any): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('IdColonia', IdColonia);
+
+  return this.http.get<any>(`${environment.SERVER_URL}/lColonia`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+
+  //Modifica registro de Taller
+  postModificaTaller(catalogoTalleres: CatalogoTalleres): Observable<any> {
+
+    return this.http.post<any>(`${environment.SERVER_URL}/Modifica-Taller`, {
+      'IdTaller'               :catalogoTalleres.IdTaller,
+      'Nombre'                 :catalogoTalleres.Nombre,
+      'RFC'                    :catalogoTalleres.RFC,
+      'Contacto'               :catalogoTalleres.Contacto,
+      'Domicilio'              :catalogoTalleres.Domicilio,
+      'IdColonia'              :catalogoTalleres.IdColonia,
+      'Telefono'               :catalogoTalleres.Telefono,
+      'HorarioIni'             :catalogoTalleres.HorarioIni,
+      'HorarioFin'             :catalogoTalleres.HorarioFin,
+      'Concurrencia'           :catalogoTalleres.Concurrencia,
+      'DuracionCita'           :catalogoTalleres.DuracionCita,    
+      'Estatus'                :catalogoTalleres.Estatus,     
+    })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }
+
 
 
 }
