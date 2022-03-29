@@ -95,6 +95,8 @@ import { AltaTalleresComponent } from './_catalogos/alta-talleres/alta-talleres.
 import { EdicionEstacionesComponent } from './_catalogos/edicion-estaciones/edicion-estaciones.component';
 import { EdicionTalleresComponent } from './_catalogos/edicion-talleres/edicion-talleres.component';
 import { VigentesComponent } from './_components/vigentes/vigentes.component';
+import { ConsumoMetaComponent } from './_dashboard/consumo-meta/consumo-meta.component';
+import { ContratosNoconsumoComponent } from './_dashboard/contratos-noconsumo/contratos-noconsumo.component';
 
 
 
@@ -226,7 +228,9 @@ FullCalendarModule.registerPlugins([
     AltaTalleresComponent,
     EdicionEstacionesComponent,
     EdicionTalleresComponent,
-    VigentesComponent
+    VigentesComponent,
+    ConsumoMetaComponent,
+    ContratosNoconsumoComponent
   ],
   imports: [
     BrowserModule,
