@@ -5,7 +5,7 @@
                 <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
                     <mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Talleres
                     </mat-card-title>
-                    <button mat-fab style="background-color: #80BC00; outline: none;" matTooltip="Estaciones" outline:none; (click)="openDialog()">
+                    <button mat-fab style="background-color: #80BC00; outline: none;" matTooltip="Talleres" outline:none; (click)="openDialog()">
 						<mat-icon>add</mat-icon>
 					</button>
                 </mat-card-actions>
@@ -68,6 +68,12 @@
                                     <mat-cell *matCellDef="let row"> {{row.IdColonia}} </mat-cell>
                                 </ng-container>
 
+                                <!-- ID Column -->
+                                <ng-container matColumnDef="Colonia">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Colonia
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.NombreC}} </mat-cell>
+                                </ng-container>
                                 <!-- ID Column -->
                                 <ng-container matColumnDef="Telefono">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header> Teléfono

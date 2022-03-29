@@ -8,8 +8,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertService } from '../../_alert';
-import { AltaUsuariosComponent } from '../alta-usuarios';
-import { EdicionUsuariosComponent } from '../../_catalogos/edicion-usuarios/edicion-usuarios.component';
+import { AltaTalleresComponent } from '../alta-talleres/alta-talleres.component';
+import { EdicionTalleresComponent } from '../../_catalogos/edicion-talleres/edicion-talleres.component';
 import { NotifierService } from 'angular-notifier';
 
 
@@ -25,12 +25,11 @@ export class ConsultaTalleresComponent implements OnInit {
   disabled = false;
   //Columnas en Tabla de consulta
   displayedColumns = [
-                      'IdTaller',
                       'Nombre',
                       'RFC',
                       'Contacto',
                       'Domicilio',
-                      'IdColonia',
+                      'Colonia',
                       'Telefono',
                       'HorarioIni',
                       'HorarioFin',
@@ -80,7 +79,7 @@ export class ConsultaTalleresComponent implements OnInit {
   
   //Abre modal para Usuarios
     openDialog(): void {
-      const dialogRef = this.dialog.open(AltaUsuariosComponent, {
+      const dialogRef = this.dialog.open(AltaTalleresComponent, {
         disableClose: true,
 //        width: '1500px',
   //      height: '900px'
@@ -133,7 +132,7 @@ export class ConsultaTalleresComponent implements OnInit {
     editar(e: any) {
       console.log("consulta-editar constrasenia  1")
       console.log(e.contrasenia)
-      const dialogRef = this.dialog.open(EdicionUsuariosComponent, {
+      const dialogRef = this.dialog.open(EdicionTalleresComponent, {
         disableClose: true,
         data: { 
           IdUsuario            :e.IdUsuario        ,           

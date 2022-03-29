@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { CatalogoDictamenes, CatalogoUsuarios, UsuariosAltaEdicion } from 'src/app/_models';
+import { CatalogoDictamenes, CatalogoUsuarios, UsuariosAltaEdicion, CatalogoTalleres, CatalogoEstaciones } from 'src/app/_models';
 
 @Injectable({
   providedIn: 'root'
@@ -329,5 +329,58 @@ getCatalogoTipoConv(): Observable<any> {
     catchError(this.handleError)
   )
 } 
+
+  //Registra en tabla de Talleres
+  postRegistraTaller(catalogoTalleres: CatalogoTalleres): Observable<any> {
+
+    return this.http.post<any>(`${environment.SERVER_URL}/Alta-Taller`, {
+      'IdTaller'               :catalogoTalleres.IdTaller,
+      'Nombre'                 :catalogoTalleres.Nombre,
+      'RFC'                    :catalogoTalleres.RFC,
+      'Contacto'               :catalogoTalleres.Contacto,
+      'Domicilio'              :catalogoTalleres.Domicilio,
+      'IdColonia'              :catalogoTalleres.IdColonia,
+      'Telefono'               :catalogoTalleres.Telefono,
+      'HorarioIni'             :catalogoTalleres.HorarioIni,
+      'HorarioFin'             :catalogoTalleres.HorarioFin,
+      'Concurrencia'           :catalogoTalleres.Concurrencia,
+      'DuracionCita'           :catalogoTalleres.DuracionCita,    
+      'Estatus'                :catalogoTalleres.Estatus,    
+    })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }
+  
+  //Registra en tabla de Talleres
+  postRegistraEstaciones(catalogoEstaciones: CatalogoEstaciones): Observable<any> {
+
+    return this.http.post<any>(`${environment.SERVER_URL}/Alta-Estacion`, {
+      'IdEstacion'              :catalogoEstaciones.IdEstacion      ,
+      'Nombre'                  :catalogoEstaciones.Nombre          ,
+      'Domicilio'               :catalogoEstaciones.Domicilio       ,
+      'Colonia'                 :catalogoEstaciones.Colonia         ,
+      'CP'                      :catalogoEstaciones.CP	            ,
+      'IdEntidadFederal'        :catalogoEstaciones.IdEntidadFederal,
+      'IdMunicipio'             :catalogoEstaciones.IdMunicipio		  ,
+      'Telefono'                :catalogoEstaciones.Telefono			  ,
+      'Ubicacion'               :catalogoEstaciones.Ubicacion	      ,
+      'Empresa'                 :catalogoEstaciones.Empresa		      ,
+      'RFC'                     :catalogoEstaciones.RFC			        ,
+      'Contacto'                :catalogoEstaciones.Contacto		    ,
+      'Region'                  :catalogoEstaciones.Region				  ,
+      'Estatus'                 :catalogoEstaciones.Estatus				  ,
+    })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }
+
 
 }
