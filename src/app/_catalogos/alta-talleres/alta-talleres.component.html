@@ -82,7 +82,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Teléfono</mat-label>
-                                    <input matInput placeholder="Telefono" formControlName="Telefono" maxlength="45" required>
+                                    <input matInput placeholder="Teléfono" formControlName="Telefono" mask="(000) 000-0000" required>
                                     <mat-error *ngIf="frmAltaTaller.get('Telefono')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>

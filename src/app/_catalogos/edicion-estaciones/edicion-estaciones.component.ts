@@ -3,10 +3,10 @@ import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, Ng
 import { CatalogosService} from '../../_services';
 import { first } from 'rxjs/operators';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { CatalogoTalleres, CP, Asentamientos, CodigosPostales} from '../../_models';
+import { CatalogoEstaciones, CP, Asentamientos, CodigosPostales} from '../../_models';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotifierService } from 'angular-notifier';
-import { Time } from '@angular/common';
+
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -33,26 +33,27 @@ export class EdicionEstacionesComponent implements OnInit {
   frmEditTaller      !: FormGroup;
   submitted          = false;
   matcher            = new MyErrorStateMatcher();
-  catalogoTalleres   !: CatalogoTalleres;
+  catalogoEstaciones !: CatalogoEstaciones;
   codigospostales    !: CodigosPostales;
   cp                 : string = "";
   asentamientos      !: CP;
   municipio          : string = "";
   entidadFederativa  : string = "";
   colonias           : Asentamientos[] = [];
-  IdEstacion           : number = 0;
+  
 
   IdEstacion         :number;
   Nombre             :string;
   Domicilio          :string;
   IdColonia          :string;
   Telefono					 :string;
-  Ubicacion	         :string;
+  Ubicacion	         :string="";
   Empresa		         :string;
   RFC			           :string;
   Contacto		       :string;
   Region					   :string;
   Estatus					   :string;
+
 
   estatus: Estatus[] = [
     { Estatus: 'A', viewValue: 'Activo' },
@@ -98,8 +99,6 @@ export class EdicionEstacionesComponent implements OnInit {
       'municipio'           : [{ value: "", disabled: true }],
       'entidad'             : [{ value: "", disabled: true }],
       'IdColonia'           : ['', Validators.required],
-      'IdEntidad'           : ['', Validators.required],
-      'IdMunicipio'         : ['', Validators.required],
       'Telefono'            : ['', Validators.required],
       'Empresa'             : ['', Validators.required],
       'RFC'                 : ['', Validators.required],
@@ -118,18 +117,18 @@ export class EdicionEstacionesComponent implements OnInit {
   llenaPantalla() {
 
     console.log("Datos en llena pantalla")
+
     this.f.IdEstacion.setValue(this.IdEstacion);
     this.f.Nombre.setValue(this.Nombre);
-    this.f.RFC.setValue(this.RFC);
-    this.f.Contacto.setValue(this.Contacto);
     this.f.Domicilio.setValue(this.Domicilio);
     this.f.IdColonia.setValue(this.IdColonia);
-//    this.f.NombreC.setValue(this.NombreC);
     this.f.Telefono.setValue(this.Telefono);
-
-    this.f.Estatus.setValue(this.Estatus);             
+    this.f.Empresa.setValue(this.Empresa);
+    this.f.RFC.setValue(this.RFC);
+    this.f.Contacto.setValue(this.Contacto);
+    this.f.Region.setValue(this.Region);
+    this.f.Estatus.setValue(this.Estatus);
   }
-
 
   onSubmit() {
     if (this.frmEditTaller.valid) {
@@ -213,31 +212,33 @@ export class EdicionEstacionesComponent implements OnInit {
   }
 
 
-  guardarTaller() {
-     
+  guardarEstacion() {
+     console.log("Entre a guardar")
      this.submitted = true;
  
      // stop here if form is invalid
      if (this.frmEditTaller.invalid) {
        return;
      }
- 
-     this.catalogoTalleres = {
-      IdEstacion            : this.IdEstacion                 ,
-      Nombre              : this.f.Nombre.value           ,
-      RFC                 : this.f.RFC.value              ,
-      Contacto            : this.f.Contacto.value         ,
-      Domicilio           : this.f.Domicilio.value        ,
-      IdColonia           : this.f.IdColonia.value        ,
-      Telefono            : this.f.Telefono.value         ,
-      HorarioIni          : this.f.HorarioIni.value       ,
-      HorarioFin          : this.f.HorarioFin.value       ,
-      Concurrencia        : this.f.Concurrencia.value     ,
-      DuracionCita        : this.f.DuracionCita.value     ,
-      Estatus		          : this.f.Estatus.value          ,
+     console.log("Entre a guardar 1")
+     this.catalogoEstaciones = {
+      IdEstacion      : this.IdEstacion          ,
+      Nombre          : this.f.Nombre.value      ,
+      Domicilio       : this.f.Domicilio.value   ,
+      IdColonia       : this.f.IdColonia.value   ,
+      Telefono        : this.f.Telefono.value    ,
+      Ubicacion       : this.Ubicacion           ,
+      Empresa         : this.f.Empresa.value     ,
+      RFC             : this.f.RFC.value         ,
+      Contacto        : this.f.Contacto.value    ,
+      Region          : this.f.Region.value      ,
+      Estatus		      : this.f.Estatus.value     ,    
      }
  
-     this.catalogoService.postModificaTaller(this.catalogoTalleres)
+     console.log("Entre a guardar 2")
+     console.log(this.catalogoEstaciones)
+     
+     this.catalogoService.postModificaEstacion(this.catalogoEstaciones)
        .pipe(first())
        .subscribe(
          data => {               

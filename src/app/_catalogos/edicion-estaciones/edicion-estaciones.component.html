@@ -8,7 +8,7 @@
                     </button>
                 </div>
                 <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-                    <mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Talleres
+                    <mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Estaciones
                     </mat-card-title>
                 </mat-card-actions>
                 <mat-card-content>
@@ -26,20 +26,9 @@
 
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
-                                    <mat-label>RFC</mat-label>
-                                    <input matInput placeholder="RFC" formControlName="RFC" maxlength="13" fxFlex="100" onkeyup="javascript:this.value=this.value.toUpperCase();" pattern="^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})\d{2}((0[1-9]|1[012])(0[1-9]|1\d|2[0-8])|(0[13456789]|1[012])(29|30)|(0[13578]|1[02])31)(\w{2})([A|a|0-9]{1}))$|^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})([02468][048]|[13579][26])0229)(\w{2})([A|a|0-9]{1})$"
-                                        required>
-                                    <mat-error *ngIf="frmEditTaller.get('RFC')!.hasError('required')">
-                                        El dato es obligatorio
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-
-                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
-                                <mat-form-field>
-                                    <mat-label>Contacto</mat-label>
-                                    <input matInput placeholder="Contacto" formControlName="Contacto" maxlength="45" required>
-                                    <mat-error *ngIf="frmEditTaller.get('Contacto')!.hasError('required')">
+                                    <mat-label>Calle y Número</mat-label>
+                                    <input matInput placeholder="Domicilio" formControlName="Domicilio" maxlength="45" required>
+                                    <mat-error *ngIf="frmEditTaller.get('Domicilio')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
                                 </mat-form-field>
@@ -90,18 +79,8 @@
 
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
-                                    <mat-label>Calle y Número</mat-label>
-                                    <input matInput placeholder="Domicilio" formControlName="Domicilio" maxlength="45" required>
-                                    <mat-error *ngIf="frmEditTaller.get('Domicilio')!.hasError('required')">
-                                        El dato es oblgatorio
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-
-                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
-                                <mat-form-field>
                                     <mat-label>Teléfono</mat-label>
-                                    <input matInput placeholder="Teléfono" formControlName="Telefono" mask="00-0000-0000" required>
+                                    <input matInput placeholder="Teléfono" formControlName="Telefono" mask="(000) 000-0000" required>
                                     <mat-error *ngIf="frmEditTaller.get('Telefono')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -110,9 +89,20 @@
 
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
-                                    <mat-label>Horario Ini</mat-label>
-                                    <input matInput placeholder="HorarioIni" formControlName="HorarioIni" maxlength="13" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-                                    <mat-error *ngIf="frmEditTaller.get('HorarioIni')!.hasError('required')">
+                                    <mat-label>Empresa</mat-label>
+                                    <input matInput placeholder="Empresa" formControlName="Empresa" maxlength="75" required>
+                                    <mat-error *ngIf="frmEditTaller.get('Empresa')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>RFC</mat-label>
+                                    <input matInput placeholder="RFC" formControlName="RFC" maxlength="13" fxFlex="100" onkeyup="javascript:this.value=this.value.toUpperCase();" pattern="^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})\d{2}((0[1-9]|1[012])(0[1-9]|1\d|2[0-8])|(0[13456789]|1[012])(29|30)|(0[13578]|1[02])31)(\w{2})([A|a|0-9]{1}))$|^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})([02468][048]|[13579][26])0229)(\w{2})([A|a|0-9]{1})$"
+                                        required>
+                                    <mat-error *ngIf="frmEditTaller.get('RFC')!.hasError('required')">
                                         El dato es obligatorio
                                     </mat-error>
                                 </mat-form-field>
@@ -120,9 +110,9 @@
 
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
-                                    <mat-label>Horario Fin</mat-label>
-                                    <input matInput placeholder="HorarioFin" formControlName="HorarioFin" maxlength="45" required>
-                                    <mat-error *ngIf="frmEditTaller.get('HorarioFin')!.hasError('required')">
+                                    <mat-label>Contacto</mat-label>
+                                    <input matInput placeholder="Contacto" formControlName="Contacto" maxlength="45" required>
+                                    <mat-error *ngIf="frmEditTaller.get('Contacto')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
                                 </mat-form-field>
@@ -130,19 +120,9 @@
 
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
-                                    <mat-label>Concurrencia</mat-label>
-                                    <input matInput placeholder="Concurrencia" formControlName="Concurrencia" maxlength="45" required>
-                                    <mat-error *ngIf="frmEditTaller.get('Concurrencia')!.hasError('required')">
-                                        El dato es oblgatorio
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-
-                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
-                                <mat-form-field>
-                                    <mat-label>DuracionCita</mat-label>
-                                    <input matInput placeholder="DuracionCita" formControlName="DuracionCita" maxlength="45" required>
-                                    <mat-error *ngIf="frmEditTaller.get('DuracionCita')!.hasError('required')">
+                                    <mat-label>Region</mat-label>
+                                    <input matInput placeholder="Region" formControlName="Region" maxlength="20" required>
+                                    <mat-error *ngIf="frmEditTaller.get('Region')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
                                 </mat-form-field>
@@ -161,7 +141,7 @@
 
                         </div>
                         <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-                            <button mat-mini-fab style="background-color: #80BC00; outline:none;" matTooltip="Guardar" (click)="guardarTaller()">
+                            <button mat-mini-fab style="background-color: #80BC00; outline:none;" matTooltip="Guardar" (click)="guardarEstacion()">
                                 <mat-icon>save</mat-icon>
                             </button>
                         </div>
