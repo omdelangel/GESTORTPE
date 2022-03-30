@@ -18,7 +18,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Nombre</mat-label>
-                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="45" required>
+                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="45" required onkeydown="return /[a-z, ]/i.test(event.key)">
                                     <mat-error *ngIf="frmAltaTaller.get('Nombre')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -92,7 +92,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Horario Ini</mat-label>
-                                    <input matInput placeholder="HorarioIni" formControlName="HorarioIni" maxlength="13" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                                    <input matInput placeholder="HorarioIni" formControlName="HorarioIni" maxlength="08" mask="00:00:00" required>
                                     <mat-error *ngIf="frmAltaTaller.get('HorarioIni')!.hasError('required')">
                                         El dato es obligatorio
                                     </mat-error>
@@ -102,7 +102,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Horario Fin</mat-label>
-                                    <input matInput placeholder="HorarioFin" formControlName="HorarioFin" maxlength="45" required>
+                                    <input matInput placeholder="HorarioFin" formControlName="HorarioFin" maxlength="08" mask="00:00:00" required>
                                     <mat-error *ngIf="frmAltaTaller.get('HorarioFin')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -122,7 +122,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>DuracionCita</mat-label>
-                                    <input matInput placeholder="DuracionCita" formControlName="DuracionCita" maxlength="45" required>
+                                    <input matInput placeholder="DuracionCita" formControlName="DuracionCita" maxlength="08" mask="00:00:00" required>
                                     <mat-error *ngIf="frmAltaTaller.get('DuracionCita')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
