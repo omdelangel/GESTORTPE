@@ -1,1 +1,142 @@
-<p>alta-estaciones works!</p>
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start right" fxLayout.lt-sm="row">
+    <div fxLayout="row wrap" fxLayoutGap="20px" style="width: 100%;">
+        <div fxFlex="100">
+            <mat-card>
+                <div class="example-button-container">
+                    <button mat-mini-fab class="close-button" style="outline: none;" (click)="onNoClick()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+                <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+                    <mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Estaciones
+                    </mat-card-title>
+                </mat-card-actions>
+                <mat-card-content>
+                    <form [formGroup]="frmAltaEstacion" (ngSubmit)="onSubmit()">
+                        <div fxLayout="row wrap" fxLayoutGap="30px grid">
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Nombre</mat-label>
+                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="45" required>
+                                    <mat-error *ngIf="frmAltaEstacion.get('Nombre')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Calle y Número</mat-label>
+                                    <input matInput placeholder="Domicilio" formControlName="Domicilio" maxlength="45" required>
+                                    <mat-error *ngIf="frmAltaEstacion.get('Domicilio')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>CP</mat-label>
+                                    <input matInput placeholder="cp" formControlName="cp" maxlength="5" required (keypress)="keyPress($event)" (change)="changeCP()">
+                                    <mat-error *ngIf="frmAltaEstacion.get('cp')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="Colonia" formControlName="IdColonia" required [errorStateMatcher]="matcher">
+                                        <mat-option *ngFor="let col of colonias" [value]="col.IdColonia">
+                                            {{col.Colonia}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="frmAltaEstacion.get('IdColonia')!.hasError('required')">
+                                        El dato es obligatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Entidad</mat-label>
+                                    <input matInput placeholder="Entidad" formControlName="IdEntidad" maxlength="45" required>
+                                    <mat-error *ngIf="frmAltaEstacion.get('IdEntidad')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Municipio</mat-label>
+                                    <input matInput placeholder="Municipio" formControlName="IdMunicipio" maxlength="45" required>
+                                    <mat-error *ngIf="frmAltaEstacion.get('IdMunicipio')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Teléfono</mat-label>
+                                    <input matInput placeholder="Telefono" formControlName="Telefono" maxlength="45" required>
+                                    <mat-error *ngIf="frmAltaEstacion.get('Telefono')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Empresa</mat-label>
+                                    <input matInput placeholder="Empresa" formControlName="Empresa" maxlength="45" required>
+                                    <mat-error *ngIf="frmAltaEstacion.get('Empresa')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Contacto</mat-label>
+                                    <input matInput placeholder="Contacto" formControlName="Contacto" maxlength="45" required>
+                                    <mat-error *ngIf="frmAltaEstacion.get('Contacto')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>RFC</mat-label>
+                                    <input matInput placeholder="RFC" formControlName="RFC" maxlength="13" fxFlex="100" onkeyup="javascript:this.value=this.value.toUpperCase();" pattern="^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})\d{2}((0[1-9]|1[012])(0[1-9]|1\d|2[0-8])|(0[13456789]|1[012])(29|30)|(0[13578]|1[02])31)(\w{2})([A|a|0-9]{1}))$|^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})([02468][048]|[13579][26])0229)(\w{2})([A|a|0-9]{1})$"
+                                        required>
+                                    <mat-error *ngIf="frmAltaEstacion.get('RFC')!.hasError('required')">
+                                        El dato es obligatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Region</mat-label>
+                                    <input matInput placeholder="Region" formControlName="Region" maxlength="45" required>
+                                    <mat-error *ngIf="frmAltaEstacion.get('Region')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+                            <button mat-mini-fab style="background-color: #80BC00; outline:none;" matTooltip="Guardar" (click)="guardarEstacion()">
+								<mat-icon>save</mat-icon>
+							</button>
+                        </div>
+                    </form>
+                </mat-card-content>
+                <notifier-container></notifier-container>
+            </mat-card>
+        </div>
+    </div>
+</div>

@@ -8,8 +8,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertService } from '../../_alert';
-import { AltaUsuariosComponent } from '../alta-usuarios';
-import { EdicionUsuariosComponent } from '../../_catalogos/edicion-usuarios/edicion-usuarios.component';
+import { AltaEstacionesComponent } from '../alta-estaciones/alta-estaciones.component';
+import { EdicionEstacionesComponent } from '../../_catalogos/edicion-estaciones/edicion-estaciones.component';
 import { NotifierService } from 'angular-notifier';
 
 
@@ -31,7 +31,6 @@ export class ConsultaEstacionesComponent implements OnInit {
                       'IdEntidadFederal',
                       'IdMunicipio',
                       'Telefono',
-                      'Ubicacion',
                       'Empresa',
                       'RFC',
                       'Contacto',
@@ -80,7 +79,7 @@ export class ConsultaEstacionesComponent implements OnInit {
   
   //Abre modal para Usuarios
     openDialog(): void {
-      const dialogRef = this.dialog.open(AltaUsuariosComponent, {
+      const dialogRef = this.dialog.open(AltaEstacionesComponent, {
         disableClose: true,
 //        width: '1500px',
   //      height: '900px'
@@ -97,7 +96,7 @@ export class ConsultaEstacionesComponent implements OnInit {
       this.catalogosService.getCatalogoEstaciones()
         .pipe(first())
         .subscribe(data => {   
-          console.log("Consulta Sindicatos ")
+          console.log("Consulta Estaciones ")
           console.log(data)
           this.catalogoEstaciones     = data.estacionesLista;   
           console.log("Consulta catalogoEstaciones 1")
@@ -133,7 +132,7 @@ export class ConsultaEstacionesComponent implements OnInit {
     editar(e: any) {
       console.log("consulta-editar constrasenia  1")
       console.log(e.contrasenia)
-      const dialogRef = this.dialog.open(EdicionUsuariosComponent, {
+      const dialogRef = this.dialog.open(EdicionEstacionesComponent, {
         disableClose: true,
         data: { 
           IdUsuario            :e.IdUsuario        ,           

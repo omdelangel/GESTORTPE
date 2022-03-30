@@ -9,8 +9,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertService } from '../../_alert';
-import { AltaUsuariosComponent } from '../alta-usuarios';
-import { EdicionUsuariosComponent } from '../../_catalogos/edicion-usuarios/edicion-usuarios.component';
+import { AltaSindicatosComponent } from '../alta-sindicatos/alta-sindicatos.component';
+import { EdicionSindicatosComponent } from '../edicion-sindicatos/edicion-sindicatos.component';
 import { NotifierService } from 'angular-notifier';
 
 
@@ -76,7 +76,7 @@ export class ConsultaSindicatosComponent implements OnInit {
   
   //Abre modal para Usuarios
     openDialog(): void {
-      const dialogRef = this.dialog.open(AltaUsuariosComponent, {
+      const dialogRef = this.dialog.open(AltaSindicatosComponent, {
         disableClose: true,
 //        width: '1500px',
   //      height: '900px'
@@ -127,9 +127,9 @@ export class ConsultaSindicatosComponent implements OnInit {
 
   //Edita el registro de Dictamen
     editar(e: any) {
-      console.log("consulta-editar constrasenia  1")
+      console.log("consulta-editar Sindicato")
       console.log(e.contrasenia)
-      const dialogRef = this.dialog.open(EdicionUsuariosComponent, {
+      const dialogRef = this.dialog.open(EdicionSindicatosComponent, {
         disableClose: true,
         data: { 
           IdUsuario            :e.IdUsuario        ,           

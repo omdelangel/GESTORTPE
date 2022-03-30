@@ -8,8 +8,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertService } from '../../_alert';
-import { AltaUsuariosComponent } from '../alta-usuarios';
-import { EdicionUsuariosComponent } from '../../_catalogos/edicion-usuarios/edicion-usuarios.component';
+import { AltaTalleresComponent } from '../alta-talleres/alta-talleres.component';
+import { EdicionTalleresComponent } from '../../_catalogos/edicion-talleres/edicion-talleres.component';
 import { NotifierService } from 'angular-notifier';
 
 
@@ -25,12 +25,11 @@ export class ConsultaTalleresComponent implements OnInit {
   disabled = false;
   //Columnas en Tabla de consulta
   displayedColumns = [
-                      'IdTaller',
                       'Nombre',
                       'RFC',
                       'Contacto',
                       'Domicilio',
-                      'IdColonia',
+                      'Colonia',
                       'Telefono',
                       'HorarioIni',
                       'HorarioFin',
@@ -80,7 +79,7 @@ export class ConsultaTalleresComponent implements OnInit {
   
   //Abre modal para Usuarios
     openDialog(): void {
-      const dialogRef = this.dialog.open(AltaUsuariosComponent, {
+      const dialogRef = this.dialog.open(AltaTalleresComponent, {
         disableClose: true,
 //        width: '1500px',
   //      height: '900px'
@@ -97,9 +96,9 @@ export class ConsultaTalleresComponent implements OnInit {
       this.catalogosService.getCatalogoTalleres()
         .pipe(first())
         .subscribe(data => {   
-          console.log("Consulta Sindicatos ")
+          console.log("Consulta Talleres ")
           console.log(data)
-          this.catalogoTalleres     = data.estacionesLista;   
+          this.catalogoTalleres     = data.talleresLista;   
           console.log("Consulta catalogoTalleres 1")
           console.log(this.catalogoTalleres)
           this.dataSource           = new MatTableDataSource(this.catalogoTalleres);
@@ -129,24 +128,26 @@ export class ConsultaTalleresComponent implements OnInit {
     }
 
 
-  //Edita el registro de Dictamen
+  //Edita el registro de Talleres
     editar(e: any) {
-      console.log("consulta-editar constrasenia  1")
-      console.log(e.contrasenia)
-      const dialogRef = this.dialog.open(EdicionUsuariosComponent, {
+      console.log("consulta-editar talleres")
+      console.log(e)
+      const dialogRef   = this.dialog.open(EdicionTalleresComponent, {
         disableClose: true,
         data: { 
-          IdUsuario            :e.IdUsuario        ,           
-          Nombre               :e.Nombre           ,           
-          Contrasenia          :e.Contrasenia      ,           
-          IdEmpleado           :e.IdEmpleado       ,           
-          IdPerfil             :e.IdPerfil         ,           
-          FechaRegistro        :e.FechaRegistro    ,           
-          Estatus              :e.Estatus          ,           
-          email                :e.email            ,           
-          Bloqueado            :e.Bloqueado        ,           
-          Intentos             :e.Intentos         ,           
-          UltimaTransaccion    :e.UltimaTransaccion,           
+                IdTaller            :e.IdTaller         , 
+                Nombre              :e.Nombre           , 
+                RFC                 :e.RFC              , 
+                Contacto            :e.Contacto         , 
+                Domicilio           :e.Domicilio        , 
+                IdColonia           :e.IdColonia        , 
+                NombreC             :e.NombreC          , 
+                Telefono            :e.Telefono         , 
+                HorarioIni          :e.HorarioIni       , 
+                HorarioFin          :e.HorarioFin       , 
+                Concurrencia        :e.Concurrencia     , 
+                DuracionCita        :e.DuracionCita     , 
+                Estatus			        :e.Estatus          ,	                
           },
 //        width: '1500px',
 //        height: '900px'

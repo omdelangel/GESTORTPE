@@ -5,7 +5,7 @@
                 <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
                     <mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Talleres
                     </mat-card-title>
-                    <button mat-fab style="background-color: #80BC00; outline: none;" matTooltip="Estaciones" outline:none; (click)="openDialog()">
+                    <button mat-fab style="background-color: #80BC00; outline: none;" matTooltip="Talleres" outline:none; (click)="openDialog()">
 						<mat-icon>add</mat-icon>
 					</button>
                 </mat-card-actions>
@@ -69,8 +69,14 @@
                                 </ng-container>
 
                                 <!-- ID Column -->
+                                <ng-container matColumnDef="Colonia">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Colonia
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.NombreC}} </mat-cell>
+                                </ng-container>
+                                <!-- ID Column -->
                                 <ng-container matColumnDef="Telefono">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Telefono
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Teléfono
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let row"> {{row.Telefono}} </mat-cell>
                                 </ng-container>
@@ -98,7 +104,7 @@
 
                                 <!-- ID Column -->
                                 <ng-container matColumnDef="DuracionCita">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Duracion Cita
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Duración Cita
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let row"> {{row.DuracionCita}} </mat-cell>
                                 </ng-container>
