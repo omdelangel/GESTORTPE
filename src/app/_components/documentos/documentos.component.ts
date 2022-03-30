@@ -194,7 +194,7 @@ export class DocumentosComponent implements OnInit {
     } else {
 
       //this.warn("El archivo no corresponde a la extensión .pdf");
-      this.notifier.notify('warning', 'El archivo no corresponde a las extensiones .pdf, .jpeg o .png', '');
+      this.notifier.notify('warning', 'El archivo no corresponde a las extensiones .pdf, .jpeg, .png', '');
     }
   }
 
@@ -220,28 +220,6 @@ export class DocumentosComponent implements OnInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
-  }
-
-
-  //Manejo de errores
-  success(message: string) {
-    this.alertService.success(message, 'success');
-  }
-
-  error(message: string) {
-    this.alertService.error(message, 'error');
-  }
-
-  info(message: string) {
-    this.alertService.info(message, 'info');
-  }
-
-  warn(message: string) {
-    this.alertService.warn(message, 'warn');
-  }
-
-  clear() {
-    this.alertService.clear();
   }
 
 }
