@@ -255,7 +255,7 @@ export class CatalogoTalleres {
     Telefono					  :string;
     HorarioIni                    :Time;
     HorarioFin		              :Time;
-    Concurrencia			      :string;
+    Concurrencia			      :number;
     DuracionCita		          :Time;
     Estatus					      :string;
     constructor(catalogoTalleres: {
@@ -268,7 +268,7 @@ export class CatalogoTalleres {
                                     Telefono					  :string;
                                     HorarioIni                    :Time;
                                     HorarioFin		              :Time;
-                                    Concurrencia			      :string;
+                                    Concurrencia			      :number;
                                     DuracionCita		          :Time;
                                     Estatus					      :string;
         }){

@@ -18,14 +18,14 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Nombre</mat-label>
-                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="45" required onkeydown="return /[a-z, ]/i.test(event.key)">
+                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="45" required onkeydown="return /[a-z, ]/i.test(event.key)" (change)="Espacios($event)">
                                     <mat-error *ngIf="frmAltaTaller.get('Nombre')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
                                 </mat-form-field>
                             </div>
 
-                            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>RFC</mat-label>
                                     <input matInput placeholder="RFC" formControlName="RFC" maxlength="13" fxFlex="100" onkeyup="javascript:this.value=this.value.toUpperCase();" pattern="^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})\d{2}((0[1-9]|1[012])(0[1-9]|1\d|2[0-8])|(0[13456789]|1[012])(29|30)|(0[13578]|1[02])31)(\w{2})([A|a|0-9]{1}))$|^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})([02468][048]|[13579][26])0229)(\w{2})([A|a|0-9]{1})$"
@@ -82,7 +82,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Teléfono</mat-label>
-                                    <input matInput placeholder="Teléfono" formControlName="Telefono" mask="(000) 000-0000" required>
+                                    <input matInput placeholder="Teléfono" formControlName="Telefono" maxlength="14" mask="(00) 0000-0000" required>
                                     <mat-error *ngIf="frmAltaTaller.get('Telefono')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -112,7 +112,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Concurrencia</mat-label>
-                                    <input matInput placeholder="Concurrencia" formControlName="Concurrencia" maxlength="45" required>
+                                    <input matInput placeholder="Concurrencia" formControlName="Concurrencia" maxlength="06" pattern="[0-9]+" required>
                                     <mat-error *ngIf="frmAltaTaller.get('Concurrencia')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
