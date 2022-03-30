@@ -1,16 +1,24 @@
 
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayout.lt-sm="row">
+  <div fxLayout="row wrap" fxLayoutGap="20px" fxFlex="100">
+    <div fxFlex="100">  
+        <div class="example-button-container">
+          <button mat-mini-fab class="close-button" style="outline: none;" (click)="onNoClick()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="visorImg">
+          <img mat-card-image src="{{pdfSrc}}" />
+        </div>
+    </div>
+  </div>
+</div>
 
-      
-                    <button mat-mini-fab  class="close-button" style="outline: none;" (click)="onNoClick()">
-                      <mat-icon>close</mat-icon>
-                    </button>
-           
-      
-	
-<pdf-viewer [src]="pdfSrc"
-[render-text]="true"
-[original-size]="false"
-style="width: 100%; height: 100%"
-></pdf-viewer>
 
+
+<pdf-viewer [src]="pdfSrc" 
+[render-text]="true" 
+[original-size]="false" 
+style="width: 100%; height: 100%">
+</pdf-viewer>
 

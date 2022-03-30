@@ -14,14 +14,31 @@ export class DocViewerComponent  {
 
   //pdfSrc = "./assets/F0000000343.pdf";
   pdfSrc!: string;
+  file: string = "";
   title = "pdfEditor";
+  visorImg: boolean = false;
+  visorPDF: boolean = false;
 
   constructor(
     
     public dialogRef: MatDialogRef<DocumentosComponent>,
     @Optional()  @Inject(MAT_DIALOG_DATA) public data: any) {
 
-      this.pdfSrc = "./assets/documentosPDF/" + data.archivoPDF;
+      this.file = data.archivoPDF;
+      var ext = this.file.split(".").pop();
+
+      if (ext == "png" || ext == "jpeg"){
+
+        this.visorImg = true;
+         this.pdfSrc = "./assets/documentosPDF/" + data.archivoPDF;
+
+      } else {
+
+        this.visorImg = false;
+        this.pdfSrc = "http://localhost:4200/assets/documentosPDF/" + data.archivoPDF;
+
+      }
+    
       dialogRef.disableClose = true;
  
   }
@@ -29,6 +46,10 @@ export class DocViewerComponent  {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  getFileExtension2(filename: string) {
+    return 
   }
 
 }

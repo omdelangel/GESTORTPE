@@ -72,7 +72,6 @@ export class EdicionDocumentosComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.clear();
     this.getDocumentosVehiculo(this.idVehiculo);
 
     //Validación de campos en pantalla
@@ -124,7 +123,7 @@ export class EdicionDocumentosComponent implements OnInit {
   openDialogPDF(archivoPDF: string): void {
 
     const dialogRef = this.dialog.open(DocViewerComponent, {
-      width: '50%',
+      width: '60%',
       height: '80%',
       disableClose: true,
       data: { archivoPDF: archivoPDF }
@@ -155,7 +154,6 @@ export class EdicionDocumentosComponent implements OnInit {
 
   //Adjunta los archivos 
   onFileSelected(e: any, row: any) {
-    this.clear();
     this.uploadedFiles = e.target.files;
 
     if (this.isFileAllowedPDF(this.uploadedFiles[0].name)) {
@@ -187,7 +185,7 @@ export class EdicionDocumentosComponent implements OnInit {
 
     } else {
 
-      this.notifier.notify('warning', 'El archivo no corresponde a las extensiones .pdf, .jpeg, .png, .j', '');
+      this.notifier.notify('warning', 'El archivo no corresponde a las extensiones .pdf, .jpeg, .png', '');
       //this.warn("El archivo no corresponde a la extensión .pdf");
     }
   }
@@ -237,25 +235,6 @@ export class EdicionDocumentosComponent implements OnInit {
   }
 
 
-  //Manejo de errores
-  success(message: string) {
-    this.alertService.success(message, 'success');
-  }
 
-  error(message: string) {
-    this.alertService.error(message, 'error');
-  }
-
-  info(message: string) {
-    this.alertService.info(message, 'info');
-  }
-
-  warn(message: string) {
-    this.alertService.warn(message, 'warn');
-  }
-
-  clear() {
-    this.alertService.clear();
-  }
 
 }
