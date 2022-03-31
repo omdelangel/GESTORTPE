@@ -423,4 +423,29 @@ getCatalogoTipoConv(): Observable<any> {
 
 
 
+  //Modifica registro de Taller
+  postModificaEstacion(catalogoEstaciones: CatalogoEstaciones): Observable<any> {
+
+    return this.http.post<any>(`${environment.SERVER_URL}/Modifica-Estacion`, {
+      'IdEstacion'        :catalogoEstaciones.IdEstacion ,
+      'Nombre'            :catalogoEstaciones.Nombre     ,
+      'Domicilio'         :catalogoEstaciones.Domicilio  ,
+      'IdColonia'         :catalogoEstaciones.IdColonia  ,
+      'Telefono'          :catalogoEstaciones.Telefono   ,
+      'Ubicacion'         :catalogoEstaciones.Ubicacion  ,
+      'Empresa'           :catalogoEstaciones.Empresa    ,
+      'RFC'               :catalogoEstaciones.RFC        ,
+      'Contacto'          :catalogoEstaciones.Contacto   ,
+      'Region'            :catalogoEstaciones.Region     ,
+      'Estatus'           :catalogoEstaciones.Estatus    ,  
+    })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }  
+
+
 }

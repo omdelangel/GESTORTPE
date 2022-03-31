@@ -77,8 +77,9 @@ export class ConsultaTalleresComponent implements OnInit {
     }
   }
   
-  //Abre modal para Usuarios
+  //Abre modal para Talleres
     openDialog(): void {
+      console.log("entre a openDialog de Talleres")
       const dialogRef = this.dialog.open(AltaTalleresComponent, {
         disableClose: true,
 //        width: '1500px',
@@ -99,7 +100,7 @@ export class ConsultaTalleresComponent implements OnInit {
           console.log("Consulta Talleres ")
           console.log(data)
           this.catalogoTalleres     = data.talleresLista;   
-          console.log("Consulta catalogoTalleres 1")
+          console.log("Consulta catalogoTalleres")
           console.log(this.catalogoTalleres)
           this.dataSource           = new MatTableDataSource(this.catalogoTalleres);
           this.dataSource.paginator = this.paginator;

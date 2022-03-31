@@ -8,9 +8,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotifierService } from 'angular-notifier';
 import { Time } from '@angular/common';
 
-
-
-
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -160,7 +157,18 @@ export class EdicionTalleresComponent implements OnInit {
       event.preventDefault();
     }
   }
-  
+
+
+  //Valida que el nombre no se igual a espacios
+  Espacios(e: any) {
+    if (e.target.value.trim() == "")
+        this.frmEditTaller.patchValue({
+        Nombre: ""
+      });
+      this.notifier.notify('warning', 'Ingresar un nombre valido', '');    
+  }  
+
+
     //Obtiene los datos de Municipio, Entidad y Colonia
     getObtenCP(): void {
   

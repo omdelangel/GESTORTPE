@@ -186,6 +186,15 @@ export class EdicionUsuariosComponent implements OnInit {
     }
   }
 
+    //Valida que el nombre no se igual a espacios
+    Espacios(e: any) {
+      if (e.target.value.trim() == "")
+      this.frmEditUsr.patchValue({
+        Nombre: ""
+      });
+        this.notifier.notify('warning', 'Ingresar un nombre valido', '');    
+       }
+  
 
   guardarUsuario() {
      

@@ -87,6 +87,15 @@ export class AltaTalleresComponent implements OnInit {
     }
   }
 
+//Valida que el nombre no se igual a espacios
+  Espacios(e: any) {
+    if (e.target.value.trim() == "")
+    this.frmAltaTaller.patchValue({
+      Nombre: ""
+    });
+      this.notifier.notify('warning', 'Ingresar un nombre valido', '');    
+  }
+
   //Obtiene los datos de Municipio, Entidad y Colonia
   changeCP(): void {
     //this.clear();

@@ -56,8 +56,8 @@ export class AltaEstacionesComponent implements OnInit {
       'Domicilio'           : ['', Validators.required],
       'cp'                  : ['', Validators.required],
       'IdColonia'           : ['', Validators.required],
-      'IdEntidad'           : ['', Validators.required],
-      'IdMunicipio'         : ['', Validators.required],
+      'IdEntidad'           : [{ value: "", disabled: true }],
+      'IdMunicipio'         : [{ value: "", disabled: true }],
       'Telefono'            : ['', Validators.required],
       'Empresa'             : ['', Validators.required],
       'RFC'                 : ['', Validators.required],
@@ -86,6 +86,15 @@ export class AltaEstacionesComponent implements OnInit {
       event.preventDefault();
     }
   }
+
+  //Valida que el nombre no se igual a espacios
+  Espacios(e: any) {
+    if (e.target.value.trim() == "")
+    this.frmAltaEstacion.patchValue({
+      Nombre: ""
+    });
+      this.notifier.notify('warning', 'Ingresar un nombre valido', '');    
+  }  
 
 
   //Obtiene los datos de Municipio, Entidad y Colonia
