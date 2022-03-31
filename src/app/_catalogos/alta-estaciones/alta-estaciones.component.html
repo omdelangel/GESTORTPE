@@ -17,7 +17,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Nombre</mat-label>
-                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="60" required onkeydown="return /[a-z,\u00f1\u00d1]/i.test(event.key)">
+                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="60" required onkeydown="return /[a-z, \u00f1\u00d1]/i.test(event.key)">
                                     <mat-error *ngIf="frmAltaEstacion.get('Nombre')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
