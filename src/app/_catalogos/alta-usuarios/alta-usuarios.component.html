@@ -27,7 +27,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Nombre</mat-label>
-                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="45" required onkeydown="return /[a-z, ]/i.test(event.key)" (change)="Espacios($event)">
+                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="85" required onkeydown="return /[a-z,\u00f1\u00d1]/i.test(event.key)">
                                     <mat-error *ngIf="frmAltaUsr.get('Nombre')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -67,7 +67,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Correo</mat-label>
-                                    <input matInput placeholder="Correo" formControlName="email" formControlName="email" maxlength="75" required>
+                                    <input matInput placeholder="Correo" formControlName="email" formControlName="email" maxlength="45" required>
                                     <mat-error *ngIf="frmAltaUsr.get('email')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>

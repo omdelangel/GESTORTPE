@@ -107,15 +107,6 @@ export class AltaUsuariosComponent implements OnInit {
         });
   }  
 
-  //Valida que el nombre no se igual a espacios
-  Espacios(e: any) {
-    if (e.target.value.trim() == "")
-    this.frmAltaUsr.patchValue({
-      Nombre: ""
-    });
-      this.notifier.notify('warning', 'Ingresar un nombre valido', '');    
-     }
-
 
   //Valida que las contraseñas sean Iguales 
   validarContrasenia(e: any){

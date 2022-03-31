@@ -17,7 +17,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Nombre</mat-label>
-                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="45" required onkeydown="return /[a-z, ]/i.test(event.key)" (change)="Espacios($event)">
+                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="60" required onkeydown="return /[a-z,\u00f1\u00d1]/i.test(event.key)">
                                     <mat-error *ngIf="frmAltaEstacion.get('Nombre')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -27,7 +27,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Calle y Número</mat-label>
-                                    <input matInput placeholder="Domicilio" formControlName="Domicilio" maxlength="45" required>
+                                    <input matInput placeholder="Domicilio" formControlName="Domicilio" maxlength="60" required>
                                     <mat-error *ngIf="frmAltaEstacion.get('Domicilio')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -80,7 +80,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Teléfono</mat-label>
-                                    <input matInput placeholder="Teléfono" formControlName="Telefono" maxlength="14" mask="(000) 000-0000" required>
+                                    <input matInput placeholder="Teléfono" formControlName="Telefono" maxlength="14" mask="(00) 0000-0000" required>
                                     <mat-error *ngIf="frmAltaEstacion.get('Telefono')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -90,7 +90,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Empresa</mat-label>
-                                    <input matInput placeholder="Empresa" formControlName="Empresa" maxlength="45" required>
+                                    <input matInput placeholder="Empresa" formControlName="Empresa" maxlength="75" required>
                                     <mat-error *ngIf="frmAltaEstacion.get('Empresa')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -100,7 +100,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Contacto</mat-label>
-                                    <input matInput placeholder="Contacto" formControlName="Contacto" maxlength="45" required>
+                                    <input matInput placeholder="Contacto" formControlName="Contacto" maxlength="85" required>
                                     <mat-error *ngIf="frmAltaEstacion.get('Contacto')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -121,7 +121,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Region</mat-label>
-                                    <input matInput placeholder="Region" formControlName="Region" maxlength="45" required>
+                                    <input matInput placeholder="Region" formControlName="Region" maxlength="20" required>
                                     <mat-error *ngIf="frmAltaEstacion.get('Region')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
