@@ -1,4 +1,5 @@
 <div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+  <h2 class="title-header-content" mat-raised-button>QR del Operador</h2>
   <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
     <div fxFlex="30">
       <mat-card>
@@ -29,7 +30,6 @@
   </div>
   
     <div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="30">
-      <h2 mat-raised-button>Concesionario</h2>
       <mat-form-field>
         <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
       </mat-form-field>

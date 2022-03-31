@@ -5,12 +5,13 @@
 html,body{height:100%;}
 body{margin:0;font-family:Roboto, "Helvetica Neue", sans-serif;}
 form{width:100%;margin:5px auto 5px;display:block;float:none;}
-.mat-form-field{width:100%;}
+.mat-form-field{width:100%; font-size: 18px;}
 .misc-bottom-padding{margin:8px 0 20px;}
 .misc-bottom-padding mat-label{margin-right:15px;}
 .mat-radio-label{margin:0 15px 0 0;}
 .title-center{margin:0 auto;}
 .button-wrapper{margin-top:10px;}
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -146,8 +147,10 @@ div.route-sign-in>div.right {
 }
 
 .mat-form-field-label {
+  //font-size: .85rem !important;
+  //color: #838597e0 !important;
   font-size: .85rem !important;
-  color: #838597e0 !important;
+  color: #0b209bdd !important;
        
 }
 
@@ -158,4 +161,13 @@ div.route-sign-in>div.right {
 
 .mat-form-field-appearance-legacy.mat-form-field-can-float .mat-form-field-autofill-control:-webkit-autofill+.mat-form-field-label-wrapper .mat-form-field-label {
   transform: translateY(-1.28125em) scale(0.95) perspective(100px) translateZ(0.00101px);
+}
+
+
+.mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after, .mat-input-element:disabled {
+  color: #000000b0 !important;
+}
+
+.mat-select-disabled .mat-select-value {
+  color: #000000b0 !important;
 }

@@ -117,8 +117,8 @@ export class DialogoTalleresComponent implements OnInit {
        data: { idTaller: row.IdTaller, nombreTaller: row.Nombre, domicilio: row.Domicilio + " " + row.Colonia + " " + "CP: " +row.CP + " " + 
        row.Municipio + " " + row.EntidadFederativa, telefono: row.Telefono, contacto: row.Contacto, nombreConce: this.nombreConcesionario,
        idConce: this.idConcesionario, idVehi: this.idVehiculo, causa: this.causaValue},
-       //width: '1500px',
-       //height: '900px'
+       width: '100%',
+       //height: '100%'
      });
  
      dialogRef.afterClosed().subscribe(res => {

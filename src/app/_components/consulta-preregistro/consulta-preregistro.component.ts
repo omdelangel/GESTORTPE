@@ -97,8 +97,8 @@ export class ConsultaPreregistroComponent implements OnInit {
     openDialog(): void {
       const dialogRef = this.dialog.open(PreregistroDialogComponent, {
         disableClose: true,
-        width: '1500px',
-        height: '900px'
+        width: '100%',
+        height: '90%'
       });
   
       dialogRef.afterClosed().subscribe(res => {
@@ -141,8 +141,8 @@ export class ConsultaPreregistroComponent implements OnInit {
       const dialogRef = this.dialog.open(PreregistroEdicionDialogComponent, {
         disableClose: true,
         data: { IdConcesionario: e.IdConcesionario, IdVehiculo: e.IdVehiculo, IdPropietario: e.IdPropietario},
-        width: '1500px',
-        height: '900px'
+        width: '100%',
+        height: '90%'
       });
   
       dialogRef.afterClosed().subscribe(res => {
@@ -160,8 +160,8 @@ export class ConsultaPreregistroComponent implements OnInit {
         disableClose: true,
         data: { IdVehiculo: e.IdVehiculo, IdConcesionario: e.IdConcesionario, nombreConcesionario: e.NombreCompleto, marca: e.Marca,
         submarca: e.Submarca, modelo: e.Modelo},
-        width: '1500px',
-        //height: '700px'
+        width: '100%',
+        //height: '90%'
       });
   
       dialogRef.afterClosed().subscribe(res => {
@@ -178,6 +178,8 @@ export class ConsultaPreregistroComponent implements OnInit {
           const dialogRef = this.dialog.open(DialogoTalleresComponent, {
             disableClose: true,
             data: { nombreConcesionario: e.NombreCompleto, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo, causa: "Verificacion"},
+            width: '100%',
+            //height: '90%'
           });
       
           dialogRef.afterClosed().subscribe(res => {
@@ -193,6 +195,8 @@ export class ConsultaPreregistroComponent implements OnInit {
           disableClose: true,
           data: { idCita: e.IdCita, NombreConcesionario: e.NombreCompleto, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo,
           marca: e.Marca, submarca: e.Submarca, modelo: e.Modelo, estatusCita: e.EstatusCita, causa: "Verificacion"},
+          width: '100%',
+          //height: '90%'
         });
     
         dialogRef.afterClosed().subscribe(res => {
@@ -218,6 +222,8 @@ export class ConsultaPreregistroComponent implements OnInit {
           disableClose: true,
           data: { idCita: e.IdCita, NombreConcesionario: e.NombreCompleto, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo,
           marca: e.Marca, submarca: e.Submarca, modelo: e.Modelo, estatusCita: e.EstatusCita },
+          width: '100%',
+          //height: '90%'
         });
     
         dialogRef.afterClosed().subscribe(res => {
@@ -236,25 +242,5 @@ export class ConsultaPreregistroComponent implements OnInit {
     }
   
   
-    //Manejo de alertas
-    success(message: string) {
-      this.alertService.success(message, 'success');
-    }
-  
-    error(message: string) {
-      this.alertService.error(message, 'error');
-    }
-  
-    info(message: string) {
-      this.alertService.info(message, 'info');
-    }
-  
-    warn(message: string) {
-      this.alertService.warn(message, 'warn');
-    }
-  
-    clear() {
-      this.alertService.clear();
-    }
   
 }

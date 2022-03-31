@@ -237,6 +237,7 @@ export class EdicionCitaComponent implements OnInit {
 
           const dialogRef = this.dialog.open(DialogoTalleresComponent, {
             data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo, causa: this.causaValue },
+            width: '100%'
           });
       
           dialogRef.afterClosed().subscribe(res => {
@@ -253,6 +254,7 @@ export class EdicionCitaComponent implements OnInit {
 
           const dialogRef = this.dialog.open(DialogoTalleresComponent, {
             data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo, causa: this.causaValue },
+            width: '100%'
           });
       
           dialogRef.afterClosed().subscribe(res => {
@@ -270,24 +272,5 @@ export class EdicionCitaComponent implements OnInit {
   }
 
 
-  //Manejo de alertas
-  success(message: string) {
-    this.alertService.success(message, 'success');
-  }
-
-  error(message: string) {
-    this.alertService.error(message, 'error');
-  }
-
-  info(message: string) {
-    this.alertService.info(message, 'info');
-  }
-
-  warn(message: string) {
-    this.alertService.warn(message, 'warn');
-  }
-
-  clear() {
-    this.alertService.clear();
-  }
+  
 }

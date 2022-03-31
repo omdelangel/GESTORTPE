@@ -139,10 +139,6 @@
     padding: 8px 24px 0;
   }
   
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
   
   .mat-table {
     overflow: auto;
@@ -160,10 +156,6 @@
     padding: 8px 24px 0;
   }
   
-  .mat-form-field {
-    font-size: 12px;
-    width: 100%;
-  }
   
   .table-container {
     height: 400px;
@@ -195,6 +187,12 @@
     top:-24px;
     right:-24px;
     background-color: #F15A24;
+  }
+
+  .title-header-content{
+    color: #001C71; 
+    font-weight: normal;
+  
   }
   
   

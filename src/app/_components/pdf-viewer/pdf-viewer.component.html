@@ -3,13 +3,14 @@
 		<div fxFlex="100">
 			<mat-card >
 				<mat-card-header fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-					<mat-card-title fx-item style="color: #009288; font-weight: lighter;">Código QR</mat-card-title>
-                    <mat-card-subtitle>Inscrito al programa Convertidor a Gas LP </mat-card-subtitle>
-				</mat-card-header>       
+					<mat-card-title fx-item class="title-header-content">Código QR</mat-card-title>
+                  
+				</mat-card-header>  
+        <h2>Inscrito al programa Convertidor a Gas LP </h2>     
 				<mat-card-content class="content-class">
 						<div fxLayout="row wrap" fxLayoutGap="30px grid">
                             <h2>{{nombreConcesionario}}</h2>
-                            <span><mat-icon>directions_car</mat-icon>{{nombreOperador}}</span>               									
+                            <h3><mat-icon>directions_car</mat-icon>{{nombreOperador}}</h3>               									
 						</div>
             <div id="qrcode" style="text-align: center;">
                         <qr-code 

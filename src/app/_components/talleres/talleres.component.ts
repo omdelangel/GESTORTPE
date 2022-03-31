@@ -109,14 +109,12 @@ export class TalleresComponent implements OnInit {
           row.Municipio + " " + row.EntidadFederativa, telefono: row.Telefono, contacto: row.Contacto, nombreConce: this.nombreConcesionario,
         idConce: this.idConcesionario, idVehi: this.idVehiculo
       },
-      width: '1500px',
-      height: '900px'
+      width: '100%',
+      //height: '900px'
     });
 
     dialogRef.afterClosed().subscribe(res => {
 
-      console.log("RESPUESTA DE CITA");
-      console.log(res);
     
       if (res != undefined) {
 
