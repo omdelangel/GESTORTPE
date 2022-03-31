@@ -8,7 +8,7 @@
           </button>
         </div>
         <div *ngIf="visorImg">
-          <img mat-card-image src="{{pdfSrc}}" />
+          <img mat-card-image src="{{pdfSrcIMG}}" />
         </div>
     </div>
   </div>
@@ -16,9 +16,11 @@
 
 
 
-<pdf-viewer [src]="pdfSrc" 
+<pdf-viewer [src]="pdfSrcPDF" 
 [render-text]="true" 
 [original-size]="false" 
-style="width: 100%; height: 100%">
+style="display: block;">
 </pdf-viewer>
+
+
 

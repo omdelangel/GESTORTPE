@@ -4,6 +4,7 @@ import { DocumentosComponent } from '../documentos';
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 
+
 @Component({
   selector: 'app-doc-viewer',
   templateUrl: './doc-viewer.component.html',
@@ -13,11 +14,13 @@ export class DocViewerComponent  {
 
 
   //pdfSrc = "./assets/F0000000343.pdf";
-  pdfSrc!: string;
+  pdfSrcIMG!: string;
+  pdfSrcPDF!: string;
   file: string = "";
   title = "pdfEditor";
   visorImg: boolean = false;
   visorPDF: boolean = false;
+
 
   constructor(
     
@@ -27,15 +30,15 @@ export class DocViewerComponent  {
       this.file = data.archivoPDF;
       var ext = this.file.split(".").pop();
 
-      if (ext == "png" || ext == "jpeg"){
+      if (ext == "png" || ext == "jpeg" || ext == "jpg"){
 
         this.visorImg = true;
-         this.pdfSrc = "./assets/documentosPDF/" + data.archivoPDF;
+         this.pdfSrcIMG = "./assets/documentosPDF/" + data.archivoPDF;
 
-      } else {
+      } else if (ext == "pdf") {
 
         this.visorImg = false;
-        this.pdfSrc = "http://localhost:4200/assets/documentosPDF/" + data.archivoPDF;
+        this.pdfSrcPDF = "./assets/documentosPDF/" + data.archivoPDF;
 
       }
     
@@ -48,8 +51,9 @@ export class DocViewerComponent  {
     this.dialogRef.close();
   }
 
-  getFileExtension2(filename: string) {
-    return 
-  }
+
+
+
+
 
 }

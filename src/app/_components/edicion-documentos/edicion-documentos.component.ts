@@ -185,7 +185,7 @@ export class EdicionDocumentosComponent implements OnInit {
 
     } else {
 
-      this.notifier.notify('warning', 'El archivo no corresponde a las extensiones .pdf, .jpeg, .png', '');
+      this.notifier.notify('warning', 'El archivo no corresponde a las extensiones .pdf, .jpeg, .png, .jpg', '');
       //this.warn("El archivo no corresponde a la extensión .pdf");
     }
   }
