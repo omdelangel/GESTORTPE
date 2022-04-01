@@ -26,7 +26,7 @@ export class AltaSindicatosComponent implements OnInit {
   private readonly notifier: NotifierService;
   IdSindicato          :number=0;
   Estatus              :string='A';
-  frmAltaServ          !:FormGroup;
+  frmAltaSind          !:FormGroup;
   submitted            = false;
   catalogoSindicato    :CatalogoSindicato;
   regiones             :CatalogoRegiones[] = [];
@@ -50,7 +50,7 @@ export class AltaSindicatosComponent implements OnInit {
     this.getCatalogoRegion();
     this.getCatalogoTipoConv();
     //Validación de campos en pantalla
-    this.frmAltaServ = this.formBuilder.group({
+    this.frmAltaSind = this.formBuilder.group({
       'Nombre'             : ['', Validators.required],
       'Seccion'            : ['', Validators.required],
       'Responsable'        : ['', Validators.required],
@@ -60,10 +60,10 @@ export class AltaSindicatosComponent implements OnInit {
     }); 
   }
 
-  get f() { return this.frmAltaServ.controls; }
+  get f() { return this.frmAltaSind.controls; }
 
   onSubmit() {
-    if (this.frmAltaServ.valid) {
+    if (this.frmAltaSind.valid) {
     } else {
       return
     }
@@ -99,7 +99,7 @@ export class AltaSindicatosComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.frmAltaServ.invalid) {
+    if (this.frmAltaSind.invalid) {
       return;
     }
 

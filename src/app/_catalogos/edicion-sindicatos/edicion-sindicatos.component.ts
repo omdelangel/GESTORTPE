@@ -28,7 +28,7 @@ interface Estatus {
 })
 export class EdicionSindicatosComponent implements OnInit {
   private readonly notifier: NotifierService;
-  frmEditServ          !:FormGroup;
+  frmEditSind          !:FormGroup;
   submitted            = false;
   catalogoSindicato    :CatalogoSindicato;
   regiones             :CatalogoRegiones[] = [];
@@ -79,7 +79,7 @@ export class EdicionSindicatosComponent implements OnInit {
   ngOnInit(): void {
     //Validación de campos en pantalla
 
-    this.frmEditServ = this.formBuilder.group({
+    this.frmEditSind = this.formBuilder.group({
       'IdSindicato'            : [({ value: "", disabled: true }), Validators.required],
       'Nombre'                 : ['', Validators.required],
       'Seccion'                : ['', Validators.required],
@@ -93,7 +93,7 @@ export class EdicionSindicatosComponent implements OnInit {
   }
 
  
-  get f() { return this.frmEditServ.controls; }
+  get f() { return this.frmEditSind.controls; }
 
   //Consulta los datos del concesionario
   llenaPantalla() {
@@ -110,7 +110,7 @@ export class EdicionSindicatosComponent implements OnInit {
 
 
   onSubmit() {
-    if (this.frmEditServ.valid) {
+    if (this.frmEditSind.valid) {
 
     } else {
       return
@@ -158,7 +158,7 @@ export class EdicionSindicatosComponent implements OnInit {
      this.submitted = true;
  
      // stop here if form is invalid
-     if (this.frmEditServ.invalid) {
+     if (this.frmEditSind.invalid) {
        return;
      }
  

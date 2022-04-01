@@ -12,13 +12,13 @@
                     </mat-card-title>
                 </mat-card-actions>
                 <mat-card-content>
-                    <form [formGroup]="frmEditServ" (ngSubmit)="onSubmit()">
+                    <form [formGroup]="frmEditSind" (ngSubmit)="onSubmit()">
                         <div fxLayout="row wrap" fxLayoutGap="30px grid">
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Nombre</mat-label>
                                     <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="90" required onkeydown="return /[a-z, \u00f1\u00d1]/i.test(event.key)">
-                                    <mat-error *ngIf="frmEditServ.get('Nombre')!.hasError('required')">
+                                    <mat-error *ngIf="frmEditSind.get('Nombre')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
                                 </mat-form-field>
@@ -28,7 +28,7 @@
                                 <mat-form-field>
                                     <mat-label>Seccion</mat-label>
                                     <input matInput placeholder="Seccion" formControlName="Seccion" maxlength="20" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-                                    <mat-error *ngIf="frmEditServ.get('Seccion')!.hasError('required')">
+                                    <mat-error *ngIf="frmEditSind.get('Seccion')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
                                 </mat-form-field>
@@ -38,7 +38,7 @@
                                 <mat-form-field>
                                     <mat-label>Responsable</mat-label>
                                     <input matInput placeholder="Responsable" formControlName="Responsable" maxlength="85" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-                                    <mat-error *ngIf="frmEditServ.get('Responsable')!.hasError('required')">
+                                    <mat-error *ngIf="frmEditSind.get('Responsable')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
                                 </mat-form-field>
@@ -48,7 +48,7 @@
                                 <mat-form-field>
                                     <mat-label>Calle y Número</mat-label>
                                     <input matInput placeholder="Direccion" formControlName="Direccion" maxlength="120" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-                                    <mat-error *ngIf="frmEditServ.get('Direccion')!.hasError('required')">
+                                    <mat-error *ngIf="frmEditSind.get('Direccion')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
                                 </mat-form-field>
@@ -61,7 +61,7 @@
                                             {{region.Nombre}}
                                         </mat-option>
                                     </mat-select>
-                                    <mat-error *ngIf="frmEditServ.get('Region')!.invalid">Campo requerido
+                                    <mat-error *ngIf="frmEditSind.get('Region')!.invalid">Campo requerido
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -73,7 +73,7 @@
                                             {{tipoConvertidor.Convertidor}}
                                         </mat-option>
                                     </mat-select>
-                                    <mat-error *ngIf="frmEditServ.get('TipoConvertidor')!.invalid">Campo requerido
+                                    <mat-error *ngIf="frmEditSind.get('TipoConvertidor')!.invalid">Campo requerido
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -85,7 +85,7 @@
                                             {{estatus.viewValue}}
                                         </mat-option>
                                     </mat-select>
-                                    <mat-error *ngIf="frmEditServ.get('Estatus')!.invalid">Campo requerido</mat-error>
+                                    <mat-error *ngIf="frmEditSind.get('Estatus')!.invalid">Campo requerido</mat-error>
                                 </mat-form-field>
                             </div>
 
