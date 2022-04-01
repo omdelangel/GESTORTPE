@@ -19,6 +19,7 @@ export class PreRegistro {
     dictamen: string;
     estatusCita: string;
     dictaminar: boolean;
+    piloto: boolean;
  
     constructor(preRegistro: {   
         idConcesionario: number;
@@ -40,7 +41,8 @@ export class PreRegistro {
         idDictamen: number;
         dictamen: string;
         estatusCita: string;
-        dictaminar: boolean;}){
+        dictaminar: boolean;
+        piloto: boolean;}){
             this.idConcesionario = preRegistro.idConcesionario;
             this.nombre = preRegistro.nombre;
             this.paterno = preRegistro.paterno;
@@ -60,6 +62,7 @@ export class PreRegistro {
             this.idDictamen = preRegistro.idDictamen;
             this.dictamen = preRegistro.dictamen;
             this.estatusCita = preRegistro.estatusCita;
-            this.dictaminar = preRegistro.dictaminar;        
+            this.dictaminar = preRegistro.dictaminar;   
+            this.piloto = preRegistro.piloto;     
     }    
 }

@@ -57,7 +57,6 @@ export class PreregistroDialogComponent implements OnInit {
     this.subscription = this.vehiculoService.onIdVehi().subscribe(idVehi => {
       this.talleresComponent.idVehiculo = idVehi.idVehiculo;
       if (this.valueAsigna) {
-        console.log("ENTRA A PROPIETARIO-VEHI");
         this.altapropietarioComponent.idVehiculo = idVehi.idVehiculo;
       }
       this.documentosComponent.getDocumentosVehiculo(idVehi.idVehiculo);
@@ -81,20 +80,16 @@ export class PreregistroDialogComponent implements OnInit {
 
     switch (e.selectedIndex) {
       case 0:
-        console.log("index 0");
         //this.altaconcesionarioComponent.guardarConcesionario();
         break;
       case 1:
-        console.log("ENTRA POR index 1");
         this.altaconcesionarioComponent.guardarConcesionario();
         break;
       case 2:
-        console.log("ENTRA POR index 2");
         this.altavehiculoComponent.guardarVehiculo();
         break;
       case 3:
         if (this.valueAsigna) {
-          console.log("ENTRA POR index 3");
           this.altapropietarioComponent.guardarPropietario();
         }
         break;

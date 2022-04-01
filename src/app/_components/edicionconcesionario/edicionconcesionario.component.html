@@ -33,18 +33,18 @@
                                             {{sindicato.Nombre}}
                                         </mat-option>
                                     </mat-select>
-                                    <mat-error *ngIf="frmStepOne.get('IdSindicato')!.invalid">Campo requerido</mat-error>
+                                    <mat-error *ngIf="frmStepOne.hasError('required')">El dato es oblgatorio</mat-error>
                                 </mat-form-field>
                             </div>
-							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="Asignación Sindicato" formControlName="IdAsignacionSindicato"
-                                        [errorStateMatcher]="matcher" required  (ngModelChange)="onSelectionAsignacion($event)">
+                                    <mat-select placeholder="Asignación Sindicato" formControlName="IdAsignacionSindicato" required
+                                        [errorStateMatcher]="matcher"  (ngModelChange)="onSelectionAsignacion($event)">
                                         <mat-option *ngFor="let asignacion of asignaciones" [value]="asignacion.IdAsignacionSindicato">
                                             {{asignacion.AsignacionSindicato}}
                                         </mat-option>
                                     </mat-select>
-                                    <mat-error *ngIf="frmStepOne.get('IdAsignacionSindicato')!.invalid">Campo requerido</mat-error>
+                                    <mat-error *ngIf="frmStepOne.invalid">El dato es oblgatorio</mat-error>
                                 </mat-form-field>
                             </div>
 							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>
@@ -245,19 +245,10 @@
                             </div>
                            
                         </div>
-             <!--           <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">           
-                            <button mat-fab style="background-color: #476777; outline:none;"
-                                matTooltip="Guardar y Continuar" (click)="guardarConcesionario()">
-                                <mat-icon>done</mat-icon>
-                            </button>
-                        </div> -->
-
                     </form>
                 </mat-card-content>
                 <notifier-container></notifier-container>	
-            </mat-card>
-   <!--       <br>
-            <alert></alert>-->  
+            </mat-card> 
         </div>
     </div>
 </div>

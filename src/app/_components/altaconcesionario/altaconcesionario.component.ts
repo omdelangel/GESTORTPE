@@ -101,7 +101,7 @@ export class AltaconcesionarioComponent implements OnInit {
     this.frmStepOne = this.formBuilder.group({
       'RFC': ['', Validators.required],
       'IdSindicato': ['', Validators.required],
-      'IdAsignacionSindicato': [({ value: 0, disabled: true })],
+      'IdAsignacionSindicato': ['', Validators.required],
       'NumeroConcesion': [''],
       'CURP': [''],
       'Nombre': ['', Validators.required],
@@ -125,7 +125,6 @@ export class AltaconcesionarioComponent implements OnInit {
       'FolioIdentificacion': ['', Validators.required]
     });
 
-    this.f.tiposPersona.setValue('F');
    
   }
 
@@ -179,6 +178,8 @@ export class AltaconcesionarioComponent implements OnInit {
   //Evento en cambio de Sindicato
   onSelectionChanged(value: any) {
 
+    this.f.IdAsignacionSindicato.setValue("");
+
     if (value.value == 0) {
       this.frmStepOne.get('IdAsignacionSindicato')?.disable();
     } else {
@@ -219,12 +220,14 @@ export class AltaconcesionarioComponent implements OnInit {
     if (this.frmStepOne.invalid) {
       return;
     }
+
     this.fechaNacimiento = moment(this.f.FechaNacimiento.value).format('YYYY/MM/DD');
     if (this.idConcesionario == 0) {
       this.idConcesionario == 0;
     } else {
       this.idConcesionario == this.idConcesionario;
     }
+
 
     this.concesionario = {
       IdConcesionario: this.idConcesionario, Nombre: this.f.Nombre.value, Paterno: this.f.Paterno.value, Materno: this.f.Materno.value,
@@ -239,6 +242,7 @@ export class AltaconcesionarioComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+
           if (data.estatus) {
             this.idConcesionario = data.IdConcesionario;
             this.nombreConcesionario = this.f.Nombre.value + " " + this.f.Paterno.value + " " + this.f.Materno.value;
@@ -246,8 +250,11 @@ export class AltaconcesionarioComponent implements OnInit {
             //this.success(data.mensaje);
             this.notifier.notify('success', data.mensaje, '');    
           } else {
+
             //this.warn(data.mensaje);            
             this.notifier.notify('warning', data.mensaje, '');
+            this.submitted = false;
+
           }
         },
         error => {
