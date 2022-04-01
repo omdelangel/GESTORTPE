@@ -1,12 +1,10 @@
 import { Component, OnInit, Inject, Optional, AfterViewChecked } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm, ControlContainer } from '@angular/forms';
-import { CatalogosService, ConcesionarioService} from '../../_services';
+import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm} from '@angular/forms';
+import { CatalogosService } from '../../_services';
 import { first } from 'rxjs/operators';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { AlertService } from '../../_alert';
-import { CatalogoRegiones, CatalogoTipoConvertidor,CatalogoSindicato,UsuariosAltaEdicion, CatalogoTpoAsignacion, ConcesionarioAltaEdicion, CP, Asentamientos, Identificaciones } from '../../_models';
+import { CatalogoRegiones, CatalogoTipoConvertidor,CatalogoSindicato} from '../../_models';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import * as moment from 'moment';
 import { NotifierService } from 'angular-notifier';
 
 
@@ -26,46 +24,25 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class AltaSindicatosComponent implements OnInit {
   private readonly notifier: NotifierService;
-  hoyDate      : Date = new Date();
-  Estatus      :string='A';
-  Intentos     :number=0;
-  Bloqueado    :boolean=false; 
-  frmAltaUsr!  : FormGroup;
-  submitted = false;
-  matcher = new MyErrorStateMatcher();
-  rfc: string = "";
-  nombre: string = "";
-  tipo: string = "";
-  concesionario!: ConcesionarioAltaEdicion;
-  usuario!: UsuariosAltaEdicion;
-  sindicatos        :CatalogoSindicato[] = [];
-  regiones          :CatalogoRegiones[] = [];
-  TipoConvertidor   :CatalogoTipoConvertidor[] = [];
-  asignaciones: CatalogoTpoAsignacion[] = [];
-  idConcesionario: number = 0;
-  cp: string = "";
-  asentamientos!: CP;
-  municipio: string = "";
-  entidadFederativa: string = "";
-  colonias: Asentamientos[] = [];
-  identificaciones: Identificaciones[] = [];
-  fechaNacimiento: string = "";
-  asigna: boolean = false;
-  nombreConcesionario: string = "";
-  hide = false;
+  IdSindicato          :number=0;
+  Estatus              :string='A';
+  frmAltaServ          !:FormGroup;
+  submitted            = false;
+  catalogoSindicato    :CatalogoSindicato;
+  regiones             :CatalogoRegiones[] = [];
+  TipoConvertidor      :CatalogoTipoConvertidor[] = [];
+  matcher            = new MyErrorStateMatcher();
+  
 
   constructor(
-    private formBuilder: FormBuilder,
-    private alertService: AlertService,
-    private catalogoService: CatalogosService,
-    private concesionarioService: ConcesionarioService,
-    notifierService: NotifierService,
+    private formBuilder      :FormBuilder,
+    private catalogoService  :CatalogosService,
+    notifierService          : NotifierService,
+
     public dialogRef: MatDialogRef<AltaSindicatosComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any)   
     {
-
-      this.notifier = notifierService;   
-     
+      this.notifier = notifierService;       
   }
 
   ngOnInit(): void {
@@ -73,89 +50,74 @@ export class AltaSindicatosComponent implements OnInit {
     this.getCatalogoRegion();
     this.getCatalogoTipoConv();
     //Validación de campos en pantalla
-    this.frmAltaUsr = this.formBuilder.group({
-      'IdSindicato'        : ['', Validators.required],
+    this.frmAltaServ = this.formBuilder.group({
       'Nombre'             : ['', Validators.required],
       'Seccion'            : ['', Validators.required],
       'Responsable'        : ['', Validators.required],
       'Direccion'          : ['', Validators.required],
       'Region'             : ['', Validators.required],
       'TipoConvertidor'    : ['', Validators.required],
-      'Estatus'            : ['', Validators.required],
-
     }); 
   }
 
-  get f() { return this.frmAltaUsr.controls; }
+  get f() { return this.frmAltaServ.controls; }
 
   onSubmit() {
-    if (this.frmAltaUsr.valid) {
-
+    if (this.frmAltaServ.valid) {
     } else {
       return
     }
   }
 
-   //Llena catálogo de Perfiles
-   getCatalogoRegion() {
-    this.catalogoService.getCatalogoRegiones()
-      .pipe(first())
-      .subscribe(data => {
-        console.log("Catálogo de Regiones")
-        console.log(data)
-        this.regiones       = data.regionesLista;
-        console.log(this.regiones)
-      },
-        error => {
-        });
+  //Llena catálogo de Regiones
+  getCatalogoRegion() {
+  this.catalogoService.getCatalogoRegiones()
+    .pipe(first())
+    .subscribe(data => {
+      this.regiones       = data.regionesLista;
+      console.log(this.regiones)
+    },
+      error => {
+      });
   }  
-  
-   //Llena catálogo de Perfiles
-   getCatalogoTipoConv() {
-    this.catalogoService.getCatalogoTipoConv()
-      .pipe(first())
-      .subscribe(data => {
-        console.log("Catálogo de Tipo Conv")
-        console.log(data)
-        this.TipoConvertidor   = data.convertidoresLista;
-        console.log(this.TipoConvertidor)
-      },
-        error => {
-        });
+
+  //Llena catálogo de Tipo Conv
+  getCatalogoTipoConv() {
+  this.catalogoService.getCatalogoTipoConv()
+    .pipe(first())
+    .subscribe(data => {
+      this.TipoConvertidor   = data.convertidoresLista;
+    },
+      error => {
+      });
   }    
 
   //Registra el Usuario
-  guardarUsuario() {
-
+  guardarSindicato() {
+    
    //this.clear();
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.frmAltaUsr.invalid) {
+    if (this.frmAltaServ.invalid) {
       return;
     }
 
-    this.usuario = {
-      IdUsuario        :this.f.IdUsuario.value,
-      Nombre           :this.f.Nombre.value,
-      Contrasenia      :this.f.Contrasenia.value,
-      IdEmpleado       :0,
-      IdPerfil         :this.f.IdPerfil.value,
-      FechaRegistro    :moment(this.hoyDate).format('YYYY-MM-DD'),
-      Estatus          :this.Estatus,
-      email            :this.f.email.value,
-      Bloqueado        :this.Bloqueado,
-      Intentos         :this.Intentos,
-      UltimaTransaccion:moment(this.hoyDate).format('YYYY-MM-DD'),
+    this.catalogoSindicato   = {
+      IdSindicato           : this.IdSindicato                   ,
+      Nombre                : this.f.Nombre.value                ,
+      Seccion               : this.f.Seccion.value               ,
+      Responsable           : this.f.Responsable.value           ,
+      Direccion             : this.f.Direccion.value             ,
+      IdRegion              : this.f.Region.value                ,
+      IdTipoConvertidor     : this.f.TipoConvertidor.value       ,
+      Estatus               : this.Estatus                       ,
     }
 
-    this.catalogoService.postRegistraUsuario(this.usuario)
+    this.catalogoService.postRegistraSindicato(this.catalogoSindicato)
       .pipe(first())
       .subscribe(
         data => {
-          console.log("Se intentó Alta Usuario")
-          console.log(data)
-                
           if (data.estatus) {
             this.notifier.notify('success', data.mensaje, '');    
             this.dialogRef.close();
