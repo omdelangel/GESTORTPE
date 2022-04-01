@@ -138,6 +138,7 @@ export class FormalizacionComponent implements OnInit {
           const dialogRef = this.dialog.open(DialogoTalleresComponent, {
             disableClose: true,
             data: { nombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo, causa: "Instalacion"},
+            
           });
       
           dialogRef.afterClosed().subscribe(res => {

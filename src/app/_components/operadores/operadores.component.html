@@ -1,4 +1,5 @@
 <div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+  <h2 class="title-header-content" mat-raised-button>Operadores</h2>
   <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
       <div fxFlex="30">
           <mat-card>    
@@ -28,12 +29,11 @@
 
 
   <div id="divTitle" class="example-header" fxFlex="100"  fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">	   
-      <div fxFlex="50">
-        <h2 mat-raised-button>Operadores</h2>
+   
       <mat-form-field >
           <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
       </mat-form-field>
-    </div>
+ 
     <div fxFlex="50" fxLayoutAlign="end end">
       <button mat-fab style="background-color: #80BC00; outline: none;" matTooltip="Alta de Operador"
       outline:none; (click)="openDialog()">

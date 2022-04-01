@@ -97,6 +97,9 @@ export class PrecioGasolinaComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
 
+        console.log("GASOLINA");
+        console.log(data);
+
         if (data.estatus && data.hGasolinaLista != "") {
   
           this.notifier.notify('success', data.mensaje);

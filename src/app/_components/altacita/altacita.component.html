@@ -19,17 +19,17 @@
                             <div fxFlex="30" fxFlex.lt-md="100" fxl>
                                 <mat-card>
                                     <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-                                        <mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Datos de la Cita
+                                        <mat-card-title fx-item class="title-header-content">Datos de la Cita
                                         </mat-card-title>
                                     </mat-card-actions>
-                                    <mat-card-subtitle>{{nombreValue}}</mat-card-subtitle>
-                                    <mat-card-subtitle>Domicilio: {{domicilioValue}}</mat-card-subtitle>
-                                    <mat-card-subtitle>Contacto: {{contactoValue}}</mat-card-subtitle>
-                                    <mat-card-subtitle>Teléfono: {{telefonoValue}}</mat-card-subtitle>
+                                    <h3>Taller: {{nombreValue}}</h3>
+                                    <h3>Domicilio: {{domicilioValue}}</h3>
+                                    <h3>Contacto: {{contactoValue}}</h3>
+                                    <h3>Teléfono: {{telefonoValue}}</h3>
                                     <mat-card-content>
-                                        <p>Concesionario: {{nombreConcesionario}}</p>
-                                        <p>Fecha: {{dia | date: 'dd/MM/yyyy' }}</p>
-                                        <p>Hora: {{hora}}</p>
+                                        <h4>Concesionario: {{nombreConcesionario}}</h4>
+                                        <h4>Fecha: {{dia | date: 'dd/MM/yyyy' }}</h4>
+                                        <h4>Hora: {{hora}}</h4>
                                         <mat-divider></mat-divider>
                                         <br>
                                         <button  mat-raised-button class='w-full login-field' (click)="mostrarDialogoConfirmacion()">
