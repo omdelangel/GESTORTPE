@@ -79,8 +79,8 @@ export class AltaSindicatosComponent implements OnInit {
       'Seccion'            : ['', Validators.required],
       'Responsable'        : ['', Validators.required],
       'Direccion'          : ['', Validators.required],
-      'IdRegion'           : ['', Validators.required],
-      'IdTipoConvertidor'  : ['', Validators.required],
+      'Region'             : ['', Validators.required],
+      'TipoConvertidor'    : ['', Validators.required],
       'Estatus'            : ['', Validators.required],
 
     }); 
@@ -98,12 +98,12 @@ export class AltaSindicatosComponent implements OnInit {
 
    //Llena catálogo de Perfiles
    getCatalogoRegion() {
-    this.catalogoService.getCatalogoPerfiles()
+    this.catalogoService.getCatalogoRegiones()
       .pipe(first())
       .subscribe(data => {
-        console.log("Catálogo de Perfiles")
+        console.log("Catálogo de Regiones")
         console.log(data)
-        this.regiones   = data.listaRegiones;
+        this.regiones       = data.regionesLista;
         console.log(this.regiones)
       },
         error => {
@@ -115,10 +115,10 @@ export class AltaSindicatosComponent implements OnInit {
     this.catalogoService.getCatalogoTipoConv()
       .pipe(first())
       .subscribe(data => {
-        console.log("Catálogo de Perfiles")
+        console.log("Catálogo de Tipo Conv")
         console.log(data)
-        this.regiones   = data.listaRegiones;
-        console.log(this.regiones)
+        this.TipoConvertidor   = data.convertidoresLista;
+        console.log(this.TipoConvertidor)
       },
         error => {
         });

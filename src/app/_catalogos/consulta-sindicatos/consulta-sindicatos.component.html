@@ -56,7 +56,7 @@
 
                                 <!-- ID Column -->
                                 <ng-container matColumnDef="Direccion">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Direccion
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Calle y Número
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let row"> {{row.Direccion}} </mat-cell>
                                 </ng-container>
@@ -69,10 +69,24 @@
                                 </ng-container>
 
                                 <!-- ID Column -->
+                                <ng-container matColumnDef="Region">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Region
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.NombreR}} </mat-cell>
+                                </ng-container>
+
+                                <!-- ID Column -->
                                 <ng-container matColumnDef="IdTipoConvertidor">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header> Id Tipo Convertidor
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let row"> {{row.IdTipoConvertidor}} </mat-cell>
+                                </ng-container>
+
+                                <!-- ID Column -->
+                                <ng-container matColumnDef="TipoConvertidor">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Convertidor
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.NombreC}} </mat-cell>
                                 </ng-container>
 
                                 <!--chip column -->

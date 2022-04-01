@@ -87,6 +87,52 @@ export class AltaTalleresComponent implements OnInit {
     }
   }
 
+  //valida la Hora Fin
+  changeHF(): void{
+    if (this.f.HorarioIni.value >= this.f.HorarioFin.value) {
+      this.frmAltaTaller.patchValue({
+        HorarioFin: ""
+      });
+      this.notifier.notify('warning', 'Hora Fin debe ser Mayor a Hora Ini', '');
+    }
+  }
+
+  changeDuracion():void{ 
+    let inicioMinutos        = parseInt(this.f.HorarioIni.value.substr(3,2));
+    let inicioHoras          = parseInt(this.f.HorarioIni.value.substr(0,2));
+    
+    let finMinutos           = parseInt(this.f.HorarioFin.value.substr(3,2));
+    let finHoras             = parseInt(this.f.HorarioFin.value.substr(0,2));
+
+    let DurMinutos           = parseInt(this.f.DuracionCita.value.substr(3,2));
+    let DurHoras             = parseInt(this.f.DuracionCita.value.substr(0,2));
+
+    let transcurridoMinutos  = finMinutos - inicioMinutos;
+    let transcurridoHoras    = finHoras - inicioHoras;
+    
+    if (transcurridoMinutos < 0) {
+        transcurridoHoras--;
+      transcurridoMinutos = 60 + transcurridoMinutos;
+    }
+    
+    if (transcurridoHoras == DurHoras ) {
+        if (transcurridoMinutos < DurMinutos ){
+            this.frmAltaTaller.patchValue({
+            DuracionCita: ""
+            });
+        this.notifier.notify('warning', 'Hora Ini + Duración debe ser Menor a Hora Fin', '');
+           }
+      }
+    
+    if (transcurridoHoras < DurHoras ){
+        this.frmAltaTaller.patchValue({
+        DuracionCita: ""
+       });
+       this.notifier.notify('warning', 'Hora Ini + Duración debe ser Menor a Hora Fin', '');
+      }
+  }
+
+
   //Obtiene los datos de Municipio, Entidad y Colonia
   changeCP(): void {
     //this.clear();

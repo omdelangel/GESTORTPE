@@ -318,6 +318,19 @@ getCatalogoTalleres(): Observable<any> {
   )
 }  
 
+
+//Obtiene los valores de la tabla de Regiones
+getCatalogoRegiones(): Observable<any> {
+
+  return this.http.get<any>(`${environment.SERVER_URL}/lregiones`, {})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+} 
+
 //Obtiene los valores de la tabla de Tiposconvertidor
 getCatalogoTipoConv(): Observable<any> {
 

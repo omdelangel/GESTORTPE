@@ -131,7 +131,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Concurrencia</mat-label>
-                                    <input matInput placeholder="Concurrencia" formControlName="Concurrencia" maxlength="06" pattern="[0-9]+" required>
+                                    <input matInput placeholder="Concurrencia" formControlName="Concurrencia" maxlength="06" (keypress)="keyPress($event)" required>
                                     <mat-error *ngIf="frmEditTaller.get('Concurrencia')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>

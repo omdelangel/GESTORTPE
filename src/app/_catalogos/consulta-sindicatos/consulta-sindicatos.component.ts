@@ -29,8 +29,8 @@ export class ConsultaSindicatosComponent implements OnInit {
                       'Seccion',
                       'Responsable',
                       'Direccion',
-                      'IdRegion',
-                      'IdTipoConvertidor',
+                      'Region',
+                      'TipoConvertidor',
                       'Estatus',
                       'actions'
                       ];                      
