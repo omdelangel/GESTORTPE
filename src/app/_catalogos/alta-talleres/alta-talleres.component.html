@@ -102,7 +102,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Horario Fin</mat-label>
-                                    <input matInput placeholder="HorarioFin" type="time" formControlName="HorarioFin" required>
+                                    <input matInput placeholder="HorarioFin" type="time" formControlName="HorarioFin" required (change)="changeHF()">
                                     <mat-error *ngIf="frmAltaTaller.get('HorarioFin')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -112,7 +112,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Concurrencia</mat-label>
-                                    <input matInput placeholder="Concurrencia" formControlName="Concurrencia" maxlength="06" pattern="[0-9]+" required>
+                                    <input matInput placeholder="Concurrencia" formControlName="Concurrencia" maxlength="06" (keypress)="keyPress($event)" required>
                                     <mat-error *ngIf="frmAltaTaller.get('Concurrencia')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
@@ -122,7 +122,7 @@
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>DuracionCita</mat-label>
-                                    <input matInput placeholder="00:00:00" formControlName="DuracionCita" maxlength="08" pattern="^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)(?:)?$" required>
+                                    <input matInput placeholder="00:00:00" formControlName="DuracionCita" maxlength="08" pattern="^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)(?:)?$" (change)="changeDuracion()" required>
                                     <mat-error *ngIf="frmAltaTaller.get('DuracionCita')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>

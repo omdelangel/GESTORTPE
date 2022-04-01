@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { CatalogoDictamenes, CatalogoUsuarios, UsuariosAltaEdicion, CatalogoTalleres, CatalogoEstaciones } from 'src/app/_models';
+import { CatalogoDictamenes, CatalogoUsuarios, UsuariosAltaEdicion, CatalogoTalleres, CatalogoEstaciones, CatalogoSindicato } from 'src/app/_models';
 
 @Injectable({
   providedIn: 'root'
@@ -258,29 +258,29 @@ getCatUsuBloqueado(catalogoUsuarios: CatalogoUsuarios): Observable<any> {
       )
   }
 
-    //Registra usuarios
-    postModificaUsuario(usuario: UsuariosAltaEdicion): Observable<any> {
+  //Registra usuarios
+  postModificaUsuario(usuario: UsuariosAltaEdicion): Observable<any> {
 
-      return this.http.post<any>(`${environment.SERVER_URL}/Modifica-Usuario`, {
-        'IdUsuario'        :usuario.IdUsuario,
-        'Nombre'           :usuario.Nombre,
-        'Contrasenia'      :usuario.Contrasenia,
-        'IdEmpleado'       :usuario.IdEmpleado,
-        'IdPerfil'         :usuario.IdPerfil,
-        'FechaRegistro'    :usuario.FechaRegistro,
-        'Estatus'          :usuario.Estatus,
-        'email'            :usuario.email,
-        'Bloqueado'        :usuario.Bloqueado,
-        'Intentos'         :usuario.Intentos,
-        'UltimaTransaccion':usuario.UltimaTransaccion,    
-      })
-        .pipe(map((res: Response) => {
-  
-          return res || {}
-        }),
-          catchError(this.handleError)
-        )
-    }
+    return this.http.post<any>(`${environment.SERVER_URL}/Modifica-Usuario`, {
+      'IdUsuario'        :usuario.IdUsuario,
+      'Nombre'           :usuario.Nombre,
+      'Contrasenia'      :usuario.Contrasenia,
+      'IdEmpleado'       :usuario.IdEmpleado,
+      'IdPerfil'         :usuario.IdPerfil,
+      'FechaRegistro'    :usuario.FechaRegistro,
+      'Estatus'          :usuario.Estatus,
+      'email'            :usuario.email,
+      'Bloqueado'        :usuario.Bloqueado,
+      'Intentos'         :usuario.Intentos,
+      'UltimaTransaccion':usuario.UltimaTransaccion,    
+    })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }
 
 //Obtiene lso valores de la tabla de Sindicatos
 getCatalogoSindicato(): Observable<any> {
@@ -317,6 +317,19 @@ getCatalogoTalleres(): Observable<any> {
     catchError(this.handleError)
   )
 }  
+
+
+//Obtiene los valores de la tabla de Regiones
+getCatalogoRegiones(): Observable<any> {
+
+  return this.http.get<any>(`${environment.SERVER_URL}/lregiones`, {})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+} 
 
 //Obtiene los valores de la tabla de Tiposconvertidor
 getCatalogoTipoConv(): Observable<any> {
@@ -379,6 +392,33 @@ getCatalogoTipoConv(): Observable<any> {
       )
   }
 
+
+  //Registra en tabla de Sindicatos
+  postRegistraSindicato(catalogoSindicato: CatalogoSindicato): Observable<any> {
+
+    return this.http.post<any>(`${environment.SERVER_URL}/Alta-Sindicato`, {
+      'IdSindicato'           : catalogoSindicato.IdSindicato      ,
+      'Nombre'                : catalogoSindicato.Nombre           ,
+      'Seccion'               : catalogoSindicato.Seccion          ,
+      'Responsable'           : catalogoSindicato.Responsable      ,
+      'Direccion'             : catalogoSindicato.Direccion        ,
+      'IdRegion'              : catalogoSindicato.IdRegion         ,
+      'IdTipoConvertidor'     : catalogoSindicato.IdTipoConvertidor,
+      'Estatus'               : catalogoSindicato.Estatus          ,
+    })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }  
+
+
+
+
+
+
   
   //Obtiene CP con base a la Colonia
   getObtenCP(IdColonia: any): Observable<any> {
@@ -425,7 +465,7 @@ getCatalogoTipoConv(): Observable<any> {
 
   //Modifica registro de Taller
   postModificaEstacion(catalogoEstaciones: CatalogoEstaciones): Observable<any> {
-
+  
     return this.http.post<any>(`${environment.SERVER_URL}/Modifica-Estacion`, {
       'IdEstacion'        :catalogoEstaciones.IdEstacion ,
       'Nombre'            :catalogoEstaciones.Nombre     ,
@@ -440,12 +480,33 @@ getCatalogoTipoConv(): Observable<any> {
       'Estatus'           :catalogoEstaciones.Estatus    ,  
     })
       .pipe(map((res: Response) => {
-
+  
         return res || {}
       }),
         catchError(this.handleError)
       )
   }  
+  
+  //Modifica Sindicatos usuarios
+  postModificaSindicato(catalogoSindicato: CatalogoSindicato): Observable<any> {
+
+    return this.http.post<any>(`${environment.SERVER_URL}/Modifica-Sindicato`, {
+      'IdSindicato'           : catalogoSindicato.IdSindicato      ,
+      'Nombre'                : catalogoSindicato.Nombre           ,
+      'Seccion'               : catalogoSindicato.Seccion          ,
+      'Responsable'           : catalogoSindicato.Responsable      ,
+      'Direccion'             : catalogoSindicato.Direccion        ,
+      'IdRegion'              : catalogoSindicato.IdRegion         ,
+      'IdTipoConvertidor'     : catalogoSindicato.IdTipoConvertidor,
+      'Estatus'               : catalogoSindicato.Estatus          ,   
+    })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }
 
 
 }

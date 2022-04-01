@@ -52,23 +52,18 @@ export class CatalogoRegiones {
 
 export class CatalogoTipoConvertidor {
     IdTipoConvertidor   :number;
-    Descripcion         :string;
-    Costo               :number;    
-    Marca               :string;
-    ConsumoRequerido    :number;
+    Convertidor         :string;
+    TotalLitrosConsumo  :string;
 
     constructor(catalogoTipoConvertidor: { 
         IdTipoConvertidor   :number;
-        Descripcion         :string;
-        Costo               :number;    
-        Marca               :string;
-        ConsumoRequerido    :number;
+        Convertidor         :string;
+        TotalLitrosConsumo  :string;
+
                                 }){
         this.IdTipoConvertidor    = catalogoTipoConvertidor.IdTipoConvertidor  ;
-        this.Descripcion          = catalogoTipoConvertidor.Descripcion        ;
-        this.Costo                = catalogoTipoConvertidor.Costo              ;
-        this.Marca                = catalogoTipoConvertidor.Marca              ;
-        this.ConsumoRequerido     = catalogoTipoConvertidor.ConsumoRequerido   ;
+        this.Convertidor          = catalogoTipoConvertidor.Convertidor        ;
+        this.TotalLitrosConsumo   = catalogoTipoConvertidor.TotalLitrosConsumo ;
     }    
 }
 

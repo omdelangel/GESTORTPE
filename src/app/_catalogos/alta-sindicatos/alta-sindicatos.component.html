@@ -12,23 +12,14 @@
                     </mat-card-title>
                 </mat-card-actions>
                 <mat-card-content>
-                    <form [formGroup]="frmAltaUsr" (ngSubmit)="onSubmit()">
+                    <form [formGroup]="frmAltaSind" (ngSubmit)="onSubmit()">
                         <div fxLayout="row wrap" fxLayoutGap="30px grid">
-                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
-                                <mat-form-field>
-                                    <mat-label>Id Sindicato</mat-label>
-                                    <input matInput placeholder="Id Sindicato" formControlName="IdSindicato" maxlength="13" required>
-                                    <mat-error *ngIf="frmAltaUsr.get('IdSindicato')!.hasError('required')">
-                                        El dato es obligatorio
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
 
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Nombre</mat-label>
-                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="90" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-                                    <mat-error *ngIf="frmAltaUsr.get('Nombre')!.hasError('required')">
+                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="90" required onkeydown="return /[a-z, \u00f1\u00d1]/i.test(event.key)">
+                                    <mat-error *ngIf="frmAltaSind.get('Nombre')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
                                 </mat-form-field>
@@ -38,7 +29,7 @@
                                 <mat-form-field>
                                     <mat-label>Seccion</mat-label>
                                     <input matInput placeholder="Seccion" formControlName="Seccion" maxlength="20" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-                                    <mat-error *ngIf="frmAltaUsr.get('Seccion')!.hasError('required')">
+                                    <mat-error *ngIf="frmAltaSind.get('Seccion')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
                                 </mat-form-field>
@@ -48,7 +39,7 @@
                                 <mat-form-field>
                                     <mat-label>Responsable</mat-label>
                                     <input matInput placeholder="Responsable" formControlName="Responsable" maxlength="85" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-                                    <mat-error *ngIf="frmAltaUsr.get('Responsable')!.hasError('required')">
+                                    <mat-error *ngIf="frmAltaSind.get('Responsable')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
                                 </mat-form-field>
@@ -56,9 +47,9 @@
 
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
-                                    <mat-label>Direccion</mat-label>
+                                    <mat-label>Calle y Número</mat-label>
                                     <input matInput placeholder="Direccion" formControlName="Direccion" maxlength="120" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-                                    <mat-error *ngIf="frmAltaUsr.get('Direccion')!.hasError('required')">
+                                    <mat-error *ngIf="frmAltaSind.get('Direccion')!.hasError('required')">
                                         El dato es oblgatorio
                                     </mat-error>
                                 </mat-form-field>
@@ -66,24 +57,24 @@
 
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="IdRegion" formControlName="IdRegion" [errorStateMatcher]="matcher" required>
+                                    <mat-select placeholder="Region" formControlName="Region" [errorStateMatcher]="matcher" required>
                                         <mat-option *ngFor="let region of regiones" [value]="region.IdRegion">
                                             {{region.Nombre}}
                                         </mat-option>
                                     </mat-select>
-                                    <mat-error *ngIf="frmAltaUsr.get('IdRegion')!.invalid">Campo requerido
+                                    <mat-error *ngIf="frmAltaSind.get('Region')!.invalid">Campo requerido
                                     </mat-error>
                                 </mat-form-field>
                             </div>
 
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="IdTipoConvertidor" formControlName="IdTipoConvertidor" [errorStateMatcher]="matcher" required>
+                                    <mat-select placeholder="TipoConvertidor" formControlName="TipoConvertidor" [errorStateMatcher]="matcher" required>
                                         <mat-option *ngFor="let tipoConvertidor of TipoConvertidor" [value]="tipoConvertidor.IdTipoConvertidor">
-                                            {{tipoConvertidor.Descripcion}}
+                                            {{tipoConvertidor.Convertidor}}
                                         </mat-option>
                                     </mat-select>
-                                    <mat-error *ngIf="frmAltaUsr.get('IdTipoConvertidor')!.invalid">Campo requerido
+                                    <mat-error *ngIf="frmAltaSind.get('TipoConvertidor')!.invalid">Campo requerido
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -91,7 +82,7 @@
 
                         </div>
                         <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-                            <button mat-mini-fab style="background-color: #80BC00; outline:none;" matTooltip="Guardar" (click)="guardarUsuario()">
+                            <button mat-mini-fab style="background-color: #80BC00; outline:none;" matTooltip="Guardar" (click)="guardarSindicato()">
 								<mat-icon>save</mat-icon>
 							</button>
                         </div>
