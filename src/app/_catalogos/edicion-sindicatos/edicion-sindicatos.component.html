@@ -1,1 +1,106 @@
-<p>edicion-sindicatos works!</p>
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start right" fxLayout.lt-sm="row">
+    <div fxLayout="row wrap" fxLayoutGap="20px" style="width: 100%;">
+        <div fxFlex="100">
+            <mat-card>
+                <div class="example-button-container">
+                    <button mat-mini-fab class="close-button" style="outline: none;" (click)="onNoClick()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+                <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+                    <mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Sindicatos
+                    </mat-card-title>
+                </mat-card-actions>
+                <mat-card-content>
+                    <form [formGroup]="frmEditServ" (ngSubmit)="onSubmit()">
+                        <div fxLayout="row wrap" fxLayoutGap="30px grid">
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Nombre</mat-label>
+                                    <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="90" required onkeydown="return /[a-z, \u00f1\u00d1]/i.test(event.key)">
+                                    <mat-error *ngIf="frmEditServ.get('Nombre')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Seccion</mat-label>
+                                    <input matInput placeholder="Seccion" formControlName="Seccion" maxlength="20" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                                    <mat-error *ngIf="frmEditServ.get('Seccion')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Responsable</mat-label>
+                                    <input matInput placeholder="Responsable" formControlName="Responsable" maxlength="85" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                                    <mat-error *ngIf="frmEditServ.get('Responsable')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Calle y Número</mat-label>
+                                    <input matInput placeholder="Direccion" formControlName="Direccion" maxlength="120" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                                    <mat-error *ngIf="frmEditServ.get('Direccion')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="Region" formControlName="Region" [errorStateMatcher]="matcher" required>
+                                        <mat-option *ngFor="let region of regiones" [value]="region.IdRegion">
+                                            {{region.Nombre}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="frmEditServ.get('Region')!.invalid">Campo requerido
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="TipoConvertidor" formControlName="TipoConvertidor" [errorStateMatcher]="matcher" required>
+                                        <mat-option *ngFor="let tipoConvertidor of TipoConvertidor" [value]="tipoConvertidor.IdTipoConvertidor">
+                                            {{tipoConvertidor.Convertidor}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="frmEditServ.get('TipoConvertidor')!.invalid">Campo requerido
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="Estatus" formControlName="Estatus" [errorStateMatcher]="matcher" required>
+                                        <mat-option *ngFor="let estatus of estatus" [value]="estatus.Estatus">
+                                            {{estatus.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="frmEditServ.get('Estatus')!.invalid">Campo requerido</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+                            <button mat-mini-fab style="background-color: #80BC00; outline:none;" matTooltip="Guardar" (click)="guardarSindicato()">
+                                <mat-icon>save</mat-icon>
+                            </button>
+                        </div>
+                    </form>
+                </mat-card-content>
+                <notifier-container></notifier-container>
+            </mat-card>
+            <!--       <br>
+            <alert></alert>-->
+        </div>
+    </div>
+</div>
