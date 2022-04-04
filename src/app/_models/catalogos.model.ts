@@ -3,10 +3,12 @@ import { Time } from "@angular/common";
 export class CatalogoSindicatos {
     IdSindicato: number;
     Nombre: string;
+    Piloto: boolean;
 
-    constructor(catalogoGeneral: { IdSindicato: number; Nombre: string}){
+    constructor(catalogoGeneral: { IdSindicato: number; Nombre: string; Piloto: boolean;}){
         this.IdSindicato = catalogoGeneral.IdSindicato;
         this.Nombre = catalogoGeneral.Nombre; 
+        this.Piloto = catalogoGeneral.Piloto;
     }    
 }
 

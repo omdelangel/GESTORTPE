@@ -41,6 +41,7 @@ export class EdicionCitaComponent implements OnInit {
   modelo: string = "";
   estatusCita: string = "";
   causaValue: string = "";
+  piloto: boolean = false;
 
   constructor(private citaService: CitasService,
     private alertService: AlertService,
@@ -62,6 +63,8 @@ export class EdicionCitaComponent implements OnInit {
     this.modelo = data.modelo;
     this.estatusCita = data.estatusCita;
     this.causaValue = data.causa;
+    this.piloto = data.piloto;
+
 
     switch (this.estatusCita) {
       case 'A':
@@ -236,7 +239,7 @@ export class EdicionCitaComponent implements OnInit {
           //this.cancelarCita();
 
           const dialogRef = this.dialog.open(DialogoTalleresComponent, {
-            data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo, causa: this.causaValue },
+            data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo, causa: this.causaValue, piloto: this.piloto },
             width: '100%'
           });
       
@@ -253,7 +256,7 @@ export class EdicionCitaComponent implements OnInit {
         } else {
 
           const dialogRef = this.dialog.open(DialogoTalleresComponent, {
-            data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo, causa: this.causaValue },
+            data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo, causa: this.causaValue, piloto: this.piloto},
             width: '100%'
           });
       

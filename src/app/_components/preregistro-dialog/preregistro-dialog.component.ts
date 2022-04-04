@@ -22,6 +22,7 @@ export class PreregistroDialogComponent implements OnInit {
   valueAsigna: boolean = false;
   valueVehiculo: number = 0;
   idConcesionarioValue: number = 0;
+  piloto: boolean = false;
 
   
   @ViewChild(AltaconcesionarioComponent) altaconcesionarioComponent!: AltaconcesionarioComponent;
@@ -37,11 +38,15 @@ export class PreregistroDialogComponent implements OnInit {
     private propietarioService: PropietarioService,
     public dialogRef: MatDialogRef<PreregistroDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any){
+
+      
       
     dialogRef.disableClose = true;
     //subscription para ocultar y mostrar la pestaña de propietarios
     this.subscription = this.concesionarioService.onView().subscribe(message => {
-      this.valueAsigna = this.altaconcesionarioComponent.asigna;      
+      this.valueAsigna = this.altaconcesionarioComponent.asigna;  
+      this.piloto = this.altaconcesionarioComponent.piloto;  
+      this.talleresComponent.pilotoValue = this.piloto;  
     });
 
      //subscription para obtener el idConcesionario
@@ -57,7 +62,6 @@ export class PreregistroDialogComponent implements OnInit {
     this.subscription = this.vehiculoService.onIdVehi().subscribe(idVehi => {
       this.talleresComponent.idVehiculo = idVehi.idVehiculo;
       if (this.valueAsigna) {
-        console.log("ENTRA A PROPIETARIO-VEHI");
         this.altapropietarioComponent.idVehiculo = idVehi.idVehiculo;
       }
       this.documentosComponent.getDocumentosVehiculo(idVehi.idVehiculo);
@@ -77,24 +81,18 @@ export class PreregistroDialogComponent implements OnInit {
 
   selectionChange(e: any){
 
-    console.log(e)
-
     switch (e.selectedIndex) {
       case 0:
-        console.log("index 0");
         //this.altaconcesionarioComponent.guardarConcesionario();
         break;
       case 1:
-        console.log("ENTRA POR index 1");
         this.altaconcesionarioComponent.guardarConcesionario();
         break;
       case 2:
-        console.log("ENTRA POR index 2");
         this.altavehiculoComponent.guardarVehiculo();
         break;
       case 3:
         if (this.valueAsigna) {
-          console.log("ENTRA POR index 3");
           this.altapropietarioComponent.guardarPropietario();
         }
         break;

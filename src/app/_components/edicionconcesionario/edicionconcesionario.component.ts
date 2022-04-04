@@ -107,7 +107,7 @@ export class EdicionconcesionarioComponent implements OnInit {
     this.frmStepOne = this.formBuilder.group({
       'RFC': [({ value: "", disabled: true }), Validators.required],
       'IdSindicato': ['', Validators.required],
-      'IdAsignacionSindicato': [({ value: 0, disabled: true })],
+      'IdAsignacionSindicato': ['', Validators.required],
       'NumeroConcesion': [''],
       'CURP': [({ value: "", disabled: true })],
       'Nombre': ['', Validators.required],
@@ -182,7 +182,7 @@ export class EdicionconcesionarioComponent implements OnInit {
 
   //Consulta los datos del concesionario
   getConcesionarioVehiculo(idConcesionario: number, idVehiculo: number) {
-    this.clear();
+
 
     this.concesionarioService.getConsecionarioVehiculo(idConcesionario, idVehiculo)
       .pipe(first())
@@ -236,6 +236,8 @@ export class EdicionconcesionarioComponent implements OnInit {
   //LLena el catálogo de tpos de asignación de acuerdo al Sindicato seleccionado
   onSelectionChanged(value: any) {
 
+    this.f.IdAsignacionSindicato.setValue("");
+
     if (value.value == 0) {
       this.frmStepOne.get('IdAsignacionSindicato')?.disable();
     } else {
@@ -276,7 +278,8 @@ export class EdicionconcesionarioComponent implements OnInit {
       return;
     }
 
-    this.fechaNacimiento = moment(this.f.FechaNacimiento.value).format('YYYY/MM/DD');
+
+    this.fechaNacimiento = moment(this.f.FechaNacimiento.value).format('YYYY/MM/DD');  
 
     this.concesionario = {
       IdConcesionario: this.idConcesionario, Nombre: this.f.Nombre.value, Paterno: this.f.Paterno.value, Materno: this.f.Materno.value,
@@ -298,8 +301,11 @@ export class EdicionconcesionarioComponent implements OnInit {
             //this.success(data.mensaje);  
             this.notifier.notify('success', data.mensaje, '');         
           } else {
+
+            console.log(data.mensaje);
             //this.warn(data.mensaje);
             this.notifier.notify('warning', data.mensaje, '');
+            this.submitted = false;
           }
         },
         error => {
@@ -347,27 +353,6 @@ export class EdicionconcesionarioComponent implements OnInit {
         });
   }
 
-
-  //Manejo de alertas
-  success(message: string) {
-    this.alertService.success(message, 'success');
-  }
-
-  error(message: string) {
-    this.alertService.error(message, 'error');
-  }
-
-  info(message: string) {
-    this.alertService.info(message, 'info');
-  }
-
-  warn(message: string) {
-    this.alertService.warn(message, 'warn');
-  }
-
-  clear() {
-    this.alertService.clear();
-  }
 
 
 }

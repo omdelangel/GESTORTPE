@@ -53,6 +53,7 @@ export class TalleresComponent implements OnInit {
   telefonoValue: string = "";
   diaValue: string = ""; 
   horaValue: string = "";  
+  pilotoValue: boolean = false;
 
   constructor(public dialog: MatDialog,
     private alertService: AlertService,
@@ -107,7 +108,7 @@ export class TalleresComponent implements OnInit {
       data: {
         idTaller: row.IdTaller, nombreTaller: row.Nombre, domicilio: row.Domicilio + " " + row.Colonia + " " + "CP: " + row.CP + " " +
           row.Municipio + " " + row.EntidadFederativa, telefono: row.Telefono, contacto: row.Contacto, nombreConce: this.nombreConcesionario,
-        idConce: this.idConcesionario, idVehi: this.idVehiculo
+        idConce: this.idConcesionario, idVehi: this.idVehiculo, piloto: this.pilotoValue
       },
       width: '100%',
       //height: '900px'
