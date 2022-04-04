@@ -508,5 +508,43 @@ getCatalogoTipoConv(): Observable<any> {
       )
   }
 
+//Llena catálogo de marcas
+getCatalogoMarca(): Observable<any> {
+  return this.http.get<any>(`${environment.SERVER_URL}/lMarcas`)
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}  
+
+
+  //Obtiene CP con base a la Colonia
+getCatalogoMarcaSub(Marca: any): Observable<any> {
+
+    let params = new HttpParams();
+    params = params.append('IdMarca', Marca);
+  
+    return this.http.get<any>(`${environment.SERVER_URL}/Marca-Submarca`, {params: params})
+    .pipe(map((res: Response) => {
+  
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+}
+
+  //Obtiene CP con base a la Colonia
+  getCatalogoMarcaSubmarca(): Observable<any> {
+
+    return this.http.get<any>(`${environment.SERVER_URL}/Marca-Submarca`, {})
+    .pipe(map((res: Response) => {
+  
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+}
 
 }

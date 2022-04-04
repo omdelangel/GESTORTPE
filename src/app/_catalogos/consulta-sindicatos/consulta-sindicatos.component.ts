@@ -74,7 +74,7 @@ export class ConsultaSindicatosComponent implements OnInit {
     }
   }
   
-  //Abre modal para Usuarios
+  //Abre modal para Sindicatos
     openDialog(): void {
       const dialogRef = this.dialog.open(AltaSindicatosComponent, {
         disableClose: true,
@@ -88,7 +88,7 @@ export class ConsultaSindicatosComponent implements OnInit {
     }
 
 
-  //Consulta los datos de Dictamen
+  //Consulta los datos de Sindicatos
   getConsultaSindicatos(){
       this.catalogosService.getCatalogoSindicato()
         .pipe(first())
@@ -125,7 +125,7 @@ export class ConsultaSindicatosComponent implements OnInit {
     }
 
 
-  //Edita el registro de Dictamen
+  //Edita el registro de Sindicatos
     editar(e: any) {
       console.log("consulta-editar Sindicato")
       console.log(e.contrasenia)

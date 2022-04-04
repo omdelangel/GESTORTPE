@@ -32,7 +32,7 @@ import { ConsultaSindicatosComponent } from './_catalogos/consulta-sindicatos/co
 import { ConsultaEstacionesComponent } from './_catalogos/consulta-estaciones/consulta-estaciones.component';
 import { ConsultaTalleresComponent } from './_catalogos/consulta-talleres/consulta-talleres.component';
 import { VigentesComponent } from './_components/vigentes/vigentes.component'
-
+import { ConsultaMarcasComponent } from './_catalogos/consulta-marcas/consulta-marcas.component';
 
 
 const routes: Routes = [
@@ -69,7 +69,8 @@ const routes: Routes = [
                { path: 'sindicatos', component: ConsultaSindicatosComponent},        
                { path: 'estaciones', component: ConsultaEstacionesComponent},        
                { path: 'talleres', component: ConsultaTalleresComponent},  
-               { path: 'vigentes', component: VigentesComponent },      
+               { path: 'vigentes', component: VigentesComponent },    
+               { path: 'marcas', component: ConsultaMarcasComponent },    
                ]},  
  
  
