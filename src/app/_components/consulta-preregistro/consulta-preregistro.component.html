@@ -41,28 +41,18 @@
 									<mat-cell *matCellDef="let row"> {{row.IdConcesionario}} </mat-cell>
 								</ng-container>
 
-								<!-- ID Column 
+								<!-- ID Column -->
 								<ng-container matColumnDef="NombreCompleto">
 									<mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Concesionario
 									</mat-header-cell>
 									
 									<mat-cell *matCellDef="let row" >	
 										<p>								
-											<mat-icon matBadge="P"  *ngIf="row.Piloto">directions_car</mat-icon>
+											<mat-icon matBadge="P"  *ngIf="row.Piloto" matBadgeColor="warn">directions_car</mat-icon>
 											{{row.NombreCompleto}}
 										  </p>														 								
 										</mat-cell>
-								</ng-container>-->
-
-												<!-- ID Column -->
-												<ng-container matColumnDef="NombreCompleto">
-													<mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Concesionario
-													</mat-header-cell>												
-													<mat-cell *matCellDef="let row">																								
-														{{row.NombreCompleto}}
-													</mat-cell>
-												</ng-container>
-
+								</ng-container>
 
 								<!-- ID Column -->
 								<ng-container matColumnDef="FechaRegistro">

@@ -34,7 +34,7 @@
                                         (selectionChange)="onSelectionChanged($event)">
                                         <mat-option *ngFor="let sindicato of sindicatos"
                                             [value]="sindicato.IdSindicato">
-                                            {{sindicato.Nombre}}
+                                            {{sindicato.Nombre}} 
                                         </mat-option>
                                     </mat-select>
                                     <mat-error *ngIf="frmStepOne.get('IdSindicato')!.invalid">Campo requerido

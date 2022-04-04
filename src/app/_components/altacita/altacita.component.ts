@@ -36,6 +36,7 @@ export class AltacitaComponent implements OnInit {
   idVehiculoValue: number = 0;
   idConcesionarioValue: number = 0;
   diaHora: any;
+  piloto: boolean = false;
 
   //Determina si viene del registro o de la formalización
   causaValue: string = "";
@@ -117,6 +118,7 @@ export class AltacitaComponent implements OnInit {
     this.idConcesionarioValue = data.idConce;
     this.idVehiculoValue = data.idVehi;
     this.causaValue = data.causa;
+    this.piloto = data.piloto;
 
   }
 

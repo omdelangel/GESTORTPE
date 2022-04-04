@@ -59,6 +59,7 @@ export class AltaconcesionarioComponent implements OnInit {
   fechaNacimiento: string = "";
   asigna: boolean = false;
   nombreConcesionario: string = "";
+  piloto: boolean = false;
  
 
   //Catálogos locales
@@ -144,6 +145,7 @@ export class AltaconcesionarioComponent implements OnInit {
     this.catalogoService.getCatalogoSindicatos()
       .pipe(first())
       .subscribe(data => {
+
         this.sindicatos = data.sindicatos;
       },
         error => {
@@ -177,6 +179,15 @@ export class AltaconcesionarioComponent implements OnInit {
 
   //Evento en cambio de Sindicato
   onSelectionChanged(value: any) {
+
+    this.piloto = false;
+
+    for (let sin of this.sindicatos) {
+      if (value.value == sin.IdSindicato && sin.Piloto == true) {
+        this.piloto = sin.Piloto;
+        break;
+      }
+}
 
     this.f.IdAsignacionSindicato.setValue("");
 

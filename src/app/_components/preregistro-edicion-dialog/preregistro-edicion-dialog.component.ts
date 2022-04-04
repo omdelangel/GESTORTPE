@@ -21,6 +21,7 @@ export class PreregistroEdicionDialogComponent implements OnInit {
   idConcesionarioValue: number = 0;
   idVehiculoValue: number = 0;
   idPropietarioValue: number = 0;
+  piloto: boolean = false;
 
   
   @ViewChild(EdicionconcesionarioComponent) edicionconcesionarioComponent!: EdicionconcesionarioComponent;
@@ -39,6 +40,7 @@ export class PreregistroEdicionDialogComponent implements OnInit {
       this.idConcesionarioValue = data.IdConcesionario;
       this.idVehiculoValue = data.IdVehiculo;
       this.idPropietarioValue = data.IdPropietario;
+      this.piloto = data.Piloto;
 
         
     //subscription para ocultar y mostrar la pestaña de propietarios

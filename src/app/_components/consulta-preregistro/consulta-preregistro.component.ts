@@ -140,7 +140,7 @@ export class ConsultaPreregistroComponent implements OnInit {
 
       const dialogRef = this.dialog.open(PreregistroEdicionDialogComponent, {
         disableClose: true,
-        data: { IdConcesionario: e.IdConcesionario, IdVehiculo: e.IdVehiculo, IdPropietario: e.IdPropietario},
+        data: { IdConcesionario: e.IdConcesionario, IdVehiculo: e.IdVehiculo, IdPropietario: e.IdPropietario, Piloto: e.Piloto},
         width: '100%',
         height: '90%'
       });
@@ -159,7 +159,7 @@ export class ConsultaPreregistroComponent implements OnInit {
       const dialogRef = this.dialog.open(EdicionDocumentosComponent, {
         disableClose: true,
         data: { IdVehiculo: e.IdVehiculo, IdConcesionario: e.IdConcesionario, nombreConcesionario: e.NombreCompleto, marca: e.Marca,
-        submarca: e.Submarca, modelo: e.Modelo},
+        submarca: e.Submarca, modelo: e.Modelo, Piloto: e.Piloto},
         width: '100%',
         //height: '90%'
       });
@@ -177,7 +177,7 @@ export class ConsultaPreregistroComponent implements OnInit {
 
           const dialogRef = this.dialog.open(DialogoTalleresComponent, {
             disableClose: true,
-            data: { nombreConcesionario: e.NombreCompleto, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo, causa: "Verificacion"},
+            data: { nombreConcesionario: e.NombreCompleto, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo, causa: "Verificacion", piloto: e.Piloto},
             width: '100%',
             //height: '90%'
           });
@@ -194,7 +194,7 @@ export class ConsultaPreregistroComponent implements OnInit {
         const dialogRef = this.dialog.open(EdicionCitaComponent, {
           disableClose: true,
           data: { idCita: e.IdCita, NombreConcesionario: e.NombreCompleto, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo,
-          marca: e.Marca, submarca: e.Submarca, modelo: e.Modelo, estatusCita: e.EstatusCita, causa: "Verificacion"},
+          marca: e.Marca, submarca: e.Submarca, modelo: e.Modelo, estatusCita: e.EstatusCita, causa: "Verificacion", piloto: e.Piloto},
           width: '100%',
           //height: '90%'
         });

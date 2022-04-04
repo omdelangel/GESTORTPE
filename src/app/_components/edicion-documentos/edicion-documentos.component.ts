@@ -49,6 +49,7 @@ export class EdicionDocumentosComponent implements OnInit {
   marcaValue: string = "";
   submarcaValue: string = "";
   modeloValue: string = "";
+  piloto: boolean = false;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -66,7 +67,8 @@ export class EdicionDocumentosComponent implements OnInit {
       this.nombreConcesionarioValue = data.nombreConcesionario;
       this.marcaValue = data.marca;
       this.submarcaValue = data.submarca;
-     this.modeloValue = data.modelo;
+      this.modeloValue = data.modelo;
+      this.piloto = data.Piloto;
 
     }
 

@@ -22,6 +22,7 @@ export class PreregistroDialogComponent implements OnInit {
   valueAsigna: boolean = false;
   valueVehiculo: number = 0;
   idConcesionarioValue: number = 0;
+  piloto: boolean = false;
 
   
   @ViewChild(AltaconcesionarioComponent) altaconcesionarioComponent!: AltaconcesionarioComponent;
@@ -37,11 +38,15 @@ export class PreregistroDialogComponent implements OnInit {
     private propietarioService: PropietarioService,
     public dialogRef: MatDialogRef<PreregistroDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any){
+
+      
       
     dialogRef.disableClose = true;
     //subscription para ocultar y mostrar la pestaña de propietarios
     this.subscription = this.concesionarioService.onView().subscribe(message => {
-      this.valueAsigna = this.altaconcesionarioComponent.asigna;      
+      this.valueAsigna = this.altaconcesionarioComponent.asigna;  
+      this.piloto = this.altaconcesionarioComponent.piloto;  
+      this.talleresComponent.pilotoValue = this.piloto;  
     });
 
      //subscription para obtener el idConcesionario
@@ -75,8 +80,6 @@ export class PreregistroDialogComponent implements OnInit {
   }
 
   selectionChange(e: any){
-
-    console.log(e)
 
     switch (e.selectedIndex) {
       case 0:
