@@ -40,7 +40,7 @@ export class DialogoContratoComponent implements OnInit {
   idContrato: number = 0;
   nombreContratoMembresia: string = "";
   nombreContratoSuministro: string = "";
-
+  piloto: boolean = false;
 
 
   constructor(
@@ -57,6 +57,7 @@ export class DialogoContratoComponent implements OnInit {
       this.concesionarioValue = data.nombreConcesionario;
       this.idVehiculoValue = data.IdVehiculo;
       this.sindicatoValue = data.sindicato;
+      this.piloto = data.piloto;
 
       this.getContratoVehiculo(this.idVehiculoValue);
 

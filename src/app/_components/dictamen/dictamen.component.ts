@@ -38,6 +38,7 @@ export class DictamenComponent implements OnInit {
   submarca: string = "";
   modelo: string = "";
   estatusCita: string = "";
+  piloto: boolean = false;
 
   constructor(private citaService: CitasService,
     private alertService: AlertService,
@@ -55,6 +56,7 @@ export class DictamenComponent implements OnInit {
       this.submarca = data.submarca;
       this.modelo = data.modelo;
       this.estatusCita = data.estatusCita;
+      this.piloto = data.piloto;
      }
 
   ngOnInit(): void {

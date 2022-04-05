@@ -17,7 +17,7 @@
 							<div fxFlex="50" fxFlex.lt-md="100" fxl>
                                 <mat-form-field class="example-full-width">
                                     <mat-select placeholder="Dictamen" formControlName="Dictamen" required
-                                        [errorStateMatcher]="matcher">
+                                        [errorStateMatcher]="matcher"  >
                                         <mat-option *ngFor="let dictamen of dictamenes"
                                             [value]="dictamen.IdDictamen">
                                             {{dictamen.Nombre}}
@@ -31,7 +31,7 @@
 							<div fxFlex="100" fxFlex.lt-md="100" fxl>
 								<mat-form-field class="example-full-width" appearance="fill">
 									<mat-label>Observaciones</mat-label>
-									<textarea matInput placeholder="" formControlName="Observaciones"></textarea>
+									<textarea matInput placeholder="" formControlName="Observaciones" ></textarea>   
 								  </mat-form-field>
 							</div>							
 						</div>
