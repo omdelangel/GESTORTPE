@@ -72,7 +72,7 @@ export class DialogoDictamencitaComponent implements OnInit {
      //Validación de campos en pantalla
      this.reactiveForm = this.formBuilder.group({
       'Dictamen': ['', Validators.required],
-      'Observaciones': ['', Validators.required],
+      'Observaciones':  [''],
     });
   }
 
@@ -92,6 +92,7 @@ export class DialogoDictamencitaComponent implements OnInit {
     this.catalogoService.getCatalogoDictamen()
       .pipe(first())
       .subscribe(data => {
+
         this.dictamenes = data.dictamenes;
       },
         error => {
@@ -133,7 +134,7 @@ export class DialogoDictamencitaComponent implements OnInit {
   }
 
     //Guarda la cita
-    mostrarDialogoConfirmacion(): void {
+    mostrarDialogoConfirmacion(): void {     
 
       //this.clear();
     this.submitted = true;
@@ -142,6 +143,11 @@ export class DialogoDictamencitaComponent implements OnInit {
     if (this.reactiveForm.invalid) {
       return;
     }
+
+    if(this.f.Dictamen.value != "APB" && this.f.Observaciones.value == ""){
+      this.notifier.notify('warnig', "Debe ingresar las Observaciones");
+      return;
+    } 
 
     switch (this.f.Dictamen.value) {
       case 'APB':
@@ -173,6 +179,7 @@ export class DialogoDictamencitaComponent implements OnInit {
           if (confirmado) {
   
            this.dictaminarCita();
+           this.dialogRef.close();
   
           } else {
   
@@ -184,25 +191,5 @@ export class DialogoDictamencitaComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  //Manejo de Alertas
-  success(message: string) {
-    this.alertService.success(message, 'success');
-  }
-
-  error(message: string) {
-    this.alertService.error(message, 'error');
-  }
-
-  info(message: string) {
-    this.alertService.info(message, 'info');
-  }
-
-  warn(message: string) {
-    this.alertService.warn(message, 'warn');
-  }
-
-  clear() {
-    this.alertService.clear();
-  }
 
 }

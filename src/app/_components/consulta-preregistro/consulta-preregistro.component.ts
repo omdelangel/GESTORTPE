@@ -221,7 +221,7 @@ export class ConsultaPreregistroComponent implements OnInit {
         const dialogRef = this.dialog.open(DictamenComponent, {
           disableClose: true,
           data: { idCita: e.IdCita, NombreConcesionario: e.NombreCompleto, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo,
-          marca: e.Marca, submarca: e.Submarca, modelo: e.Modelo, estatusCita: e.EstatusCita },
+          marca: e.Marca, submarca: e.Submarca, modelo: e.Modelo, estatusCita: e.EstatusCita, piloto: e.Piloto },
           width: '100%',
           //height: '90%'
         });

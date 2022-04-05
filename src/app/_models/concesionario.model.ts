@@ -115,7 +115,7 @@ export class ConcesionarioRegistro {
     IdAsignacionSindicato: number;
     EditaContrato: boolean;
     EditaDocumentos: boolean;
-    EditaOperador: boolean;
+    Piloto: boolean;
     constructor(concesionarioRegistro: {
         IdConcesionario: number;
         NombreConcesionario: string;
@@ -131,7 +131,7 @@ export class ConcesionarioRegistro {
         IdAsignacionSindicato: number;
         EditaContrato: boolean;
         EditaDocumentos: boolean;
-        EditaOperador: boolean;
+        Piloto: boolean;
     }) {
         this.IdConcesionario = concesionarioRegistro.IdConcesionario;
         this.NombreConcesionario = concesionarioRegistro.NombreConcesionario;
@@ -147,7 +147,7 @@ export class ConcesionarioRegistro {
         this.IdAsignacionSindicato = concesionarioRegistro.IdAsignacionSindicato;
         this.EditaContrato = concesionarioRegistro.EditaContrato;
         this.EditaDocumentos = concesionarioRegistro.EditaDocumentos;
-        this.EditaOperador = concesionarioRegistro.EditaOperador;
+        this.Piloto = concesionarioRegistro.Piloto;
     }
 }
 
@@ -165,6 +165,7 @@ export class ConcesionarioInstalacion {
     FechaCitaInstalacion: string;
     EstatusCitaInstalacion: string;
     ConfirmaCita: boolean;
+    Piloto: boolean;
     constructor(concesionarioInstalacion: {
         IdConcesionario: number;
         NombreConcesionario: string;
@@ -179,6 +180,7 @@ export class ConcesionarioInstalacion {
         FechaCitaInstalacion: string;
         EstatusCitaInstalacion: string;
         ConfirmaCita: boolean;
+        Piloto: boolean;
     }) {
         this.IdConcesionario = concesionarioInstalacion.IdConcesionario;
         this.NombreConcesionario = concesionarioInstalacion.NombreConcesionario;
@@ -193,6 +195,7 @@ export class ConcesionarioInstalacion {
         this.FechaCitaInstalacion = concesionarioInstalacion.FechaCitaInstalacion;
         this.EstatusCitaInstalacion = concesionarioInstalacion.EstatusCitaInstalacion;
         this.ConfirmaCita = concesionarioInstalacion.ConfirmaCita;
+        this.Piloto = concesionarioInstalacion.Piloto;
     }
 }
 

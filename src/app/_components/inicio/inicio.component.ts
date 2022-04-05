@@ -19,15 +19,15 @@ export class InicioComponent implements OnInit {
      let valores = JSON.parse(this.dataPerfil);
      this.perfil = valores.IdPerfil;
 
-     if (this.perfil == 6) {
-
-      this.viewDashboard = false;
-      this.viewBienvenidos = true;
- 
-    } else {
+     if (this.perfil == 1 || this.perfil == 6) {
 
       this.viewDashboard = true;
       this.viewBienvenidos = false;
+ 
+    } else {
+
+      this.viewDashboard = false;
+      this.viewBienvenidos = true;
  
     }
 

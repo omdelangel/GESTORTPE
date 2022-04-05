@@ -61,6 +61,7 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
   perfil: number = 0;
   submitted = false;
   documento: DocumentoVerificacion;
+  piloto: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
     private documentosService: DocumentosService,
@@ -77,6 +78,7 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
     this.marcaValue = data.marca;
     this.submarcaValue = data.submarca;
     this.modeloValue = data.modelo;
+    this.piloto = data.piloto;
 
     //Obtiene el valor del perfil para la revisión de los documentos
     this.dataPerfil = sessionStorage.getItem('usuario');
