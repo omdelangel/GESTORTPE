@@ -17,7 +17,7 @@ import { RepoSinConcluirComponent } from './_components/repo-sin-concluir/repo-s
 import { FormalizacionComponent } from './_components/formalizacion/formalizacion.component';
 import { PrecioGasComponent } from './_catalogos/precio-gas';
 import { PrecioGasolinaComponent } from './_catalogos/precio-gasolina';
-import { InicioBienvenidosComponent } from './_components/inicio-bienvenidos/inicio-bienvenidos.component';
+//import { InicioBienvenidosComponent } from './_components/inicio-bienvenidos/inicio-bienvenidos.component';
 import { RepoAhorroPeriodoComponent } from './_components/repo-ahorro-periodo/repo-ahorro-periodo.component';
 import { RepoNoConsumenComponent } from './_components/repo-no-consumen/repo-no-consumen.component';
 import { RepoVtasRecaudadasComponent } from './_components/repo-vtas-recaudadas/repo-vtas-recaudadas.component';
@@ -32,6 +32,7 @@ import { ConsultaSindicatosComponent } from './_catalogos/consulta-sindicatos/co
 import { ConsultaEstacionesComponent } from './_catalogos/consulta-estaciones/consulta-estaciones.component';
 import { ConsultaTalleresComponent } from './_catalogos/consulta-talleres/consulta-talleres.component';
 import { VigentesComponent } from './_components/vigentes/vigentes.component'
+import { PilotoComponent } from './_components/piloto';
 
 
 
@@ -54,7 +55,7 @@ const routes: Routes = [
                { path: 'formalizacion', component: FormalizacionComponent},
                { path: 'precioGas', component: PrecioGasComponent},
                { path: 'precioGasolina', component: PrecioGasolinaComponent},
-               { path: 'bienvenidos', component: InicioBienvenidosComponent},
+              // { path: 'bienvenidos', component: InicioBienvenidosComponent},
                { path: 'repoAhorroPeriodo', component: RepoAhorroPeriodoComponent},
                { path: 'repoNoConsumen', component: RepoNoConsumenComponent},
                { path: 'repoVtasRecaudadas', component: RepoVtasRecaudadasComponent},
@@ -69,7 +70,8 @@ const routes: Routes = [
                { path: 'sindicatos', component: ConsultaSindicatosComponent},        
                { path: 'estaciones', component: ConsultaEstacionesComponent},        
                { path: 'talleres', component: ConsultaTalleresComponent},  
-               { path: 'vigentes', component: VigentesComponent },      
+               { path: 'vigentes', component: VigentesComponent },  
+               { path: 'piloto', component: PilotoComponent},    
                ]},  
  
  

@@ -124,20 +124,20 @@
                                     </ng-container>
                                     						<!--toggle column -->
 						
-                            <ng-container matColumnDef="Correcto" stickyEnd>
+                            <ng-container matColumnDef="Correcto" stickyEnd >
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Validar documentos</mat-header-cell>
-                                <mat-cell *matCellDef="let row">
-                                    <a (click)="editar(row, 1)" matTooltip="Correcto" *ngIf="!row.editable"
+                                <mat-cell *matCellDef="let row"  >
+                                    <a (click)="editar(row, 1)" matTooltip="Correcto" *ngIf="!row.editable" 
                                     class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
                                     mat-icon-button>
                                    <mat-icon style="color: #1B4F72;">check_box</mat-icon>
                                  </a>
-                                 <a (click)="salvar(row, 1)" matTooltip="Guardar" *ngIf="row.editable"
+                                 <a (click)="salvar(row, 1)" matTooltip="Guardar" *ngIf="row.editable" 
                                  class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
                                  mat-icon-button>
                                 <mat-icon style="color: #009288;">save</mat-icon>
                               </a>
-                              <a (click)="cancelar(row, 1)" matTooltip="Cancelar" *ngIf="row.editable"
+                              <a (click)="cancelar(row, 1)" matTooltip="Cancelar" *ngIf="row.editable" 
                                  class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
                                  mat-icon-button>
                                 <mat-icon style="color: #009288;">cancel</mat-icon>
@@ -145,20 +145,20 @@
                                 </mat-cell>
                             </ng-container>
 
-                            <ng-container matColumnDef="Incorrecto" stickyEnd>
+                            <ng-container matColumnDef="Incorrecto" stickyEnd >
                                 <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-                                <mat-cell *matCellDef="let row">
+                                <mat-cell *matCellDef="let row" >
                                     <a (click)="editar(row, 0)" matTooltip="Incorrecto" *ngIf="!row.editable1"
                                     class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
                                     mat-icon-button>
                                    <mat-icon style="color: #009288;">cancel</mat-icon>
                                  </a>
-                                 <a (click)="salvar(row, 0)" matTooltip="Guardar" *ngIf="row.editable1"
+                                 <a (click)="salvar(row, 0)" matTooltip="Guardar" *ngIf="row.editable1" 
                                  class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
                                  mat-icon-button>
                                 <mat-icon style="color: #009288;">save</mat-icon>
                               </a>
-                              <a (click)="cancelar(row, 0)" matTooltip="Cancelar" *ngIf="row.editable1"
+                              <a (click)="cancelar(row, 0)" matTooltip="Cancelar" *ngIf="row.editable1" 
                                  class="w-8 h-8 leading-none flex items-center justify-center ml-1 hover:bg-hover"
                                  mat-icon-button>
                                 <mat-icon style="color: #009288;">cancel</mat-icon>

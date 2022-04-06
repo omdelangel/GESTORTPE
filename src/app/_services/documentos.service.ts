@@ -48,8 +48,6 @@ postGuardaDocumentoPDF(formData: any): Observable<any> {
   let params = new HttpParams();
   params = params.append('IdVehiculo', IdVehiculo);
 
-  console.log(IdVehiculo);
-
   return this.http.get<any>(`${environment.SERVER_URL}/contrato`, { params: params })
     .pipe(map((res: Response) => {
 
@@ -67,9 +65,6 @@ getDocumentosContrato(IdVehiculo: number): Observable<any> {
 
   return this.http.get<any>(`${environment.SERVER_URL}/documentos-contrato`, { params: params })
     .pipe(map((res: Response) => {
-
-      console.log("res");
-      console.log(res);
 
       return res || {}
     }),

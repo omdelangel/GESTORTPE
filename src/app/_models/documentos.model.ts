@@ -8,6 +8,7 @@ export class DocumentosVehiculo {
     Faltante: number;
     Calificacion: number;
     Observaciones: string;
+    Calificar: boolean;
 
     constructor(documentosVehiculo: { IdDocumento: number;
         Documento: string;
@@ -15,7 +16,8 @@ export class DocumentosVehiculo {
         NombreArchivo: string;
         Faltante: number;
         Calificacion: number;
-        Observaciones: string;}){
+        Observaciones: string;
+        Calificar: boolean;}){
         this.IdDocumento = documentosVehiculo.IdDocumento;
         this.Documento = documentosVehiculo.Documento;
         this.IdVehiculo = documentosVehiculo.IdVehiculo;
@@ -23,6 +25,7 @@ export class DocumentosVehiculo {
         this.Faltante = documentosVehiculo.Faltante;
         this.Calificacion = documentosVehiculo.Calificacion;
         this.Observaciones = documentosVehiculo.Observaciones;
+        this.Calificar = documentosVehiculo.Calificar;
     }    
 }
 

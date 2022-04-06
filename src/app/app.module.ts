@@ -97,6 +97,7 @@ import { EdicionTalleresComponent } from './_catalogos/edicion-talleres/edicion-
 import { VigentesComponent } from './_components/vigentes/vigentes.component';
 import { ConsumoMetaComponent } from './_dashboard/consumo-meta/consumo-meta.component';
 import { ContratosNoconsumoComponent } from './_dashboard/contratos-noconsumo/contratos-noconsumo.component';
+import { PilotoComponent } from './_components/piloto/piloto.component';
 
 
 
@@ -230,7 +231,8 @@ FullCalendarModule.registerPlugins([
     EdicionTalleresComponent,
     VigentesComponent,
     ConsumoMetaComponent,
-    ContratosNoconsumoComponent
+    ContratosNoconsumoComponent,
+    PilotoComponent
   ],
   imports: [
     BrowserModule,

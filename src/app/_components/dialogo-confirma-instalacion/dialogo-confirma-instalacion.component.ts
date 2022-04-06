@@ -34,6 +34,7 @@ export class DialogoConfirmaInstalacionComponent implements OnInit {
   tipoConvertidor: string = "";
   submitted = false;
   citas!: Citas;
+  piloto: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
     notifierService: NotifierService,
@@ -50,6 +51,7 @@ export class DialogoConfirmaInstalacionComponent implements OnInit {
       this.placa = data.Placa;
       this.tipoVehiculo = data.TipoVehiculo;
       this.tipoConvertidor = data.TipoConvertidor;
+      this.piloto = data.piloto;
      }
 
   ngOnInit(): void {

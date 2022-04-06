@@ -35,7 +35,10 @@
 									<mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Concesionario
 									</mat-header-cell>
 									<mat-cell *matCellDef="let row">
-										{{row.NombreConcesionario}}</mat-cell>
+										<p>
+											<mat-icon matBadge="P" *ngIf="row.Piloto" matBadgeColor="warn">directions_car</mat-icon>
+											{{row.NombreConcesionario}}
+										</p></mat-cell>
 								</ng-container>
 
 

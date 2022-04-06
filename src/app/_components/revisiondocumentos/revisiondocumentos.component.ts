@@ -115,7 +115,7 @@ export class RevisiondocumentosComponent implements OnInit {
       disableClose: true,
       data: {
         IdVehiculo: e.IdVehiculo, IdConcesionario: e.IdConcesionario, nombreConcesionario: e.NombreConcesionario, marca: e.Marca,
-        submarca: e.Submarca, modelo: e.Modelo
+        submarca: e.Submarca, modelo: e.Modelo, piloto: e.Piloto
       },
       width: '1500px',
       //height: '700px'

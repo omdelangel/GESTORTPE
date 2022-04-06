@@ -275,6 +275,8 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
   //Califica el documento
   editar(e: any, valor: number) {
 
+if(e.Calificar){
+
     if (valor == 1) {
       if (this.edit) e.editable = !e.editable;
       this.disabled = false;
@@ -284,6 +286,9 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
       this.disabled = false;
       this.edit = false;
     }
+  } else {
+    this.notifier.notify('info', 'El documento ya fue calificado');
+ }
 
   }
 
@@ -305,9 +310,6 @@ export class DialogoDocumentosRegistroComponent implements OnInit {
 
   //Guarda la calificación del documento
   salvar(e: any, valor: number) {
-
-    console.log("valor");
-    console.log(valor);
 
     if (valor == 1) {
       this.calificaDocumento(e, valor);
