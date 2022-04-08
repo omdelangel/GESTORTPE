@@ -120,8 +120,7 @@ export class DialogoConfirmaInstalacionComponent implements OnInit {
     this.f.TipoConvertidor.setValue(this.tipoConvertidor);
     this.f.TipoVehiculo.setValue(this.tipoVehiculo);
     this.f.Placa.setValue(this.placa); 
-    this.f.FechaInstalacion.setValue(this.fechaInstalacion);  
-      
+    this.f.FechaInstalacion.setValue(moment(this.fechaInstalacion).format('dd/MM/YYYY'));       
   }
 
 

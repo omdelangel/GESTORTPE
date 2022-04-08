@@ -98,6 +98,9 @@ import { VigentesComponent } from './_components/vigentes/vigentes.component';
 import { ConsumoMetaComponent } from './_dashboard/consumo-meta/consumo-meta.component';
 import { ContratosNoconsumoComponent } from './_dashboard/contratos-noconsumo/contratos-noconsumo.component';
 import { PilotoComponent } from './_components/piloto/piloto.component';
+import { DialogoConfirmacionPilotoComponent } from './_components/dialogo-confirmacion-piloto/dialogo-confirmacion-piloto.component';
+import { DialogoContratoPilotoComponent } from './_components/dialogo-contrato-piloto/dialogo-contrato-piloto.component';
+import { DialogoDocumentosRegistroPilotoComponent } from './_components/dialogo-documentos-registro-piloto/dialogo-documentos-registro-piloto.component';
 
 
 
@@ -232,7 +235,10 @@ FullCalendarModule.registerPlugins([
     VigentesComponent,
     ConsumoMetaComponent,
     ContratosNoconsumoComponent,
-    PilotoComponent
+    PilotoComponent,
+    DialogoConfirmacionPilotoComponent,
+    DialogoContratoPilotoComponent,
+    DialogoDocumentosRegistroPilotoComponent
   ],
   imports: [
     BrowserModule,

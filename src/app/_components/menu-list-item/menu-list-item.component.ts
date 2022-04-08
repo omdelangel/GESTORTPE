@@ -21,9 +21,11 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class MenuListItemComponent  implements OnInit {
   expanded: boolean = false;
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
+  @Input() valor!: boolean;
   @Input() item!: NavItem;
   @Input() depth!: number;
   title: string = "";
+
 
   constructor(public navService: NavService,
     public router: Router) {
@@ -41,20 +43,31 @@ export class MenuListItemComponent  implements OnInit {
           // console.log(`${this.item.route} is expanded: ${this.expanded}`);
         }
       });
+
+
     }
   
      onItemSelected(item: NavItem) {
        
       if (!item.children || !item.children.length) {
+
+        console.log("onItemSelected");
         this.router.navigate([item.route]);
         //this.navService.closeNav();      
       }
       if (item.children && item.children.length) {
 
+
+       console.log("item.children");
+       console.log(item.children);
+
+
+       console.log("item.children.length");
+       console.log(item.children.length);
+
         this.expanded = !this.expanded;
       }
     }
-
     
   }
   

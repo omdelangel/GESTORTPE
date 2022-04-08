@@ -1,14 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm, ControlContainer } from '@angular/forms';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { first } from 'rxjs/operators';
-import { DocumentosService } from 'src/app/_services';
-import { VehiculoContrato } from 'src/app/_models';
 import { NotifierService } from 'angular-notifier';
-import { CurrencyPipe } from '@angular/common';  
-import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
-
+import { ContratoPiloto } from 'src/app/_models/piloto.model';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { PilotoService, DocumentosService } from 'src/app/_services';
+import { CurrencyPipe } from '@angular/common';
+import { first } from 'rxjs/operators';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -19,20 +17,18 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-dialogo-contrato',
-  templateUrl: './dialogo-contrato.component.html',
-  styleUrls: ['./dialogo-contrato.component.scss']
+  selector: 'app-dialogo-contrato-piloto',
+  templateUrl: './dialogo-contrato-piloto.component.html',
+  styleUrls: ['./dialogo-contrato-piloto.component.scss']
 })
-export class DialogoContratoComponent implements OnInit {
+export class DialogoContratoPilotoComponent implements OnInit {
   private readonly notifier: NotifierService;
 
   concesionarioValue: string = "";
-  sindicatoValue: string = "";
   reactiveForm!: FormGroup;
-  idVehiculoValue: number = 0;
   value: boolean = false;
   tituloContrato: string = "";
-  contrato!: VehiculoContrato;
+  contrato!: ContratoPiloto;
   pdfSrc!: string;
   idContrato: number = 0;
   nombreContratoMembresia: string = "";
@@ -43,20 +39,20 @@ export class DialogoContratoComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    public documentosService: DocumentosService,
+    public pilotoService: PilotoService,
     notifierService: NotifierService,
     public currencyPipe: CurrencyPipe,
-    public dialogRef: MatDialogRef<DialogoContratoComponent>,
+    public documentosService: DocumentosService,
+    public dialogRef: MatDialogRef<DialogoContratoPilotoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
       this.notifier = notifierService; 
       dialogRef.disableClose = true;
       this.concesionarioValue = data.nombreConcesionario;
-      this.idVehiculoValue = data.IdVehiculo;
-      this.sindicatoValue = data.sindicato;
       this.piloto = data.piloto;
+      this.idContrato = data.idContrato;
 
-      this.getContratoVehiculo(this.idVehiculoValue);
+      this.getContratoPiloto(this.idContrato);
 
      }
 
@@ -87,9 +83,9 @@ export class DialogoContratoComponent implements OnInit {
   }
 
   //Consulta los datos del contrato
-  getContratoVehiculo(idVehiculo: number) {
+  getContratoPiloto(idContrato: number) {
 
-    this.documentosService.getVehiculoContrato(idVehiculo)
+    this.pilotoService.getContratoPiloto(idContrato)
       .pipe(first())
       .subscribe(data => {
 
@@ -97,7 +93,7 @@ export class DialogoContratoComponent implements OnInit {
 
         this.idContrato = data.contrato[0].IdContrato;
         this.f.Concesionario.setValue(this.concesionarioValue);
-        this.f.Sindicato.setValue(this.sindicatoValue);
+        this.f.Sindicato.setValue(data.contrato[0].Sindicato);
         this.f.TipoConvertidor.setValue(data.contrato[0].Convertidor);
         this.f.CostoConvertidor.setValue(this.currencyPipe.transform(data.contrato[0].ConsumoRequerido));
         this.f.ConsumoMensualLTS.setValue(this.currencyPipe.transform(data.contrato[0].ConsumoMensual));

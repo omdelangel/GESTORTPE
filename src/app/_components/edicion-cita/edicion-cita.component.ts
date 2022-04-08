@@ -236,7 +236,7 @@ export class EdicionCitaComponent implements OnInit {
       .subscribe((confirmado: Boolean) => {
         if (confirmado) {
 
-          //this.cancelarCita();
+          this.cancelarCita();
 
           const dialogRef = this.dialog.open(DialogoTalleresComponent, {
             data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo, causa: this.causaValue, piloto: this.piloto },
