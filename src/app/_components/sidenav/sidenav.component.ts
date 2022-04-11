@@ -110,12 +110,10 @@ export class SidenavComponent implements OnDestroy{
   increase() {
     this.sidenavWidth = 15;
     this.isShowing = true;
-    console.log('increase sidenav width');
   }
   decrease() {
     this.sidenavWidth = 4;
     this.isShowing = false;
-    console.log('decrease sidenav width');
   }
 
   ngOnDestroy() {
