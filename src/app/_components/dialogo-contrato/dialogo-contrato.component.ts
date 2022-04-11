@@ -10,9 +10,6 @@ import { CurrencyPipe } from '@angular/common';
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 
-declare var require: any
-const FileSaver = require('file-saver');
-
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {

@@ -1,0 +1,188 @@
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayout.lt-sm="row">
+	<div fxLayout="row wrap" fxLayoutGap="20px" fxFlex="100">
+		<div fxFlex="100" *ngIf="divTalleres">
+			<mat-card>
+				<div class="example-button-container">
+					<button mat-mini-fab class="close-button" style="outline: none;" (click)="onNoClick()">
+						<mat-icon>close</mat-icon>
+					</button>
+				</div>
+				<mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+					<mat-card-title fx-item class="title-header-content">Lista de Talleres
+					</mat-card-title>
+				</mat-card-actions>
+
+				<mat-card-header>
+					<div class="w-full" fxFlex="30">
+						<mat-form-field>
+							<input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
+						</mat-form-field>
+					</div>
+				</mat-card-header>
+
+				<mat-card-content>
+					<!--	<div>
+						<alert style="font-size: small; height: 30px;"></alert>
+					</div> -->
+					<form [formGroup]="frmStepFour" (ngSubmit)="onSubmit()">
+						<div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100">
+							<mat-table [dataSource]="dataSource" matSort>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="IdTaller">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> IdTaller
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.IdTaller}} </mat-cell>
+								</ng-container>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="Nombre">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Nombre
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row">
+										{{row.Nombre}}</mat-cell>
+								</ng-container>
+
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="RFC">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> RFC
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.RFC}} </mat-cell>
+								</ng-container>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="Domicilio">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Domicilio
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.Domicilio}} </mat-cell>
+								</ng-container>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="IdColonia">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> IdColonia
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.IdColonia}} </mat-cell>
+								</ng-container>
+
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="Colonia">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Colonia
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.Colonia}} </mat-cell>
+								</ng-container>
+
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="CP">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> CP
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.CP}} </mat-cell>
+								</ng-container>
+
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="Municipio">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Municipio
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.Municipio}} </mat-cell>
+								</ng-container>
+
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="EntidadFederativa">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> EntidadFederativa
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.EntidadFederativa}} </mat-cell>
+								</ng-container>
+
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="Telefono">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Teléfono
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.Telefono}} </mat-cell>
+								</ng-container>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="Contacto">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Contacto
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.Contacto}} </mat-cell>
+								</ng-container>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="HorarioIni">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Apertura
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.HorarioIni }} </mat-cell>
+								</ng-container>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="HorarioFin">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Cierre
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.HorarioFin }} </mat-cell>
+								</ng-container>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="Concurrencia">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Concurrencia
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.Concurrencia}} </mat-cell>
+								</ng-container>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="DuracionCita">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> DuracionCita
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.DuracionCita}} </mat-cell>
+								</ng-container>
+
+								<!-- ID Column -->
+								<ng-container matColumnDef="Estatus">
+									<mat-header-cell *matHeaderCellDef mat-sort-header> Estatus
+									</mat-header-cell>
+									<mat-cell *matCellDef="let row"> {{row.Estatus}} </mat-cell>
+								</ng-container>
+
+								<mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+								<mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectRecord(row)">
+								</mat-row>
+							</mat-table>
+							<mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+						</div>
+					</form>
+				</mat-card-content>
+				<notifier-container></notifier-container>
+			</mat-card>
+		</div>
+		<div fxFlex="100" *ngIf="divCitas">
+			<mat-card>
+				<div class="example-button-container">
+					<button mat-mini-fab class="close-button" style="outline: none;" (click)="onNoClick()">
+						<mat-icon>close</mat-icon>
+					</button>
+				</div>
+				<mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+					<mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Su cita ha sido registrada
+					</mat-card-title>
+				</mat-card-actions>
+				<mat-card-subtitle>Taller: {{tallerValue}}</mat-card-subtitle>
+				<mat-card-subtitle>Domicilio: {{domicilioValue}}</mat-card-subtitle>
+				<mat-card-subtitle>Contacto: {{contactoValue}}</mat-card-subtitle>
+				<mat-card-subtitle>Teléfono: {{telefonoValue}}</mat-card-subtitle>
+				<mat-card-content>
+					<mat-divider></mat-divider>
+					<br>
+					<p>Concesionario: {{nombreConcesionario}}</p>
+					<p>Día: {{diaValue | date: 'dd/MM/yyyy'}}</p>
+					<p>Hora: {{horaValue}}</p>
+				</mat-card-content>
+				<notifier-container></notifier-container>
+			</mat-card>
+
+		</div>
+	</div>
+</div>

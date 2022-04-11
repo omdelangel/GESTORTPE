@@ -47,8 +47,6 @@ getColorDisponibles(idTaller: number, dia: any): Observable<any> {
 //Registra la Cita para la revisión del auto
 postRegistraCita(citas: Citas): Observable<any> {
 
-  console.log("citas");
-  console.log(citas);
 
   return this.http.post<any>(`${environment.SERVER_URL}/cita-registro`, {'IdVehiculo': citas.IdVehiculo, 
   'IdConcesionario': citas.IdConcesionario, 'Fecha': citas.Fecha, 'IdTaller': citas.IdTaller})

@@ -88,15 +88,11 @@ export class DialogoOperadorEditaComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogoOperadorEditaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
-      console.log(data);
-
       this.notifier = notifierService; 
       this.idConcesionario = data.IdConcesionario;
       this.idVehiculo = data.IdVehiculo;
       this.operadorEdita = data.data;
       this.idOperador = this.operadorEdita.IdOperador;
-
-      console.log(this.idOperador);
 
   }
 

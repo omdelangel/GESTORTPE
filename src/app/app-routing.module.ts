@@ -6,27 +6,27 @@ import { AuthGuard } from './_guards/auth.guard';
 import { QRComponent } from './_components/qr/qr.component';
 import { InicioComponent } from './_components/inicio';
 import { ReimpresionQRComponent } from './_components/reimpresion-qr';
-import { RepoSitActualConceComponent } from './_components/repo-sit-actual-conce';
+import { RepoSitActualConceComponent } from './_reportes/repo-sit-actual-conce';
 import { ConsultaPreregistroComponent } from './_components/consulta-preregistro';
 import { ConsultaRegistroComponent } from './_components/consulta-registro';
 import { RevisiondocumentosComponent } from './_components/revisiondocumentos';
 import { CatDictamenesComponent } from './_catalogos/cat-dictamenes';
 import { ConsultaUsuariosComponent } from './_catalogos/consulta-usuarios'
-import { RepoTaxiVanConvComponent } from './_components/repo-taxi-van-conv/repo-taxi-van-conv.component';
-import { RepoSinConcluirComponent } from './_components/repo-sin-concluir/repo-sin-concluir.component';
+import { RepoTaxiVanConvComponent } from './_reportes/repo-taxi-van-conv/repo-taxi-van-conv.component';
+import { RepoSinConcluirComponent } from './_reportes/repo-sin-concluir/repo-sin-concluir.component';
 import { FormalizacionComponent } from './_components/formalizacion/formalizacion.component';
 import { PrecioGasComponent } from './_catalogos/precio-gas';
 import { PrecioGasolinaComponent } from './_catalogos/precio-gasolina';
-import { InicioBienvenidosComponent } from './_components/inicio-bienvenidos/inicio-bienvenidos.component';
-import { RepoAhorroPeriodoComponent } from './_components/repo-ahorro-periodo/repo-ahorro-periodo.component';
-import { RepoNoConsumenComponent } from './_components/repo-no-consumen/repo-no-consumen.component';
-import { RepoVtasRecaudadasComponent } from './_components/repo-vtas-recaudadas/repo-vtas-recaudadas.component';
-import { RepoConsumoEstacionesComponent } from './_components/repo-consumo-estaciones/repo-consumo-estaciones.component';
-import { RepoContratosSinCitaComponent } from './_components/repo-contratos-sin-cita/repo-contratos-sin-cita.component';
-import { RepoAnalisisSitCitaComponent } from './_components/repo-analisis-sit-cita/repo-analisis-sit-cita.component';
-import { RepoConsumoItAhorroComponent } from './_components/repo-consumo-it-ahorro/repo-consumo-it-ahorro.component';
-import { RepoConsumoItIncompletoComponent } from './_components/repo-consumo-it-incompleto/repo-consumo-it-incompleto.component';
-import { RepoBeneficioSaludComponent } from './_components/repo-beneficio-salud/repo-beneficio-salud.component';
+//import { InicioBienvenidosComponent } from './_components/inicio-bienvenidos/inicio-bienvenidos.component';
+import { RepoAhorroPeriodoComponent } from './_reportes/repo-ahorro-periodo/repo-ahorro-periodo.component';
+import { RepoNoConsumenComponent } from './_reportes/repo-no-consumen/repo-no-consumen.component';
+import { RepoVtasRecaudadasComponent } from './_reportes/repo-vtas-recaudadas/repo-vtas-recaudadas.component';
+import { RepoConsumoEstacionesComponent } from './_reportes/repo-consumo-estaciones/repo-consumo-estaciones.component';
+import { RepoContratosSinCitaComponent } from './_reportes/repo-contratos-sin-cita/repo-contratos-sin-cita.component';
+import { RepoAnalisisSitCitaComponent } from './_reportes/repo-analisis-sit-cita/repo-analisis-sit-cita.component';
+import { RepoConsumoItAhorroComponent } from './_reportes/repo-consumo-it-ahorro/repo-consumo-it-ahorro.component';
+import { RepoConsumoItIncompletoComponent } from './_reportes/repo-consumo-it-incompleto/repo-consumo-it-incompleto.component';
+import { RepoBeneficioSaludComponent } from './_reportes/repo-beneficio-salud/repo-beneficio-salud.component';
 import { OperadoresComponent } from './_components/operadores/operadores.component';
 import { ConsultaSindicatosComponent } from './_catalogos/consulta-sindicatos/consulta-sindicatos.component';
 import { ConsultaEstacionesComponent } from './_catalogos/consulta-estaciones/consulta-estaciones.component';
@@ -34,6 +34,8 @@ import { ConsultaTalleresComponent } from './_catalogos/consulta-talleres/consul
 import { VigentesComponent } from './_components/vigentes/vigentes.component'
 import { ConsultaMarcasComponent } from './_catalogos/consulta-marcas/consulta-marcas.component';
 import { RepoPilotoPorVencerComponent } from './_components/repo-piloto-por-vencer/repo-piloto-por-vencer.component';
+import { PilotoComponent } from './_piloto/piloto';
+
 
 
 const routes: Routes = [
@@ -55,7 +57,7 @@ const routes: Routes = [
                { path: 'formalizacion', component: FormalizacionComponent},
                { path: 'precioGas', component: PrecioGasComponent},
                { path: 'precioGasolina', component: PrecioGasolinaComponent},
-               { path: 'bienvenidos', component: InicioBienvenidosComponent},
+              // { path: 'bienvenidos', component: InicioBienvenidosComponent},
                { path: 'repoAhorroPeriodo', component: RepoAhorroPeriodoComponent},
                { path: 'repoNoConsumen', component: RepoNoConsumenComponent},
                { path: 'repoVtasRecaudadas', component: RepoVtasRecaudadasComponent},
@@ -73,6 +75,8 @@ const routes: Routes = [
                { path: 'vigentes', component: VigentesComponent },    
                { path: 'marcas', component: ConsultaMarcasComponent },
                { path: 'repoPilotoPorVencer', component: RepoPilotoPorVencerComponent },
+               { path: 'vigentes', component: VigentesComponent },  
+               { path: 'piloto', component: PilotoComponent},    
                ]},  
  
  

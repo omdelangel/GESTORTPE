@@ -1,3 +1,5 @@
 export * from './sidenav.component';
 export * from './nav-item';
 export * from './nav-service';
+export * from './Config';
+export * from './Menu';

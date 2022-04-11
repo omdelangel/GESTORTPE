@@ -133,6 +133,13 @@
 }
 
 
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+
 .mat-table {
   overflow: auto;
   max-height: 400px;
@@ -142,19 +149,14 @@
   display: flex;
   flex-direction: column;
   min-width: 300px;
-  visibility: hidden;
 }
 
 .example-header {
   min-height: 64px;
   padding: 8px 24px 0;
-  visibility: hidden;
 }
 
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
+
 
 .table-container {
   height: 400px;
@@ -177,9 +179,70 @@
   text-align: center;
 }
 
+// .mat-table-sticky-border-elem-right {
+//  border-left: 1px solid #e0e0e0;
+//}
 
-.mat-cell {
-  font-size: 12px;
+// .mat-table-sticky-border-elem-left {
+//   border-right: 1px solid #e0e0e0;
+//}
+
+
+.button-edit {
+  width: 35px;
+  height: 35px;
+  outline: none;
+  background-color: #001C71;
+}
+
+.button-documentos {
+  width: 35px;
+  height: 35px;
+  outline: none;
+  background-color: #80BC00;
+}
+
+.button-citas {
+  width: 35px;
+  height: 35px;
+  outline: none;
+  background-color: #F15A24;
+}
+
+.button-dictaminar {
+  width: 35px;
+  height: 35px;
+  outline: none;
+  background-color: #476777;
+}
+
+
+
+
+.iconSize{
+font-size: 20px;
+
+}
+
+.button-operador {
+  width: 35px;
+  height: 35px;
+  outline: none;
+  background-color: #001C71;
+}
+
+.button-cita {
+  width: 35px;
+  height: 35px;
+  outline: none;
+  background-color: #80BC00;
+}
+
+.button-instalacion {
+  width: 35px;
+  height: 35px;
+  outline: none;
+  background-color: #F15A24;
 }
 
 
@@ -189,3 +252,12 @@
 
 }
 
+.mat-column-NombreConcesionario {
+  flex: 0 0 20%;
+  height: 70px;
+}
+
+.piloto{
+  font-weight: bold;
+  color: #F15A24;
+}

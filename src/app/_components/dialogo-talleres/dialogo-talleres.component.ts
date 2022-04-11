@@ -60,7 +60,7 @@ export class DialogoTalleresComponent implements OnInit {
      private tallerService: TalleresService,
      private formBuilder: FormBuilder,
      notifierService: NotifierService,
-     public dialogRef: MatDialogRef<AltacitaComponent>,
+     public dialogRef: MatDialogRef<DialogoTalleresComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
 

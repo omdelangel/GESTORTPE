@@ -20,7 +20,7 @@ import { SharingService } from './_services';
 import { ReimpresionQRComponent } from './_components/reimpresion-qr/reimpresion-qr.component';
 import { PdfViewerComponent } from './_components/pdf-viewer/pdf-viewer.component';
 import { ConfirmationDialogComponent } from './_components/confirmation-dialog/confirmation-dialog.component';
-import { RepoSitActualConceComponent } from './_components/repo-sit-actual-conce/repo-sit-actual-conce.component';
+import { RepoSitActualConceComponent } from './_reportes/repo-sit-actual-conce/repo-sit-actual-conce.component';
 import { ConsultaPreregistroComponent } from './_components/consulta-preregistro/consulta-preregistro.component';
 import { PreregistroDialogComponent } from './_components/preregistro-dialog/preregistro-dialog.component';
 import { AltaconcesionarioComponent } from './_components/altaconcesionario/altaconcesionario.component';
@@ -60,28 +60,28 @@ import { ConsultaUsuariosComponent } from './_catalogos/consulta-usuarios/consul
 import { DialogoOperadorAltaComponent } from './_components/dialogo-operador-alta/dialogo-operador-alta.component';
 import { AltaUsuariosComponent } from './_catalogos/alta-usuarios/alta-usuarios.component';
 import { EdicionUsuariosComponent } from './_catalogos/edicion-usuarios/edicion-usuarios.component'; 
-import { RepoTaxiVanConvComponent } from './_components/repo-taxi-van-conv/repo-taxi-van-conv.component'; 
+import { RepoTaxiVanConvComponent } from './_reportes/repo-taxi-van-conv/repo-taxi-van-conv.component'; 
 import { FormalizacionComponent } from './_components/formalizacion/formalizacion.component';
 import { PieChartComponent } from './_dashboard/pie-chart/pie-chart.component'; 
 import { DashboardCardsComponent } from './_dashboard/dashboard-cards/dashboard-cards.component';
 import { TendenciaChartComponent } from './_dashboard/tendencia-chart/tendencia-chart.component';
 import { InstalacionesTipoVehiculoChartComponent } from './_dashboard/instalaciones-tipo-vehiculo-chart/instalaciones-tipo-vehiculo-chart.component';
 import { EstadoProcesoComponent } from './_dashboard/estado-proceso/estado-proceso.component';
-import { RepoSinConcluirComponent } from './_components/repo-sin-concluir/repo-sin-concluir.component'; 
+import { RepoSinConcluirComponent } from './_reportes/repo-sin-concluir/repo-sin-concluir.component'; 
 import { DialogoConfirmaInstalacionComponent } from './_components/dialogo-confirma-instalacion/dialogo-confirma-instalacion.component';
 import { PrecioGasComponent } from './_catalogos/precio-gas/precio-gas.component';
 import { PrecioGasolinaComponent } from './_catalogos/precio-gasolina/precio-gasolina.component'; 
 import { InicioBienvenidosComponent } from './_components/inicio-bienvenidos/inicio-bienvenidos.component';
 import { AltaPreciosGasComponent } from './_catalogos/alta-precios-gas/alta-precios-gas.component';
-import { RepoAhorroPeriodoComponent } from './_components/repo-ahorro-periodo/repo-ahorro-periodo.component';
-import { RepoNoConsumenComponent } from './_components/repo-no-consumen/repo-no-consumen.component';
-import { RepoVtasRecaudadasComponent } from './_components/repo-vtas-recaudadas/repo-vtas-recaudadas.component';
-import { RepoConsumoEstacionesComponent } from './_components/repo-consumo-estaciones/repo-consumo-estaciones.component';
-import { RepoContratosSinCitaComponent } from './_components/repo-contratos-sin-cita/repo-contratos-sin-cita.component';
-import { RepoConsumoItAhorroComponent } from './_components/repo-consumo-it-ahorro/repo-consumo-it-ahorro.component';
-import { RepoConsumoItIncompletoComponent } from './_components/repo-consumo-it-incompleto/repo-consumo-it-incompleto.component';
-import { RepoAnalisisSitCitaComponent } from './_components/repo-analisis-sit-cita/repo-analisis-sit-cita.component';
-import { RepoBeneficioSaludComponent } from './_components/repo-beneficio-salud/repo-beneficio-salud.component';
+import { RepoAhorroPeriodoComponent } from './_reportes/repo-ahorro-periodo/repo-ahorro-periodo.component';
+import { RepoNoConsumenComponent } from './_reportes/repo-no-consumen/repo-no-consumen.component';
+import { RepoVtasRecaudadasComponent } from './_reportes/repo-vtas-recaudadas/repo-vtas-recaudadas.component';
+import { RepoConsumoEstacionesComponent } from './_reportes/repo-consumo-estaciones/repo-consumo-estaciones.component';
+import { RepoContratosSinCitaComponent } from './_reportes/repo-contratos-sin-cita/repo-contratos-sin-cita.component';
+import { RepoConsumoItAhorroComponent } from './_reportes/repo-consumo-it-ahorro/repo-consumo-it-ahorro.component';
+import { RepoConsumoItIncompletoComponent } from './_reportes/repo-consumo-it-incompleto/repo-consumo-it-incompleto.component';
+import { RepoAnalisisSitCitaComponent } from './_reportes/repo-analisis-sit-cita/repo-analisis-sit-cita.component';
+import { RepoBeneficioSaludComponent } from './_reportes/repo-beneficio-salud/repo-beneficio-salud.component';
 import { OperadoresComponent } from './_components/operadores/operadores.component';
 import { DialogoOperadorEditaComponent } from './_components/dialogo-operador-edita/dialogo-operador-edita.component';
 import { OperadoresAltaComponent } from './_components/operadores-alta/operadores-alta.component';
@@ -102,6 +102,14 @@ import { RepoPilotoPorVencerComponent } from './_components/repo-piloto-por-venc
 import { AltaMarcaSubmarcaComponent } from './_catalogos/alta-marca-submarca/alta-marca-submarca.component';
 import { EdicionMarcaSubmarcaComponent } from './_catalogos/edicion-marca-submarca/edicion-marca-submarca.component';
 import { ImgViewerComponent } from './_catalogos/img-viewer/img-viewer.component';
+import { PilotoComponent } from './_piloto/piloto/piloto.component';
+import { DialogoConfirmacionPilotoComponent } from './_piloto/dialogo-confirmacion-piloto/dialogo-confirmacion-piloto.component';
+import { DialogoContratoPilotoComponent } from './_piloto/dialogo-contrato-piloto/dialogo-contrato-piloto.component';
+import { DialogoDocumentosRegistroPilotoComponent } from './_piloto/dialogo-documentos-registro-piloto/dialogo-documentos-registro-piloto.component';
+import { DialogoTalleresPilotoComponent } from './_piloto/dialogo-talleres-piloto/dialogo-talleres-piloto.component';
+import { AltacitaPilotoComponent } from './_piloto/altacita-piloto/altacita-piloto.component';
+import { DialogoConfirmaDesinstalacionPilotoComponent } from './_piloto/dialogo-confirma-desinstalacion-piloto/dialogo-confirma-desinstalacion-piloto.component';
+import { EdicionCitaPilotoComponent } from './_piloto/edicion-cita-piloto/edicion-cita-piloto.component';
 
 
 
@@ -240,7 +248,15 @@ FullCalendarModule.registerPlugins([
     RepoPilotoPorVencerComponent,
     AltaMarcaSubmarcaComponent,
     EdicionMarcaSubmarcaComponent,
-    ImgViewerComponent
+    ImgViewerComponent,
+    PilotoComponent,
+    DialogoConfirmacionPilotoComponent,
+    DialogoContratoPilotoComponent,
+    DialogoDocumentosRegistroPilotoComponent,
+    DialogoTalleresPilotoComponent,
+    AltacitaPilotoComponent,
+    DialogoConfirmaDesinstalacionPilotoComponent,
+    EdicionCitaPilotoComponent
   ],
   imports: [
     BrowserModule,

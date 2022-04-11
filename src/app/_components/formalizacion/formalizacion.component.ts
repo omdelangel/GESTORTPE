@@ -137,7 +137,7 @@ export class FormalizacionComponent implements OnInit {
 
           const dialogRef = this.dialog.open(DialogoTalleresComponent, {
             disableClose: true,
-            data: { nombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo, causa: "Instalacion"},
+            data: { nombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo, causa: "Instalacion", piloto: e.Piloto},
             
           });
       
@@ -151,7 +151,7 @@ export class FormalizacionComponent implements OnInit {
         const dialogRef = this.dialog.open(EdicionCitaComponent, {
           disableClose: true,
           data: { idCita: e.IdCitaInstalacion, NombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo,
-          marca: e.Marca, submarca: e.Submarca, modelo: e.Modelo, estatusCita: e.EstatusCitaInstalacion, causa: "Instalacion" },
+          marca: e.Marca, submarca: e.Submarca, modelo: e.Modelo, estatusCita: e.EstatusCitaInstalacion, causa: "Instalacion" , piloto: e.Piloto},
         });
     
         dialogRef.afterClosed().subscribe(res => {
@@ -167,7 +167,7 @@ export class FormalizacionComponent implements OnInit {
 
       const dialogRef = this.dialog.open(DialogoConfirmaInstalacionComponent, {
         data: { IdVehiculo: e.IdVehiculo, IdConcesionario: e.IdConcesionario, NombreConcesionario: e.NombreConcesionario, Placa: e.Placa,
-        TipoVehiculo: e.TipoVehiculo, TipoConvertidor: e.TipoConvertidor, FechaInstalacion: e.FechaCitaInstalacion},
+        TipoVehiculo: e.TipoVehiculo, TipoConvertidor: e.TipoConvertidor, FechaInstalacion: e.FechaCitaInstalacion, piloto: e.Piloto},
         disableClose: true,
         //width: '1500px',
        // height: '900px'
