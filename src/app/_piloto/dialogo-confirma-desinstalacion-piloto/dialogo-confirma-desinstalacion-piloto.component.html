@@ -1,0 +1,69 @@
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+    <div fxLayout="row wrap" fxLayoutGap="20px" style="width: 100%;">
+        <div fxFlex="100">
+            <mat-card>
+                <div class="example-button-container">
+                    <button mat-mini-fab  class="close-button" style="outline: none;" (click)="onNoClick()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                  <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+					<mat-card-title fx-item class="title-header-content">Confirmar la Instalación del Convertidor <span *ngIf="piloto" class="piloto">/ PILOTO</span>
+					</mat-card-title>
+				</mat-card-actions>
+                <mat-card-content>
+                    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+                        <div fxLayout="row wrap" fxLayoutGap="30px grid">
+	                                        
+                            <div fxFlex="75" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Concesionario</mat-label>
+									<input matInput formControlName="Concesionario">
+								</mat-form-field>
+							</div>
+							<div fxFlex="25" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Placa</mat-label>
+									<input matInput formControlName="Placa">
+								</mat-form-field>
+							</div>
+							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Tipo Vehículo</mat-label>
+									<input matInput formControlName="TipoVehiculo">
+								</mat-form-field>
+							</div>	
+							<div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+								<mat-form-field>
+									<mat-label>Tipo convertidor</mat-label>
+									<input matInput formControlName="TipoConvertidor">
+								</mat-form-field>
+							</div>          
+                         
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Fecha Instalación</mat-label>
+                                    <input matInput [matDatepicker]="picker" formControlName="FechaInstalacion">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker style="outline: none;" required></mat-datepicker>
+                                    <mat-error *ngIf="reactiveForm.get('FechaInstalacion')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>                      
+                           
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+                            <button mat-mini-fab style="background-color: #80BC00; outline:none;" matTooltip="Confirmar"
+                                (click)="confirmaDesinstalacion()">
+                                <mat-icon>save</mat-icon>
+                            </button>
+                        </div>
+
+                    </form>
+                </mat-card-content>
+                <notifier-container></notifier-container>	
+            </mat-card>
+        </div>
+    </div>
+</div>

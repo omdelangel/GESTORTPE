@@ -50,20 +50,10 @@ export class MenuListItemComponent  implements OnInit {
      onItemSelected(item: NavItem) {
        
       if (!item.children || !item.children.length) {
-
-        console.log("onItemSelected");
         this.router.navigate([item.route]);
         //this.navService.closeNav();      
       }
       if (item.children && item.children.length) {
-
-
-       console.log("item.children");
-       console.log(item.children);
-
-
-       console.log("item.children.length");
-       console.log(item.children.length);
 
         this.expanded = !this.expanded;
       }

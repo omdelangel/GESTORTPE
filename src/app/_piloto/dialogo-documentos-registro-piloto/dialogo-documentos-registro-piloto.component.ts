@@ -6,12 +6,12 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { DocumentosVehiculo, DocumentoVerificacion } from '../../_models';
 import { MatTableDataSource } from '@angular/material/table';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from '../confirmation-dialog';
-import { DocViewerComponent } from '../doc-viewer'; 
+import { ConfirmationDialogComponent } from '../../_components/confirmation-dialog';
+import { DocViewerComponent } from '../../_components/doc-viewer'; 
 import {MatPaginator} from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import {SelectionModel} from '@angular/cdk/collections';
-import { DialogoConfirmacionComponent } from '../dialogo-confirmacion';
+import { DialogoConfirmacionComponent } from '../../_components/dialogo-confirmacion';
 import { NotifierService } from 'angular-notifier';
 
 

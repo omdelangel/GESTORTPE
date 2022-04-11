@@ -136,17 +136,11 @@ export class RepoAhorroPeriodoComponent implements OnInit {
     if (this.reactiveForm.invalid) {
      return;
     }
-      console.log("Parámetros")
-      console.log(this.f.TipoPersona.value)
-      console.log(this.f.sindicato.value)
-
 
       this.repoService.getReporteAhorroPeriodo(this.f.TipoPersona.value,this.f.sindicato.value) 
       .pipe(first())
       .subscribe(data => {
- 
-        console.log("regresé del reporte")
-        console.log(data)
+
         if (data.estatus && !isEmpty(data.reporte[0])) {
   
           // Assign the data to the data source for the table to render

@@ -114,7 +114,10 @@ export class ConsultaPreregistroComponent implements OnInit {
 
       this.concesionarioService.getPreRegConcesionario()
         .pipe(first())
-        .subscribe(data => {   
+        .subscribe(data => {  
+          
+          console.log("PREREGISTRO");
+          console.log(data);
  
           this.preRegistro = data.concesionario;   
           this.dataSource = new MatTableDataSource(this.preRegistro);

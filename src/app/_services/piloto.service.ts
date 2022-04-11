@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Citas } from '../_models/cita.model';
 
 
 @Injectable({
@@ -75,6 +76,32 @@ export class PilotoService {
 
   return this.http.post<any>(this.SERVER_URLReg, formData)
   .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Registra la Cita para la desinstalación del convertidor
+postRegistraCitaDesinstalacion(citas: Citas): Observable<any> {
+
+  return this.http.post<any>(`${environment.SERVER_URL}/cita-convertidor-desinstalacion`, {'IdVehiculo': citas.IdVehiculo, 
+  'IdConcesionario': citas.IdConcesionario, 'Fecha': citas.Fecha, 'IdTaller': citas.IdTaller})
+  .pipe(map((res: Response) => { 
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Confirma la desinstalación del convertidor
+postConfirmaDesinstalacion(citas: Citas): Observable<any> {
+
+  return this.http.post<any>(`${environment.SERVER_URL}/desinstalacion`, {'IdVehiculo': citas.IdVehiculo, 
+  'IdConcesionario': citas.IdConcesionario, 'FechaDesinstalacion': citas.Fecha})
+  .pipe(map((res: Response) => { 
 
       return res || {}
     }),

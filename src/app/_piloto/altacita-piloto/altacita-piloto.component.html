@@ -1,0 +1,52 @@
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+    <div fxLayout="row wrap" fxLayoutGap="20px" style="width: 100%;">
+        <div fxFlex="100">
+            <mat-card>
+                <div class="example-button-container">
+                    <button mat-mini-fab  class="close-button" style="outline: none;" (click)="onNoClick()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                <mat-card-content>
+                    <form [formGroup]="frmStepFour" (ngSubmit)="onSubmit()">
+                        <div fxLayout="row wrap" fxLayoutGap="50px grid">
+                            <div fxFlex="70" fxFlex.lt-md="100" fxl>
+                                <div class="my-ng-fullcalendar">
+                            <!--       <full-calendar [options]="calendarOptions" [data]="myEvents" [options]="eventSettings"></full-calendar>-->
+                                <full-calendar [events]="events" [options]="calendarOptions"></full-calendar> 
+                                </div>
+                            </div>
+                            <div fxFlex="30" fxFlex.lt-md="100" fxl>
+                                <mat-card>
+                                    <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+                                        <mat-card-title fx-item class="title-header-content">Datos de la Cita <span *ngIf="piloto" class="piloto">/ PILOTO</span>
+                                        </mat-card-title>
+                                    </mat-card-actions>
+                                    <h3>Taller: {{nombreValue}}</h3>
+                                    <h3>Domicilio: {{domicilioValue}}</h3>
+                                    <h3>Contacto: {{contactoValue}}</h3>
+                                    <h3>Teléfono: {{telefonoValue}}</h3>
+                                    <mat-card-content>
+                                        <h4>Concesionario: {{nombreConcesionario}}</h4>
+                                        <h4>Fecha: {{dia | date: 'dd/MM/yyyy' }}</h4>
+                                        <h4>Hora: {{hora}}</h4>
+                                        <mat-divider></mat-divider>
+                                        <br>
+                                        <button  mat-raised-button class='w-full login-field' (click)="mostrarDialogoConfirmacion()">
+                                            
+                                            Confirmar la Cita</button>   
+                                  
+                                    </mat-card-content>
+                                  <!-- <alert></alert>--> 
+                                </mat-card>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+                <notifier-container></notifier-container>		
+            </mat-card>
+            <br>
+            
+        </div>
+    </div>
+</div>

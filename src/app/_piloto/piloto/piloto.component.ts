@@ -9,9 +9,9 @@ import { MatSort } from '@angular/material/sort';
 import { PilotoService } from 'src/app/_services';
 import { MatDialog } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
-import { DialogoConfirmaInstalacionComponent } from '../dialogo-confirma-instalacion';
-import { DialogoTalleresComponent } from '../dialogo-talleres';
-import { EdicionCitaComponent } from '../edicion-cita';
+import { DialogoConfirmaDesinstalacionPilotoComponent } from '../dialogo-confirma-desinstalacion-piloto';
+import { DialogoTalleresPilotoComponent } from '../dialogo-talleres-piloto';
+import { EdicionCitaPilotoComponent } from '../edicion-cita-piloto';
 import { DialogoContratoPilotoComponent } from '../dialogo-contrato-piloto';
 import { DialogoDocumentosRegistroPilotoComponent } from '../dialogo-documentos-registro-piloto';
 import { DialogoConfirmacionPilotoComponent } from '../dialogo-confirmacion-piloto';
@@ -106,7 +106,7 @@ export class PilotoComponent implements OnInit {
   //Confirma la desinstalación del convertidor
   confirmacion(e: any) {
 
-    const dialogRef = this.dialog.open(DialogoConfirmaInstalacionComponent, {
+    const dialogRef = this.dialog.open(DialogoConfirmaDesinstalacionPilotoComponent, {
       data: {
         IdVehiculo: e.IdVehiculo, IdConcesionario: e.IdConcesionario, NombreConcesionario: e.NombreConcesionario, Placa: e.Placa,
         TipoVehiculo: e.TipoVehiculo, TipoConvertidor: e.TipoConvertidor, FechaInstalacion: e.FechaCitaInstalacion, piloto: e.Piloto
@@ -134,11 +134,11 @@ export class PilotoComponent implements OnInit {
     .subscribe((confirmado: Boolean) => {
       if (confirmado) {
 
-        this.enviaRespuesta(e.IdContrato, 1);
+        this.enviaRespuesta(e.IdContrato, 0);
 
         if (e.IdCitaInstalacion == null || e.EstatusCitaInstalacion == "V") {
 
-          const dialogRef = this.dialog.open(DialogoTalleresComponent, {
+          const dialogRef = this.dialog.open(DialogoTalleresPilotoComponent, {
             disableClose: true,
             data: { nombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo, causa: "Instalacion", piloto: e.Piloto },
     
@@ -151,7 +151,7 @@ export class PilotoComponent implements OnInit {
     
         } else {
     
-          const dialogRef = this.dialog.open(EdicionCitaComponent, {
+          const dialogRef = this.dialog.open(EdicionCitaPilotoComponent, {
             disableClose: true,
             data: {
               idCita: e.IdCitaInstalacion, NombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo,
@@ -184,7 +184,7 @@ export class PilotoComponent implements OnInit {
       .subscribe((confirmado: Boolean) => {
         if (confirmado) {
 
-          this.enviaRespuesta(e.IdContrato, 0);
+          this.enviaRespuesta(e.IdContrato, 1);
 
           const dialogRef = this.dialog.open(DialogoContratoPilotoComponent, {
             data: { idContrato: e.IdContrato, nombreConcesionario: e.NombreConcesionario},
@@ -211,8 +211,6 @@ export class PilotoComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
 
-        console.log("data de respuesta");
-        console.log(data);
         this.notifier.notify('success', data.mensaje);
       },
         error => {
