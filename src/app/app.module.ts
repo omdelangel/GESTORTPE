@@ -98,7 +98,7 @@ import { VigentesComponent } from './_components/vigentes/vigentes.component';
 import { ConsumoMetaComponent } from './_dashboard/consumo-meta/consumo-meta.component';
 import { ContratosNoconsumoComponent } from './_dashboard/contratos-noconsumo/contratos-noconsumo.component';
 import { ConsultaMarcasComponent } from './_catalogos/consulta-marcas/consulta-marcas.component';
-import { RepoPilotoPorVencerComponent } from './_components/repo-piloto-por-vencer/repo-piloto-por-vencer.component';
+import { RepoPilotoPorVencerComponent } from './_piloto/repo-piloto-por-vencer/repo-piloto-por-vencer.component';
 import { AltaMarcaSubmarcaComponent } from './_catalogos/alta-marca-submarca/alta-marca-submarca.component';
 import { EdicionMarcaSubmarcaComponent } from './_catalogos/edicion-marca-submarca/edicion-marca-submarca.component';
 import { ImgViewerComponent } from './_catalogos/img-viewer/img-viewer.component';

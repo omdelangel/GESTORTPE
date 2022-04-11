@@ -29,18 +29,13 @@ export class VigentesComponent implements OnInit {
   private readonly notifier: NotifierService;
 
   displayedColumns = [
-                      'NumeroConcesion',
                       'Concesionario',
-                      'email',
-                      'Telefono',
                       'FechaInicio',
                       'FechaTermino',
                       'ConsumoMes',
                       'Periodos',
                       'FechaContrato',
-                      'Empresa',
                       'TipoConvertidor',
-                      'Convertidor',
                       'TipoVehiculo',
                       'Vehiculo',
                       'LitrosConsumidos',

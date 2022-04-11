@@ -33,7 +33,7 @@ import { ConsultaEstacionesComponent } from './_catalogos/consulta-estaciones/co
 import { ConsultaTalleresComponent } from './_catalogos/consulta-talleres/consulta-talleres.component';
 import { VigentesComponent } from './_components/vigentes/vigentes.component'
 import { ConsultaMarcasComponent } from './_catalogos/consulta-marcas/consulta-marcas.component';
-import { RepoPilotoPorVencerComponent } from './_components/repo-piloto-por-vencer/repo-piloto-por-vencer.component';
+import { RepoPilotoPorVencerComponent } from './_piloto/repo-piloto-por-vencer/repo-piloto-por-vencer.component';
 import { PilotoComponent } from './_piloto/piloto';
 
 

@@ -159,7 +159,7 @@ export class ConsultaUsuariosComponent implements OnInit {
   isFileAllowedPDF(fileName: string) {
 
     let isFileAllowed = false;
-    const allowedFiles = ['.pdf', '.jpeg', '.png', '.jpg'];
+    const allowedFiles = ['.jpeg', '.png', '.jpg'];
     const regex = /(?:\.([^.]+))?$/;
     const extension = regex.exec(fileName);
     if (undefined !== extension && null !== extension) {

@@ -13,11 +13,11 @@ export class ImgViewerComponent {
 
   //pdfSrc = "./assets/documentosPDF/cita_1649698874199.pdf";
   pdfSrcIMG!: string;
-  pdfSrcPDF!: string;
+  //pdfSrcPDF!: string;
   file: string = "";
   title = "imgEditor";
   visorImg: boolean = false;
-  visorPDF: boolean = false;
+  //visorPDF: boolean = false;
 
 
   constructor(
@@ -35,12 +35,13 @@ export class ImgViewerComponent {
           this.pdfSrcIMG = "./assets/documentosPDF/" + data.archivoIMG;
 //          this.pdfSrcIMG = this.pdfSrc;
 
-      } else if (ext == "pdf") {
+      } 
+//      else if (ext == "pdf") {
 
-         this.visorImg = false;
-         this.pdfSrcPDF = "./assets/documentosPDF/" + data.archivoIMG;
+//         this.visorImg = false;
+  //       this.pdfSrcPDF = "./assets/documentosPDF/" + data.archivoIMG;
   //       this.pdfSrcPDF = this.pdfSrc;
-      }
+//      }
     
      dialogRef.disableClose = true;
 
