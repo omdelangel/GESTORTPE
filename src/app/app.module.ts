@@ -97,6 +97,11 @@ import { EdicionTalleresComponent } from './_catalogos/edicion-talleres/edicion-
 import { VigentesComponent } from './_components/vigentes/vigentes.component';
 import { ConsumoMetaComponent } from './_dashboard/consumo-meta/consumo-meta.component';
 import { ContratosNoconsumoComponent } from './_dashboard/contratos-noconsumo/contratos-noconsumo.component';
+import { ConsultaMarcasComponent } from './_catalogos/consulta-marcas/consulta-marcas.component';
+import { RepoPilotoPorVencerComponent } from './_piloto/repo-piloto-por-vencer/repo-piloto-por-vencer.component';
+import { AltaMarcaSubmarcaComponent } from './_catalogos/alta-marca-submarca/alta-marca-submarca.component';
+import { EdicionMarcaSubmarcaComponent } from './_catalogos/edicion-marca-submarca/edicion-marca-submarca.component';
+import { ImgViewerComponent } from './_catalogos/img-viewer/img-viewer.component';
 import { PilotoComponent } from './_piloto/piloto/piloto.component';
 import { DialogoConfirmacionPilotoComponent } from './_piloto/dialogo-confirmacion-piloto/dialogo-confirmacion-piloto.component';
 import { DialogoContratoPilotoComponent } from './_piloto/dialogo-contrato-piloto/dialogo-contrato-piloto.component';
@@ -239,6 +244,11 @@ FullCalendarModule.registerPlugins([
     VigentesComponent,
     ConsumoMetaComponent,
     ContratosNoconsumoComponent,
+    ConsultaMarcasComponent,
+    RepoPilotoPorVencerComponent,
+    AltaMarcaSubmarcaComponent,
+    EdicionMarcaSubmarcaComponent,
+    ImgViewerComponent,
     PilotoComponent,
     DialogoConfirmacionPilotoComponent,
     DialogoContratoPilotoComponent,

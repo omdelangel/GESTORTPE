@@ -1,17 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup,FormControl, FormBuilder, FormGroupDirective, NgForm } from '@angular/forms';
+import { FormGroup, FormBuilder} from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { CatalogoUsuarios } from 'src/app/_models';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { CatalogosService } from '../../_services';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { AlertService } from '../../_alert';
 import { AltaUsuariosComponent } from '../alta-usuarios';
 import { EdicionUsuariosComponent } from '../../_catalogos/edicion-usuarios/edicion-usuarios.component';
 import { NotifierService } from 'angular-notifier';
+//import { ConfirmationDialogComponent } from '../../_components/confirmation-dialog/confirmation-dialog.component';
+import { ImgViewerComponent } from '../../_catalogos/img-viewer/img-viewer.component'; 
+
 
 
 @Component({
@@ -31,7 +32,9 @@ export class ConsultaUsuariosComponent implements OnInit {
                       'email',
                       'Bloqueado',
                       'Intentos',
-                      'actions'
+                      'actions',
+                      'archivoIMG',
+                      'actionsVer'
                       ];                      
   dataSource!: MatTableDataSource<CatalogoUsuarios>;
 
@@ -39,12 +42,12 @@ export class ConsultaUsuariosComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  reactiveForm!:       FormGroup;
-  catalogoUsuarios:  CatalogoUsuarios[] = [];
+  reactiveForm        !:FormGroup;
+  catalogoUsuarios    :CatalogoUsuarios[] = [];
+  uploadedFiles       !: Array<File>;
 
   constructor(
     public dialog:                MatDialog,
-    private alertService:         AlertService,
     private catalogosService:     CatalogosService,
     private formBuilder:          FormBuilder,
     notifierService:              NotifierService) { 
@@ -87,7 +90,7 @@ export class ConsultaUsuariosComponent implements OnInit {
     }
 
 
-  //Consulta los datos de Dictamen
+  //Consulta los datos de Usuarios
     getConsultaUsuarios(){
       this.catalogosService.getCatalogoUsuarios()
         .pipe(first())
@@ -107,16 +110,10 @@ export class ConsultaUsuariosComponent implements OnInit {
 
   //cambiar valor de Bloqueo
     cambiaBloqueo(e: any){
-      console.log("cambia Bloqueo ")
-      console.log(e.Bloqueado)
       e.Bloqueado = !e.Bloqueado;
-      console.log(e.Bloqueado)
-      console.log(e)
       this.catalogosService.getCatUsuBloqueado(e)
         .pipe(first())
         .subscribe(data => {   
-          console.log("Actualiza Bloqueo Usuario  data ===>  ")
-          console.log(data)
           this.getConsultaUsuarios();
         },
           error => {  
@@ -126,8 +123,6 @@ export class ConsultaUsuariosComponent implements OnInit {
 
   //Edita el registro de Dictamen
     editar(e: any) {
-      console.log("consulta-editar constrasenia  1")
-      console.log(e.contrasenia)
       const dialogRef = this.dialog.open(EdicionUsuariosComponent, {
         disableClose: true,
         data: { 
@@ -159,28 +154,113 @@ export class ConsultaUsuariosComponent implements OnInit {
       filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
       this.dataSource.filter = filterValue;
     }
-  
-  
-  //Manejo de alertas
-    success(message: string) {
-      this.alertService.success(message, 'success');
+
+  //Valida la extensión del archivo PDF
+  isFileAllowedPDF(fileName: string) {
+
+    let isFileAllowed = false;
+    const allowedFiles = ['.jpeg', '.png', '.jpg'];
+    const regex = /(?:\.([^.]+))?$/;
+    const extension = regex.exec(fileName);
+    if (undefined !== extension && null !== extension) {
+      for (const ext of allowedFiles) {
+        if (ext === extension[0]) {
+          isFileAllowed = true;
+        }
+      }
     }
-  
-    error(message: string) {
-      this.alertService.error(message, 'error');
+    return isFileAllowed;
+  }    
+
+
+  //Adjunta los archivos 
+  onFileSelected(e: any, row: any) {
+    console.log("inFileSelected")
+    console.log(e)
+    console.log(e.target.files)
+    console.log(row)
+    this.uploadedFiles = e.target.files;
+
+    if (this.isFileAllowedPDF(this.uploadedFiles[0].name)) {
+        const formData = new FormData();
+        formData.append('Imagen', this.uploadedFiles[0], this.uploadedFiles[0].name),
+        formData.append('IdUsuario', row.IdUsuario),
+        console.log("FormData")
+        console.log(formData)
+        console.log(formData.append)
+
+      this.catalogosService.postGuardaImagenRegistro(formData)
+        .pipe(first())
+        .subscribe(
+          data => {
+            console.log("Graba Imagen Registro")
+            console.log(data)
+            if (data.estatus) {
+              //this.success(data.mensaje);
+              this.notifier.notify('success', data.mensaje, '');
+              this.getConsultaUsuarios();
+            } else if (!data.estatus) {
+              //this.warn(data.mensaje);
+              this.notifier.notify('warning', data.mensaje, '');
+            }
+          },
+          error => {
+            //this.error(error);
+            this.notifier.notify('error', error, '');
+            console.log("Error")
+            console.log(error)
+          });
+
+    } else {
+      this.notifier.notify('warning', 'El archivo no corresponde a las extensiones .jpeg, .png, .jpg', '');
+      //this.warn("El archivo no corresponde a la extensión .pdf");
     }
-  
-    info(message: string) {
-      this.alertService.info(message, 'info');
-    }
-  
-    warn(message: string) {
-      this.alertService.warn(message, 'warn');
-    }
-  
-    clear() {
-      this.alertService.clear();
-    }
+  }
+
+  //Abre la imagen del archivo 
+  verIMG(row: any) {
+    console.log("VerIMG")
+    console.log(row)
+
+//    if (row.Foto == ""){
+//      this.openDialogSinIMG(row);
+//      console.log("Sin IMG")
+//    }else{
+      this.openDialogIMG(row.Foto);
+      console.log("Con IMG")
+ //   }
+  }  
+
+/*  
+  //Abre un aviso para la carga del documento
+  openDialogSinIMG(row: any) {
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '30%',
+      //height: '20%',
+      disableClose: true,
+      data: { documento: row.Documento }
+    });
+    // const snack = this.snackBar.open('Snack bar open before dialog');
+    dialogRef.afterClosed().subscribe(res => {
+
+    });
+  }
+*/
+
+  //Abre modal visualizar el documento
+  openDialogIMG(archivoIMG: string): void {
+
+    const dialogRef = this.dialog.open(ImgViewerComponent, {
+      width: '50%',
+      height: '80%',
+      disableClose: true,
+      data: { archivoIMG: archivoIMG }
+    });
+    dialogRef.afterClosed().subscribe(res => {
+
+    });
+  }  
   
 }
 

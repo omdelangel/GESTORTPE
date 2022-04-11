@@ -32,6 +32,8 @@ import { ConsultaSindicatosComponent } from './_catalogos/consulta-sindicatos/co
 import { ConsultaEstacionesComponent } from './_catalogos/consulta-estaciones/consulta-estaciones.component';
 import { ConsultaTalleresComponent } from './_catalogos/consulta-talleres/consulta-talleres.component';
 import { VigentesComponent } from './_components/vigentes/vigentes.component'
+import { ConsultaMarcasComponent } from './_catalogos/consulta-marcas/consulta-marcas.component';
+import { RepoPilotoPorVencerComponent } from './_piloto/repo-piloto-por-vencer/repo-piloto-por-vencer.component';
 import { PilotoComponent } from './_piloto/piloto';
 
 
@@ -70,6 +72,9 @@ const routes: Routes = [
                { path: 'sindicatos', component: ConsultaSindicatosComponent},        
                { path: 'estaciones', component: ConsultaEstacionesComponent},        
                { path: 'talleres', component: ConsultaTalleresComponent},  
+               { path: 'vigentes', component: VigentesComponent },    
+               { path: 'marcas', component: ConsultaMarcasComponent },
+               { path: 'repoPilotoPorVencer', component: RepoPilotoPorVencerComponent },
                { path: 'vigentes', component: VigentesComponent },  
                { path: 'piloto', component: PilotoComponent},    
                ]},  

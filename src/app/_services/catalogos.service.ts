@@ -3,12 +3,14 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { CatalogoDictamenes, CatalogoUsuarios, UsuariosAltaEdicion, CatalogoTalleres, CatalogoEstaciones, CatalogoSindicato } from 'src/app/_models';
+import { CatalogoDictamenes, CatalogoUsuarios, UsuariosAltaEdicion, CatalogoTalleres, CatalogoEstaciones, CatalogoSindicato, Marca, Submarca} from 'src/app/_models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CatalogosService {
+
+  SERVER_URLReg: string = `${environment.SERVER_URL}/Imagen-digitalizacion`;
 
   constructor(private http: HttpClient) {}
 
@@ -414,11 +416,6 @@ getCatalogoTipoConv(): Observable<any> {
       )
   }  
 
-
-
-
-
-
   
   //Obtiene CP con base a la Colonia
   getObtenCP(IdColonia: any): Observable<any> {
@@ -507,6 +504,145 @@ getCatalogoTipoConv(): Observable<any> {
         catchError(this.handleError)
       )
   }
+
+//Llena catálogo de marcas
+getCatalogoMarca(): Observable<any> {
+  return this.http.get<any>(`${environment.SERVER_URL}/lMarcas`)
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}  
+
+
+  //Obtiene Catálogo de Marcas/Submarcas de una Marca en específico
+getCatalogoMarcaSub(Marca: any): Observable<any> {
+
+    let params = new HttpParams();
+    params = params.append('IdMarca', Marca);
+  
+    return this.http.get<any>(`${environment.SERVER_URL}/Marca-Submarca`, {params: params})
+    .pipe(map((res: Response) => {
+  
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+}
+
+  //Obtiene  Catálogo de Marcas/Submarcas de toda la información de las tablas
+  getCatalogoMarcaSubmarca(): Observable<any> {
+
+    return this.http.get<any>(`${environment.SERVER_URL}/Marca-SubmarcaCMPX`, {})
+    .pipe(map((res: Response) => {
+  
+      console.log("RES")
+      console.log(res)
+        return res || {}
+
+      }),
+      catchError(this.handleError)
+    )
+}
+
+
+  //Registra en tabla de Marcas
+  postRegistraMarca(marca: Marca): Observable<any> {
+
+    return this.http.post<any>(`${environment.SERVER_URL}/Alta-Marca`, {
+      'IdMarca'               : marca.IdMarca                   ,
+      'Nombre'                : marca.Nombre                    ,
+      'Estatus'               : marca.Estatus                   ,
+    })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  } 
+
+  //Registra en tabla de Submarcas
+  postRegistraSubmarca(submarca: Submarca): Observable<any> {
+
+    return this.http.post<any>(`${environment.SERVER_URL}/Alta-SubMarca`, {
+      'IdSubmarca'            : submarca.IdSubmarca                ,
+      'IdMarca'               : submarca.IdMarca                   ,
+      'Nombre'                : submarca.Nombre                    ,
+      'TipoVehiculo'          : submarca.TipoVehiculo              ,
+      'Estatus'               : submarca.Estatus                   ,
+    })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  } 
+  
+  //Registra en tabla de Submarcas
+  postModificaSubmarca(submarca: Submarca): Observable<any> {
+
+    return this.http.post<any>(`${environment.SERVER_URL}/Modifica-SubMarca`, {
+      'IdSubmarca'            : submarca.IdSubmarca                ,
+      'IdMarca'               : submarca.IdMarca                   ,
+      'Nombre'                : submarca.Nombre                    ,
+      'TipoVehiculo'          : submarca.TipoVehiculo              ,
+      'Estatus'               : submarca.Estatus                   ,
+    })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  } 
+
+
+  //Obtiene Catálogo de Marcas/Submarcas de una Marca en específico
+  getCatalogoSubmarca(Marca: any): Observable<any> {
+
+    let params = new HttpParams();
+    params = params.append('IdMarca', Marca);
+  
+    return this.http.get<any>(`${environment.SERVER_URL}/lSubMarcas`, {params: params})
+    .pipe(map((res: Response) => {
+  
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+}  
+
+  
+  //Registra en tabla de Submarcas
+  postModificaMarca(submarca: Submarca): Observable<any> {
+    return this.http.post<any>(`${environment.SERVER_URL}/Modifica-Marca`, {
+      'IdMarca'               : submarca.IdMarca                   ,
+      'Nombre'                : submarca.Nombre                    ,
+      'Estatus'               : submarca.Estatus                   ,
+    })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  } 
+
+//Guarda los documentos de la pantalla de Registro
+postGuardaImagenRegistro(formData: any): Observable<any> {  
+
+  return this.http.post<any>(this.SERVER_URLReg, formData)
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
 
 
 }

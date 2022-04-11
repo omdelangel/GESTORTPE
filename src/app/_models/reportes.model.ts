@@ -601,16 +601,12 @@ export class RepoVigentes {
     IdConcesionario	                :number;
     NumeroConcesion					:string;
     Concesionario					:string;
-    email							:string;
-    Telefono						:string;
     FechaInicio						:string;
     FechaTermino					:string;
     ConsumoMes	                    :number;
     Periodos						:number;
     FechaContrato					:string;
-    Empresa							:string;
     TipoConvertidor					:string;
-    Convertidor						:string;
     TipoVehiculo					:string;
     Vehiculo						:number;
     LitrosConsumidos				:number;
@@ -622,16 +618,12 @@ export class RepoVigentes {
         IdConcesionario	                :number;
         NumeroConcesion					:string;
         Concesionario					:string;
-        email							:string;
-        Telefono						:string;
         FechaInicio						:string;
         FechaTermino					:string;
         ConsumoMes	                    :number;
         Periodos						:number;
         FechaContrato					:string;
-        Empresa							:string;
         TipoConvertidor					:string;
-        Convertidor						:string;
         TipoVehiculo					:string;
         Vehiculo						:number;
         LitrosConsumidos				:number;
@@ -642,16 +634,12 @@ export class RepoVigentes {
         this.IdConcesionario						= repoVigentes.IdConcesionario	  ;
         this.NumeroConcesion						= repoVigentes.NumeroConcesion	  ;
         this.Concesionario							= repoVigentes.Concesionario	  ;
-        this.email									= repoVigentes.email			  ;
-        this.Telefono								= repoVigentes.Telefono			  ;
         this.FechaInicio							= repoVigentes.FechaInicio		  ;
         this.FechaTermino							= repoVigentes.FechaTermino		  ;
         this.ConsumoMes	      				    	= repoVigentes.ConsumoMes	      ;
         this.Periodos								= repoVigentes.Periodos			  ;
         this.FechaContrato							= repoVigentes.FechaContrato	  ;
-        this.Empresa								= repoVigentes.Empresa			  ;
         this.TipoConvertidor						= repoVigentes.TipoConvertidor	  ;
-        this.Convertidor							= repoVigentes.Convertidor		  ;
         this.TipoVehiculo							= repoVigentes.TipoVehiculo		  ;
         this.Vehiculo								= repoVigentes.Vehiculo			  ;
         this.LitrosConsumidos						= repoVigentes.LitrosConsumidos	  ;
@@ -659,3 +647,45 @@ export class RepoVigentes {
         this.PorcentajeConsumo					    = repoVigentes.PorcentajeConsumo  ;                               
     }    
 }
+
+
+export class RepoPilotoPorVencer {
+    IdConcesionario                :number;
+    NombreCompleto                 :string;
+    Telefono                       :string;
+    Email                          :string;
+    NombreSM                       :string;
+    NombreM                        :string;
+    IdVehiculo                     :number;
+    Placa                          :string;
+    FechaInicio			    	   :string;
+    FechaTermino			       :string;
+
+    constructor(RepoPilotoPorVencer: {   
+        IdConcesionario                :number;        
+        NombreCompleto                 :string;
+        Telefono                       :string;
+        Email                          :string;
+        NombreSM                       :string;
+        NombreM                        :string;
+        IdVehiculo                     :number;
+        Placa                          :string;
+        FechaInicio			    	   :string;
+        FechaTermino			       :string;
+    }){
+        this.IdConcesionario             = RepoPilotoPorVencer.IdConcesionario   ;        
+        this.NombreCompleto              = RepoPilotoPorVencer.NombreCompleto    ;
+        this.Telefono                    = RepoPilotoPorVencer.Telefono          ;
+        this.Email                       = RepoPilotoPorVencer.Email             ;
+        this.NombreSM                    = RepoPilotoPorVencer.NombreSM          ;
+        this.NombreM                     = RepoPilotoPorVencer.NombreM           ;
+        this.IdVehiculo                  = RepoPilotoPorVencer.IdVehiculo        ;
+        this.Placa                       = RepoPilotoPorVencer.Placa             ;
+        this.FechaInicio		         = RepoPilotoPorVencer.FechaInicio		 ;
+        this.FechaTermino		         = RepoPilotoPorVencer.FechaTermino		 ;        
+    }    
+}
+
+
+
+
