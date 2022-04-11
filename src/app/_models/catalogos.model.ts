@@ -1,4 +1,5 @@
 import { Time } from "@angular/common";
+import { FooterRowOutlet } from '@angular/cdk/table';
 
 export class CatalogoSindicatos {
     IdSindicato: number;
@@ -142,6 +143,7 @@ export class CatalogoUsuarios {
     Bloqueado        :number;
     Intentos         :number;
     UltimaTransaccion:Date;
+    Foto             :string;
 
     constructor(catalogoUsuarios: { IdUsuario        :string; 
                                    Nombre           :string; 
@@ -155,6 +157,7 @@ export class CatalogoUsuarios {
                                    Bloqueado        :number; 
                                    Intentos         :number; 
                                    UltimaTransaccion:Date;
+                                   Foto             :string;
     }){
         this.IdUsuario             = catalogoUsuarios.IdUsuario        ; 
         this.Nombre                = catalogoUsuarios.Nombre           ; 
@@ -168,6 +171,7 @@ export class CatalogoUsuarios {
         this.Bloqueado             = catalogoUsuarios.Bloqueado        ; 
         this.Intentos              = catalogoUsuarios.Intentos         ; 
         this.UltimaTransaccion     = catalogoUsuarios.UltimaTransaccion; 
+        this.Foto                  = catalogoUsuarios.Foto             ; 
     }    
 }
 
@@ -457,4 +461,80 @@ export class PreciosGasolina {
     }
 
 }
+
+export class CatalogoMarcas {
+    Nombre               :string;
+    Estatus              :number;    
+    catalogoSubmarcas    :CatalogoSubmarcas[] = [];
+
+    constructor(catalogoMarcas: { 
+        Nombre            :string;
+        Estatus           :number;    
+    }) {
+        this.Nombre            = catalogoMarcas.Nombre;
+        this.Estatus           = catalogoMarcas.Estatus           ;
+    }
+}
+
+export class CatalogoSubmarcas {
+    IdSubmarca        :number = 0;
+    NombreSubmarca    :string = "";
+    TipoVehiculo      :string = "";
+    Estatus           :number;    
+
+   constructor(catalogoSubmarcas: {
+    IdSubmarca        :number;
+    NombreSubmarca    :string;
+    TipoVehiculo      :string;
+    Estatus           :number;    
+    }) {
+        this.IdSubmarca        = catalogoSubmarcas.IdSubmarca        ;
+        this.NombreSubmarca    = catalogoSubmarcas.NombreSubmarca    ;
+        this.TipoVehiculo      = catalogoSubmarcas.TipoVehiculo      ;
+        this.Estatus           = catalogoSubmarcas.Estatus           ;
+    }
+}
+
+export class Marca {
+    IdMarca           :number = 0;
+    Nombre            :string = "";
+    Estatus           :number;    
+
+   constructor(catalogoMarca: {
+    IdMarca           :number;
+    Nombre            :string;
+    Estatus           :number;    
+    }) {
+        this.IdMarca           = catalogoMarca.IdMarca           ;
+        this.Nombre            = catalogoMarca.Nombre            ;
+        this.Estatus           = catalogoMarca.Estatus           ;
+    }
+}
+
+
+export class Submarca {
+    IdSubmarca        :number = 0;
+    IdMarca           :number = 0;
+    Nombre            :string = "";
+    TipoVehiculo      :string = "";
+    Estatus           :number;    
+
+   constructor(catalogoSubmarcas: {
+    IdSubmarca        :number;
+    IdMarca           :number;
+    Nombre            :string;
+    TipoVehiculo      :string;
+    Estatus           :number;    
+    }) {
+        this.IdSubmarca        = catalogoSubmarcas.IdSubmarca        ;
+        this.IdMarca           = catalogoSubmarcas.IdMarca           ;
+        this.Nombre            = catalogoSubmarcas.Nombre            ;
+        this.TipoVehiculo      = catalogoSubmarcas.TipoVehiculo      ;
+        this.Estatus           = catalogoSubmarcas.Estatus           ;
+    }
+}
+
+
+
+
 

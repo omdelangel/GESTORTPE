@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup,FormControl, FormBuilder, FormGroupDirective, NgForm } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { Marcas } from 'src/app/_models';
+import { CatalogoMarcas } from 'src/app/_models';
 import { CatalogosService } from '../../_services';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -10,8 +10,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { AlertService } from '../../_alert';
 import { isEmpty } from 'lodash';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { AltaTalleresComponent } from '../alta-talleres/alta-talleres.component';
-import { EdicionTalleresComponent } from '../../_catalogos/edicion-talleres/edicion-talleres.component';
+import { AltaMarcaSubmarcaComponent } from '../alta-marca-submarca/alta-marca-submarca.component';
+import { EdicionMarcaSubmarcaComponent } from '../../_catalogos/edicion-marca-submarca/edicion-marca-submarca.component';
 import { NotifierService } from 'angular-notifier';
 
 
@@ -32,13 +32,14 @@ import { NotifierService } from 'angular-notifier';
 
 export class ConsultaMarcasComponent implements OnInit {
 
-  columnsToDisplay = ['Nombre', 'action'];
-  expandDisplayedColumns = ['NombreSubmarca', 'TipoVehiculo', 'actions'];
-  dataSource!: MatTableDataSource<Marcas>;
-  expandedElement!: Marcas | null;
+  columnsToDisplay = ['Nombre', 'action','actionMarca'];
+  expandDisplayedColumns = ['NombreSubmarca', 'TipoVehiculo'];
+  dataSource!: MatTableDataSource<CatalogoMarcas>;
+  expandedElement!: CatalogoMarcas | null;
 
   private readonly notifier: NotifierService;
   panelOpenState: boolean = false;
+  submitted = false;
 
   disabled = false;
   //Columnas en Tabla de consulta
@@ -53,7 +54,8 @@ export class ConsultaMarcasComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   reactiveForm          !: FormGroup;
-  marcas                 : Marcas[] = [];
+  dataList               : any[] = [];
+
 
   constructor(
     public dialog:                MatDialog,
@@ -71,11 +73,12 @@ export class ConsultaMarcasComponent implements OnInit {
 
   //Validación de campos en pantalla
     this.reactiveForm = this.formBuilder.group({
-      'Nombre'      :[''],
+      'Nombre'      :[''],   
     });    
   }
 
   get g() { return this.reactiveForm.controls; }
+
 
   onSubmit() {
     if (this.reactiveForm.valid) {
@@ -85,10 +88,11 @@ export class ConsultaMarcasComponent implements OnInit {
     }
   }
   
-  //Abre modal para Talleres
+
+  //Abre modal para Alta de Marca/Submarca
     openDialog(): void {
       console.log("entre a openDialog de Marcas")
-      const dialogRef = this.dialog.open(AltaTalleresComponent, {
+      const dialogRef = this.dialog.open(AltaMarcaSubmarcaComponent, {
         disableClose: true,
 //        width: '1500px',
   //      height: '900px'
@@ -103,28 +107,9 @@ export class ConsultaMarcasComponent implements OnInit {
 
     }    
 
-  //Consulta los datos de Dictamen
-  getConsultaMarcas1(){
-    this.catalogosService.getCatalogoMarca()
-        .pipe(first())
-        .subscribe(data => {   
-          console.log("Consulta Marcas ")
-          console.log(data)
-          this.marcas     = data.MarcassLista;   
-          console.log("Consulta Marcas")
-          console.log(this.marcas)
-          this.dataSource           = new MatTableDataSource(this.marcas);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort      = this.sort;
-        },
-          error => {  
-          });
-    }
-
-
 
     getConsultaMarcas(){
-//      this.submitted = true;  
+      this.submitted = true;  
    
       this.catalogosService.getCatalogoMarcaSubmarca()
       .pipe(first())
@@ -132,19 +117,13 @@ export class ConsultaMarcasComponent implements OnInit {
  
         console.log("regresé del servico Marcas")
         console.log(data)
-        if (data.estatus && !isEmpty(data.MarcassLista[0])) {
+        if (data.estatus ) {
   
           // Assign the data to the data source for the table to render
-          this.marcas = data.MarcassLista;
-          console.log("Marcas")
-          console.log(this.marcas)
-  
-          this.dataSource = new MatTableDataSource(this.marcas);
-          console.log("dataSource")
-          console.log(this.dataSource)
-
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
+          this.dataList               = data.marca;
+          this.dataSource             = new MatTableDataSource(data.marca);
+          this.dataSource.paginator   = this.paginator;
+          this.dataSource.sort        = this.sort;
   
           var elemDiv = document.getElementById('divTitle');
           elemDiv!.style.visibility = "visible";
@@ -175,61 +154,55 @@ export class ConsultaMarcasComponent implements OnInit {
     }
 
 
+//cambiar valor de Estatus
+changeEstatus(e: any){
+  if (e.Estatus == "A") {
+      e.Estatus = 1;
+     } else if (e.Estatus == "I") {
+      e.Estatus = 0;
+     }
+    this.catalogosService.postModificaMarca(e)
+      .pipe(first())
+      .subscribe(data => {   
+        this.getConsultaMarcas();
+    },
+      error => {  
+      });
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //cambiar valor de Bloqueo
-    cambiaBloqueo(e: any){
-      console.log("cambia Bloqueo ")
-      console.log(e.Bloqueado)
-      e.Bloqueado = !e.Bloqueado;
-      console.log(e.Bloqueado)
-      console.log(e)
-      this.catalogosService.getCatUsuBloqueado(e)
-        .pipe(first())
-        .subscribe(data => {   
-          console.log("Actualiza Bloqueo Usuario  data ===>  ")
-          console.log(data)
-          this.getConsultaMarcas();
+  //Edita el registro de Marcas/Submarcas
+  editarMarca(e: any) {
+    console.log("editar Marca")
+    console.log(e)
+   
+    const dialogRef   = this.dialog.open(EdicionMarcaSubmarcaComponent, {
+      disableClose: true,
+      data: { 
+              IdMarca             :e.IdMarca          , 
+              Nombre              :e.Nombre           ,                 
         },
-          error => {  
-          });
-    }
+//        width: '1500px',
+//        height: '900px'
+    });
 
+    dialogRef.afterClosed().subscribe(res => {
+      this.getConsultaMarcas();
+    });
+   
+  }
 
-  //Edita el registro de Talleres
+  //Edita el registro de Marcas/Submarcas
     editar(e: any) {
-      console.log("consulta-editar talleres")
+      console.log("editar SubMarca")
       console.log(e)
-      const dialogRef   = this.dialog.open(EdicionTalleresComponent, {
+     
+      const dialogRef   = this.dialog.open(EdicionMarcaSubmarcaComponent, {
         disableClose: true,
         data: { 
-                IdTaller            :e.IdTaller         , 
-                Nombre              :e.Nombre           , 
-                RFC                 :e.RFC              , 
-                Contacto            :e.Contacto         , 
-                Domicilio           :e.Domicilio        , 
-                IdColonia           :e.IdColonia        , 
-                NombreC             :e.NombreC          , 
-                Telefono            :e.Telefono         , 
-                HorarioIni          :e.HorarioIni       , 
-                HorarioFin          :e.HorarioFin       , 
-                Concurrencia        :e.Concurrencia     , 
-                DuracionCita        :e.DuracionCita     , 
-                Estatus			        :e.Estatus          ,	                
+                IdMarca             :e.IdMarca          , 
+                Nombre              :e.Nombre           ,                 
           },
 //        width: '1500px',
 //        height: '900px'
@@ -238,6 +211,7 @@ export class ConsultaMarcasComponent implements OnInit {
       dialogRef.afterClosed().subscribe(res => {
         this.getConsultaMarcas();
       });
+     
     }
 
 

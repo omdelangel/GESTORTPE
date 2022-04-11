@@ -1,0 +1,1 @@
+export * from './alta-marca-submarca.component';

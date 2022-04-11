@@ -222,4 +222,16 @@ getRegistrosVigentes(sindicato: number): Observable<any> {
   )
 }
 
+//Obtiene información de Autos Sin concluir 
+getReportePilotoPorVencer(): Observable<any> {
+
+  return this.http.get<any>(`${environment.SERVER_URL}/lLPVPilotos`, {})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
  }

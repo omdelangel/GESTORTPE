@@ -659,3 +659,45 @@ export class RepoVigentes {
         this.PorcentajeConsumo					    = repoVigentes.PorcentajeConsumo  ;                               
     }    
 }
+
+
+export class RepoPilotoPorVencer {
+    IdConcesionario                :number;
+    NombreCompleto                 :string;
+    Telefono                       :string;
+    Email                          :string;
+    NombreSM                       :string;
+    NombreM                        :string;
+    IdVehiculo                     :number;
+    Placa                          :string;
+    FechaInicio			    	   :string;
+    FechaTermino			       :string;
+
+    constructor(RepoPilotoPorVencer: {   
+        IdConcesionario                :number;        
+        NombreCompleto                 :string;
+        Telefono                       :string;
+        Email                          :string;
+        NombreSM                       :string;
+        NombreM                        :string;
+        IdVehiculo                     :number;
+        Placa                          :string;
+        FechaInicio			    	   :string;
+        FechaTermino			       :string;
+    }){
+        this.IdConcesionario             = RepoPilotoPorVencer.IdConcesionario   ;        
+        this.NombreCompleto              = RepoPilotoPorVencer.NombreCompleto    ;
+        this.Telefono                    = RepoPilotoPorVencer.Telefono          ;
+        this.Email                       = RepoPilotoPorVencer.Email             ;
+        this.NombreSM                    = RepoPilotoPorVencer.NombreSM          ;
+        this.NombreM                     = RepoPilotoPorVencer.NombreM           ;
+        this.IdVehiculo                  = RepoPilotoPorVencer.IdVehiculo        ;
+        this.Placa                       = RepoPilotoPorVencer.Placa             ;
+        this.FechaInicio		         = RepoPilotoPorVencer.FechaInicio		 ;
+        this.FechaTermino		         = RepoPilotoPorVencer.FechaTermino		 ;        
+    }    
+}
+
+
+
+
