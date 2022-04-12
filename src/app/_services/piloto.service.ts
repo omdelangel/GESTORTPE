@@ -4,7 +4,7 @@ import { Observable, throwError, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Citas } from '../_models/cita.model';
-
+import { PromocionesSindicato } from '../_models/piloto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -122,4 +122,36 @@ postConfirmaDesinstalacion(citas: Citas): Observable<any> {
     }
     return throwError(msg);
   }
+
+  //Consulta los concesionarios en programa Piloto
+  getPromocionesEmpresa(): Observable<any> {
+
+    return this.http.get<any>(`${environment.SERVER_URL}/lPromocionesSind`)
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }
+
+    //Registra en tabla de promocionessindicato
+  postRegistraPromocionesSindicato(promocionesSindicato: PromocionesSindicato): Observable<any> {
+
+    return this.http.post<any>(`${environment.SERVER_URL}/Alta-PromoSindicato`, {
+      'IdPromocion'            :promocionesSindicato.IdPromocion        ,
+      'IdSindicato'            :promocionesSindicato.IdSindicato        ,
+      'FechaInicio'            :promocionesSindicato.FechaInicio        ,
+      'FechaTermino'           :promocionesSindicato.FechaTermino       ,
+      'Duracion'               :promocionesSindicato.Duracion           ,
+      'Litros'                 :promocionesSindicato.Litros             ,  
+    })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }
+
 }

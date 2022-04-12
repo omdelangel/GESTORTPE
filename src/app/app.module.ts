@@ -110,6 +110,8 @@ import { DialogoTalleresPilotoComponent } from './_piloto/dialogo-talleres-pilot
 import { AltacitaPilotoComponent } from './_piloto/altacita-piloto/altacita-piloto.component';
 import { DialogoConfirmaDesinstalacionPilotoComponent } from './_piloto/dialogo-confirma-desinstalacion-piloto/dialogo-confirma-desinstalacion-piloto.component';
 import { EdicionCitaPilotoComponent } from './_piloto/edicion-cita-piloto/edicion-cita-piloto.component';
+import { AltaEmpresaPilotoComponent } from './_piloto/alta-empresa-piloto/alta-empresa-piloto.component';
+import { ConsultaEmpresaPilotoComponent } from './_piloto/consulta-empresa-piloto/consulta-empresa-piloto.component';
 
 
 
@@ -256,7 +258,9 @@ FullCalendarModule.registerPlugins([
     DialogoTalleresPilotoComponent,
     AltacitaPilotoComponent,
     DialogoConfirmaDesinstalacionPilotoComponent,
-    EdicionCitaPilotoComponent
+    EdicionCitaPilotoComponent,
+    AltaEmpresaPilotoComponent,
+    ConsultaEmpresaPilotoComponent
   ],
   imports: [
     BrowserModule,
