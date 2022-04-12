@@ -107,15 +107,14 @@ this.submitted = true;
 if (this.reactiveForm.invalid) {
 return;
 }
-console.log("Parámetros")
-console.log(this.f.sindicato.value)
 
 this.repoService.getRegistrosVigentes(this.f.sindicato.value) 
 .pipe(first())
 .subscribe(data => {
 
-console.log("regresé del reporte")
-console.log(data)
+  console.log("vigentes");
+  console.log(data);
+
 if (data.estatus && !isEmpty(data.hFormalizadosLista[0])) {
 
 // Assign the data to the data source for the table to render
@@ -131,8 +130,8 @@ elemDiv!.style.visibility = "visible";
 var elemTable = document.getElementById('htmlData');
 elemTable!.style.visibility = "visible";
 
-var elemReport = document.getElementById('divReport');
-elemReport!.style.visibility = "visible";
+//var elemReport = document.getElementById('divReport');
+//elemReport!.style.visibility = "visible";
 
 } else {
 var elemDiv = document.getElementById('divTitle');
@@ -141,8 +140,8 @@ elemDiv!.style.visibility = "hidden";
 var elemTable = document.getElementById('htmlData');
 elemTable!.style.visibility = "hidden";
 
-var elemReport = document.getElementById('divReport');
-elemReport!.style.visibility = "hidden";
+//var elemReport = document.getElementById('divReport');
+//elemReport!.style.visibility = "hidden";
 
 this.notifier.notify('info', data.mensaje, '');    
 

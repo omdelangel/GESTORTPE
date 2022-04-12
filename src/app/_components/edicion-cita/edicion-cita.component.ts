@@ -140,8 +140,6 @@ export class EdicionCitaComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
 
-        console.log(data);
-
         this.f.Concesionario.setValue(this.Concesionario);
         this.f.Taller.setValue(data.citaInstalacion[0].Taller);
         this.f.Domicilio.setValue(data.citaInstalacion[0].Domicilio + " " + data.citaInstalacion[0].Colonia + " " + data.citaInstalacion[0].CP + " " + data.citaInstalacion[0].Municipio + " " + data.citaInstalacion[0].EntidadFederativa);
@@ -158,6 +156,7 @@ export class EdicionCitaComponent implements OnInit {
 
   //Cancela de cita
   cancelarCita() {
+
     //this.clear();
     if (this.causaValue == "Verificacion") {
       this.citaService.postCancelaCita(this.idVehiculo, this.idCita)
@@ -220,6 +219,9 @@ export class EdicionCitaComponent implements OnInit {
 
         } else {
 
+          this.cancelar = false;
+          this.nuevaCita = true;
+
         }
       });
   }
@@ -235,8 +237,6 @@ export class EdicionCitaComponent implements OnInit {
       .afterClosed()
       .subscribe((confirmado: Boolean) => {
         if (confirmado) {
-
-          this.cancelarCita();
 
           const dialogRef = this.dialog.open(DialogoTalleresComponent, {
             data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo, causa: this.causaValue, piloto: this.piloto },

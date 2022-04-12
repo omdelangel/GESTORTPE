@@ -169,16 +169,16 @@
 					<mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Su cita ha sido registrada
 					</mat-card-title>
 				</mat-card-actions>
-				<mat-card-subtitle>Taller: {{tallerValue}}</mat-card-subtitle>
-				<mat-card-subtitle>Domicilio: {{domicilioValue}}</mat-card-subtitle>
-				<mat-card-subtitle>Contacto: {{contactoValue}}</mat-card-subtitle>
-				<mat-card-subtitle>Teléfono: {{telefonoValue}}</mat-card-subtitle>
+				<h2>Taller: {{tallerValue}}</h2>
+				<h2>Domicilio: {{domicilioValue}}</h2>
+				<h2>Contacto: {{contactoValue}}</h2>
+				<h2>Teléfono: {{telefonoValue}}</h2>
 				<mat-card-content>
 					<mat-divider></mat-divider>
 					<br>
-					<p>Concesionario: {{nombreConcesionario}}</p>
-					<p>Día: {{diaValue | date: 'dd/MM/yyyy'}}</p>
-					<p>Hora: {{horaValue}}</p>
+					<h3>Concesionario: {{nombreConcesionario}}</h3>
+					<h3>Día: {{diaValue | date: 'dd/MM/yyyy'}}</h3>
+					<h3>Hora: {{horaValue}}</h3>
 				</mat-card-content>
 				<notifier-container></notifier-container>
 			</mat-card>

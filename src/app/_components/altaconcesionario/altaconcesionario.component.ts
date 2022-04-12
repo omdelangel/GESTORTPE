@@ -101,7 +101,7 @@ export class AltaconcesionarioComponent implements OnInit {
     //Validación de campos en pantalla
     this.frmStepOne = this.formBuilder.group({
       'RFC': ['', Validators.required],
-      'IdSindicato': ['', Validators.required],
+      'IdSindicato': ['', [Validators.required]],
       'IdAsignacionSindicato': ['', Validators.required],
       'NumeroConcesion': [''],
       'CURP': [''],
