@@ -142,7 +142,7 @@
 
 .mat-table {
   overflow: auto;
-  max-height: 400px;
+  max-height: 100%;
 }
 
 .example-container {
@@ -157,9 +157,8 @@
 }
 
 
-
 .table-container {
-  height: 400px;
+  height: 100%;
   overflow: auto;
 }
 
@@ -188,6 +187,8 @@
 //}
 
 
+
+
 .button-edit {
   width: 35px;
   height: 35px;
@@ -202,18 +203,23 @@
   background-color: #80BC00;
 }
 
-.button-citas {
+.button-cita {
   width: 35px;
   height: 35px;
   outline: none;
   background-color: #F15A24;
 }
 
-.button-dictaminar {
+.button-instalacion {
   width: 35px;
   height: 35px;
   outline: none;
   background-color: #476777;
+}
+
+.mat-column-NombreCompleto {
+  flex: 0 0 20%;
+  height: 70px;
 }
 
 
@@ -224,40 +230,23 @@ font-size: 20px;
 
 }
 
-.button-operador {
-  width: 35px;
-  height: 35px;
-  outline: none;
-  background-color: #001C71;
-}
-
-.button-cita {
-  width: 35px;
-  height: 35px;
-  outline: none;
-  background-color: #80BC00;
-}
-
-.button-instalacion {
-  width: 35px;
-  height: 35px;
-  outline: none;
-  background-color: #F15A24;
-}
-
-
 .title-header-content{
   color: #001C71; 
   font-weight: normal;
 
 }
 
-.mat-column-NombreConcesionario {
-  flex: 0 0 20%;
-  height: 70px;
+.add-header-content{
+  background-color: #80BC00; 
+  outline: none;
 }
 
-.piloto{
-  font-weight: bold;
-  color: #F15A24;
-}
+
+
+
+
+
+
+
+
+
