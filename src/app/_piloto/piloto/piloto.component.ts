@@ -93,8 +93,6 @@ export class PilotoComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
 
-        console.log(data);
-
         this.piloto = data.concesionario;
         this.dataSource = new MatTableDataSource(this.piloto);
         this.dataSource.paginator = this.paginator;
@@ -127,37 +125,8 @@ export class PilotoComponent implements OnInit {
   //Registro de Citas para la instalacion
   cita(e: any) {
 
-    if (e.IdCitaDesinstalacion == null && e.EstatusCitaDesinstalacion == null) {
 
-      this.dialog
-        .open(DialogoConfirmacionPilotoComponent, {
-          data: `Si acepta, confirmará que el CONCESIONARIO NO está de acuerdo en continuar con los beneficios del programa Cambia y Gana.`,
-          width: '30%'
-        })
-        .afterClosed()
-        .subscribe((confirmado: Boolean) => {
-          if (confirmado) {
-
-            this.enviaRespuesta(e.IdContrato, 0);
-
-            const dialogRef = this.dialog.open(DialogoTalleresPilotoComponent, {
-              disableClose: true,
-              data: { idCita: e.IdCitaDesinstalacion, estatusCita: e.EstatusCitaDesinstalacion, nombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo },
-
-            });
-
-            dialogRef.afterClosed().subscribe(res => {
-              this.getConsultaPiloto();
-            });
-
-          } else {
-
-          }
-        });
-
-    } else {
-
-      if (e.EstatusCitaDesinstalacion == "V" || e.EstatusCitaDesinstalacion == "C") {
+      if (e.EstatusCitaDesinstalacion == null || e.EstatusCitaDesinstalacion == "V" || e.EstatusCitaDesinstalacion == "C") {
 
         const dialogRef = this.dialog.open(DialogoTalleresPilotoComponent, {
           disableClose: true,
@@ -181,22 +150,21 @@ export class PilotoComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(res => {
-          console.log("REGRES DE CNCELAR");
           this.getConsultaPiloto();
         });
 
       }
-
-    }
 
   }
 
   //Edita el concesionario/preregistro
   contrato(e: any) {
 
+    if (e.AceptoConvertidor != 1) {
+
     this.dialog
       .open(DialogoConfirmacionPilotoComponent, {
-        data: `Si acepta, confirmará que el CONCESIONARIO está de acuerdo en continuar con los beneficios del programa Cambia y Gana.`,
+        data: `Confirma que el CONCESIONARIO está de acuerdo en continuar con los beneficios del programa Cambia y Gana.`,
         width: '30%'
       })
       .afterClosed()
@@ -220,8 +188,33 @@ export class PilotoComponent implements OnInit {
 
         } else {
 
+          this.enviaRespuesta(e.IdContrato, 0);
+          const dialogRef = this.dialog.open(DialogoTalleresPilotoComponent, {
+            disableClose: true,
+            data: { idCita: e.IdCitaDesinstalacion, estatusCita: e.EstatusCitaDesinstalacion, nombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo },
+  
+          });
+  
+          dialogRef.afterClosed().subscribe(res => {
+            this.getConsultaPiloto();
+          });
+
         }
       });
+
+    } else {
+
+      const dialogRef = this.dialog.open(DialogoContratoPilotoComponent, {
+        data: { idContrato: e.IdContrato, nombreConcesionario: e.NombreConcesionario},
+        disableClose: true,
+        //width: '1500px',
+        //height: '900px'
+      });
+
+      dialogRef.afterClosed().subscribe(res => {
+        this.getConsultaPiloto();
+      });
+    }
   }
 
 

@@ -47,8 +47,6 @@ export class ConcesionarioService {
     return this.http.get<any>(`${environment.SERVER_URL}/impresion-qr`, { params: params })
       .pipe(map((res: Response) => {
 
-        console.log(res);
-
         return res || {}
       }),
         catchError(this.handleError)
@@ -62,8 +60,6 @@ export class ConcesionarioService {
 
     return this.http.get<any>(`${environment.SERVER_URL}/concesionario-prerregistro`)
       .pipe(map((res: Response) => {    
-
-        console.log(res);
 
         return res || {}
       }),
