@@ -71,8 +71,16 @@
             <ng-container matColumnDef="TipoVehiculo">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Vehiculo
                 </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.TipoVehiculo}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.TipoVehiculo=='A' ? 'Taxi': ''}} {{row.TipoVehiculo=='V' ? 'Vans': ''}} {{row.TipoVehiculo=='S' ? 'Suburbano': ''}} </mat-cell>
             </ng-container>
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="EstatusCita" sticky>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus Cita
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.EstatusCita=='A' ? 'Abierta': ''}} {{row.EstatusCita=='D' ? 'Dictaminada': ''}} {{row.EstatusCita=='C' ? 'Cancelada': ''}} {{row.EstatusCita=='V' ? 'Vencida': ''}}</mat-cell>
+            </ng-container>
+
 
             <!--toggle column -->
             <ng-container matColumnDef="Estatus">

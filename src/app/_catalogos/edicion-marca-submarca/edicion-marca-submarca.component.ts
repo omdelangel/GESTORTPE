@@ -57,7 +57,7 @@ export class EdicionMarcaSubmarcaComponent implements OnInit {
 
   //Catálogos locales
   tiposVehiculo: TipoVehiculo[] = [
-    { TipoVehiculo: 'A', viewValue: 'Taxis' },
+    { TipoVehiculo: 'A', viewValue: 'Taxi' },
     { TipoVehiculo: 'V', viewValue: 'Vans' },
     { TipoVehiculo: 'S', viewValue: 'Suburbano' },
   ];
