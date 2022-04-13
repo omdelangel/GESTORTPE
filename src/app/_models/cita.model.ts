@@ -1,4 +1,5 @@
 export class Citas {
+    IdCita: number;
     IdVehiculo: number;
     IdConcesionario: number;
     Fecha: any;

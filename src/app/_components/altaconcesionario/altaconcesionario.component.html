@@ -37,8 +37,7 @@
                                             {{sindicato.Nombre}} 
                                         </mat-option>
                                     </mat-select>
-                                    <mat-error *ngIf="frmStepOne.get('IdSindicato')!.invalid">Campo requerido
-                                    </mat-error>
+                                    <mat-error *ngIf="frmStepOne.get('IdSindicato')!.invalid">El dato es obligatorio</mat-error>
                                 </mat-form-field>
                             </div>
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
@@ -49,7 +48,7 @@
                                             {{asignacion.AsignacionSindicato}}
                                         </mat-option>
                                     </mat-select>
-                                    <mat-error *ngIf="frmStepOne.invalid">El dato es oblgatorio</mat-error>
+                                    <mat-error *ngIf="frmStepOne.invalid">El dato es obligatorio</mat-error>
                                 </mat-form-field>
                             </div>
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
@@ -66,7 +65,7 @@
                                     <input matInput placeholder="Nombre" formControlName="Nombre" maxlength="45"
                                         required onkeydown="return /[a-z, ]/i.test(event.key)">
                                     <mat-error *ngIf="frmStepOne.get('Nombre')!.hasError('required')">
-                                        El dato es oblgatorio
+                                        El dato es obligatorio
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -76,7 +75,7 @@
                                     <input matInput placeholder="Apellido Paterno" formControlName="Paterno"
                                         maxlength="45" required onkeydown="return /[a-z, ]/i.test(event.key)">
                                     <mat-error *ngIf="frmStepOne.get('Paterno')!.hasError('required')">
-                                        El dato es oblgatorio
+                                        El dato es obligatorio
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -132,7 +131,7 @@
                                     <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
                                     <mat-datepicker #picker style="outline: none;" required></mat-datepicker>
                                     <mat-error *ngIf="frmStepOne.get('FechaNacimiento')!.hasError('required')">
-                                        El dato es oblgatorio
+                                        El dato es obligatorio
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -142,7 +141,7 @@
                                     <input matInput placeholder="CP" formControlName="cp" maxlength="5" required
                                         (keypress)="keyPress($event)" (change)="changeCP()">
                                     <mat-error *ngIf="frmStepOne.get('cp')!.hasError('required')">
-                                        El dato es oblgatorio
+                                        El dato es obligatorio
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -152,7 +151,7 @@
                                     <input matInput placeholder="Municipio" formControlName="municipio" maxlength="45"
                                         required [value]="municipio">
                                     <mat-error *ngIf="frmStepOne.get('municipio')!.hasError('required')">
-                                        El dato es oblgatorio
+                                        El dato es obligatorio
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -162,7 +161,7 @@
                                     <input matInput placeholder="Entidad" formControlName="entidad" maxlength="45"
                                         required>
                                     <mat-error *ngIf="frmStepOne.get('entidad')!.hasError('required')">
-                                        El dato es oblgatorio
+                                        El dato es obligatorio
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -184,7 +183,7 @@
                                     <mat-label>Calle</mat-label>
                                     <input matInput placeholder="Calle" formControlName="Calle" maxlength="60" required>
                                     <mat-error *ngIf="frmStepOne.get('Calle')!.hasError('required')">
-                                        El dato es oblgatorio
+                                        El dato es obligatorio
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -194,7 +193,7 @@
                                     <input matInput placeholder="Número Exterior" formControlName="Exterior"
                                         maxlength="10" required>
                                     <mat-error *ngIf="frmStepOne.get('Exterior')!.hasError('required')">
-                                        El dato es oblgatorio
+                                        El dato es obligatorio
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -212,7 +211,7 @@
                                     <input matInput placeholder="Teléfono Contacto" formControlName="Telefono"
                                         mask="(000) 000-0000" required>
                                     <mat-error *ngIf="frmStepOne.get('Telefono')!.hasError('required')">
-                                        El dato es oblgatorio
+                                        El dato es obligatorio
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -222,7 +221,7 @@
                                     <input matInput placeholder="Celular" formControlName="Celular"
                                         mask="(000) 000-0000" required>
                                     <mat-error *ngIf="frmStepOne.get('Celular')!.hasError('required')">
-                                        El dato es oblgatorio
+                                        El dato es obligatorio
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -232,7 +231,7 @@
                                     <input matInput placeholder="Correo" formControlName="email" maxlength="75"
                                         required>
                                     <mat-error *ngIf="frmStepOne.get('email')!.hasError('required')">
-                                        El dato es oblgatorio
+                                        El dato es obligatorio
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -257,7 +256,7 @@
                                     <input matInput placeholder="Folio" formControlName="FolioIdentificacion"
                                         maxlength="25" required>
                                     <mat-error *ngIf="frmStepOne.get('FolioIdentificacion')!.hasError('required')">
-                                        El dato es oblgatorio
+                                        El dato es obligatorio
                                     </mat-error>
                                 </mat-form-field>
                             </div>

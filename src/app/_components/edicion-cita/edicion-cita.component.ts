@@ -166,6 +166,7 @@ export class EdicionCitaComponent implements OnInit {
 
             if (data.estatus) {
               this.valorCancel = true;
+              this.dialogRef.close();
               //this.success(data.mensaje);
               this.notifier.notify('success', data.mensaje, '');
             } else {
@@ -214,60 +215,22 @@ export class EdicionCitaComponent implements OnInit {
         if (confirmado) {
 
           this.cancelarCita();
-          this.cancelar = true;
-          this.nuevaCita = false;
+          
 
-        } else {
-
-          this.cancelar = false;
-          this.nuevaCita = true;
-
-        }
+        } 
       });
   }
 
-  //Cancela la Cita y Agenda una nueva
-  mostrarDialogoCancelarReagendar(): void {
+  //Reagenda una cita
+  mostrarDialogoReagendar(): void {
 
-    this.dialog
-      .open(DialogoConfirmacionComponent, {
-        data: `¿Desea reagendar una nueva cita?`,
-        width: '25%'
-      })
-      .afterClosed()
-      .subscribe((confirmado: Boolean) => {
-        if (confirmado) {
-
-          const dialogRef = this.dialog.open(DialogoTalleresComponent, {
-            data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo, causa: this.causaValue, piloto: this.piloto },
+          this.dialog.open(DialogoTalleresComponent, {
+            data: {idCita: this.idCita, estatusCita: this.estatusCita, nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo, causa: this.causaValue, piloto: this.piloto },
             width: '100%'
-          });
-      
-          dialogRef.afterClosed().subscribe(res => {
-      
-           // let idCita = Number(sessionStorage.getItem("NuevaCita"));
-          //  this.obtieneCita(idCita);  
-          //  this.cancelar = false;
-          //  this.nuevaCita = false;  
+          }).afterClosed().subscribe(res => {  
            this.dialogRef.close();        
       
           });
-      
-        } else {
-
-          const dialogRef = this.dialog.open(DialogoTalleresComponent, {
-            data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo, causa: this.causaValue, piloto: this.piloto},
-            width: '100%'
-          });
-      
-          dialogRef.afterClosed().subscribe(res => {
-      
-            let idCita = Number(sessionStorage.getItem("NuevaCita"));
-            this.obtieneCita(idCita);            
-      
-          });
-        }
-      });  
   }
 
   onNoClick(): void {

@@ -35,7 +35,9 @@ export class AltacitaPilotoComponent implements OnInit {
   idVehiculoValue: number = 0;
   idConcesionarioValue: number = 0;
   diaHora: any;
-  piloto: boolean = false;
+  idCitaValue: number = 0;
+  estatusCita: string = "";
+  
 
   //Determina si viene del registro o de la formalización
   causaValue: string = "";
@@ -116,7 +118,6 @@ export class AltacitaPilotoComponent implements OnInit {
     this.idConcesionarioValue = data.idConce;
     this.idVehiculoValue = data.idVehi;
     this.causaValue = data.causa;
-    this.piloto = data.piloto;
 
   }
 
@@ -145,22 +146,25 @@ export class AltacitaPilotoComponent implements OnInit {
     //this.clear(); 
     this.submitted = true;
 
+    if (this.idCitaValue == 0 || this.idCitaValue == null || this.estatusCita == "D" || this.estatusCita == "V" || this.estatusCita == "C" ) {
+
     if (this.dia != undefined && this.hora != undefined && this.dia != "" && this.hora != "") {
 
       this.diaHora = moment(this.dia + " " + this.hora).format('YYYY-MM-DD HH:mm:ss');
-      this.citas = { IdVehiculo: this.idVehiculoValue, IdConcesionario: this.idConcesionarioValue, Fecha: this.diaHora, IdTaller: this.idTallerValue }
-
-      if (this.causaValue == "Verificacion" || this.causaValue == undefined) {
+      this.citas = { IdCita: this.idCitaValue, IdVehiculo: this.idVehiculoValue, IdConcesionario: this.idConcesionarioValue, Fecha: this.diaHora, IdTaller: this.idTallerValue }
 
         this.pilotoService.postRegistraCitaDesinstalacion(this.citas)
           .pipe(first())
           .subscribe(
             data => {
 
+              console.log("dataRegistroCita");
+              console.log(data); 
+
               if (data.estatus) {
                 //this.success(data.mensaje);  
                 this.notifier.notify('success', data.mensaje, '');
-                this.dialogRef.close({ idCita: data.IdCita, dia: this.dia, hora: this.hora });
+                this.dialogRef.close({ idCita: data.IdCitaDesinstalacion, dia: this.dia, hora: this.hora });
               } else {
                 //this.warn(data.mensaje);
                 this.notifier.notify('warning', data.mensaje, '');
@@ -170,39 +174,50 @@ export class AltacitaPilotoComponent implements OnInit {
             error => {
               this.notifier.notify('error', error, '');
             });
-
-      } else if (this.causaValue == "Instalacion") {
-
-        this.pilotoService.postRegistraCitaDesinstalacion(this.citas)
-          .pipe(first())
-          .subscribe(
-            data => {
-
-              if (data.estatus) {
-                //this.success(data.mensaje);  
-                this.notifier.notify('success', data.mensaje, '');
-                this.dialogRef.close({ idCita: data.IdCita, dia: this.dia, hora: this.hora });
-              } else {
-                //this.warn(data.mensaje);
-                this.notifier.notify('warning', data.mensaje, '');
-                this.dialogRef.close({ idCita: 0 });
-              }
-            },
-            error => {
-              this.notifier.notify('error', error, '');
-            });
-
-
 
       }
-
-
-
-    } else {
+   else {
 
       //this.info("Seleccione fecha y hora de la cita!!!");
       this.notifier.notify('info', "Seleccione fecha y hora de la cita!!!", '');
     }
+  } else if (this.idCitaValue != 0 && this.estatusCita == "A") {
+
+    if (this.dia != undefined && this.hora != undefined && this.dia != "" && this.hora != "") {
+
+      this.diaHora = moment(this.dia + " " + this.hora).format('YYYY-MM-DD HH:mm:ss');
+      this.citas = { IdCita: this.idCitaValue, IdVehiculo: this.idVehiculoValue, IdConcesionario: this.idConcesionarioValue, Fecha: this.diaHora, IdTaller: this.idTallerValue }
+
+        this.pilotoService.postCitaModificacionConvertidor(this.citas)
+          .pipe(first())
+          .subscribe(
+            data => {
+
+              console.log("data");
+              console.log(data);
+
+              if (data.estatus) {
+                //this.success(data.mensaje);  
+                this.notifier.notify('success', data.mensaje, '');
+                this.dialogRef.close({ idCita: data.IdCitaDesinstalacion, dia: this.dia, hora: this.hora });
+              } else {
+                //this.warn(data.mensaje);
+                this.notifier.notify('warning', data.mensaje, '');
+                this.dialogRef.close({ idCita: 0 });
+              }
+            },
+            error => {
+              this.notifier.notify('error', error, '');
+            });
+
+      }
+   else {
+
+      //this.info("Seleccione fecha y hora de la cita!!!");
+      this.notifier.notify('info', "Seleccione fecha y hora de la cita!!!", '');
+    }
+
+  }
   }
 
 

@@ -133,12 +133,15 @@ export class AltaconcesionarioComponent implements OnInit {
   get f() { return this.frmStepOne.controls; }
 
   onSubmit() {
+
     if (this.frmStepOne.valid) {
 
     } else {
       return
     }
   }
+
+
 
    //Llena catálogo de Sindicatos
   getCatalogoSindicatos() {

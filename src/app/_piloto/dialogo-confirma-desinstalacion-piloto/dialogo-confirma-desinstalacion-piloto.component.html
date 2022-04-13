@@ -8,7 +8,7 @@
                     </button>
                   </div>
                   <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-					<mat-card-title fx-item class="title-header-content">Confirmar la Instalación del Convertidor <span *ngIf="piloto" class="piloto">/ PILOTO</span>
+					<mat-card-title fx-item class="title-header-content">Confirmar la Desinstalación del Convertidor 
 					</mat-card-title>
 				</mat-card-actions>
                 <mat-card-content>
@@ -42,7 +42,7 @@
                          
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
-                                    <mat-label>Fecha Instalación</mat-label>
+                                    <mat-label>Fecha Desinstalación</mat-label>
                                     <input matInput [matDatepicker]="picker" formControlName="FechaInstalacion">
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-datepicker #picker style="outline: none;" required></mat-datepicker>

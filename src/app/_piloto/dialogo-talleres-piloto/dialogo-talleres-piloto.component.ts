@@ -50,8 +50,8 @@ export class DialogoTalleresPilotoComponent implements OnInit {
   telefonoValue: string = "";
   diaValue: string = ""; 
   horaValue: string = "";  
-  causaValue: string = "";
-  pilotoValue: boolean = false;
+  idCitaValue: number = 0;
+  estatusCita: string = "";
 
   constructor(public dialog: MatDialog,
     private tallerService: TalleresService,
@@ -66,10 +66,8 @@ export class DialogoTalleresPilotoComponent implements OnInit {
        this.nombreConcesionario = data.nombreConcesionario;
        this.idConcesionario = data.idConcesionario;       
        this.idVehiculo = data.idVehiculo;
-       this.pilotoValue = data.piloto;
-
-       //Determina si viene del registro o de la formalización
-       this.causaValue = data.causa;
+       this.idCitaValue = data.idCita;
+       this.estatusCita = data.estatusCita;
 
     }
 
@@ -113,9 +111,9 @@ export class DialogoTalleresPilotoComponent implements OnInit {
   selectRecord(row: any){
 
     const dialogRef = this.dialog.open(AltacitaPilotoComponent, {
-      data: { idTaller: row.IdTaller, nombreTaller: row.Nombre, domicilio: row.Domicilio + " " + row.Colonia + " " + "CP: " +row.CP + " " + 
+      data: {idCita: this.idCitaValue, estatusCita: this.estatusCita, idTaller: row.IdTaller, nombreTaller: row.Nombre, domicilio: row.Domicilio + " " + row.Colonia + " " + "CP: " +row.CP + " " + 
       row.Municipio + " " + row.EntidadFederativa, telefono: row.Telefono, contacto: row.Contacto, nombreConce: this.nombreConcesionario,
-      idConce: this.idConcesionario, idVehi: this.idVehiculo, causa: this.causaValue, piloto: this.pilotoValue},
+      idConce: this.idConcesionario, idVehi: this.idVehiculo},
       width: '100%',
       //height: '100%'
     });

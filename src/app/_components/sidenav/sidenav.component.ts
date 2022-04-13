@@ -24,17 +24,14 @@ import { MediaChange, MediaObserver } from "@angular/flex-layout";
     ])
   ]
 })
-export class SidenavComponent implements OnDestroy{
-
-  opened: boolean = true;
-  mediaWatcher: Subscription;
-
+export class SidenavComponent {
+  expanded!: boolean;
+  @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
   @ViewChild('appDrawer') appDrawer!: ElementRef;
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   title: string = "Inicio";
   myJson: any[] = [];
-
 
   
   isExpanded = true;
@@ -44,23 +41,20 @@ export class SidenavComponent implements OnDestroy{
   
   dataUser: [] = [];
   nombre: string = "";
+  navItems1: NavItem[] = [];
+
   navItems: NavItem[] = [];
-  sidenavWidth = 4;
-  ngStyle: string;
 
 
   constructor(public authenticationService: AuthenticationService, 
+    private observer: BreakpointObserver,
     public navService: NavService,
-    private sharingService: SharingService,
-    private media: MediaObserver
-    ) {
+    public router: Router,
+    private route: ActivatedRoute,
+    private sharingService: SharingService) {
 
       this.myJson = this.sharingService.sharingValue;
       this.navItems = this.myJson[0];
-
-      this.mediaWatcher = this.media.media$.subscribe((mediaChange: MediaChange) => {
-        this.handleMediaChange(mediaChange);
-    })
     
     }
 
@@ -71,25 +65,38 @@ export class SidenavComponent implements OnDestroy{
     
     this.dataUser = JSON.parse(sessionStorage.getItem('usuario')!);
 
+    console.log("this.dataUser");
+    console.log(this.dataUser);
+
     for (var key in this.dataUser) {
       if (key == "Nombre") {
         this.nombre = this.dataUser[key];
       }
     }  
-
   }
-
-  private handleMediaChange(mediaChange: MediaChange) {
-    if (this.media.isActive('lt-md')) {
-        this.opened = false;
-    } else {
-        this.opened = true;
-    }
-}
 
 
   onLogout(){
     this.authenticationService.logout();
+  }
+
+  ngAfterViewInit() {
+    this.observer
+    .observe(['(max-width: 800px)'])
+    .pipe(delay(1))
+    .subscribe((res) => {
+
+    
+      if (res.matches) {
+        this.sidenav.mode = 'over';
+        this.sidenav.close();
+      } else {
+        this.sidenav.mode = 'side';
+        this.sidenav.open();
+      }
+    });
+    
+    this.navService.appDrawer = this.appDrawer;
   }
 
   mouseenter() {
@@ -106,20 +113,9 @@ export class SidenavComponent implements OnDestroy{
     }
   }
 
+  handleClick(selectedItem: any) {
 
-  increase() {
-    this.sidenavWidth = 15;
-    this.isShowing = true;
+    this.title = selectedItem;
   }
-  decrease() {
-    this.sidenavWidth = 4;
-    this.isShowing = false;
-  }
-
-  ngOnDestroy() {
-    this.mediaWatcher.unsubscribe();
-}
-
-
 
 }

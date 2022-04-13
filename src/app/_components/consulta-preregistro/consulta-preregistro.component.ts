@@ -174,38 +174,37 @@ export class ConsultaPreregistroComponent implements OnInit {
       //Consulta las citas
       citas(e: any) {
 
-        if(e.IdCita == null || e.EstatusCita == "D" || e.EstatusCita == "V"){
+        if (e.IdCita == null || e.EstatusCita == "D" || e.EstatusCita == "V" || e.EstatusCita == "C") {
 
           const dialogRef = this.dialog.open(DialogoTalleresComponent, {
             disableClose: true,
-            data: { nombreConcesionario: e.NombreCompleto, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo, causa: "Verificacion", piloto: e.Piloto},
+            data: { idCita: e.IdCita, estatusCita: e.EstatusCita, nombreConcesionario: e.NombreCompleto, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo, causa: "Verificacion", piloto: e.Piloto },
             width: '100%',
             //height: '90%'
           });
-      
+
           dialogRef.afterClosed().subscribe(res => {
             this.getConsultaPreRegistro();
           });
 
-
         } else {
 
-         
-       
-        const dialogRef = this.dialog.open(EdicionCitaComponent, {
-          disableClose: true,
-          data: { idCita: e.IdCita, NombreConcesionario: e.NombreCompleto, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo,
-          marca: e.Marca, submarca: e.Submarca, modelo: e.Modelo, estatusCita: e.EstatusCita, causa: "Verificacion", piloto: e.Piloto},
-          width: '100%',
-          //height: '90%'
-        });
-    
-        dialogRef.afterClosed().subscribe(res => {
-          this.getConsultaPreRegistro();
-        });
+          const dialogRef = this.dialog.open(EdicionCitaComponent, {
+            disableClose: true,
+            data: {
+              idCita: e.IdCita, NombreConcesionario: e.NombreCompleto, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo,
+              marca: e.Marca, submarca: e.Submarca, modelo: e.Modelo, estatusCita: e.EstatusCita, causa: "Verificacion", piloto: e.Piloto
+            },
+            width: '100%',
+            //height: '90%'
+          });
 
-      }
-  
+          dialogRef.afterClosed().subscribe(res => {
+            this.getConsultaPreRegistro();
+          });
+
+        }
+
       }
 
 

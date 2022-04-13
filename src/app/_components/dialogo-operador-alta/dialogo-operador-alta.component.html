@@ -106,7 +106,10 @@
                                     <mat-label>Fecha de Nacimiento</mat-label>
                                     <input matInput [matDatepicker]="picker" formControlName="FechaNacimiento">
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker style="outline: none;"></mat-datepicker>
+                                    <mat-datepicker #picker style="outline: none;" required></mat-datepicker>
+                                    <mat-error *ngIf="reactiveForm.get('FechaNacimiento')!.hasError('required')">
+                                        El dato es obligatorio
+                                    </mat-error>
 
                                 </mat-form-field>
                             </div>

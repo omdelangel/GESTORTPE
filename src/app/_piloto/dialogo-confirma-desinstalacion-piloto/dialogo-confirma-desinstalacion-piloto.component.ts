@@ -34,7 +34,6 @@ export class DialogoConfirmaDesinstalacionPilotoComponent implements OnInit {
   tipoConvertidor: string = "";
   submitted = false;
   citas!: Citas;
-  piloto: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
     notifierService: NotifierService,
@@ -47,11 +46,10 @@ export class DialogoConfirmaDesinstalacionPilotoComponent implements OnInit {
       this.idConcesionario = data.IdConcesionario;
       this.nombreConcesionario = data.NombreConcesionario
       this.idVehiculo = data.IdVehiculo;
-      this.fechaInstalacion = data.FechaInstalacion;
+      this.fechaInstalacion = data.FechaDesinstalacion;
       this.placa = data.Placa;
       this.tipoVehiculo = data.TipoVehiculo;
       this.tipoConvertidor = data.TipoConvertidor;
-      this.piloto = data.piloto;
      }
 
   ngOnInit(): void {
@@ -91,7 +89,7 @@ export class DialogoConfirmaDesinstalacionPilotoComponent implements OnInit {
 
   
        this.citas = {
-         IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo, Fecha: moment(this.f.FechaInstalacion.value).format('YYYY/MM/DD'), IdTaller: 0
+        IdCita: 0, IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo, Fecha: moment(this.f.FechaInstalacion.value).format('YYYY/MM/DD'), IdTaller: 0
        }
 
    

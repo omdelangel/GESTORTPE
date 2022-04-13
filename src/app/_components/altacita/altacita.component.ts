@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, Ng
 import esLocale from '@fullcalendar/core/locales/es';
 import { CalendarOptions } from '@fullcalendar/angular';
 import * as moment from 'moment';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HoracitaDialogComponent } from '../horacita-dialog';
 import { AlertService } from '../../_alert';
 import { Citas, DisponibilidadCitas } from 'src/app/_models/cita.model';
@@ -37,6 +37,8 @@ export class AltacitaComponent implements OnInit {
   idConcesionarioValue: number = 0;
   diaHora: any;
   piloto: boolean = false;
+  idCitaValue: number = 0;
+  estatusCita: string = "";
 
   //Determina si viene del registro o de la formalización
   causaValue: string = "";
@@ -119,6 +121,8 @@ export class AltacitaComponent implements OnInit {
     this.idVehiculoValue = data.idVehi;
     this.causaValue = data.causa;
     this.piloto = data.piloto;
+    this.idCitaValue = data.idCita;
+    this.estatusCita = data.estatusCita;
 
   }
 
@@ -149,63 +153,121 @@ export class AltacitaComponent implements OnInit {
     //this.clear(); 
     this.submitted = true;
 
-    if (this.dia != undefined && this.hora != undefined && this.dia != "" && this.hora != "") {
+    if (this.idCitaValue == 0 || this.idCitaValue == null || this.estatusCita == "D" || this.estatusCita == "V" || this.estatusCita == "C" ) {
 
-      this.diaHora = moment(this.dia + " " + this.hora).format('YYYY-MM-DD HH:mm:ss');
-      this.citas = { IdVehiculo: this.idVehiculoValue, IdConcesionario: this.idConcesionarioValue, Fecha: this.diaHora, IdTaller: this.idTallerValue }
+      if (this.dia != undefined && this.hora != undefined && this.dia != "" && this.hora != "") {
 
-      if (this.causaValue == "Verificacion" || this.causaValue == undefined) {
+        this.diaHora = moment(this.dia + " " + this.hora).format('YYYY-MM-DD HH:mm:ss');
+        this.citas = { IdCita: 0, IdVehiculo: this.idVehiculoValue, IdConcesionario: this.idConcesionarioValue, Fecha: this.diaHora, IdTaller: this.idTallerValue }
 
-        this.citasService.postRegistraCita(this.citas)
-          .pipe(first())
-          .subscribe(
-            data => {
+        if (this.causaValue == "Verificacion" || this.causaValue == undefined) {
 
-              if (data.estatus) {
-                //this.success(data.mensaje);  
-                this.notifier.notify('success', data.mensaje, '');
-                this.dialogRef.close({ idCita: data.IdCita, dia: this.dia, hora: this.hora });
-              } else {
-                //this.warn(data.mensaje);
-                this.notifier.notify('warning', data.mensaje, '');
-                this.dialogRef.close({ idCita: 0 });
-              }
-            },
-            error => {
-              this.notifier.notify('error', error, '');
-            });
+          this.citasService.postRegistraCita(this.citas)
+            .pipe(first())
+            .subscribe(
+              data => {
 
-      } else if (this.causaValue == "Instalacion") {
+                if (data.estatus) {
+                  //this.success(data.mensaje);  
+                  this.notifier.notify('success', data.mensaje, '');
+                  this.dialogRef.close({ idCita: data.IdCita, dia: this.dia, hora: this.hora });
+                } else {
+                  //this.warn(data.mensaje);
+                  this.notifier.notify('warning', data.mensaje, '');
+                  this.dialogRef.close({ idCita: 0 });
+                }
+              },
+              error => {
+                this.notifier.notify('error', error, '');
+              });
 
-        this.citasService.postRegistraCitaInstalacion(this.citas)
-          .pipe(first())
-          .subscribe(
-            data => {
+        } else if (this.causaValue == "Instalacion") {
 
-              if (data.estatus) {
-                //this.success(data.mensaje);  
-                this.notifier.notify('success', data.mensaje, '');
-                this.dialogRef.close({ idCita: data.IdCita, dia: this.dia, hora: this.hora });
-              } else {
-                //this.warn(data.mensaje);
-                this.notifier.notify('warning', data.mensaje, '');
-                this.dialogRef.close({ idCita: 0 });
-              }
-            },
-            error => {
-              this.notifier.notify('error', error, '');
-            });
+          this.citasService.postRegistraCitaInstalacion(this.citas)
+            .pipe(first())
+            .subscribe(
+              data => {
+
+                if (data.estatus) {
+                  //this.success(data.mensaje);  
+                  this.notifier.notify('success', data.mensaje, '');
+                  this.dialogRef.close({ idCita: data.IdCitaInstalacion, dia: this.dia, hora: this.hora });
+                } else {
+                  //this.warn(data.mensaje);
+                  this.notifier.notify('warning', data.mensaje, '');
+                  this.dialogRef.close({ idCita: 0 });
+                }
+              },
+              error => {
+                this.notifier.notify('error', error, '');
+              });
 
 
 
+        }
+
+      } else {
+        //this.info("Seleccione fecha y hora de la cita!!!");
+        this.notifier.notify('info', "Seleccione fecha y hora de la cita!!!", '');
+      }
+    } else if (this.idCitaValue != 0 && this.estatusCita == "A") {
+
+      if (this.dia != undefined && this.hora != undefined && this.dia != "" && this.hora != "") {
+
+        this.diaHora = moment(this.dia + " " + this.hora).format('YYYY-MM-DD HH:mm:ss');
+        this.citas = { IdCita: this.idCitaValue, IdVehiculo: this.idVehiculoValue, IdConcesionario: this.idConcesionarioValue, Fecha: this.diaHora, IdTaller: this.idTallerValue }
+
+        if (this.causaValue == "Verificacion" || this.causaValue == undefined) {
+
+          this.citasService.postCitaModificacion(this.citas)
+            .pipe(first())
+            .subscribe(
+              data => {
+
+                if (data.estatus) {
+                  //this.success(data.mensaje);  
+                  this.notifier.notify('success', data.mensaje, '');
+                  this.dialogRef.close({ idCita: data.IdCita, dia: this.dia, hora: this.hora });
+                } else {
+                  //this.warn(data.mensaje);
+                  this.notifier.notify('warning', data.mensaje, '');
+                  this.dialogRef.close({ idCita: 0 });
+                }
+              },
+              error => {
+                this.notifier.notify('error', error, '');
+              });
+
+        } else if (this.causaValue == "Instalacion") {
+
+          this.citasService.postCitaModificacionConvertidor(this.citas)
+            .pipe(first())
+            .subscribe(
+              data => {
+
+                if (data.estatus) {
+                  //this.success(data.mensaje);  
+                  this.notifier.notify('success', data.mensaje, '');
+                  this.dialogRef.close({ idCita: data.IdCitaInstalacion, dia: this.dia, hora: this.hora });
+                } else {
+                  //this.warn(data.mensaje);
+                  this.notifier.notify('warning', data.mensaje, '');
+                  this.dialogRef.close({ idCita: 0 });
+                }
+              },
+              error => {
+                this.notifier.notify('error', error, '');
+              });
+
+
+
+        }
+
+      } else {
+        //this.info("Seleccione fecha y hora de la cita!!!");
+        this.notifier.notify('info', "Seleccione fecha y hora de la cita!!!", '');
       }
 
-
-
-    } else {
-
-      //this.info("Seleccione fecha y hora de la cita!!!");
-      this.notifier.notify('info', "Seleccione fecha y hora de la cita!!!", '');
     }
   }
 
@@ -228,7 +290,7 @@ export class AltacitaComponent implements OnInit {
   }
 
 
-  //Guarda la cita
+  //Abre dialogo confirmación
   mostrarDialogoConfirmacion(): void {
     this.dialog
       .open(DialogoConfirmacionComponent, {

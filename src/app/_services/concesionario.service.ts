@@ -57,10 +57,13 @@ export class ConcesionarioService {
 
 
   //Consulta los datos de Concesionario para la pantalla de Preregistro
-  getPreRegConcesionario(): Observable<any> {   
+  getPreRegConcesionario(): Observable<any> {  
+    
 
     return this.http.get<any>(`${environment.SERVER_URL}/concesionario-prerregistro`)
       .pipe(map((res: Response) => {    
+
+        console.log(res);
 
         return res || {}
       }),
