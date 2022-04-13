@@ -133,11 +133,11 @@ export class FormalizacionComponent implements OnInit {
       //Registro de Citas para la instalacion
       cita(e: any) {
 
-        if(e.IdCitaInstalacion == null  || e.EstatusCitaInstalacion == "V"){
+        if(e.IdCitaInstalacion == null  || e.EstatusCitaInstalacion == "D" || e.EstatusCitaInstalacion == "V" || e.EstatusCitaInstalacion == "C"){
 
           const dialogRef = this.dialog.open(DialogoTalleresComponent, {
             disableClose: true,
-            data: { nombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo, causa: "Instalacion", piloto: e.Piloto},
+            data: {idCita: e.IdCitaInstalacion, estatusCita: e.EstatusCitaInstalacion, nombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo, causa: "Instalacion", piloto: e.Piloto},
             
           });
       

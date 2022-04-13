@@ -91,7 +91,7 @@ export class DialogoConfirmaInstalacionComponent implements OnInit {
 
   
        this.citas = {
-         IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo, Fecha: moment(this.f.FechaInstalacion.value).format('YYYY/MM/DD'), IdTaller: 0
+        IdCita: 0, IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo, Fecha: moment(this.f.FechaInstalacion.value).format('YYYY/MM/DD'), IdTaller: 0
        }
 
    

@@ -116,7 +116,9 @@
 								<ng-container matColumnDef="EstatusCitaDesinstalacion">
 									<mat-header-cell *matHeaderCellDef mat-sort-header> Estatus cita desinstalación
 									</mat-header-cell>
-									<mat-cell *matCellDef="let row"> {{row.EstatusCitaDesinstalacion}} </mat-cell>
+									<mat-cell *matCellDef="let row"> 	{{row.EstatusCitaDesinstalacion=='A' ?
+										'Abierta': ''}} {{row.EstatusCitaDesinstalacion=='D' ? 'Dictaminada': ''}} {{row.EstatusCitaDesinstalacion=='C' ? 'Cancelada': ''}}
+										{{row.EstatusCitaDesinstalacion=='V' ? 'Vencida': ''}}</mat-cell>						
 								</ng-container>
 
 								<!-- ID Column -->

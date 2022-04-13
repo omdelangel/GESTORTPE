@@ -105,8 +105,7 @@ export class TalleresComponent implements OnInit {
   selectRecord(row: any) {
 
     const dialogRef = this.dialog.open(AltacitaComponent, {
-      data: {
-        idTaller: row.IdTaller, nombreTaller: row.Nombre, domicilio: row.Domicilio + " " + row.Colonia + " " + "CP: " + row.CP + " " +
+      data: {idCita: 0, idTaller: row.IdTaller, nombreTaller: row.Nombre, domicilio: row.Domicilio + " " + row.Colonia + " " + "CP: " + row.CP + " " +
           row.Municipio + " " + row.EntidadFederativa, telefono: row.Telefono, contacto: row.Contacto, nombreConce: this.nombreConcesionario,
         idConce: this.idConcesionario, idVehi: this.idVehiculo, piloto: this.pilotoValue
       },

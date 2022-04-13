@@ -47,7 +47,6 @@ getColorDisponibles(idTaller: number, dia: any): Observable<any> {
 //Registra la Cita para la revisión del auto
 postRegistraCita(citas: Citas): Observable<any> {
 
-
   return this.http.post<any>(`${environment.SERVER_URL}/cita-registro`, {'IdVehiculo': citas.IdVehiculo, 
   'IdConcesionario': citas.IdConcesionario, 'Fecha': citas.Fecha, 'IdTaller': citas.IdTaller})
   .pipe(map((res: Response) => { 
@@ -57,6 +56,7 @@ postRegistraCita(citas: Citas): Observable<any> {
     catchError(this.handleError)
   )
 }
+
 
 //Obtiene los datos de la cita
 getCitaConcesionario(idCita: number): Observable<any> {
@@ -79,6 +79,32 @@ postCancelaCita(idVehiculo: number, idCita: number): Observable<any> {
 
   return this.http.post<any>(`${environment.SERVER_URL}/cita-cancelacion`, {'IdVehiculo': idVehiculo, 
   'IdCita': idCita})
+  .pipe(map((res: Response) => { 
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Reagenda la cita para la revisión
+postCitaModificacion(citas: Citas): Observable<any> {
+
+  return this.http.post<any>(`${environment.SERVER_URL}/cita-modificacion`, {'IdCita': citas.IdCita, 'IdVehiculo': citas.IdVehiculo, 
+  'IdConcesionario': citas.IdConcesionario, 'Fecha': citas.Fecha, 'IdTaller': citas.IdTaller})
+  .pipe(map((res: Response) => { 
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Reagenda la cita para la instalación del convertidor
+postCitaModificacionConvertidor(citas: Citas): Observable<any> {
+
+  return this.http.post<any>(`${environment.SERVER_URL}/cita-convertidor-modificacion`, {'IdCita': citas.IdCita, 'IdVehiculo': citas.IdVehiculo, 
+  'IdConcesionario': citas.IdConcesionario, 'Fecha': citas.Fecha, 'IdTaller': citas.IdTaller})
   .pipe(map((res: Response) => { 
 
       return res || {}

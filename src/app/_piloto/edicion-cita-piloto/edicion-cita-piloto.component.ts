@@ -27,7 +27,6 @@ export class EdicionCitaPilotoComponent implements OnInit {
   private readonly notifier: NotifierService;
 
   Concesionario: string = "";
-  idCita: number = 0;
   reactiveForm!: FormGroup;
   idVehiculo: number = 0;
   idConcesionario: number = 0;
@@ -37,9 +36,9 @@ export class EdicionCitaPilotoComponent implements OnInit {
   marca: string = "";
   submarca: string = "";
   modelo: string = "";
+  idCita: number = 0;
   estatusCita: string = "";
-  causaValue: string = "";
-  piloto: boolean = false;
+
 
   constructor(private pilotoService: PilotoService,
     private formBuilder: FormBuilder,
@@ -52,16 +51,15 @@ export class EdicionCitaPilotoComponent implements OnInit {
 
     this.notifier = notifierService;   
     dialogRef.disableClose = true;
-    this.idCita = data.idCita;
     this.Concesionario = data.NombreConcesionario;
     this.idVehiculo = data.idVehiculo;
     this.idConcesionario = data.idConcesionario;
     this.marca = data.marca;
     this.submarca = data.submarca;
     this.modelo = data.modelo;
+    this.idCita = data.idCita;
     this.estatusCita = data.estatusCita;
-    this.causaValue = data.causa;
-    this.piloto = data.piloto;
+
 
 
     switch (this.estatusCita) {
@@ -117,24 +115,7 @@ export class EdicionCitaPilotoComponent implements OnInit {
   obtieneCita(idCita: number) {
     //this.clear();
 
-    if(this.causaValue == "Verificacion"){
-    this.citaService.getCitaConcesionario(idCita)
-      .pipe(first())
-      .subscribe(data => {
-
-        this.f.Concesionario.setValue(this.Concesionario);
-        this.f.Taller.setValue(data.cita[0].Taller);
-        this.f.Domicilio.setValue(data.cita[0].Domicilio + " " + data.cita[0].Colonia + " " + data.cita[0].CP + " " + data.cita[0].Municipio + " " + data.cita[0].EntidadFederativa);
-        this.f.Telefono.setValue(data.cita[0].Telefono);
-        this.f.Contacto.setValue(data.cita[0].Contacto);
-        this.f.Fecha.setValue(data.cita[0].Fecha);
-        this.f.Hora.setValue(data.cita[0].Hora);
-      },
-        error => {
-        });
-      } else if (this.causaValue == "Instalacion" ) {
-
-        this.citaService.getCitaInstalacion(idCita)
+    this.citaService.getCitaInstalacion(idCita)
       .pipe(first())
       .subscribe(data => {
 
@@ -148,42 +129,20 @@ export class EdicionCitaPilotoComponent implements OnInit {
       },
         error => {
         });
-
-      }
+      
   }
 
   //Cancela de cita
   cancelarCita() {
 
-    //this.clear();
-    if (this.causaValue == "Verificacion") {
-      this.citaService.postCancelaCita(this.idVehiculo, this.idCita)
-        .pipe(first())
-        .subscribe(
-          data => {
-
-            if (data.estatus) {
-              this.valorCancel = true;
-              //this.success(data.mensaje);
-              this.notifier.notify('success', data.mensaje, '');
-            } else {
-              this.valorCancel = false;
-              //this.warn(data.mensaje);
-              this.notifier.notify('warning', data.mensaje, '');
-            }
-          },
-          error => {
-            //this.error(error);
-            this.notifier.notify('error', error, '');
-          });
-    } else if (this.causaValue == "Instalacion") {
-      this.citaService.postCancelaCitaInstalacion(this.idVehiculo, this.idCita)
+    this.citaService.postCancelaCitaInstalacion(this.idVehiculo, this.idCita)
       .pipe(first())
       .subscribe(
         data => {
 
           if (data.estatus) {
             this.valorCancel = true;
+            this.dialogRef.close();
             //this.success(data.mensaje);
             this.notifier.notify('success', data.mensaje, '');
           } else {
@@ -196,8 +155,7 @@ export class EdicionCitaPilotoComponent implements OnInit {
           //this.error(error);
           this.notifier.notify('error', error, '');
         });
-
-    }
+       
   }
 
   //Cancela la cita
@@ -211,16 +169,9 @@ export class EdicionCitaPilotoComponent implements OnInit {
       .subscribe((confirmado: Boolean) => {
         if (confirmado) {
 
-          this.cancelarCita();
-          this.cancelar = true;
-          this.nuevaCita = false;
+          this.cancelarCita();        
 
-        } else {
-
-          this.cancelar = false;
-          this.nuevaCita = true;
-
-        }
+        } 
       });
   }
 
@@ -237,7 +188,7 @@ export class EdicionCitaPilotoComponent implements OnInit {
         if (confirmado) {
 
           const dialogRef = this.dialog.open(DialogoTalleresPilotoComponent, {
-            data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo, causa: this.causaValue, piloto: this.piloto },
+            data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo},
             width: '100%'
           });
       
@@ -254,7 +205,7 @@ export class EdicionCitaPilotoComponent implements OnInit {
         } else {
 
           const dialogRef = this.dialog.open(DialogoTalleresPilotoComponent, {
-            data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo, causa: this.causaValue, piloto: this.piloto},
+            data: { nombreConcesionario: this.Concesionario, idConcesionario: this.idConcesionario, idVehiculo: this.idVehiculo},
             width: '100%'
           });
       

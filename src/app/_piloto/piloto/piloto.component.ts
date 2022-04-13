@@ -93,6 +93,8 @@ export class PilotoComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
 
+        console.log(data);
+
         this.piloto = data.concesionario;
         this.dataSource = new MatTableDataSource(this.piloto);
         this.dataSource.paginator = this.paginator;
@@ -109,7 +111,7 @@ export class PilotoComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogoConfirmaDesinstalacionPilotoComponent, {
       data: {
         IdVehiculo: e.IdVehiculo, IdConcesionario: e.IdConcesionario, NombreConcesionario: e.NombreConcesionario, Placa: e.Placa,
-        TipoVehiculo: e.TipoVehiculo, TipoConvertidor: e.TipoConvertidor, FechaInstalacion: e.FechaCitaInstalacion, piloto: e.Piloto
+        TipoVehiculo: e.TipoVehiculo, TipoConvertidor: e.TipoConvertidor, FechaDesinstalacion: e.FechaCitaDesinstalacion
       },
       disableClose: true,
       //width: '1500px',
@@ -125,50 +127,67 @@ export class PilotoComponent implements OnInit {
   //Registro de Citas para la instalacion
   cita(e: any) {
 
-    this.dialog
-    .open(DialogoConfirmacionPilotoComponent, {
-      data: `Si acepta, confirmará que el CONCESIONARIO NO está de acuerdo en continuar con los beneficios del programa Cambia y Gana.`,
-      width: '30%'
-    })
-    .afterClosed()
-    .subscribe((confirmado: Boolean) => {
-      if (confirmado) {
+    if (e.IdCitaDesinstalacion == null && e.EstatusCitaDesinstalacion == null) {
 
-        this.enviaRespuesta(e.IdContrato, 0);
+      this.dialog
+        .open(DialogoConfirmacionPilotoComponent, {
+          data: `Si acepta, confirmará que el CONCESIONARIO NO está de acuerdo en continuar con los beneficios del programa Cambia y Gana.`,
+          width: '30%'
+        })
+        .afterClosed()
+        .subscribe((confirmado: Boolean) => {
+          if (confirmado) {
 
-        if (e.IdCitaInstalacion == null || e.EstatusCitaInstalacion == "V") {
+            this.enviaRespuesta(e.IdContrato, 0);
 
-          const dialogRef = this.dialog.open(DialogoTalleresPilotoComponent, {
-            disableClose: true,
-            data: { nombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo, causa: "Instalacion", piloto: e.Piloto },
-    
-          });
-    
-          dialogRef.afterClosed().subscribe(res => {
-            this.getConsultaPiloto();
-          });
-    
-    
-        } else {
-    
-          const dialogRef = this.dialog.open(EdicionCitaPilotoComponent, {
-            disableClose: true,
-            data: {
-              idCita: e.IdCitaInstalacion, NombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo,
-              marca: e.Marca, submarca: e.Submarca, modelo: e.Modelo, estatusCita: e.EstatusCitaInstalacion, causa: "Instalacion", piloto: e.Piloto
-            },
-          });
-    
-          dialogRef.afterClosed().subscribe(res => {
-            this.getConsultaPiloto();
-          });
-    
-        }
+            const dialogRef = this.dialog.open(DialogoTalleresPilotoComponent, {
+              disableClose: true,
+              data: { idCita: e.IdCitaDesinstalacion, estatusCita: e.EstatusCitaDesinstalacion, nombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo },
+
+            });
+
+            dialogRef.afterClosed().subscribe(res => {
+              this.getConsultaPiloto();
+            });
+
+          } else {
+
+          }
+        });
+
+    } else {
+
+      if (e.EstatusCitaDesinstalacion == "V" || e.EstatusCitaDesinstalacion == "C") {
+
+        const dialogRef = this.dialog.open(DialogoTalleresPilotoComponent, {
+          disableClose: true,
+          data: { idCita: e.IdCitaDesinstalacion, estatusCita: e.EstatusCitaDesinstalacion, nombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo },
+
+        });
+
+        dialogRef.afterClosed().subscribe(res => {
+          this.getConsultaPiloto();
+        });
+
 
       } else {
 
+        const dialogRef = this.dialog.open(EdicionCitaPilotoComponent, {
+          disableClose: true,
+          data: {
+            idCita: e.IdCitaDesinstalacion, NombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo,
+            marca: e.Marca, submarca: e.Submarca, modelo: e.Modelo, estatusCita: e.EstatusCitaDesinstalacion
+          },
+        });
+
+        dialogRef.afterClosed().subscribe(res => {
+          console.log("REGRES DE CNCELAR");
+          this.getConsultaPiloto();
+        });
+
       }
-    });
+
+    }
 
   }
 

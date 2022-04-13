@@ -119,7 +119,8 @@ export class DictamenComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(res => {
-
+       
+      this.dialogRef.close();
       
     }); 
 

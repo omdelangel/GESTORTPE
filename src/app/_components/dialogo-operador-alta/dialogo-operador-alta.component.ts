@@ -122,7 +122,7 @@ export class DialogoOperadorAltaComponent implements OnInit {
       'Materno': [''],
       'RFC': ['', Validators.required],
       'CURP': [''],
-      'FechaNacimiento': [''],
+      'FechaNacimiento': ['', Validators.required],
       'TipoPersona': ['', Validators.required],
       'Genero': ['', Validators.required],
       'EstadoCivil': [''],
