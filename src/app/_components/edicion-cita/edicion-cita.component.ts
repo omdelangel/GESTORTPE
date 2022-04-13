@@ -166,6 +166,7 @@ export class EdicionCitaComponent implements OnInit {
 
             if (data.estatus) {
               this.valorCancel = true;
+              this.dialogRef.close();
               //this.success(data.mensaje);
               this.notifier.notify('success', data.mensaje, '');
             } else {
@@ -214,7 +215,7 @@ export class EdicionCitaComponent implements OnInit {
         if (confirmado) {
 
           this.cancelarCita();
-          this.dialogRef.close();
+          
 
         } 
       });
