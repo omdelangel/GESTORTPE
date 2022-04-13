@@ -3,7 +3,6 @@ import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, Ng
 import { CatalogosService} from '../../_services';
 import { first } from 'rxjs/operators';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { AlertService } from '../../_alert';
 import { Marca, Submarca} from '../../_models';
 import { NotifierService } from 'angular-notifier';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -50,23 +49,13 @@ export class EdicionMarcaSubmarcaComponent implements OnInit {
   BanderaMarca          :boolean = true;
   BanderaGrabar         :boolean = true;
   Estatus               :number = 0;
-  
-
-
-  submitted = false;
-  matcher = new MyErrorStateMatcher();
+  submitted             = false;
+  matcher               = new MyErrorStateMatcher();
   Nombre                : string = "";
-  tipo: string = "";
-
-  
-  asigna: boolean = false;
-  estatus: string = "";
   condition: boolean = false;
-  operadorEdita: any;
+
 
   //Catálogos locales
-
-
   tiposVehiculo: TipoVehiculo[] = [
     { TipoVehiculo: 'A', viewValue: 'Taxis' },
     { TipoVehiculo: 'V', viewValue: 'Vans' },
@@ -76,11 +65,8 @@ export class EdicionMarcaSubmarcaComponent implements OnInit {
 
   constructor(
     private formBuilder        :FormBuilder,
-    private alertService       :AlertService,
     private catalogoService    :CatalogosService,
-
     notifierService            :NotifierService,
-    public dialog              :MatDialog,
     public dialogRef           :MatDialogRef<EdicionMarcaSubmarcaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       console.log("Edicion Marcas-Submarcas  ==> ")
@@ -284,25 +270,20 @@ export class EdicionMarcaSubmarcaComponent implements OnInit {
   getConsultasubmarcas(marca: number) {
 //getCatalogoMarca
 //    this.operadorService.getOperadorVehiculo(placa)
-   console.log("Consulta Submarca")
-   console.log(marca)
 
     this.catalogoService.getCatalogoSubmarca(marca)
       .pipe(first())
       .subscribe(data => {
-        console.log("regrese de servicio de consulta submarca")
-        console.log(data)
 
         if (data.estatus == true && data.SubMarcasLista != "") {
-
+      
           // Assign the data to the data source for the table to render
           this.submarcas = data.SubMarcasLista;
-//          this.idConcesionario = data.IdConcesionario;
-  //        this.idVehiculo = data.IdVehiculo;
-
-
           this.dataSource = new MatTableDataSource(this.submarcas);
-          this.dataSource.paginator = this.paginator;
+          console.log(" dataSource ")
+          console.log(this.dataSource)
+          console.log(this.submarcas)
+          //this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
 
           var elemTable = document.getElementById('htmlData');
@@ -311,15 +292,15 @@ export class EdicionMarcaSubmarcaComponent implements OnInit {
 
         } else if (data.estatus == false) {
 
-          var elemTable = document.getElementById('htmlData');
-          elemTable!.style.visibility = "hidden";
+          //var elemTable = document.getElementById('htmlData');
+          //elemTable!.style.visibility = "hidden";
 
           this.notifier.notify('warning', data.mensaje);
 
         } else if (data.estatus == true && data.submarcas == "") {
 
-          var elemTable = document.getElementById('htmlData');
-          elemTable!.style.visibility = "hidden";
+          //var elemTable = document.getElementById('htmlData');
+          //elemTable!.style.visibility = "hidden";
 
           this.notifier.notify('warning', data.mensaje);
 

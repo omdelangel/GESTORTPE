@@ -31,13 +31,11 @@ export class RepoPilotoPorVencerComponent implements OnInit {
   hoyDate      : Date = new Date();
 
   displayedColumns = [
-                      'IdConcesionario', 
                       'NombreCompleto', 
                       'Telefono', 
                       'email', 
-                      'NombreSM', 
                       'NombreM', 
-                      'IdVehiculo', 
+                      'NombreSM',                       
                       'Placa', 
                       'FechaInicio', 
                       'FechaTermino', 

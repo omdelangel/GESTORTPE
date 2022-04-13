@@ -463,16 +463,19 @@ export class PreciosGasolina {
 }
 
 export class CatalogoMarcas {
+    IdMarca           :number;
     Nombre               :string;
-    Estatus              :number;    
-    catalogoSubmarcas    :CatalogoSubmarcas[] = [];
+//    Estatus              :number;    
+    submarcas    :CatalogoSubmarcas[] = [];
 
-    constructor(catalogoMarcas: { 
+    constructor(catalogoMarcas: {
+        IdMarca           :number;
         Nombre            :string;
-        Estatus           :number;    
+//        Estatus           :number;    
     }) {
+        this.IdMarca        = catalogoMarcas.IdMarca        ;
         this.Nombre            = catalogoMarcas.Nombre;
-        this.Estatus           = catalogoMarcas.Estatus           ;
+//        this.Estatus           = catalogoMarcas.Estatus           ;
     }
 }
 
@@ -480,18 +483,18 @@ export class CatalogoSubmarcas {
     IdSubmarca        :number = 0;
     NombreSubmarca    :string = "";
     TipoVehiculo      :string = "";
-    Estatus           :number;    
+//    Estatus           :number;    
 
    constructor(catalogoSubmarcas: {
     IdSubmarca        :number;
     NombreSubmarca    :string;
     TipoVehiculo      :string;
-    Estatus           :number;    
+//    Estatus           :number;    
     }) {
         this.IdSubmarca        = catalogoSubmarcas.IdSubmarca        ;
         this.NombreSubmarca    = catalogoSubmarcas.NombreSubmarca    ;
         this.TipoVehiculo      = catalogoSubmarcas.TipoVehiculo      ;
-        this.Estatus           = catalogoSubmarcas.Estatus           ;
+  //      this.Estatus           = catalogoSubmarcas.Estatus           ;
     }
 }
 
@@ -513,10 +516,10 @@ export class Marca {
 
 
 export class Submarca {
-    IdSubmarca        :number = 0;
-    IdMarca           :number = 0;
-    Nombre            :string = "";
-    TipoVehiculo      :string = "";
+    IdSubmarca        :number;
+    IdMarca           :number;
+    Nombre            :string;
+    TipoVehiculo      :string;
     Estatus           :number;    
 
    constructor(catalogoSubmarcas: {

@@ -534,8 +534,9 @@ getCatalogoMarcaSub(Marca: any): Observable<any> {
 
   //Obtiene  Catálogo de Marcas/Submarcas de toda la información de las tablas
   getCatalogoMarcaSubmarca(): Observable<any> {
+    console.log("getCatalogoMarcaSubmarca")
 
-    return this.http.get<any>(`${environment.SERVER_URL}/Marca-SubmarcaCMPX`, {})
+    return this.http.get<any>(`${environment.SERVER_URL}/Marca-SubmarcaCMPX`)
     .pipe(map((res: Response) => {
   
       console.log("RES")

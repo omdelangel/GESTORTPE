@@ -32,7 +32,7 @@ import { NotifierService } from 'angular-notifier';
 
 export class ConsultaMarcasComponent implements OnInit {
 
-  columnsToDisplay = ['Nombre', 'action','actionMarca'];
+  columnsToDisplay = ['Nombre', 'action'];
   expandDisplayedColumns = ['NombreSubmarca', 'TipoVehiculo'];
   dataSource!: MatTableDataSource<CatalogoMarcas>;
   expandedElement!: CatalogoMarcas | null;
@@ -68,12 +68,14 @@ export class ConsultaMarcasComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
+    console.log("OnInit")
     this.getConsultaMarcas();
+    console.log("OnInit1")
 
   //Validación de campos en pantalla
     this.reactiveForm = this.formBuilder.group({
       'Nombre'      :[''],   
+      'action'      :[''],   
     });    
   }
 
@@ -109,7 +111,8 @@ export class ConsultaMarcasComponent implements OnInit {
 
 
     getConsultaMarcas(){
-      this.submitted = true;  
+      console.log("Consulta Marcas4")
+//      this.submitted = true;  
    
       this.catalogosService.getCatalogoMarcaSubmarca()
       .pipe(first())
@@ -117,6 +120,7 @@ export class ConsultaMarcasComponent implements OnInit {
  
         console.log("regresé del servico Marcas")
         console.log(data)
+        
         if (data.estatus ) {
   
           // Assign the data to the data source for the table to render
@@ -146,8 +150,10 @@ export class ConsultaMarcasComponent implements OnInit {
 
             this.notifier.notify('info', data.mensaje, '');    
         }
+        
       },
         error => {        
+          this.notifier.notify('error', error, '');
   
         });
   
@@ -195,7 +201,7 @@ changeEstatus(e: any){
 
   //Edita el registro de Marcas/Submarcas
     editar(e: any) {
-      console.log("editar SubMarca")
+      console.log("editar SubMarca1")
       console.log(e)
      
       const dialogRef   = this.dialog.open(EdicionMarcaSubmarcaComponent, {

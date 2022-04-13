@@ -23,7 +23,7 @@
 
                 <!-- Progress Column -->
                 <ng-container matColumnDef="NombreCompleto">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header> NombreCompleto
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Completo
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row"> {{row.NombreCompleto}} </mat-cell>
                 </ng-container>
@@ -37,23 +37,23 @@
 
                 <!-- Progress Column -->
                 <ng-container matColumnDef="email">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header> email
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Email
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row" matTooltip="{{row.email}}"> {{row.email}} </mat-cell>
                 </ng-container>
 
                 <!-- Progress Column -->
-                <ng-container matColumnDef="NombreSM">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre SM
+                <ng-container matColumnDef="NombreM">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Marca
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{row.NombreSM}} </mat-cell>
+                    <mat-cell *matCellDef="let row"> {{row.NombreM}} </mat-cell>
                 </ng-container>
 
                 <!-- Progress Column -->
-                <ng-container matColumnDef="NombreM">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre M
+                <ng-container matColumnDef="NombreSM">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Sub Marca
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{row.NombreM}} </mat-cell>
+                    <mat-cell *matCellDef="let row"> {{row.NombreSM}} </mat-cell>
                 </ng-container>
 
                 <!-- Progress Column -->
@@ -79,7 +79,7 @@
 
                 <!-- Progress Column -->
                 <ng-container matColumnDef="FechaTermino">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Termino
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Término
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row"> {{row.FechaTermino | date: 'dd/MM/yyyy'}} </mat-cell>
                 </ng-container>

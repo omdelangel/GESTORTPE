@@ -59,13 +59,6 @@
     <div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100" id="htmlData">
         <mat-table [dataSource]="dataSource" matSort>
 
-            <!-- Progress Column -->
-            <ng-container matColumnDef="IdSubmarca">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Id Submarca
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.IdSubmarca}} </mat-cell>
-            </ng-container>
-
 
             <!-- Progress Column -->
             <ng-container matColumnDef="Nombre">
