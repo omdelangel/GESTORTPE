@@ -5,23 +5,22 @@
                 <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
                     <div fxLayout="row" fxLayoutAlign="center center">
                         <img mat-card-image style="width: 50%; height: 50%" src="assets/images/logo-cambia.jpg" alt="">
-                       </div>
-			                 
-				</mat-card-actions>            
-                <mat-card-content>                  
-                    <div mat-dialog-content>                       
+                    </div>
+
+                </mat-card-actions>
+                <mat-card-content>
+                    <div mat-dialog-content>
                         <h2>{{mensaje}}</h2>
                     </div>
-            
-                    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-                        <button mat-fab style="background-color: #F15A24; outline:none;" matTooltip="Cerrar"
-                            matDialogClose>
-                            <mat-icon>clear</mat-icon>
-                        </button>
+
+                    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
                         <button mat-fab style="background-color: #80BC00; outline:none;" matTooltip="Confirmar"
-                            (click)="confirmado()">
-                            <mat-icon>done</mat-icon>
+                            (click)="confirmado()">SI
                         </button>
+                        <button mat-fab style="background-color: #F15A24; outline:none;" matTooltip="Cerrar"
+                            matDialogClose>NO
+                        </button>
+
                     </div>
                 </mat-card-content>
             </mat-card>

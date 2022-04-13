@@ -164,38 +164,16 @@ export class AltavehiculoComponent implements OnInit {
           if (data.estatus) {
             this.idVehiculo = data.IdVehiculo;
             this.vehiculoService.sendIdVehi(this.idVehiculo);          
-            //this.success(data.mensaje);
             this.notifier.notify('success', data.mensaje, ''); 
           } else {            
-            //this.warn(data.mensaje);
-            this.notifier.notify('warning', data.mensaje, '');
+            this.f.Placa.setValue("");
+            this.f.VIN.setValue("");
+            this.notifier.notify('warning', data.mensaje, '');          
           }
         },
         error => {
-          //this.error(error);
           this.notifier.notify('error', error, '');
         });
-  }
-
-  //Manejo de alertas
-  success(message: string) {
-    this.alertService.success(message, 'success');
-  }
-
-  error(message: string) {
-    this.alertService.error(message, 'error');
-  }
-
-  info(message: string) {
-    this.alertService.info(message, 'info');
-  }
-
-  warn(message: string) {
-    this.alertService.warn(message, 'warn');
-  }
-
-  clear() {
-    this.alertService.clear();
   }
 
 

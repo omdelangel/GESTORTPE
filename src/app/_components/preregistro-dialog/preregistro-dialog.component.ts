@@ -79,7 +79,7 @@ export class PreregistroDialogComponent implements OnInit {
 
   }
 
-  selectionChange(e: any){
+  selectionChange(e: any) {
 
     switch (e.selectedIndex) {
       case 0:
@@ -92,9 +92,9 @@ export class PreregistroDialogComponent implements OnInit {
         this.altavehiculoComponent.guardarVehiculo();
         break;
       case 3:
-        if (this.valueAsigna) {
-          this.altapropietarioComponent.guardarPropietario();
-        }
+          if (this.valueAsigna) {
+            this.altapropietarioComponent.guardarPropietario();
+          }
         break;
       default:
         // 

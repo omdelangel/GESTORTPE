@@ -24,16 +24,6 @@
 					<form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
 						<div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100">
 							<mat-table [dataSource]="dataSource" matSort>
-								 <!--chip column -->
-								<!--	  <ng-container matColumnDef="Piloto">
-										<mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-										<mat-cell *matCellDef="let row;let i = index; " [formGroup]="reactiveForm">
-											<mat-chip-list>
-												<mat-chip *ngIf="row.Piloto" style="background-color:#F15A24" color="primary" selected>Piloto</mat-chip>
-											</mat-chip-list>
-										</mat-cell>
-									</ng-container> -->
-
 								<!-- ID Column -->
 								<ng-container matColumnDef="IdConcesionario">
 									<mat-header-cell *matHeaderCellDef mat-sort-header> Id Concesionario
