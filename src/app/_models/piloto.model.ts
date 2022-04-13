@@ -94,3 +94,29 @@ export class ContratoPiloto {
         this.Sindicato = contratoPiloto.Sindicato;
     }    
 }
+
+
+export class PromocionesSindicato {
+    IdPromocion                :number;
+    IdSindicato                :number;
+    FechaInicio                :string;    
+    FechaTermino               :string;    
+    Duracion                   :number;
+    Litros                     :number;
+
+   constructor(promocionesSindicato: {
+                IdPromocion                :number;
+                IdSindicato                :number;
+                FechaInicio                :string;    
+                FechaTermino               :string;    
+                Duracion                   :number;
+                Litros                     :number;
+              }) {
+        this.IdPromocion          = promocionesSindicato.IdPromocion    ;
+        this.IdSindicato          = promocionesSindicato.IdSindicato    ;
+        this.FechaInicio          = promocionesSindicato.FechaInicio    ;
+        this.FechaTermino         = promocionesSindicato.FechaTermino   ;
+        this.Duracion             = promocionesSindicato.Duracion       ;
+        this.Litros               = promocionesSindicato.Litros         ;
+    }
+}

@@ -1,0 +1,85 @@
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start right" fxLayout.lt-sm="row">
+    <div fxLayout="row wrap" fxLayoutGap="20px" style="width: 100%;">
+        <div fxFlex="100">
+            <mat-card>
+                <div class="example-button-container">
+                    <button mat-mini-fab class="close-button" style="outline: none;" (click)="onNoClick()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+                <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+                    <mat-card-title fx-item style="color: #001C71; font-weight: lighter;">Empresa-Piloto
+                    </mat-card-title>
+                </mat-card-actions>
+                <mat-card-content>
+                    <form [formGroup]="frmAltaEP" (ngSubmit)="onSubmit()">
+                        <div fxLayout="row wrap" fxLayoutGap="30px grid">
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Promoción</mat-label>
+                                    <input matInput placeholder="Id Promocion" formControlName="IdPromocion" maxlength="10" required>
+                                    <mat-error *ngIf="frmAltaEP.get('IdPromocion')!.hasError('required')">
+                                        El dato es obligatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="Sindicato" formControlName="Sindicato" [errorStateMatcher]="matcher" required>
+                                        <mat-option *ngFor="let Sindicato of sindicatos" [value]="Sindicato.IdSindicato">
+                                            {{Sindicato.Nombre}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="frmAltaEP.get('Sindicato')!.invalid">Campo requerido
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Duración</mat-label>
+                                    <input matInput placeholder="Duracion" formControlName="Duracion" maxlength="05" required>
+                                    <mat-error *ngIf="frmAltaEP.get('Duracion')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Fecha Inicio</mat-label>
+                                    <input matInput [matDatepicker]="picker" formControlName="FechaInicio">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker style="outline: none;" required></mat-datepicker>
+                                    <mat-error *ngIf="frmAltaEP.get('FechaInicio')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Fecha Término</mat-label>
+                                    <input matInput [matDatepicker]="pickerF" formControlName="FechaTermino">
+                                    <mat-datepicker-toggle matSuffix [for]="pickerF"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerF style="outline: none;" required></mat-datepicker>
+                                    <mat-error *ngIf="frmAltaEP.get('FechaTermino')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+                            <button mat-mini-fab style="background-color: #80BC00; outline:none;" matTooltip="Guardar" (click)="guardarEmpresaPiloto()">
+								<mat-icon>save</mat-icon>
+							</button>
+                        </div>
+                    </form>
+                </mat-card-content>
+                <notifier-container></notifier-container>
+            </mat-card>
+        </div>
+    </div>
+</div>

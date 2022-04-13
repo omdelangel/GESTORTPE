@@ -10,7 +10,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { AltaUsuariosComponent } from '../alta-usuarios';
 import { EdicionUsuariosComponent } from '../../_catalogos/edicion-usuarios/edicion-usuarios.component';
 import { NotifierService } from 'angular-notifier';
-//import { ConfirmationDialogComponent } from '../../_components/confirmation-dialog/confirmation-dialog.component';
 import { ImgViewerComponent } from '../../_catalogos/img-viewer/img-viewer.component'; 
 
 
@@ -222,31 +221,11 @@ export class ConsultaUsuariosComponent implements OnInit {
     console.log("VerIMG")
     console.log(row)
 
-//    if (row.Foto == ""){
-//      this.openDialogSinIMG(row);
-//      console.log("Sin IMG")
-//    }else{
-      this.openDialogIMG(row.Foto);
-      console.log("Con IMG")
+    this.openDialogIMG(row.Foto);
+    console.log("Con IMG")
  //   }
   }  
 
-/*  
-  //Abre un aviso para la carga del documento
-  openDialogSinIMG(row: any) {
-
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: '30%',
-      //height: '20%',
-      disableClose: true,
-      data: { documento: row.Documento }
-    });
-    // const snack = this.snackBar.open('Snack bar open before dialog');
-    dialogRef.afterClosed().subscribe(res => {
-
-    });
-  }
-*/
 
   //Abre modal visualizar el documento
   openDialogIMG(archivoIMG: string): void {
