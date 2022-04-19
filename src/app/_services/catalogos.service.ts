@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { CatalogoDictamenes, CatalogoUsuarios, UsuariosAltaEdicion, CatalogoTalleres, CatalogoEstaciones, CatalogoSindicato, Marca, Submarca} from 'src/app/_models';
+import { CatalogoDictamenes, CatalogoUsuarios, UsuariosAltaEdicion, CatalogoTalleres, CatalogoEstaciones, CatalogoSindicato, Marca, Submarca, PreciosGas, PreciosGasolina} from 'src/app/_models';
 
 @Injectable({
   providedIn: 'root'
@@ -123,6 +123,21 @@ getCatalogoDictamen(): Observable<any> {
 //Llena catálogo de entidades
 getCatalogoEntidades(): Observable<any> {
   return this.http.get<any>(`${environment.SERVER_URL}/entidades`)
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Llena catálogo de municipios
+getCatalogoMunicipios(IdEntFed: number): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('IdEntidadFederal', IdEntFed);  
+
+  return this.http.get<any>(`${environment.SERVER_URL}/lMunicipios`, {params: params})
   .pipe(map((res: Response) => {
 
       return res || {}
@@ -646,4 +661,49 @@ postGuardaImagenRegistro(formData: any): Observable<any> {
 }
 
 
+
+  //Registra en tabla de Precios Gas
+  postRegistraPreciosGas(preciosGas: PreciosGas): Observable<any> {
+
+    return this.http.post<any>(`${environment.SERVER_URL}/Alta-Hgas`, {
+      'IdHistoricoGas'          :preciosGas.IdHistoricoGas          ,
+      'FechaAlta'               :preciosGas.FechaAlta               ,
+      'FechaDesde'              :preciosGas.FechaDesde              ,
+      'FechaHasta'              :preciosGas.FechaHasta              ,
+      'IdEntidadFederal'        :preciosGas.IdEntidadFederal        ,
+      'IdMunicipio'             :preciosGas.IdMunicipio             ,
+      'PrecioKg'                :preciosGas.PrecioKg                ,
+      'PrecioLtr'               :preciosGas.PrecioLtr               ,
+      'NombreE'                 :preciosGas.NombreE                 ,  
+      'NombreM'                 :preciosGas.NombreM                 , 
+    })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  } 
+
+  //Registra en tabla de Precios Gas
+  postRegistraPreciosGasolina(preciosGasolina: PreciosGasolina): Observable<any> {
+
+    return this.http.post<any>(`${environment.SERVER_URL}/Alta-Hgasolina`, {
+      'IdHistoricoGasolina'     :preciosGasolina.IdHistoricoGasolina     ,
+      'FechaAlta'               :preciosGasolina.FechaAlta               ,
+      'FechaDesde'              :preciosGasolina.FechaDesde              ,
+      'FechaHasta'              :preciosGasolina.FechaHasta              ,
+      'IdEntidadFederal'        :preciosGasolina.IdEntidadFederal        ,
+      'IdMunicipio'             :preciosGasolina.IdMunicipio             ,
+      'PrecioLtr'               :preciosGasolina.PrecioLtr               ,
+      'NombreE'                 :preciosGasolina.NombreE                 ,  
+      'NombreM'                 :preciosGasolina.NombreM                 , 
+    })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }   
 }

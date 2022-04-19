@@ -7,7 +7,7 @@ import { NotifierService } from 'angular-notifier';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import * as moment from 'moment';
-import { CatalogoRegiones, Entidades, Municipios, PreciosGas } from 'src/app/_models';
+import { CatalogoRegiones, Entidades, Municipios, PreciosGasolina } from 'src/app/_models';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
@@ -20,18 +20,17 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-alta-precios-gas',
-  templateUrl: './alta-precios-gas.component.html',
-  styleUrls: ['./alta-precios-gas.component.scss']
+  selector: 'app-alta-precios-gasolina',
+  templateUrl: './alta-precios-gasolina.component.html',
+  styleUrls: ['./alta-precios-gasolina.component.scss']
 })
-
-export class AltaPreciosGasComponent implements OnInit {
+export class AltaPreciosGasolinaComponent implements OnInit {
   private readonly notifier: NotifierService;
   matcher              = new MyErrorStateMatcher();
   regiones             :CatalogoRegiones[] = [];
   entidades            :Entidades[] = [];
   municipios           :Municipios[] = [];
-  preciosGas           :PreciosGas;
+  preciosGasolina      :PreciosGasolina;
   submitted            = false;
   IdHistorico          = 0;
   espacios             = "";
@@ -49,7 +48,7 @@ export class AltaPreciosGasComponent implements OnInit {
     private formBuilder          :FormBuilder,
     private catalogoService      :CatalogosService,
     notifierService              :NotifierService,
-    public dialogRef             :MatDialogRef<AltaPreciosGasComponent>,
+    public dialogRef             :MatDialogRef<AltaPreciosGasolinaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
       this.notifier               = notifierService;
@@ -59,14 +58,12 @@ export class AltaPreciosGasComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCatalogoEntidades();
-
+    
     //Validación de campos en pantalla
     this.reactiveForm = this.formBuilder.group({
       'Entidad'              : ['', Validators.required],
       'Municipio'            : ['', Validators.required],
       'FechaInicio'          : ['', Validators.required],
-      'FechaTermino'         : ['', Validators.required],
-      'PrecioKg'             : ['', Validators.required],
       'PrecioLtr'            : ['', Validators.required],
     });     
   }
@@ -122,27 +119,26 @@ export class AltaPreciosGasComponent implements OnInit {
        return;
      }
  
-     this.preciosGas   = {
-      IdHistoricoGas          : this.IdHistorico                                       ,
+     this.preciosGasolina   = {
+      IdHistoricoGasolina     : this.IdHistorico                                       ,
       FechaAlta               :moment(this.hoyDate).format('YYYY-MM-DD')               ,
       FechaDesde              :moment(this.f.FechaInicio.value).format('YYYY-MM-DD')   ,
-      FechaHasta              :moment(this.f.FechaTermino.value).format('YYYY-MM-DD')  ,
+      FechaHasta              :moment(this.f.FechaInicio.value).format('YYYY-MM-DD')  ,
       IdEntidadFederal        :this.f.Entidad.value                                    ,
       IdMunicipio             :this.f.Municipio.value                                  ,
-      PrecioKg                :this.f.PrecioKg.value                                   ,
       PrecioLtr               :this.f.PrecioLtr.value                                  ,
       NombreE                 :this.espacios                                           ,  
       NombreM                 :this.espacios                                           , 
      }
 
-     console.log("antes del Alta ")
-     console.log(this.preciosGas)
+     console.log("antes del Alta GASOLINA")
+     console.log(this.preciosGasolina)
  
-     this.catalogoService.postRegistraPreciosGas(this.preciosGas)
+     this.catalogoService.postRegistraPreciosGasolina(this.preciosGasolina)
        .pipe(first())
        .subscribe(
          data => {
-           console.log("Alta de Precios GAS")
+           console.log("Alta de Precios GASOLINA")
            console.log(data)
            if (data.estatus) {
              this.notifier.notify('success', data.mensaje, '');    
@@ -179,3 +175,4 @@ export class AltaPreciosGasComponent implements OnInit {
   }
 
 }
+

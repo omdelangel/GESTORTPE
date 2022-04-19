@@ -54,29 +54,6 @@
 
                             <div fxFlex="50" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
-                                    <mat-label>Fecha Término</mat-label>
-                                    <input matInput [matDatepicker]="pickerF" formControlName="FechaTermino">
-                                    <mat-datepicker-toggle matSuffix [for]="pickerF"></mat-datepicker-toggle>
-                                    <mat-datepicker #pickerF style="outline: none;" required></mat-datepicker>
-                                    <mat-error *ngIf="reactiveForm.get('FechaTermino')!.hasError('required')">
-                                        El dato es oblgatorio
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-
-                            <div fxFlex="50" fxFlex.lt-md="100" fxl>
-                                <mat-form-field>
-                                    <mat-label>Precio Kg</mat-label>
-                                    <input matInput placeholder="PrecioKg" formControlName="PrecioKg" maxlength="6" required (keypress)="keyPress($event)">
-                                    <mat-error *ngIf="reactiveForm.get('PrecioKg')!.hasError('required')">
-                                        El dato es oblgatorio
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-
-
-                            <div fxFlex="50" fxFlex.lt-md="100" fxl>
-                                <mat-form-field>
                                     <mat-label>Precio Lt</mat-label>
                                     <input matInput placeholder="PrecioLtr" formControlName="PrecioLtr" maxlength="6" required (keypress)="keyPress($event)">
                                     <mat-error *ngIf="reactiveForm.get('PrecioLtr')!.hasError('required')">

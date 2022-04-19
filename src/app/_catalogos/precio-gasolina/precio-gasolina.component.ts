@@ -10,7 +10,7 @@ import { NotifierService } from 'angular-notifier';
 import { first } from 'rxjs/operators';
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
-import { AltaPreciosGasComponent } from '../alta-precios-gas';
+import { AltaPreciosGasolinaComponent } from '../alta-precios-gasolina';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export default class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -142,9 +142,10 @@ export class PrecioGasolinaComponent implements OnInit {
      //Abre modal para Alta de precios
      openDialog(): void {
 
-      const dialogRef = this.dialog.open(AltaPreciosGasComponent, {
+      const dialogRef = this.dialog.open(AltaPreciosGasolinaComponent, {
         disableClose: true,
-        data: {idEntidad: this.idEntidad, nombreE: this.nombreEntidad}
+        data: {idEntidad: this.idEntidad, nombreE: this.nombreEntidad},
+        width:'50%'
 
       });
   

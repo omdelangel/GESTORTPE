@@ -112,6 +112,7 @@ import { DialogoConfirmaDesinstalacionPilotoComponent } from './_piloto/dialogo-
 import { EdicionCitaPilotoComponent } from './_piloto/edicion-cita-piloto/edicion-cita-piloto.component';
 import { AltaEmpresaPilotoComponent } from './_piloto/alta-empresa-piloto/alta-empresa-piloto.component';
 import { ConsultaEmpresaPilotoComponent } from './_piloto/consulta-empresa-piloto/consulta-empresa-piloto.component';
+import { AltaPreciosGasolinaComponent } from './_catalogos/alta-precios-gasolina/alta-precios-gasolina.component';
 
 
 
@@ -260,7 +261,8 @@ FullCalendarModule.registerPlugins([
     DialogoConfirmaDesinstalacionPilotoComponent,
     EdicionCitaPilotoComponent,
     AltaEmpresaPilotoComponent,
-    ConsultaEmpresaPilotoComponent
+    ConsultaEmpresaPilotoComponent,
+    AltaPreciosGasolinaComponent
   ],
   imports: [
     BrowserModule,
