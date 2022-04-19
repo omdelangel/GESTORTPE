@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { CatalogoDictamenes, CatalogoUsuarios, UsuariosAltaEdicion, CatalogoTalleres, CatalogoEstaciones, CatalogoSindicato, Marca, Submarca, PreciosGas, PreciosGasolina} from 'src/app/_models';
+import { CatalogoDictamenes, CatalogoUsuarios, UsuariosAltaEdicion, CatalogoTalleres, CatalogoEstaciones, CatalogoSindicato, Marca, Submarca, PreciosGas, PreciosGasolina, CatalogoAsignacionSindicato} from 'src/app/_models';
 
 @Injectable({
   providedIn: 'root'
@@ -360,6 +360,19 @@ getCatalogoTipoConv(): Observable<any> {
   )
 } 
 
+//Obtiene los valores de la tabla de Tiposconvertidor
+getCatalogoTipoAsignacion(): Observable<any> {
+
+  return this.http.get<any>(`${environment.SERVER_URL}/lTiposAsignacion`, {})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+} 
+
+
   //Registra en tabla de Talleres
   postRegistraTaller(catalogoTalleres: CatalogoTalleres): Observable<any> {
 
@@ -423,6 +436,39 @@ getCatalogoTipoConv(): Observable<any> {
       'IdTipoConvertidor'     : catalogoSindicato.IdTipoConvertidor,
       'Estatus'               : catalogoSindicato.Estatus          ,
     })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }  
+
+  //Registra en tabla de AsignacionSindicatos y Sindicatos
+  postRegistraAsignacionSindicato(catalogoAsignacionSindicato: CatalogoAsignacionSindicato): Observable<any> {
+
+    return this.http.post<any>(`${environment.SERVER_URL}/Alta-SindicTipAsig`, {
+      'IdSindicato' 					          		:catalogoAsignacionSindicato.IdSindicato           							,
+      'Nombre' 				                			:catalogoAsignacionSindicato.Nombre                							,
+      'Seccion' 			    			          	:catalogoAsignacionSindicato.Seccion               							,
+      'Responsable'           							:catalogoAsignacionSindicato.Responsable           							,
+      'Direccion' 			            				:catalogoAsignacionSindicato.Direccion             							,
+      'IdRegion' 					            	  	:catalogoAsignacionSindicato.IdRegion              							,
+      'IdTipoConvertidor' 						    	:catalogoAsignacionSindicato.IdTipoConvertidor     							,
+      'Estatus' 							              :catalogoAsignacionSindicato.Estatus               							,
+      'IdTipoAsignacionA' 				  		  	:catalogoAsignacionSindicato.IdTipoAsignacionA     							,
+      'PorcAhorroConcesionA' 			  				:catalogoAsignacionSindicato.PorcAhorroConcesionA  							,
+      'PorcAhorroOperadorA' 		  					:catalogoAsignacionSindicato.PorcAhorroOperadorA   							,
+      'PorcAhorroPropietarioA' 							:catalogoAsignacionSindicato.PorcAhorroPropietarioA							,
+      'IdTipoAsignacionB' 			    				:catalogoAsignacionSindicato.IdTipoAsignacionB     							,
+      'PorcAhorroConcesionB' 				  			:catalogoAsignacionSindicato.PorcAhorroConcesionB  							,
+      'PorcAhorroOperadorB' 					  		:catalogoAsignacionSindicato.PorcAhorroOperadorB   							,
+      'PorcAhorroPropietarioB' 							:catalogoAsignacionSindicato.PorcAhorroPropietarioB							,
+      'IdTipoAsignacionC' 		    					:catalogoAsignacionSindicato.IdTipoAsignacionC     							,
+      'PorcAhorroConcesionC' 			  				:catalogoAsignacionSindicato.PorcAhorroConcesionC  							,
+      'PorcAhorroOperadorC' 				  			:catalogoAsignacionSindicato.PorcAhorroOperadorC   							,
+      'PorcAhorroPropietarioC' 							:catalogoAsignacionSindicato.PorcAhorroPropietarioC							,
+          })
       .pipe(map((res: Response) => {
 
         return res || {}
