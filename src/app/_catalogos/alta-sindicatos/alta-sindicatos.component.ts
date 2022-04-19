@@ -139,7 +139,6 @@ export class AltaSindicatosComponent implements OnInit {
   //Registra el Usuario
   guardarAsignacionSindicato() {
     
-   //this.clear();
     this.submitted = true;
 
     // stop here if form is invalid
@@ -147,8 +146,6 @@ export class AltaSindicatosComponent implements OnInit {
       return;
     }
 
-
-    console.log("Voy a llenar AsignacionSindicato")
     this.catalogoAsignacionSindicato   = {
       IdSindicato           					: this.IdSindicato                    				,
       Nombre                					: this.f.Nombre.value                					,
@@ -184,15 +181,10 @@ export class AltaSindicatosComponent implements OnInit {
     this.catalogoAsignacionSindicato.PorcAhorroOperadorC       = this.catalogoAsignacionSindicato.PorcAhorroOperadorC/10000;
     this.catalogoAsignacionSindicato.PorcAhorroPropietarioC    = this.catalogoAsignacionSindicato.PorcAhorroPropietarioC/10000;
 
-    console.log("voy al alta de AsignacionSindicato")    
-    console.log(this.catalogoAsignacionSindicato)
-
     this.catalogoService.postRegistraAsignacionSindicato(this.catalogoAsignacionSindicato)
       .pipe(first())
       .subscribe(
         data => {
-          console.log("regeso del alta de AsignacionSindicato")
-          console.log(data)
           if (data.estatus) {
             this.notifier.notify('success', data.mensaje, '');    
             this.dialogRef.close();
