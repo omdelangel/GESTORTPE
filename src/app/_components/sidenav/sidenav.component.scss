@@ -34,6 +34,10 @@ mat-sidenav-container {
 
 }
 
+.mat-icon-button {
+  z-index: 1;
+}
+
 .menu-button {
   width: 100%;
   display: flex;
@@ -114,15 +118,17 @@ mat-divider {
 }
 
 
-
-.active-list-item {
-  color: #d8c7a2 !important; /* Note: You could also use a custom theme */
-}
-
 .disable_ripple:hover{
   background: #d8c7a2 !important;
   opacity: 0.5;
   }
+
+
+
+
+
+
+
 
 
 

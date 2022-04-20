@@ -44,6 +44,8 @@ export class SidenavComponent {
   navItems1: NavItem[] = [];
 
   navItems: NavItem[] = [];
+  sidenavWidth = 4;
+  ngStyle: string;
 
 
   constructor(public authenticationService: AuthenticationService, 
@@ -116,6 +118,15 @@ export class SidenavComponent {
   handleClick(selectedItem: any) {
 
     this.title = selectedItem;
+  }
+
+  increase() {
+    this.sidenavWidth = 15;
+    console.log('increase sidenav width');
+  }
+  decrease() {
+    this.sidenavWidth = 4;
+    console.log('decrease sidenav width');
   }
 
 }

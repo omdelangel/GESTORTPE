@@ -36,10 +36,11 @@ export class MenuListItemComponent   {
        
       if (!item.children || !item.children.length) {
         this.router.navigate([item.route]);
+        console.log("item.route");
+        console.log(item.route);
         //this.navService.closeNav();      
       }
       if (item.children && item.children.length) {
-
         this.expanded = !this.expanded;
       }
     }
