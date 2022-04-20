@@ -70,6 +70,24 @@ export class CatalogoTipoConvertidor {
     }    
 }
 
+export class CatalogoTipoAsignacion {
+    IdTipoAsignacion   :number;
+    Nombre             :string;
+    Estatus            :string;
+
+    constructor(catalogoTipoConvertidor: { 
+        IdTipoAsignacion   :number;
+        Nombre             :string;
+        Estatus            :string;
+                                }){
+        this.IdTipoAsignacion    = catalogoTipoConvertidor.IdTipoAsignacion  ;
+        this.Nombre              = catalogoTipoConvertidor.Nombre            ;
+        this.Estatus             = catalogoTipoConvertidor.Estatus           ;
+    }    
+}
+
+
+
 export class CatalogoPerfiles {
     IdPerfil         :number;
     Descripcion      :string;
@@ -205,6 +223,76 @@ export class CatalogoSindicato {
         this.Estatus                = catalogoSindicato.Estatus            ;        
     }    
 }
+
+export class CatalogoAsignacionSindicato {
+    IdSindicato           				:number;
+    Nombre                				:string;
+    Seccion               				:string;
+    Responsable           				:string;
+    Direccion             				:string;
+    IdRegion              				:number;
+    IdTipoConvertidor     				:number;
+    Estatus               				:string;
+    IdTipoAsignacionA     				:number;
+    PorcAhorroConcesionA  				:number;
+    PorcAhorroOperadorA   				:number;
+    PorcAhorroPropietarioA				:number;
+    IdTipoAsignacionB     				:number;
+    PorcAhorroConcesionB  				:number;
+    PorcAhorroOperadorB   				:number;
+    PorcAhorroPropietarioB				:number;
+    IdTipoAsignacionC     				:number;
+    PorcAhorroConcesionC  				:number;
+    PorcAhorroOperadorC   				:number;
+    PorcAhorroPropietarioC				:number;
+    
+
+    constructor(catalogoAsignacionSindicato: {
+                                IdSindicato           				:number;
+                                Nombre                				:string;
+                                Seccion               				:string;
+                                Responsable           				:string;
+                                Direccion             				:string;
+                                IdRegion              				:number;
+                                IdTipoConvertidor     				:number;
+                                Estatus               				:string;
+                                IdTipoAsignacionA     				:number;
+                                PorcAhorroConcesionA  				:number;
+                                PorcAhorroOperadorA   				:number;
+                                PorcAhorroPropietarioA				:number;
+                                IdTipoAsignacionB     				:number;
+                                PorcAhorroConcesionB  				:number;
+                                PorcAhorroOperadorB   				:number;
+                                PorcAhorroPropietarioB				:number;
+                                IdTipoAsignacionC     				:number;
+                                PorcAhorroConcesionC  				:number;
+                                PorcAhorroOperadorC   				:number;
+                                PorcAhorroPropietarioC				:number;                                
+    }){
+        this.IdSindicato                    = catalogoAsignacionSindicato.IdSindicato           						;
+        this.Nombre                         = catalogoAsignacionSindicato.Nombre                						;
+        this.Seccion                        = catalogoAsignacionSindicato.Seccion               						;
+        this.Responsable                    = catalogoAsignacionSindicato.Responsable           						;
+        this.Direccion                      = catalogoAsignacionSindicato.Direccion             						;
+        this.IdRegion                       = catalogoAsignacionSindicato.IdRegion              						;
+        this.IdTipoConvertidor              = catalogoAsignacionSindicato.IdTipoConvertidor     						;
+        this.Estatus                        = catalogoAsignacionSindicato.Estatus               						;
+        this.IdTipoAsignacionA              = catalogoAsignacionSindicato.IdTipoAsignacionA     						;
+        this.PorcAhorroConcesionA           = catalogoAsignacionSindicato.PorcAhorroConcesionA  						;
+        this.PorcAhorroOperadorA            = catalogoAsignacionSindicato.PorcAhorroOperadorA   						;
+        this.PorcAhorroPropietarioA         = catalogoAsignacionSindicato.PorcAhorroPropietarioA						;
+        this.IdTipoAsignacionB              = catalogoAsignacionSindicato.IdTipoAsignacionB     						;
+        this.PorcAhorroConcesionB           = catalogoAsignacionSindicato.PorcAhorroConcesionB  						;
+        this.PorcAhorroOperadorB            = catalogoAsignacionSindicato.PorcAhorroOperadorB   						;
+        this.PorcAhorroPropietarioB         = catalogoAsignacionSindicato.PorcAhorroPropietarioB						;
+        this.IdTipoAsignacionC              = catalogoAsignacionSindicato.IdTipoAsignacionC     						;
+        this.PorcAhorroConcesionC           = catalogoAsignacionSindicato.PorcAhorroConcesionC  						;
+        this.PorcAhorroOperadorC            = catalogoAsignacionSindicato.PorcAhorroOperadorC   						;
+        this.PorcAhorroPropietarioC         = catalogoAsignacionSindicato.PorcAhorroPropietarioC						;
+              
+    }    
+}
+
 
 export class CatalogoEstaciones {
     IdEstacion                    :number;

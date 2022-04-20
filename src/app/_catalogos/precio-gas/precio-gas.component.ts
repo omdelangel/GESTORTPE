@@ -144,7 +144,8 @@ export class PrecioGasComponent implements OnInit {
 
       const dialogRef = this.dialog.open(AltaPreciosGasComponent, {
         disableClose: true,
-        data: {idEntidad: this.idEntidad, nombreE: this.nombreEntidad}
+        data: {idEntidad: this.idEntidad, nombreE: this.nombreEntidad},
+        width:'50%'
 
       });
   

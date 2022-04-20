@@ -1,5 +1,17 @@
 <div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
-    <h2 class="title-header-content" mat-raised-button>Lista de precios de Gasolina por Entidad </h2>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+        <div>
+            <h2 fx-item class="title-header-content">Lista de precios de Gasolina por Entidad
+            </h2>
+        </div>
+        <div>
+            <button class="add-header-content" mat-fab matTooltip="Alta de precios Gasolina" outline:none; (click)="openDialog()">
+                <mat-icon>add</mat-icon>  
+            </button>
+        </div>
+    </div>
+
     <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
         <div fxFlex="50">
             <mat-card>
@@ -59,9 +71,11 @@
                 <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
             </mat-form-field>
         </div>
+        <!--
         <button mat-fab style="background-color: #80BC00; outline: none;" matTooltip="Alta de precios Gas" outline:none; (click)="openDialog()">
         <mat-icon>add</mat-icon>
     </button>
+-->
     </div>
 
     <div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100" id="htmlData">

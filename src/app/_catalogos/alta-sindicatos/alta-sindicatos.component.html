@@ -79,10 +79,127 @@
                                 </mat-form-field>
                             </div>
 
+                            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Tipo Asignación</mat-label>
+                                    <input matInput placeholder="TipoAsignacionA" formControlName="TipoAsignacionA" maxlength="90" required>
+                                    <mat-error *ngIf="frmAltaSind.get('TipoAsignacionA')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
 
+                            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>% Ahorro Concesión</mat-label>
+                                    <input matInput placeholder="% Ahorro Concesión" formControlName="PorcAhorroConcesionA" mask="00.00" maxlength="5" required (keypress)="keyPress($event)">
+                                    <mat-error *ngIf="frmAltaSind.get('PorcAhorroConcesionA')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>% Ahorro Operador</mat-label>
+                                    <input matInput placeholder="% Ahorro Operador" formControlName="PorcAhorroOperadorA" mask="00.00" maxlength="5" required (keypress)="keyPress($event)">
+                                    <mat-error *ngIf="frmAltaSind.get('PorcAhorroOperadorA')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>% Ahorro Propietario</mat-label>
+                                    <input matInput placeholder="% Ahorro Propietario" formControlName="PorcAhorroPropietarioA" mask="00.00" maxlength="5" required (keypress)="keyPress($event)">
+                                    <mat-error *ngIf="frmAltaSind.get('PorcAhorroPropietarioA')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Tipo Asignación</mat-label>
+                                    <input matInput placeholder="TipoAsignacionB" formControlName="TipoAsignacionB" maxlength="90" required>
+                                    <mat-error *ngIf="frmAltaSind.get('TipoAsignacionB')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>% Ahorro Concesión</mat-label>
+                                    <input matInput placeholder="% Ahorro Concesión" formControlName="PorcAhorroConcesionB" mask="00.00" maxlength="5" required (keypress)="keyPress($event)">
+                                    <mat-error *ngIf="frmAltaSind.get('PorcAhorroConcesionB')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>% Ahorro Operador</mat-label>
+                                    <input matInput placeholder="% Ahorro Operador" formControlName="PorcAhorroOperadorB" mask="00.00" maxlength="5" required (keypress)="keyPress($event)">
+                                    <mat-error *ngIf="frmAltaSind.get('PorcAhorroOperadorB')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>% Ahorro Propietario</mat-label>
+                                    <input matInput placeholder="% Ahorro Propietario" formControlName="PorcAhorroPropietarioB" mask="00.00" maxlength="5" required (keypress)="keyPress($event)">
+                                    <mat-error *ngIf="frmAltaSind.get('PorcAhorroPropietarioB')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Tipo Asignación</mat-label>
+                                    <input matInput placeholder="TipoAsignacionC" formControlName="TipoAsignacionC" maxlength="90" required>
+                                    <mat-error *ngIf="frmAltaSind.get('TipoAsignacionC')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>% Ahorro Concesión</mat-label>
+                                    <input matInput placeholder="% Ahorro Concesión" formControlName="PorcAhorroConcesionC" mask="00.00" maxlength="5" required (keypress)="keyPress($event)">
+                                    <mat-error *ngIf="frmAltaSind.get('PorcAhorroConcesionC')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>% Ahorro Operador</mat-label>
+                                    <input matInput placeholder="% Ahorro Operador" formControlName="PorcAhorroOperadorC" mask="00.00" maxlength="5" required (keypress)="keyPress($event)">
+                                    <mat-error *ngIf="frmAltaSind.get('PorcAhorroOperadorC')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>% Ahorro Propietario</mat-label>
+                                    <input matInput placeholder="% Ahorro Propietario" formControlName="PorcAhorroPropietarioC" mask="00.00" maxlength="5" required (keypress)="keyPress($event)">
+                                    <mat-error *ngIf="frmAltaSind.get('PorcAhorroPropietarioC')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
                         </div>
                         <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-                            <button mat-mini-fab style="background-color: #80BC00; outline:none;" matTooltip="Guardar" (click)="guardarSindicato()">
+                            <button mat-mini-fab style="background-color: #80BC00; outline:none;" matTooltip="Guardar" (click)="guardarAsignacionSindicato()">
 								<mat-icon>save</mat-icon>
 							</button>
                         </div>
