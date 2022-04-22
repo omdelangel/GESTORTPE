@@ -213,7 +213,7 @@ getRegistrosVigentes(sindicato: number): Observable<any> {
   params = params.append('Empresa', sindicato);
 
  
-  return this.http.get<any>(`${environment.SERVER_URL}/Formalizados`, {params: params})
+  return this.http.get<any>(`${environment.SERVER_URL}/Vigentes`, {params: params})
   .pipe(map((res: Response) => {
 
       return res || {}

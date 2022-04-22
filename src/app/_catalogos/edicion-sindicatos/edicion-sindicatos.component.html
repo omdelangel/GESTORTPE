@@ -55,6 +55,16 @@
                             </div>
 
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field>
+                                    <mat-label>Teléfono</mat-label>
+                                    <input matInput placeholder="Teléfono" formControlName="Telefono" maxlength="14" mask="(00) 0000-0000" required>
+                                    <mat-error *ngIf="frmEditSind.get('Telefono')!.hasError('required')">
+                                        El dato es oblgatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field class="example-full-width">
                                     <mat-select placeholder="Region" formControlName="Region" [errorStateMatcher]="matcher" required>
                                         <mat-option *ngFor="let region of regiones" [value]="region.IdRegion">

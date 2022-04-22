@@ -199,6 +199,7 @@ export class CatalogoSindicato {
     Seccion                :string;
     Responsable            :string;
     Direccion              :string;
+    Telefono               :string;
     IdRegion               :number;
     IdTipoConvertidor      :number;
     Estatus                :string;
@@ -209,6 +210,7 @@ export class CatalogoSindicato {
                                     Seccion                :string;
                                     Responsable            :string;
                                     Direccion              :string;
+                                    Telefono               :string;
                                     IdRegion               :number;
                                     IdTipoConvertidor      :number;
                                     Estatus                :string;
@@ -218,6 +220,7 @@ export class CatalogoSindicato {
         this.Seccion                = catalogoSindicato.Seccion            ;
         this.Responsable            = catalogoSindicato.Responsable        ;
         this.Direccion              = catalogoSindicato.Direccion          ;
+        this.Telefono              = catalogoSindicato.Telefono            ;
         this.IdRegion               = catalogoSindicato.IdRegion           ;
         this.IdTipoConvertidor      = catalogoSindicato.IdTipoConvertidor  ;
         this.Estatus                = catalogoSindicato.Estatus            ;        
@@ -231,6 +234,7 @@ export class CatalogoAsignacionSindicato {
     Responsable           				:string;
     Direccion             				:string;
     IdRegion              				:number;
+    Telefono					        :string;
     IdTipoConvertidor     				:number;
     Estatus               				:string;
     IdTipoAsignacionA     				:number;
@@ -254,6 +258,7 @@ export class CatalogoAsignacionSindicato {
                                 Responsable           				:string;
                                 Direccion             				:string;
                                 IdRegion              				:number;
+                                Telefono					        :string;
                                 IdTipoConvertidor     				:number;
                                 Estatus               				:string;
                                 IdTipoAsignacionA     				:number;
@@ -275,6 +280,7 @@ export class CatalogoAsignacionSindicato {
         this.Responsable                    = catalogoAsignacionSindicato.Responsable           						;
         this.Direccion                      = catalogoAsignacionSindicato.Direccion             						;
         this.IdRegion                       = catalogoAsignacionSindicato.IdRegion              						;
+        this.Telefono                       = catalogoAsignacionSindicato.Telefono              						;
         this.IdTipoConvertidor              = catalogoAsignacionSindicato.IdTipoConvertidor     						;
         this.Estatus                        = catalogoAsignacionSindicato.Estatus               						;
         this.IdTipoAsignacionA              = catalogoAsignacionSindicato.IdTipoAsignacionA     						;
@@ -306,6 +312,8 @@ export class CatalogoEstaciones {
     Contacto		              :string;
     Region					      :string;
     Estatus					      :string;
+    TipoCombustible               :string;
+    ZonaFronteriza                :number;
 
     constructor(catalogoEstaciones: {
                                         IdEstacion                    :number;
@@ -319,6 +327,8 @@ export class CatalogoEstaciones {
                                         Contacto		              :string;
                                         Region					      :string;
                                         Estatus					      :string;    
+                                        TipoCombustible               :string;
+                                        ZonaFronteriza                :number;
     }){
         this.IdEstacion               = catalogoEstaciones.IdEstacion           ;
         this.Nombre                   = catalogoEstaciones.Nombre               ;
@@ -331,6 +341,8 @@ export class CatalogoEstaciones {
         this.Contacto		          = catalogoEstaciones.Contacto		        ;
         this.Region					  = catalogoEstaciones.Region			    ;
         this.Estatus				  = catalogoEstaciones.Estatus			    ;                
+        this.TipoCombustible		  = catalogoEstaciones.TipoCombustible		;
+        this.ZonaFronteriza	          = catalogoEstaciones.ZonaFronteriza       ;                
     }    
 }
 

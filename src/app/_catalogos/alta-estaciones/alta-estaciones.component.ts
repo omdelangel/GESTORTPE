@@ -15,6 +15,16 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
+
+interface TiposGas {
+  TipoGas        : string;
+  viewValue      : string;
+}
+
+interface ZonasFronterizas {
+  ZF             : number;
+  viewValue      : string;
+}
 @Component({
   selector: 'app-alta-estaciones',
   templateUrl: './alta-estaciones.component.html',
@@ -34,7 +44,18 @@ export class AltaEstacionesComponent implements OnInit {
   colonias                   : Asentamientos[] = [];
   idEstacion                 : number = 0;
   idUbicacion                : string = ' ';
- 
+  Region                     : string = ' ';
+
+  tiposGas: TiposGas[] = [
+    { TipoGas: 'GNT', viewValue: 'Gas Natural' },
+    { TipoGas: 'GLP', viewValue: 'Gas LP' },
+  ];  
+
+  zonasFronterizas: ZonasFronterizas[] = [
+    { ZF: 0, viewValue: 'No Fronteriza' },
+    { ZF: 1, viewValue: 'Fronteriza' },
+  ];  
+
 
   constructor(
     private formBuilder       : FormBuilder,
@@ -62,7 +83,9 @@ export class AltaEstacionesComponent implements OnInit {
       'Empresa'             : ['', Validators.required],
       'RFC'                 : ['', Validators.required],
       'Contacto'            : ['', Validators.required],
-      'Region'              : ['', Validators.required],
+      'TiposGas'            : ['', Validators.required],
+      'ZF'                  : ['', Validators.required],
+//      'Region'              : ['', Validators.required],
     }); 
   }
 
@@ -136,17 +159,20 @@ export class AltaEstacionesComponent implements OnInit {
     }
 
     this.catalogoEstaciones = {
-      IdEstacion             : this.idEstacion,
-      Nombre                 : this.f.Nombre.value    ,
-      Domicilio              : this.f.Domicilio.value    ,
-      IdColonia              : this.f.IdColonia.value    ,
-      Telefono				       : this.f.Telefono.value    ,
-      Ubicacion	             : this.idUbicacion    ,
-      Empresa		             : this.f.Empresa.value    ,
-      RFC			               : this.f.RFC.value    ,
-      Contacto		           : this.f.Contacto.value    ,
-      Region					       : this.f.Region.value    ,
-      Estatus				         : this.Estatus    ,      
+      IdEstacion             : this.idEstacion            ,
+      Nombre                 : this.f.Nombre.value        ,
+      Domicilio              : this.f.Domicilio.value     ,
+      IdColonia              : this.f.IdColonia.value     ,
+      Telefono				       : this.f.Telefono.value      ,
+      Ubicacion	             : this.idUbicacion           ,
+      Empresa		             : this.f.Empresa.value       ,
+      RFC			               : this.f.RFC.value           ,
+      Contacto		           : this.f.Contacto.value      ,
+//      Region					       : this.f.Region.value      ,
+      Region					       : this.Region                ,
+      Estatus				         : this.Estatus               ,      
+      TipoCombustible        : this.f.TiposGas.value      ,
+      ZonaFronteriza         : this.f.ZF.value      ,
     }
     console.log("Voy a dar de alta")
     console.log(this.catalogoEstaciones)

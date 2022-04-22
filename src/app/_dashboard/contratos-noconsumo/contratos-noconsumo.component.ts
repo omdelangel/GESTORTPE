@@ -24,17 +24,19 @@ export class ContratosNoconsumoComponent implements OnInit {
       this.dimsGraph = dataList['datos'][0].map((res : any) => res.Clasifica);
 
       const ctx = 'noConsumo-chart';
+      const porcentaje = ( 100 * this.dataGraph[0] / (this.dataGraph[0] + this.dataGraph[1]) );
 
       const chart =  new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
           labels : this.dimsGraph,
           datasets : [
             {
               label : "Vehiculos-Consumo",
               data : this.dataGraph,
-              backgroundColor: ["rgb(67, 188, 205)", "rgb(157, 157, 157)"],
-              hoverOffset: 4,
+              //backgroundColor: ["rgb(67, 188, 205)", "rgb(157, 157, 157)"],
+              backgroundColor: ["Red", "rgb(128, 188, 0)"],
+
             }
           ]
         },
@@ -42,10 +44,17 @@ export class ContratosNoconsumoComponent implements OnInit {
           plugins: {
             legend: {
               position: 'top',
+              display: false
             },
             title: {
-              display: false,
-              text: 'Comparativo de vehículos con y sin consumo'
+              position : 'top',
+              display: true,
+              text: 'Porcentaje de vehículos sin consumo: ' + porcentaje.toFixed(2)+'%',
+            },
+
+            tooltip: {
+              yAlign : 'bottom',
+              displayColors : false,
             }
           }
         }

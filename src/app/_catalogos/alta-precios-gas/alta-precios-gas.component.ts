@@ -10,6 +10,14 @@ import * as moment from 'moment';
 import { CatalogoRegiones, Entidades, Municipios, PreciosGas } from 'src/app/_models';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+/*
+import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
+import {MatDatepicker} from '@angular/material/datepicker';
+import {default as _rollupMoment, Moment} from 'moment';  
+
+const moment = _rollupMoment || _moment;
+*/
+
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -36,6 +44,9 @@ export class AltaPreciosGasComponent implements OnInit {
   IdHistorico          = 0;
   espacios             = "";
   hoyDate              : Date = new Date();
+  fechaWork            : Date = new Date();
+  dias                 = 6; 
+
 
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -65,7 +76,7 @@ export class AltaPreciosGasComponent implements OnInit {
       'Entidad'              : ['', Validators.required],
       'Municipio'            : ['', Validators.required],
       'FechaInicio'          : ['', Validators.required],
-      'FechaTermino'         : ['', Validators.required],
+//      'FechaTermino'         : ['', Validators.required],
       'PrecioKg'             : ['', Validators.required],
       'PrecioLtr'            : ['', Validators.required],
     });     
@@ -101,15 +112,29 @@ export class AltaPreciosGasComponent implements OnInit {
         });
     }  
 
-    //Acepta sólo el ingreso de números
-    keyPress(event: any) {
-      const pattern = /[0-9\+\-\. ]/;
-  
-      let inputChar = String.fromCharCode(event.charCode);
-      if (event.keyCode != 8 && !pattern.test(inputChar)) {
-        event.preventDefault();
-      }
+  //Acepta sólo el ingreso de números
+  keyPress(event: any) {
+    const pattern = /[0-9\+\-\. ]/;
+
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
     }
+  }
+
+  //Acepta sólo el ingreso de números
+  ValidaDia(event: any) {
+    const numeroDia = new Date(this.f.FechaInicio.value).getDay();
+    if (numeroDia != 0){
+      this.notifier.notify('warning', "Debe seleccionar Domingo ", '');   
+      this.f.FechaInicio.setValue(this.espacios);                
+    }else{
+      this.fechaWork = moment(this.f.FechaInicio.value,"DD/MM/YYYY").toDate();
+      this.fechaWork.setDate(this.fechaWork.getDate() + this.dias);
+    }
+  
+  }    
+
 
   //Registra el Usuario
   guardarPreciosGas() {
@@ -126,7 +151,8 @@ export class AltaPreciosGasComponent implements OnInit {
       IdHistoricoGas          : this.IdHistorico                                       ,
       FechaAlta               :moment(this.hoyDate).format('YYYY-MM-DD')               ,
       FechaDesde              :moment(this.f.FechaInicio.value).format('YYYY-MM-DD')   ,
-      FechaHasta              :moment(this.f.FechaTermino.value).format('YYYY-MM-DD')  ,
+//      FechaHasta              :moment(this.f.FechaTermino.value).format('YYYY-MM-DD')  ,
+      FechaHasta              :moment(this.fechaWork).format('YYYY-MM-DD')             ,
       IdEntidadFederal        :this.f.Entidad.value                                    ,
       IdMunicipio             :this.f.Municipio.value                                  ,
       PrecioKg                :this.f.PrecioKg.value                                   ,
@@ -135,7 +161,7 @@ export class AltaPreciosGasComponent implements OnInit {
       NombreM                 :this.espacios                                           , 
      }
 
-     console.log("antes del Alta ")
+     console.log("antes del Alta de Gas")
      console.log(this.preciosGas)
  
      this.catalogoService.postRegistraPreciosGas(this.preciosGas)

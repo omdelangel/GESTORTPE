@@ -42,8 +42,8 @@
 
                             <div fxFlex="50" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
-                                    <mat-label>Fecha Inicio</mat-label>
-                                    <input matInput [matDatepicker]="picker" formControlName="FechaInicio">
+                                    <mat-label>Fecha </mat-label>
+                                    <input matInput [matDatepicker]="picker" formControlName="FechaInicio" (dateChange)="ValidaDia($event)">
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-datepicker #picker style="outline: none;" required></mat-datepicker>
                                     <mat-error *ngIf="reactiveForm.get('FechaInicio')!.hasError('required')">
@@ -51,7 +51,7 @@
                                     </mat-error>
                                 </mat-form-field>
                             </div>
-
+                            <!--
                             <div fxFlex="50" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Fecha Término</mat-label>
@@ -63,7 +63,7 @@
                                     </mat-error>
                                 </mat-form-field>
                             </div>
-
+-->
                             <div fxFlex="50" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Precio Kg</mat-label>
