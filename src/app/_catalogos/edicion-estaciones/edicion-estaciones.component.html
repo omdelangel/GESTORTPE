@@ -117,7 +117,7 @@
                                     </mat-error>
                                 </mat-form-field>
                             </div>
-
+                            <!--
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Region</mat-label>
@@ -127,7 +127,7 @@
                                     </mat-error>
                                 </mat-form-field>
                             </div>
-
+-->
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field class="example-full-width">
                                     <mat-select placeholder="Estatus" formControlName="Estatus" [errorStateMatcher]="matcher" required>
@@ -138,6 +138,34 @@
                                     <mat-error *ngIf="frmEditTaller.get('Estatus')!.invalid">Campo requerido</mat-error>
                                 </mat-form-field>
                             </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="TiposGas" formControlName="TiposGas" required [errorStateMatcher]="matcher">
+                                        <mat-option *ngFor="let tipoGas of tiposGas" [value]="tipoGas.TipoGas">
+                                            {{tipoGas.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="frmEditTaller.get('TiposGas')!.hasError('required')">
+                                        El dato es obligatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="ZF" formControlName="ZF" required [errorStateMatcher]="matcher">
+                                        <mat-option *ngFor="let zonaFronteriza of zonasFronterizas" [value]="zonaFronteriza.ZF">
+                                            {{zonaFronteriza.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="frmEditTaller.get('ZF')!.hasError('required')">
+                                        El dato es obligatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+
 
                         </div>
                         <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">

@@ -413,6 +413,8 @@ getCatalogoTipoAsignacion(): Observable<any> {
       'Contacto'                :catalogoEstaciones.Contacto		    ,
       'Region'                  :catalogoEstaciones.Region				  ,
       'Estatus'                 :catalogoEstaciones.Estatus				  ,
+      'TipoCombustible'         :catalogoEstaciones.TipoCombustible ,
+      'ZonaFronteriza'          :catalogoEstaciones.ZonaFronteriza  ,
     })
       .pipe(map((res: Response) => {
 
@@ -536,6 +538,9 @@ getCatalogoTipoAsignacion(): Observable<any> {
       'Contacto'          :catalogoEstaciones.Contacto   ,
       'Region'            :catalogoEstaciones.Region     ,
       'Estatus'           :catalogoEstaciones.Estatus    ,  
+      'TipoCombustible'   :catalogoEstaciones.TipoCombustible ,
+      'ZonaFronteriza'    :catalogoEstaciones.ZonaFronteriza  ,
+
     })
       .pipe(map((res: Response) => {
   

@@ -137,6 +137,7 @@ export class ConsultaSindicatosComponent implements OnInit {
                 Seccion                    :e.Seccion                 ,
                 Responsable                :e.Responsable             ,
                 Direccion                  :e.Direccion               ,
+                Telefono                   :e.Telefono                ,
                 IdRegion                   :e.IdRegion                ,
                 IdTipoConvertidor          :e.IdTipoConvertidor       ,
                 Estatus                    :e.Estatus                 ,

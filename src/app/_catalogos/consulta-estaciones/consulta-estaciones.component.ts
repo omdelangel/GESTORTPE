@@ -142,7 +142,9 @@ export class ConsultaEstacionesComponent implements OnInit {
           RFC                 :e.RFC              , 
           Contacto            :e.Contacto         , 
           Region              :e.Region           , 
-          Estatus			        :e.Estatus          ,	        
+          Estatus			        :e.Estatus          ,	  
+          TipoCombustible     :e.TipoCombustible  ,      
+          ZonaFronteriza      :e.ZonaFronteriza   , 
           },
 //        width: '1500px',
 //        height: '900px'

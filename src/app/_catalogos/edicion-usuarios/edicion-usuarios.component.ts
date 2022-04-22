@@ -111,10 +111,10 @@ export class EdicionUsuariosComponent implements OnInit {
     //Validación de campos en pantalla
     this.frmEditUsr = this.formBuilder.group({
       'IdUsuario'       : [({ value: "", disabled: true }), Validators.required],
-      'Nombre'          : ['', Validators.required],
+      'Nombre'          : [({ value: "", disabled: true }), Validators.required],
       'IdPerfil'        : ['', Validators.required],
       'Estatus'         : ['', Validators.required],
-      'email'           : ['', [Validators.required, Validators.email]],
+      'email'           : [({ value: "", disabled: true }), Validators.required],
     }); 
     this.llenaPantalla();
   }

@@ -97,19 +97,19 @@ export class EdicionTalleresComponent implements OnInit {
     //Validación de campos en pantalla
     this.frmEditTaller = this.formBuilder.group({
       'IdTaller'            : [({ value: "", disabled: true }), Validators.required],
-      'Nombre'              : ['', Validators.required],
-      'RFC'                 : ['', Validators.required],
+      'Nombre'              : [({ value: "", disabled: true }), Validators.required],
+      'RFC'                 : [({ value: "", disabled: true }), Validators.required],
       'Contacto'            : ['', Validators.required],
-      'Domicilio'           : ['', Validators.required],
-      'cp'                  : ['', Validators.required],
+      'Domicilio'           : [({ value: "", disabled: true }), Validators.required],
+      'cp'                  : [({ value: "", disabled: true }), Validators.required],
       'municipio'           : [{ value: "", disabled: true }],
       'entidad'             : [{ value: "", disabled: true }],
-      'IdColonia'           : ['', Validators.required],
+      'IdColonia'           : [({ value: "", disabled: true }), Validators.required],
       'Telefono'            : ['', Validators.required],
-      'HorarioIni'          : ['', Validators.required],
-      'HorarioFin'          : ['', Validators.required],
-      'Concurrencia'        : ['', Validators.required],
-      'DuracionCita'        : ['', Validators.required],
+      'HorarioIni'          : [({ value: "", disabled: true }), Validators.required],
+      'HorarioFin'          : [({ value: "", disabled: true }), Validators.required],
+      'Concurrencia'        : [({ value: "", disabled: true }), Validators.required],
+      'DuracionCita'        : [({ value: "", disabled: true }), Validators.required],
       'Estatus'             : ['', Validators.required],
     }); 
     this.llenaPantalla();

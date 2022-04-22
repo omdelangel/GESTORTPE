@@ -40,6 +40,7 @@ export class EdicionSindicatosComponent implements OnInit {
   Seccion                :string;
   Responsable            :string;
   Direccion              :string;
+  Telefono					     :string;
   IdRegion               :number;
   IdTipoConvertidor      :number;
   Estatus                :string;
@@ -67,6 +68,7 @@ export class EdicionSindicatosComponent implements OnInit {
         this.Responsable             = data.Responsable            ;
         this.Direccion               = data.Direccion              ;
         this.IdRegion                = data.IdRegion               ;
+        this.Telefono                = data.Telefono               ;
         this.IdTipoConvertidor       = data.IdTipoConvertidor      ;
         this.Estatus                 = data.Estatus                ;
       
@@ -81,11 +83,12 @@ export class EdicionSindicatosComponent implements OnInit {
 
     this.frmEditSind = this.formBuilder.group({
       'IdSindicato'            : [({ value: "", disabled: true }), Validators.required],
-      'Nombre'                 : ['', Validators.required],
-      'Seccion'                : ['', Validators.required],
+      'Nombre'                 : [({ value: "", disabled: true }), Validators.required],
+      'Seccion'                : [({ value: "", disabled: true }), Validators.required],
       'Responsable'            : ['', Validators.required],
-      'Direccion'              : ['', Validators.required],
-      'Region'                 : ['', Validators.required],
+      'Direccion'              : [({ value: "", disabled: true }), Validators.required],
+      'Telefono'               : ['', Validators.required],
+      'Region'                 : [({ value: "", disabled: true }), Validators.required],
       'TipoConvertidor'        : ['', Validators.required],
       'Estatus'                : ['', Validators.required],
     }); 
@@ -103,6 +106,7 @@ export class EdicionSindicatosComponent implements OnInit {
     this.f.Seccion.setValue(this.Seccion);
     this.f.Responsable.setValue(this.Responsable);
     this.f.Direccion.setValue(this.Direccion);
+    this.f.Telefono.setValue(this.Telefono);
     this.f.Region.setValue(this.IdRegion);
     this.f.TipoConvertidor.setValue(this.IdTipoConvertidor);
     this.f.Estatus.setValue(this.Estatus);
@@ -168,6 +172,7 @@ export class EdicionSindicatosComponent implements OnInit {
       Seccion               : this.f.Seccion.value               ,
       Responsable           : this.f.Responsable.value           ,
       Direccion             : this.f.Direccion.value             ,
+      Telefono              : this.f.Telefono.value              ,
       IdRegion              : this.f.Region.value                ,
       IdTipoConvertidor     : this.f.TipoConvertidor.value       ,
       Estatus               : this.f.Estatus.value               ,

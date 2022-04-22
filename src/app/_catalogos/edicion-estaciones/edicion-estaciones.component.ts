@@ -22,6 +22,16 @@ interface Estatus {
   viewValue: string;
 }
 
+interface TiposGas {
+  TipoGas        : string;
+  viewValue      : string;
+}
+
+interface ZonasFronterizas {
+  ZF             : number;
+  viewValue      : string;
+}
+
 @Component({
   selector: 'app-edicion-estaciones',
   templateUrl: './edicion-estaciones.component.html',
@@ -53,13 +63,25 @@ export class EdicionEstacionesComponent implements OnInit {
   Contacto		       :string;
   Region					   :string;
   Estatus					   :string;
+  TipoCombustible    :string;
+  ZonaFronteriza     :number;
 
 
   estatus: Estatus[] = [
     { Estatus: 'A', viewValue: 'Activo' },
     { Estatus: 'I', viewValue: 'Inactivo' },
   ];
- 
+
+  tiposGas: TiposGas[] = [
+    { TipoGas: 'GNT', viewValue: 'Gas Natural' },
+    { TipoGas: 'GLP', viewValue: 'Gas LP' },
+  ];   
+
+  zonasFronterizas: ZonasFronterizas[] = [
+    { ZF: 0, viewValue: 'No Fronteriza' },
+    { ZF: 1, viewValue: 'Fronteriza' },
+  ];  
+
 
   constructor(
     private formBuilder       : FormBuilder,
@@ -82,6 +104,8 @@ export class EdicionEstacionesComponent implements OnInit {
       this.Contacto          = data.Contacto    ;
       this.Region            = data.Region      ;
       this.Estatus			     = data.Estatus			;
+      this.TipoCombustible	 = data.TipoCombustible;
+      this.ZonaFronteriza    = data.ZonaFronteriza;
    
       this.notifier = notifierService;   
 //      this.getObtenCP();    
@@ -93,18 +117,20 @@ export class EdicionEstacionesComponent implements OnInit {
     //Validación de campos en pantalla
     this.frmEditTaller = this.formBuilder.group({
       'IdEstacion'          : [({ value: "", disabled: true }), Validators.required],
-      'Nombre'              : ['', Validators.required],
-      'Domicilio'           : ['', Validators.required],
-      'cp'                  : ['', Validators.required],
+      'Nombre'              : [({ value: "", disabled: true }), Validators.required],
+      'Domicilio'           : [({ value: "", disabled: true }), Validators.required],
+      'cp'                  : [({ value: "", disabled: true }), Validators.required],
       'municipio'           : [{ value: "", disabled: true }],
       'entidad'             : [{ value: "", disabled: true }],
-      'IdColonia'           : ['', Validators.required],
+      'IdColonia'           : [({ value: "", disabled: true }), Validators.required],
       'Telefono'            : ['', Validators.required],
-      'Empresa'             : ['', Validators.required],
-      'RFC'                 : ['', Validators.required],
+      'Empresa'             : [({ value: "", disabled: true }), Validators.required],
+      'RFC'                 : [({ value: "", disabled: true }), Validators.required],
       'Contacto'            : ['', Validators.required],
-      'Region'              : ['', Validators.required],
+//      'Region'              : ['', Validators.required],
       'Estatus'             : ['', Validators.required],
+      'TiposGas'            : ['', Validators.required],
+      'ZF'                  : ['', Validators.required],
     }); 
     this.llenaPantalla();
     this.getObtenCP();    
@@ -126,8 +152,10 @@ export class EdicionEstacionesComponent implements OnInit {
     this.f.Empresa.setValue(this.Empresa);
     this.f.RFC.setValue(this.RFC);
     this.f.Contacto.setValue(this.Contacto);
-    this.f.Region.setValue(this.Region);
-    this.f.Estatus.setValue(this.Estatus);
+//    this.f.Region.setValue(this.Region);
+    this.f.Estatus.setValue(this.Estatus);    
+    this.f.TiposGas.setValue(this.TipoCombustible);
+    this.f.ZF.setValue(this.ZonaFronteriza);
   }
 
   onSubmit() {
@@ -232,8 +260,11 @@ export class EdicionEstacionesComponent implements OnInit {
       Empresa         : this.f.Empresa.value     ,
       RFC             : this.f.RFC.value         ,
       Contacto        : this.f.Contacto.value    ,
-      Region          : this.f.Region.value      ,
-      Estatus		      : this.f.Estatus.value     ,    
+//      Region          : this.f.Region.value      ,
+      Region          : this.Region              ,
+      Estatus		      : this.f.Estatus.value     ,   
+      TipoCombustible : this.f.TiposGas.value      , 
+      ZonaFronteriza : this.f.ZF.value      , 
      }
  
      console.log("Entre a guardar 2")

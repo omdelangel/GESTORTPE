@@ -107,7 +107,7 @@
                                 </mat-form-field>
                             </div>
 
-                            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>RFC</mat-label>
                                     <input matInput placeholder="RFC" formControlName="RFC" maxlength="13" fxFlex="100" onkeyup="javascript:this.value=this.value.toUpperCase();" pattern="^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})\d{2}((0[1-9]|1[012])(0[1-9]|1\d|2[0-8])|(0[13456789]|1[012])(29|30)|(0[13578]|1[02])31)(\w{2})([A|a|0-9]{1}))$|^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})([02468][048]|[13579][26])0229)(\w{2})([A|a|0-9]{1})$"
@@ -119,6 +119,33 @@
                             </div>
 
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="TiposGas" formControlName="TiposGas" required [errorStateMatcher]="matcher">
+                                        <mat-option *ngFor="let tipoGas of tiposGas" [value]="tipoGas.TipoGas">
+                                            {{tipoGas.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="frmAltaEstacion.get('TiposGas')!.hasError('required')">
+                                        El dato es obligatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="Zona Fronteriza" formControlName="ZF" required [errorStateMatcher]="matcher">
+                                        <mat-option *ngFor="let zonaFronteriza of zonasFronterizas" [value]="zonaFronteriza.ZF">
+                                            {{zonaFronteriza.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="frmAltaEstacion.get('ZF')!.hasError('required')">
+                                        El dato es obligatorio
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!--
+                            <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field>
                                     <mat-label>Region</mat-label>
                                     <input matInput placeholder="Region" formControlName="Region" maxlength="20" required>
@@ -127,6 +154,7 @@
                                     </mat-error>
                                 </mat-form-field>
                             </div>
+-->
                         </div>
                         <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
                             <button mat-mini-fab style="background-color: #80BC00; outline:none;" matTooltip="Guardar" (click)="guardarEstacion()">
