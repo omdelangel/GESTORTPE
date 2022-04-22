@@ -134,9 +134,17 @@
 
 
 
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  visibility: hidden;
+}
+
 .example-header {
   min-height: 64px;
   padding: 8px 24px 0;
+  visibility: hidden;
 }
 
 
@@ -145,16 +153,6 @@
   max-height: 100%;
 }
 
-.example-container {
-  display: flex;
-  flex-direction: column;
-  min-width: 300px;
-}
-
-.example-header {
-  min-height: 64px;
-  padding: 8px 24px 0;
-}
 
 
 .table-container {

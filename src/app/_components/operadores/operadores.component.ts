@@ -87,10 +87,10 @@ export class OperadoresComponent implements OnInit {
           this.idConcesionario = data.IdConcesionario;
           this.idVehiculo = data.IdVehiculo;
 
-
           this.dataSource = new MatTableDataSource(this.operadores);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+
   
           var elemDiv = document.getElementById('divTitle');
           elemDiv!.style.visibility = "visible";

@@ -1,188 +1,236 @@
-<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayout.lt-sm="row">
-	<div fxLayout="row wrap" fxLayoutGap="20px" fxFlex="100">
-		<div fxFlex="100">
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+	<div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+		<div>
+			<h2 fx-item class="title-header-content">Concesionarios
+			</h2>
+		</div>
+		<div>
+			<button class="add-header-content" mat-fab matTooltip="Alta de Concesionarios" outline:none;
+				(click)="openDialog()">
+				<mat-icon>add</mat-icon>
+			</button>
+		</div>
+	</div>
+
+	<form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+		<div fxFlex="50">
 			<mat-card>
 				<mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
-					<mat-card-title fx-item class="title-header-content">Concesionarios 
+					<mat-card-title fx-item style="color: #009288; font-weight: lighter;">Filtros de búsqueda
 					</mat-card-title>
-
-					<button class="add-header-content" mat-fab  matTooltip="Pre Registro"
-						outline:none; (click)="openDialog()">
-						<mat-icon>add</mat-icon>
+					<button mat-fab style="background-color: #2d4248; outline: none;" matTooltip="Buscar información"
+						outline:none;>
+						<mat-icon>search</mat-icon>
 					</button>
 				</mat-card-actions>
-
-				<mat-card-header>
-					<div class="w-full" fxFlex="30">
-						<mat-form-field >
-							<input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro" >
+				<mat-card-content>
+					<div fxLayout="row wrap">
+						<mat-form-field class="example-full-width">
+							<mat-select placeholder="Empresa" formControlName="sindicato" [errorStateMatcher]="matcher"
+								required>
+								<mat-option [value]="0">
+									Seleccionar todo...
+								</mat-option>
+								<mat-option *ngFor="let sindicato of sindicatos" [value]="sindicato.IdSindicato">
+									{{sindicato.Nombre}}
+								</mat-option>
+							</mat-select>
+							<mat-error *ngIf="reactiveForm.get('sindicato')!.invalid">Campo requerido</mat-error>
 						</mat-form-field>
 					</div>
-				</mat-card-header>
+				</mat-card-content>
+			</mat-card>
+		</div>
+	</form>
 
-				<mat-card-content>
-					<form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
-						<div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100">
-							<mat-table [dataSource]="dataSource" matSort>
-								<!-- ID Column -->
-								<ng-container matColumnDef="IdConcesionario">
-									<mat-header-cell *matHeaderCellDef mat-sort-header> Id Concesionario
-									</mat-header-cell>
-									<mat-cell *matCellDef="let row"> {{row.IdConcesionario}} </mat-cell>
-								</ng-container>
+	<div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="space-between end" >
+		<div fxFlex="100" fxFlex.gt-md="30">
+			<mat-form-field>
+				<input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
+			</mat-form-field>
+		</div>
+	</div>
 
-								<!-- ID Column -->
+	<div id="htmlData" class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100" >
+		<mat-table [dataSource]="dataSource" matSort>
+			<!--chip column -->
+			<!--	  <ng-container matColumnDef="Piloto">
+										<mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+										<mat-cell *matCellDef="let row;let i = index; " [formGroup]="reactiveForm">
+											<mat-chip-list>
+												<mat-chip *ngIf="row.Piloto" style="background-color:#F15A24" color="primary" selected>Piloto</mat-chip>
+											</mat-chip-list>
+										</mat-cell>
+									</ng-container> -->
+
+			<!-- ID Column -->
+			<ng-container matColumnDef="IdConcesionario">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Id Concesionario
+				</mat-header-cell>
+				<mat-cell *matCellDef="let row"> {{row.IdConcesionario}} </mat-cell>
+			</ng-container>
+
+			<!-- ID Column 
 								<ng-container matColumnDef="NombreCompleto">
 									<mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Concesionario
 									</mat-header-cell>
 									
 									<mat-cell *matCellDef="let row" >	
 										<p>								
-											<mat-icon matBadge="P"  *ngIf="row.Piloto" matBadgeColor="warn">directions_car</mat-icon>
+											<mat-icon matBadge="P"  *ngIf="row.Piloto">directions_car</mat-icon>
 											{{row.NombreCompleto}}
 										  </p>														 								
 										</mat-cell>
-								</ng-container>
+								</ng-container>-->
 
-								<!-- ID Column -->
-								<ng-container matColumnDef="FechaRegistro">
-									<mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Registro
-									</mat-header-cell>
-									<mat-cell *matCellDef="let row"> {{row.FechaRegistro | date: 'dd-MM-YYYY'}} </mat-cell>
-								</ng-container>
-
-								<!-- ID Column -->
-								<ng-container matColumnDef="IdVehiculo">
-									<mat-header-cell *matHeaderCellDef mat-sort-header> Id Vehículo
-									</mat-header-cell>
-									<mat-cell *matCellDef="let row"> {{row.IdVehiculo}} </mat-cell>
-								</ng-container>
-
-								<!-- ID Column -->
-								<ng-container matColumnDef="Marca">
-									<mat-header-cell *matHeaderCellDef mat-sort-header> Marca
-									</mat-header-cell>
-									<mat-cell *matCellDef="let row"> {{row.Marca}} </mat-cell>
-								</ng-container>
+			<!-- ID Column -->
+			<ng-container matColumnDef="NombreCompleto">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Concesionario
+				</mat-header-cell>
+				<mat-cell *matCellDef="let row">
+					{{row.NombreCompleto}}
+				</mat-cell>
+			</ng-container>
 
 
-								<!-- ID Column -->
-								<ng-container matColumnDef="SubMarca">
-									<mat-header-cell *matHeaderCellDef mat-sort-header> SubMarca
-									</mat-header-cell>
-									<mat-cell *matCellDef="let row"> {{row.Submarca}} </mat-cell>
-								</ng-container>
+			<!-- ID Column -->
+			<ng-container matColumnDef="FechaRegistro">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Registro
+				</mat-header-cell>
+				<mat-cell *matCellDef="let row"> {{row.FechaRegistro | date: 'dd-MM-YYYY'}} </mat-cell>
+			</ng-container>
+
+			<!-- ID Column -->
+			<ng-container matColumnDef="IdVehiculo">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Id Vehículo
+				</mat-header-cell>
+				<mat-cell *matCellDef="let row"> {{row.IdVehiculo}} </mat-cell>
+			</ng-container>
+
+			<!-- ID Column -->
+			<ng-container matColumnDef="Marca">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Marca
+				</mat-header-cell>
+				<mat-cell *matCellDef="let row"> {{row.Marca}} </mat-cell>
+			</ng-container>
 
 
-								<!-- ID Column -->
-								<ng-container matColumnDef="Modelo">
-									<mat-header-cell *matHeaderCellDef mat-sort-header> Modelo
-									</mat-header-cell>
-									<mat-cell *matCellDef="let row"> {{row.Modelo}} </mat-cell>
-								</ng-container>
+			<!-- ID Column -->
+			<ng-container matColumnDef="SubMarca">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> SubMarca
+				</mat-header-cell>
+				<mat-cell *matCellDef="let row"> {{row.Submarca}} </mat-cell>
+			</ng-container>
 
 
-								<!-- ID Column -->
-								<ng-container matColumnDef="Placa">
-									<mat-header-cell *matHeaderCellDef mat-sort-header> Placa
-									</mat-header-cell>
-									<mat-cell *matCellDef="let row"> {{row.Placa}} </mat-cell>
-								</ng-container>
-
-								<!-- ID Column -->
-								<ng-container matColumnDef="IdPropietario">
-									<mat-header-cell *matHeaderCellDef mat-sort-header> Id Propietario
-									</mat-header-cell>
-									<mat-cell *matCellDef="let row"> {{row.IdPropietario}} </mat-cell>
-								</ng-container>
+			<!-- ID Column -->
+			<ng-container matColumnDef="Modelo">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Modelo
+				</mat-header-cell>
+				<mat-cell *matCellDef="let row"> {{row.Modelo}} </mat-cell>
+			</ng-container>
 
 
-								<!-- ID Column -->
-								<ng-container matColumnDef="IdCita">
-									<mat-header-cell *matHeaderCellDef mat-sort-header> Id Cita
-									</mat-header-cell>
-									<mat-cell *matCellDef="let row"> {{row.IdCita}} </mat-cell>
-								</ng-container>
+			<!-- ID Column -->
+			<ng-container matColumnDef="Placa">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Placa
+				</mat-header-cell>
+				<mat-cell *matCellDef="let row"> {{row.Placa}} </mat-cell>
+			</ng-container>
+
+			<!-- ID Column -->
+			<ng-container matColumnDef="IdPropietario">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Id Propietario
+				</mat-header-cell>
+				<mat-cell *matCellDef="let row"> {{row.IdPropietario}} </mat-cell>
+			</ng-container>
 
 
-								<!-- ID Column -->
-								<ng-container matColumnDef="FechaCita">
-									<mat-header-cell *matHeaderCellDef mat-sort-header> Fecha/Hora Cita
-									</mat-header-cell>
-									<mat-cell *matCellDef="let row"> {{row.FechaCita | date: 'dd-MM-YYYY HH:mm'}} </mat-cell>
-								</ng-container>
-
-								<!-- ID Column -->
-								<ng-container matColumnDef="IdDictamen">
-									<mat-header-cell *matHeaderCellDef mat-sort-header> Id Dictamen
-									</mat-header-cell>
-									<mat-cell *matCellDef="let row"> {{row.IdDictamen}} </mat-cell>
-								</ng-container>
-
-								<!-- ID Column -->
-								<ng-container matColumnDef="Dictamen">
-									<mat-header-cell *matHeaderCellDef mat-sort-header> Dictamen
-									</mat-header-cell>
-									<mat-cell *matCellDef="let row"> {{row.Dictamen}} </mat-cell>
-								</ng-container>
-
-								<!-- ID Column -->
-								<ng-container matColumnDef="EstatusCita" sticky>
-									<mat-header-cell *matHeaderCellDef mat-sort-header> Estatus Cita
-									</mat-header-cell>
-									<mat-cell *matCellDef="let row"> {{row.EstatusCita=='A' ?
-										'Abierta': ''}} {{row.EstatusCita=='D' ? 'Dictaminada': ''}} {{row.EstatusCita=='C' ? 'Cancelada': ''}}
-										{{row.EstatusCita=='V' ? 'Vencida': ''}}</mat-cell>
-								</ng-container>
-
-								<!-- ID Column -->
-								<ng-container matColumnDef="Dictaminar">
-									<mat-header-cell *matHeaderCellDef mat-sort-header> Dictaminar
-									</mat-header-cell>
-									<mat-cell *matCellDef="let row"> {{row.Dictaminar}} </mat-cell>
-								</ng-container>
+			<!-- ID Column -->
+			<ng-container matColumnDef="IdCita">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Id Cita
+				</mat-header-cell>
+				<mat-cell *matCellDef="let row"> {{row.IdCita}} </mat-cell>
+			</ng-container>
 
 
-								<!--toggle column -->
+			<!-- ID Column -->
+			<ng-container matColumnDef="FechaCita">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Fecha/Hora Cita
+				</mat-header-cell>
+				<mat-cell *matCellDef="let row"> {{row.FechaCita | date: 'dd-MM-YYYY HH:mm'}} </mat-cell>
+			</ng-container>
 
-								<ng-container matColumnDef="actions" >
-									<mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-									<mat-cell *matCellDef="let row">
-										<button mat-mini-fab  class="button-edit" (click)="editar(row)"										
-										matTooltip="Editar">
-									<mat-icon class="iconSize">edit</mat-icon>
-									</button> &nbsp; &nbsp;
+			<!-- ID Column -->
+			<ng-container matColumnDef="IdDictamen">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Id Dictamen
+				</mat-header-cell>
+				<mat-cell *matCellDef="let row"> {{row.IdDictamen}} </mat-cell>
+			</ng-container>
 
-									<button mat-mini-fab  class="button-documentos"  (click)="documentos(row)"										
-									matTooltip="Ir a documentos">
-									<mat-icon class="iconSize">attach_file</mat-icon>
-								   </button>&nbsp; &nbsp; 
+			<!-- ID Column -->
+			<ng-container matColumnDef="Dictamen">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Dictamen
+				</mat-header-cell>
+				<mat-cell *matCellDef="let row"> {{row.Dictamen}} </mat-cell>
+			</ng-container>
 
-								   <button mat-mini-fab  class="button-citas"   (click)="citas(row)"										
-								   matTooltip="Ir a citas">
-								   <mat-icon class="iconSize">calendar_today</mat-icon>
-								  </button>&nbsp; &nbsp; 
+			<!-- ID Column -->
+			<ng-container matColumnDef="EstatusCita" sticky>
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Estatus Cita
+				</mat-header-cell>
+				<mat-cell *matCellDef="let row"> {{row.EstatusCita=='A' ?
+					'Abierta': ''}} {{row.EstatusCita=='D' ? 'Dictaminada': ''}} {{row.EstatusCita=='C' ? 'Cancelada':
+					''}}
+					{{row.EstatusCita=='V' ? 'Vencida': ''}}</mat-cell>
+			</ng-container>
 
-								  <button mat-mini-fab  class="button-dictaminar"  (click)="dictaminar(row)" [disabled]="!row.Dictaminar"									
-								  matTooltip="Dictaminar">
-								  <mat-icon class="iconSize">gavel</mat-icon>
-								 </button>
-									</mat-cell>
-									
-								</ng-container>
-								<mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-								<mat-row *matRowDef="let row; columns: displayedColumns;">
-								</mat-row>
-							</mat-table>
-							<mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
-						</div>
-					</form>
-				</mat-card-content>	
-					<notifier-container></notifier-container>		
-			</mat-card>
-		</div>
+			<!-- ID Column -->
+			<ng-container matColumnDef="Dictaminar">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Dictaminar
+				</mat-header-cell>
+				<mat-cell *matCellDef="let row"> {{row.Dictaminar}} </mat-cell>
+			</ng-container>
+
+
+			<!--toggle column -->
+
+			<ng-container matColumnDef="actions">
+				<mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+				<mat-cell *matCellDef="let row">
+					<button mat-mini-fab class="button-edit" (click)="editar(row)" matTooltip="Editar">
+						<mat-icon class="iconSize">edit</mat-icon>
+					</button> &nbsp; &nbsp;
+
+					<button mat-mini-fab class="button-documentos" (click)="documentos(row)"
+						matTooltip="Ir a documentos">
+						<mat-icon class="iconSize">attach_file</mat-icon>
+					</button>&nbsp; &nbsp;
+
+					<button mat-mini-fab class="button-citas" (click)="citas(row)" matTooltip="Ir a citas">
+						<mat-icon class="iconSize">calendar_today</mat-icon>
+					</button>&nbsp; &nbsp;
+
+					<button mat-mini-fab class="button-dictaminar" (click)="dictaminar(row)"
+						[disabled]="!row.Dictaminar" matTooltip="Dictaminar">
+						<mat-icon class="iconSize">gavel</mat-icon>
+					</button>
+				</mat-cell>
+
+			</ng-container>
+			<mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+			<mat-row *matRowDef="let row; columns: displayedColumns;">
+			</mat-row>
+		</mat-table>
+		<mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
 	</div>
+	
+	<notifier-container></notifier-container>
 </div>
+
+
+
+
 
 
 

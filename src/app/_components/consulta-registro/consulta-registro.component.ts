@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup,FormControl, FormBuilder, FormGroupDirective, NgForm } from '@angular/forms';
+import { FormGroup,FormControl, FormBuilder, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { ConcesionarioRegistro } from 'src/app/_models';
+import { ConcesionarioRegistro, CatalogoSindicatos } from 'src/app/_models';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { ConcesionarioService } from '../../_services';
+import { ConcesionarioService, CatalogosService} from '../../_services';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -40,8 +40,12 @@ export class ConsultaRegistroComponent implements OnInit {
 
   reactiveForm!: FormGroup;
   registro: ConcesionarioRegistro[] = [];
+  sindicatos: CatalogoSindicatos[] = [];
+  matcher = new MyErrorStateMatcher();
+  submitted = false;
 
   constructor(public dialog: MatDialog,
+    private catalogoService: CatalogosService,
     private concesionarioService: ConcesionarioService,
     private formBuilder: FormBuilder,
     notifierService: NotifierService) { 
@@ -51,7 +55,8 @@ export class ConsultaRegistroComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getConsultaRegistro();
+    //this.getConsultaRegistro();
+    this.getCatalogoSindicatos();
 
     //Validación de campos en pantalla
     this.reactiveForm = this.formBuilder.group({
@@ -70,39 +75,82 @@ export class ConsultaRegistroComponent implements OnInit {
       'EditaContrato':[''],
       'EditaDocumentos':[''],
       'EditaOperador':[''],
-    });    
+      'sindicato': ['', Validators.required]
+    });  
 
   }
 
   get g() { return this.reactiveForm.controls; }
 
   onSubmit() {
+
+    this.submitted = true;
     if (this.reactiveForm.valid) {
-      //console.log(this.reactiveForm.value)
+      this.getConsultaRegistro(this.g.sindicato.value);
     } else {
       return
     }
+
+
+  }
+
+  getCatalogoSindicatos() {
+    this.catalogoService.getCatalogoSindicatos()
+      .pipe(first())
+      .subscribe(data => {
+        this.sindicatos = data.sindicatos;
+      },
+        error => {
+
+        });
+        
   }
 
 
 
     //Consulta los datos de concesionarios aprobados
-    getConsultaRegistro(){
+    getConsultaRegistro(idEmpresa: number){
       //this.clear();
 
 
-      this.concesionarioService.getRegistroConcesionario()
+      this.concesionarioService.getRegistroConcesionario(idEmpresa)
         .pipe(first())
         .subscribe(data => {   
+
+          if (data.estatus ) {
  
           this.registro = data.concesionario;   
           this.dataSource = new MatTableDataSource(this.registro);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-              
- 
+
+          var elemDiv = document.getElementById('divTitle');
+          elemDiv!.style.visibility = "visible";
+  
+          var elemTable = document.getElementById('htmlData');
+          elemTable!.style.visibility = "visible";
+
+          } else {
+
+            this.notifier.notify('warning', data.mensaje);
+            var elemDiv = document.getElementById('divTitle');
+            elemDiv!.style.visibility = "hidden";
+        
+            var elemTable = document.getElementById('htmlData');
+            elemTable!.style.visibility = "hidden";
+
+          }
+             
         },
           error => {
+
+          this.notifier.notify('error', error);
+
+          var elemDiv = document.getElementById('divTitle');
+          elemDiv!.style.visibility = "hidden";
+      
+          var elemTable = document.getElementById('htmlData');
+          elemTable!.style.visibility = "hidden";
   
           });
 
@@ -125,7 +173,7 @@ export class ConsultaRegistroComponent implements OnInit {
       });
   
       dialogRef.afterClosed().subscribe(res => {
-        this.getConsultaRegistro();
+        this.getConsultaRegistro(this.g.sindicato.value);
       });
 
     }
@@ -144,7 +192,7 @@ export class ConsultaRegistroComponent implements OnInit {
       });
   
       dialogRef.afterClosed().subscribe(res => {
-        this.getConsultaRegistro();
+        this.getConsultaRegistro(this.g.sindicato.value);
       });
 
     }

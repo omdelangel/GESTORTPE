@@ -15,9 +15,12 @@ export class PilotoService {
   constructor(private http: HttpClient) { }
 
     //Consulta los concesionarios en programa Piloto
-    getConcesionariosPiloto(): Observable<any> {
+    getConcesionariosPiloto(idEmpresa: number): Observable<any> {
+
+      let params = new HttpParams();
+      params = params.append('IdEmpresa', idEmpresa);
   
-      return this.http.get<any>(`${environment.SERVER_URL}/concesionario-piloto`)
+      return this.http.get<any>(`${environment.SERVER_URL}/concesionario-piloto`, {params: params})
         .pipe(map((res: Response) => {
   
           return res || {}

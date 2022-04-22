@@ -55,10 +55,15 @@ export class ConcesionarioService {
 
 
   //Consulta los datos de Concesionario para la pantalla de Preregistro
-  getPreRegConcesionario(): Observable<any> {  
+  getPreRegConcesionario(idEmpresa: string): Observable<any> {  
+
+    let params = new HttpParams();
+    params = params.append('IdEmpresa', idEmpresa);
+
+    console.log(idEmpresa);
     
 
-    return this.http.get<any>(`${environment.SERVER_URL}/concesionario-prerregistro`)
+    return this.http.get<any>(`${environment.SERVER_URL}/concesionario-prerregistro`, {params: params})
       .pipe(map((res: Response) => {    
 
         return res || {}
@@ -68,9 +73,12 @@ export class ConcesionarioService {
   }
 
    //Consulta los datos de Concesionario para la pantalla de Registro
-   getRegistroConcesionario(): Observable<any> {   
+   getRegistroConcesionario(idEmpresa: number): Observable<any> {   
 
-    return this.http.get<any>(`${environment.SERVER_URL}/concesionario-registro`)
+    let params = new HttpParams();
+    params = params.append('IdEmpresa', idEmpresa);
+
+    return this.http.get<any>(`${environment.SERVER_URL}/concesionario-registro`, {params: params})
       .pipe(map((res: Response) => {    
 
         return res || {}
@@ -80,9 +88,12 @@ export class ConcesionarioService {
   }
 
    //Consulta los datos de Concesionario para la pantalla de Verificación
-   getConcesionarioVerifica(): Observable<any> {   
+   getConcesionarioVerifica(idEmpresa: number): Observable<any> {   
 
-    return this.http.get<any>(`${environment.SERVER_URL}/concesionario-verificacion`)
+    let params = new HttpParams();
+    params = params.append('IdEmpresa', idEmpresa);
+
+    return this.http.get<any>(`${environment.SERVER_URL}/concesionario-verificacion`, {params: params})
       .pipe(map((res: Response) => {    
 
         return res || {}
@@ -145,9 +156,12 @@ export class ConcesionarioService {
   }
 
      //Consulta los datos de Concesionario para la instalación del convertidor
-     getConcesionarioInstalacion(): Observable<any> {   
+     getConcesionarioInstalacion(idEmpresa: number): Observable<any> {   
 
-      return this.http.get<any>(`${environment.SERVER_URL}/concesionario-instalacion`)
+      let params = new HttpParams();
+      params = params.append('IdEmpresa', idEmpresa);
+
+      return this.http.get<any>(`${environment.SERVER_URL}/concesionario-instalacion`, {params: params})
         .pipe(map((res: Response) => {    
   
           return res || {}

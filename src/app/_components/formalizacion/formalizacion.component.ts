@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { FormGroup,FormControl, FormBuilder, FormGroupDirective, NgForm } from '@angular/forms';
+import { FormGroup,FormControl, FormBuilder, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ConcesionarioInstalacion } from '../../_models';
-import { ConcesionarioService } from 'src/app/_services';
+import { ConcesionarioInstalacion, CatalogoSindicatos } from '../../_models';
+import { ConcesionarioService, CatalogosService} from 'src/app/_services';
 import { MatDialog } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
 import { DialogoOperadorAltaComponent } from '../dialogo-operador-alta';
@@ -42,8 +42,12 @@ export class FormalizacionComponent implements OnInit {
 
   reactiveForm!: FormGroup;
   formalizacion: ConcesionarioInstalacion[] = [];
+  sindicatos: CatalogoSindicatos[] = [];
+  matcher = new MyErrorStateMatcher();
+  submitted = false;
 
   constructor(public dialog: MatDialog,
+    private catalogoService: CatalogosService,
     private concesionarioService: ConcesionarioService,
     private formBuilder: FormBuilder,
     notifierService: NotifierService,
@@ -54,23 +58,12 @@ export class FormalizacionComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getConsultaFormalizacion();
+    //this.getConsultaFormalizacion();
+    this.getCatalogoSindicatos(); 
 
     //Validación de campos en pantalla
     this.reactiveForm = this.formBuilder.group({
-      'IdConcesionario': [''],
-      'NombreConcesionario':[''],
-      'FechaRegistro':[''],
-      'IdVehiculo': [''],
-      'Marca':[''],
-      'Submarca':[''],
-      'Modelo':[''],
-      'Placa': [''],
-      'TipoVehiculo':[''],
-      'TipoConvertidor':[''],
-      'FechaCitaInstalacion':[''],
-      'EstatusCitaInstalacion':[''],
-      'ConfirmaCita':[''],
+      'sindicato': ['', Validators.required]
     });    
 
   }
@@ -78,31 +71,72 @@ export class FormalizacionComponent implements OnInit {
   get g() { return this.reactiveForm.controls; }
 
   onSubmit() {
-    if (this.reactiveForm.valid) {
-      //console.log(this.reactiveForm.value)
-    } else {
-      return
-    }
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.reactiveForm.invalid) {
+     return;
+   } else {
+     this.getConsultaFormalizacion(this.g.sindicato.value);
+   }
+  }
+
+  getCatalogoSindicatos() {
+    this.catalogoService.getCatalogoSindicatos()
+      .pipe(first())
+      .subscribe(data => {
+        this.sindicatos = data.sindicatos;
+      },
+        error => {
+
+        });
+        
   }
 
 
-
     //Consulta los datos de concesionarios aprobados
-    getConsultaFormalizacion(){
+    getConsultaFormalizacion(idEmpresa: number){
 
 
-      this.concesionarioService.getConcesionarioInstalacion()
+      this.concesionarioService.getConcesionarioInstalacion(idEmpresa)
         .pipe(first())
         .subscribe(data => {   
+
+          if (data.estatus ) {
  
           this.formalizacion = data.concesionario;   
           this.dataSource = new MatTableDataSource(this.formalizacion);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+
+          var elemDiv = document.getElementById('divTitle');
+          elemDiv!.style.visibility = "visible";
+  
+          var elemTable = document.getElementById('htmlData');
+          elemTable!.style.visibility = "visible";
+          } else {
+
+            this.notifier.notify('warning', data.mensaje)
+
+            var elemDiv = document.getElementById('divTitle');
+            elemDiv!.style.visibility = "hidden";
+        
+            var elemTable = document.getElementById('htmlData');
+            elemTable!.style.visibility = "hidden";
+
+          }
               
  
         },
           error => {
+
+            this.notifier.notify('error', error);
+
+            var elemDiv = document.getElementById('divTitle');
+            elemDiv!.style.visibility = "hidden";
+        
+            var elemTable = document.getElementById('htmlData');
+            elemTable!.style.visibility = "hidden";
   
           });
 
@@ -125,7 +159,7 @@ export class FormalizacionComponent implements OnInit {
       });
   
       dialogRef.afterClosed().subscribe(res => {
-        this.getConsultaFormalizacion();
+        this.getConsultaFormalizacion(this.g.sindicato.value);
       });
 
     }
@@ -142,7 +176,7 @@ export class FormalizacionComponent implements OnInit {
           });
       
           dialogRef.afterClosed().subscribe(res => {
-            this.getConsultaFormalizacion();
+            this.getConsultaFormalizacion(this.g.sindicato.value);
           });
 
 
@@ -155,7 +189,7 @@ export class FormalizacionComponent implements OnInit {
         });
     
         dialogRef.afterClosed().subscribe(res => {
-          this.getConsultaFormalizacion();
+          this.getConsultaFormalizacion(this.g.sindicato.value);
         });
 
       }
@@ -174,7 +208,7 @@ export class FormalizacionComponent implements OnInit {
       });
   
       dialogRef.afterClosed().subscribe(res => {
-        this.getConsultaFormalizacion();
+        this.getConsultaFormalizacion(this.g.sindicato.value);
       });
 
     }

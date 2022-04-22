@@ -134,10 +134,7 @@
   
   
   
-  .example-header {
-    min-height: 64px;
-    padding: 8px 24px 0;
-  }
+
   
   
   .mat-table {
@@ -145,16 +142,9 @@
     max-height: 100%;
   }
   
-  .example-container {
-    display: flex;
-    flex-direction: column;
-    min-width: 300px;
-  }
+
   
-  .example-header {
-    min-height: 64px;
-    padding: 8px 24px 0;
-  }
+
   
   
   .table-container {
@@ -185,6 +175,20 @@
  // .mat-table-sticky-border-elem-left {
  //   border-right: 1px solid #e0e0e0;
   //}
+
+
+  .example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    visibility: hidden;
+  }
+  
+  .example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+    visibility: hidden;
+  }
 
 
 

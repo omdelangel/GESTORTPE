@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup,FormControl, FormBuilder, FormGroupDirective, NgForm } from '@angular/forms';
+import { FormGroup,FormControl, FormBuilder, FormGroupDirective, NgForm , Validators} from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { ConcesionarioRegistro } from 'src/app/_models';
+import { ConcesionarioRegistro, CatalogoSindicatos } from 'src/app/_models';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { ConcesionarioService } from '../../_services';
+import { ConcesionarioService, CatalogosService } from '../../_services';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -41,8 +41,12 @@ export class RevisiondocumentosComponent implements OnInit {
 
   reactiveForm!: FormGroup;
   verifica: ConcesionarioRegistro[] = [];
+  sindicatos: CatalogoSindicatos[] = [];
+  matcher = new MyErrorStateMatcher();
+  submitted = false;
 
   constructor(public dialog: MatDialog,
+    private catalogoService: CatalogosService,
     private concesionarioService: ConcesionarioService,
     private formBuilder: FormBuilder,
     notifierService: NotifierService) {
@@ -52,51 +56,81 @@ export class RevisiondocumentosComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getConsultaDocumentosVerifica();
+    //this.getConsultaDocumentosVerifica();
+    this.getCatalogoSindicatos(); 
 
     //Validación de campos en pantalla
     this.reactiveForm = this.formBuilder.group({
-      'IdConcesionario': [''],
-      'NombreConcesionario': [''],
-      'FechaRegistro': [''],
-      'IdVehiculo': [''],
-      'Marca': [''],
-      'Submarca': [''],
-      'Modelo': [''],
-      'Placa': [''],
-      'Estatus': [''],
-      'IdSindicato': [''],
-      'Sindicato': [''],
-      'IdAsignacionSindicato': [''],
+      'sindicato': ['', Validators.required]
     });
   }
 
   get g() { return this.reactiveForm.controls; }
 
   onSubmit() {
-    if (this.reactiveForm.valid) {
-      //console.log(this.reactiveForm.value)
-    } else {
-      return
-    }
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.reactiveForm.invalid) {
+     return;
+   } else {
+     this.getConsultaDocumentosVerifica(this.g.sindicato.value);
+   }
+  }
+
+  getCatalogoSindicatos() {
+    this.catalogoService.getCatalogoSindicatos()
+      .pipe(first())
+      .subscribe(data => {
+        this.sindicatos = data.sindicatos;
+      },
+        error => {
+
+        });
+        
   }
 
 
 
   //Consulta los datos de concesionarios aprobados
-  getConsultaDocumentosVerifica() {
+  getConsultaDocumentosVerifica(idEmpresa: number) {
 
-    this.concesionarioService.getConcesionarioVerifica()
+    this.concesionarioService.getConcesionarioVerifica(idEmpresa)
       .pipe(first())
       .subscribe(data => {
+
+        if (data.estatus ) {
 
         this.verifica = data.concesionario;
         this.dataSource = new MatTableDataSource(this.verifica);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
+        var elemDiv = document.getElementById('divTitle');
+        elemDiv!.style.visibility = "visible";
+
+        var elemTable = document.getElementById('htmlData');
+        elemTable!.style.visibility = "visible";
+
+        } else {
+          this.notifier.notify('warning', data.mensaje)
+
+          var elemDiv = document.getElementById('divTitle');
+          elemDiv!.style.visibility = "hidden";
+      
+          var elemTable = document.getElementById('htmlData');
+          elemTable!.style.visibility = "hidden";
+        }
+
       },
         error => {
+          this.notifier.notify('error', error);
+
+          var elemDiv = document.getElementById('divTitle');
+          elemDiv!.style.visibility = "hidden";
+      
+          var elemTable = document.getElementById('htmlData');
+          elemTable!.style.visibility = "hidden";
 
         });
 
@@ -122,7 +156,7 @@ export class RevisiondocumentosComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      this.getConsultaDocumentosVerifica();
+      this.getConsultaDocumentosVerifica(this.g.sindicato.value);
     });
 
   }

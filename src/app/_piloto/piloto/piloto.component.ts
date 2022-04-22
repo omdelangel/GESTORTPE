@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { FormGroup, FormControl, FormBuilder, FormGroupDirective, NgForm } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
 import { ConcesionarioPiloto } from 'src/app/_models/piloto.model';
+import { CatalogoSindicatos } from 'src/app/_models';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { PilotoService } from 'src/app/_services';
+import { PilotoService, CatalogosService } from 'src/app/_services';
 import { MatDialog } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
 import { DialogoConfirmaDesinstalacionPilotoComponent } from '../dialogo-confirma-desinstalacion-piloto';
@@ -42,9 +43,12 @@ export class PilotoComponent implements OnInit {
 
   reactiveForm!: FormGroup;
   piloto: ConcesionarioPiloto[] = [];
-
+  sindicatos: CatalogoSindicatos[] = [];
+  submitted = false;
+  matcher = new MyErrorStateMatcher();
 
   constructor(public dialog: MatDialog,
+    private catalogoService: CatalogosService,
     private pilotoService: PilotoService,
     private formBuilder: FormBuilder,
     notifierService: NotifierService) {
@@ -54,51 +58,83 @@ export class PilotoComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getConsultaPiloto();
+    //this.getConsultaPiloto();
+    this.getCatalogoSindicatos(); 
 
     //Validación de campos en pantalla
     this.reactiveForm = this.formBuilder.group({
-      'IdConcesionario': [''],
-      'IdContrato': [''],
-      'NombreConcesionario': [''],
-      'TerminoPiloto': [''],
-      'IdVehiculo': [''],
-      'Marca': [''],
-      'Submarca': [''],
-      'Modelo': [''],
-      'Placa': [''],
-      'TipoVehiculo': [''],
-      'TipoConvertidor': [''],
-      'FechaCitaDesinstalacion': [''],
-      'EstatusCitaDesinstalacion': [''],
-      'IdCitaDesinstalacion': [''],
+      'sindicato': ['', Validators.required]
     });
   }
 
   get g() { return this.reactiveForm.controls; }
 
   onSubmit() {
-    if (this.reactiveForm.valid) {
-      //console.log(this.reactiveForm.value)
+    this.submitted = true;
+
+     // stop here if form is invalid
+     if (this.reactiveForm.invalid) {
+      return;
     } else {
-      return
+      this.getConsultaPiloto(this.g.sindicato.value);
     }
+  
+  }
+
+  getCatalogoSindicatos() {
+    this.catalogoService.getCatalogoSindicatos()
+      .pipe(first())
+      .subscribe(data => {
+        this.sindicatos = data.sindicatos;
+      },
+        error => {
+
+        });
+        
   }
 
 
   //Consulta los datos de concesionarios en programa piloto
-  getConsultaPiloto() {
+  getConsultaPiloto(idEmpresa: number) {
 
-    this.pilotoService.getConcesionariosPiloto()
+    this.pilotoService.getConcesionariosPiloto(idEmpresa)
       .pipe(first())
       .subscribe(data => {
+
+        if (data.estatus ) {
 
         this.piloto = data.concesionario;
         this.dataSource = new MatTableDataSource(this.piloto);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+
+        var elemDiv = document.getElementById('divTitle');
+        elemDiv!.style.visibility = "visible";
+
+        var elemTable = document.getElementById('htmlData');
+        elemTable!.style.visibility = "visible";
+
+        } else {
+
+          this.notifier.notify('warning', data.mensaje)
+
+          var elemDiv = document.getElementById('divTitle');
+          elemDiv!.style.visibility = "hidden";
+      
+          var elemTable = document.getElementById('htmlData');
+          elemTable!.style.visibility = "hidden";
+
+        }
       },
         error => {
+
+          this.notifier.notify('error', error);
+
+          var elemDiv = document.getElementById('divTitle');
+          elemDiv!.style.visibility = "hidden";
+      
+          var elemTable = document.getElementById('htmlData');
+          elemTable!.style.visibility = "hidden";
 
         });
   }
@@ -117,7 +153,7 @@ export class PilotoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      this.getConsultaPiloto();
+      this.getConsultaPiloto(this.g.sindicato.value);
     });
 
   }
@@ -135,7 +171,7 @@ export class PilotoComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(res => {
-          this.getConsultaPiloto();
+          this.getConsultaPiloto(this.g.sindicato.value);
         });
 
 
@@ -150,7 +186,7 @@ export class PilotoComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(res => {
-          this.getConsultaPiloto();
+          this.getConsultaPiloto(this.g.sindicato.value);
         });
 
       }
@@ -181,7 +217,7 @@ export class PilotoComponent implements OnInit {
           });
 
           dialogRef.afterClosed().subscribe(res => {
-            this.getConsultaPiloto();
+            this.getConsultaPiloto(this.g.sindicato.value);
           });
 
 
@@ -196,7 +232,7 @@ export class PilotoComponent implements OnInit {
           });
   
           dialogRef.afterClosed().subscribe(res => {
-            this.getConsultaPiloto();
+            this.getConsultaPiloto(this.g.sindicato.value);
           });
 
         }
@@ -212,7 +248,7 @@ export class PilotoComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe(res => {
-        this.getConsultaPiloto();
+        this.getConsultaPiloto(this.g.sindicato.value);
       });
     }
   }
@@ -246,7 +282,7 @@ export class PilotoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      this.getConsultaPiloto();
+      this.getConsultaPiloto(this.g.sindicato.value);
     });
 
   }
