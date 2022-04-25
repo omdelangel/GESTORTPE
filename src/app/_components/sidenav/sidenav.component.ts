@@ -84,11 +84,12 @@ export class SidenavComponent {
 
   ngAfterViewInit() {
     this.observer
-    .observe(['(max-width: 800px)'])
+    .observe(['(max-width: 1366px)'])
     .pipe(delay(1))
     .subscribe((res) => {
 
-    
+      console.log("NAV BAR");
+      console.log(res);
       if (res.matches) {
         this.sidenav.mode = 'over';
         this.sidenav.close();

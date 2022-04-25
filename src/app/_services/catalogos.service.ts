@@ -38,6 +38,8 @@ getCatalogoTposAsignacion(sindicato: any): Observable<any> {
   return this.http.get<any>(`${environment.SERVER_URL}/tipos-asignacion-lista`, {params: params})
   .pipe(map((res: Response) => {
 
+    console.log()
+
       return res || {}
     }),
     catchError(this.handleError)
