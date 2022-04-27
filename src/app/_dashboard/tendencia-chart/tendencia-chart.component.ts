@@ -53,7 +53,7 @@ export class TendenciaChartComponent implements OnInit {
           {
             type: 'bar',
             label: 'Importe consumo',
-            data: this.dataLitros,
+            data: this.dataImporte,
             borderColor: 'rgb(233, 240, 42 )',
             backgroundColor: 'rgba(233, 240, 42, 0.6 )',
             yAxisID : 'y'
