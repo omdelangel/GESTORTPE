@@ -115,10 +115,10 @@ this.repoService.getRegistrosVigentes(this.f.sindicato.value)
   console.log("vigentes");
   console.log(data);
 
-if (data.estatus && !isEmpty(data.hFormalizadosLista[0])) {
+if (data.estatus && !isEmpty(data.hVigentesLista[0])) {
 
 // Assign the data to the data source for the table to render
-this.repoVigentes = data.hFormalizadosLista;
+this.repoVigentes = data.hVigentesLista;
 
 this.dataSource = new MatTableDataSource(this.repoVigentes);
 this.dataSource.paginator = this.paginator;
