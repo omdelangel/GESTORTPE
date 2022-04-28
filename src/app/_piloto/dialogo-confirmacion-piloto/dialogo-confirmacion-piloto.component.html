@@ -2,6 +2,11 @@
     <div fxLayout="row wrap" fxLayoutGap="20px" style="width: 100%;">
         <div fxFlex="100">
             <mat-card>
+                <div class="example-button-container">
+                    <button mat-mini-fab  class="close-button" style="outline: none;" (click)="onNoClick()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
                 <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
                     <div fxLayout="row" fxLayoutAlign="center center">
                         <img mat-card-image style="width: 50%; height: 50%" src="assets/images/logo-cambia.jpg" alt="">

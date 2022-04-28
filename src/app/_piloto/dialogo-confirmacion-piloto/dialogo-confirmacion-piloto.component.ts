@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+
 @Component({
   selector: 'app-dialogo-confirmacion-piloto',
   templateUrl: './dialogo-confirmacion-piloto.component.html',
@@ -23,6 +24,10 @@ export class DialogoConfirmacionPilotoComponent implements OnInit {
     }
 
   ngOnInit() {
+  }
+
+  onNoClick(): void {
+    this.dialogo.close();
   }
 
 }
