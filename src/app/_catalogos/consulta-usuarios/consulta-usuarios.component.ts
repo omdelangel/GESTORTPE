@@ -94,11 +94,7 @@ export class ConsultaUsuariosComponent implements OnInit {
       this.catalogosService.getCatalogoUsuarios()
         .pipe(first())
         .subscribe(data => {   
-          console.log("Consulta Usuarios 1")
-          console.log(data)
           this.catalogoUsuarios     = data.listaDat.usuarios;   
-          console.log("Consulta catalogoUsuarios 1")
-          console.log(this.catalogoUsuarios)
           this.dataSource           = new MatTableDataSource(this.catalogoUsuarios);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort      = this.sort;
@@ -174,26 +170,18 @@ export class ConsultaUsuariosComponent implements OnInit {
 
   //Adjunta los archivos 
   onFileSelected(e: any, row: any) {
-    console.log("inFileSelected")
-    console.log(e)
-    console.log(e.target.files)
-    console.log(row)
+
     this.uploadedFiles = e.target.files;
 
     if (this.isFileAllowedPDF(this.uploadedFiles[0].name)) {
         const formData = new FormData();
         formData.append('Imagen', this.uploadedFiles[0], this.uploadedFiles[0].name),
         formData.append('IdUsuario', row.IdUsuario),
-        console.log("FormData")
-        console.log(formData)
-        console.log(formData.append)
 
       this.catalogosService.postGuardaImagenRegistro(formData)
         .pipe(first())
         .subscribe(
           data => {
-            console.log("Graba Imagen Registro")
-            console.log(data)
             if (data.estatus) {
               //this.success(data.mensaje);
               this.notifier.notify('success', data.mensaje, '');
@@ -206,8 +194,6 @@ export class ConsultaUsuariosComponent implements OnInit {
           error => {
             //this.error(error);
             this.notifier.notify('error', error, '');
-            console.log("Error")
-            console.log(error)
           });
 
     } else {
@@ -218,11 +204,10 @@ export class ConsultaUsuariosComponent implements OnInit {
 
   //Abre la imagen del archivo 
   verIMG(row: any) {
-    console.log("VerIMG")
-    console.log(row)
+
 
     this.openDialogIMG(row.Foto);
-    console.log("Con IMG")
+
  //   }
   }  
 

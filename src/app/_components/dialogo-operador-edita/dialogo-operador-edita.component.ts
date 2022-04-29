@@ -196,9 +196,6 @@ export class DialogoOperadorEditaComponent implements OnInit {
       Licencia: this.f.Licencia.value, Estatus: ""
     }
 
-    console.log("this.operador");
-    console.log(this.operador);
-
     this.operadorService.postRegistraOperador(this.operador)
       .pipe(first())
       .subscribe(

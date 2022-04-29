@@ -79,7 +79,6 @@ export class ConsultaTalleresComponent implements OnInit {
   
   //Abre modal para Talleres
     openDialog(): void {
-      console.log("entre a openDialog de Talleres")
       const dialogRef = this.dialog.open(AltaTalleresComponent, {
         disableClose: true,
 //        width: '1500px',
@@ -97,11 +96,7 @@ export class ConsultaTalleresComponent implements OnInit {
       this.catalogosService.getCatalogoTalleres()
         .pipe(first())
         .subscribe(data => {   
-          console.log("Consulta Talleres ")
-          console.log(data)
           this.catalogoTalleres     = data.talleresLista;   
-          console.log("Consulta catalogoTalleres")
-          console.log(this.catalogoTalleres)
           this.dataSource           = new MatTableDataSource(this.catalogoTalleres);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort      = this.sort;
@@ -112,16 +107,10 @@ export class ConsultaTalleresComponent implements OnInit {
 
   //cambiar valor de Bloqueo
     cambiaBloqueo(e: any){
-      console.log("cambia Bloqueo ")
-      console.log(e.Bloqueado)
       e.Bloqueado = !e.Bloqueado;
-      console.log(e.Bloqueado)
-      console.log(e)
       this.catalogosService.getCatUsuBloqueado(e)
         .pipe(first())
         .subscribe(data => {   
-          console.log("Actualiza Bloqueo Usuario  data ===>  ")
-          console.log(data)
           this.getConsultaTalleres();
         },
           error => {  
@@ -131,8 +120,6 @@ export class ConsultaTalleresComponent implements OnInit {
 
   //Edita el registro de Talleres
     editar(e: any) {
-      console.log("consulta-editar talleres")
-      console.log(e)
       const dialogRef   = this.dialog.open(EdicionTalleresComponent, {
         disableClose: true,
         data: { 

@@ -27,16 +27,13 @@ export class TendenciaChartComponent implements OnInit {
 
   ngOnInit(): void {
     this.dash.obtenDashboard(3).pipe(first()).subscribe({next: (dataList : any) => {
-      console.log("Respuesta : "+ JSON.stringify(dataList['datos']));
-      // console.log(JSON.stringify(dataList));
+
       this.dataImporte = dataList['datos'][0].map((res : any) => res.ImporteConsumo);
       this.dataAhorros = dataList['datos'][0].map((res : any) => res.TotalAhorro);
       this.dataBeneficios = dataList['datos'][0].map((res : any) => res.TotalBeneficios);
       this.dataVehiculos = dataList['datos'][0].map((res : any) => res.VehiculosConsumo);
       this.dataLitros = dataList['datos'][0].map((res : any) => res.LitrosConsumo);
       this.dims = dataList['datos'][0].map((res : any) => res.Periodo);
-
-      console.log(this.dims);
 
       var ctx  = 'tendenciaChart';
 

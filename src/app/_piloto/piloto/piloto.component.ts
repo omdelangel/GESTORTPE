@@ -194,54 +194,58 @@ export class PilotoComponent implements OnInit {
   }
 
   //Edita el concesionario/preregistro
-  contrato(e: any) {
+  contrato(e: any) {   
 
     if (e.AceptoConvertidor != 1) {
 
-    this.dialog
-      .open(DialogoConfirmacionPilotoComponent, {
-        data: `Confirma que el CONCESIONARIO está de acuerdo en continuar con los beneficios del programa Cambia y Gana.`,
-        width: '30%'
-      })
-      .afterClosed()
-      .subscribe((confirmado: Boolean) => {
-        if (confirmado) {
-
-          this.enviaRespuesta(e.IdContrato, 1);
-
-          const dialogRef = this.dialog.open(DialogoContratoPilotoComponent, {
-            data: { idContrato: e.IdContrato, nombreConcesionario: e.NombreConcesionario},
-            disableClose: true,
-            //width: '1500px',
-            //height: '900px'
-          });
-
-          dialogRef.afterClosed().subscribe(res => {
-            this.getConsultaPiloto(this.g.sindicato.value);
-          });
+      this.dialog
+        .open(DialogoConfirmacionPilotoComponent, {
+          data: `Confirma que el CONCESIONARIO está de acuerdo en continuar con los beneficios del programa Cambia y Gana.`,
+          width: '30%'
+        })
+        .afterClosed()
+        .subscribe((confirmado: string) => {
 
 
+          if (confirmado != "CIERRA") {
+            if (confirmado == "SI") {
 
-        } else {
+              this.enviaRespuesta(e.IdContrato, 1);
 
-          this.enviaRespuesta(e.IdContrato, 0);
-          const dialogRef = this.dialog.open(DialogoTalleresPilotoComponent, {
-            disableClose: true,
-            data: { idCita: e.IdCitaDesinstalacion, estatusCita: e.EstatusCitaDesinstalacion, nombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo },
-  
-          });
-  
-          dialogRef.afterClosed().subscribe(res => {
-            this.getConsultaPiloto(this.g.sindicato.value);
-          });
+              const dialogRef = this.dialog.open(DialogoContratoPilotoComponent, {
+                data: { idContrato: e.IdContrato, nombreConcesionario: e.NombreConcesionario },
+                disableClose: true,
+                //width: '1500px',
+                //height: '900px'
+              });
 
-        }
-      });
+              dialogRef.afterClosed().subscribe(res => {
+                this.getConsultaPiloto(this.g.sindicato.value);
+              });
+
+
+
+            } else if (confirmado == "NO"){
+
+              this.enviaRespuesta(e.IdContrato, 0);
+              const dialogRef = this.dialog.open(DialogoTalleresPilotoComponent, {
+                disableClose: true,
+                data: { idCita: e.IdCitaDesinstalacion, estatusCita: e.EstatusCitaDesinstalacion, nombreConcesionario: e.NombreConcesionario, idConcesionario: e.IdConcesionario, idVehiculo: e.IdVehiculo },
+
+              });
+
+              dialogRef.afterClosed().subscribe(res => {
+                this.getConsultaPiloto(this.g.sindicato.value);
+              });
+
+            }
+          }
+        });
 
     } else {
 
       const dialogRef = this.dialog.open(DialogoContratoPilotoComponent, {
-        data: { idContrato: e.IdContrato, nombreConcesionario: e.NombreConcesionario},
+        data: { idContrato: e.IdContrato, nombreConcesionario: e.NombreConcesionario },
         disableClose: true,
         //width: '1500px',
         //height: '900px'

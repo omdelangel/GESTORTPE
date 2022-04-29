@@ -163,8 +163,6 @@ export class DocumentosComponent implements OnInit {
 
     if (this.isFileAllowedPDF(this.uploadedFiles[0].name)) {
 
-      console.log(this.uploadedFiles[0].name)
-
       const formData = new FormData();
       formData.append('Documento', this.uploadedFiles[0], this.uploadedFiles[0].name),
       formData.append('IdVehiculo', row.IdVehiculo),

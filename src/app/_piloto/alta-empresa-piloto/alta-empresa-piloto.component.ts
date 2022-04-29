@@ -110,8 +110,6 @@ export class AltaEmpresaPilotoComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          console.log("Alta PromocionesSindicato")
-          console.log(data)
                 
           if (data.estatus) {
             this.notifier.notify('success', data.mensaje, '');    

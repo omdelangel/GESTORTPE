@@ -67,9 +67,6 @@ export class SidenavComponent {
     
     this.dataUser = JSON.parse(sessionStorage.getItem('usuario')!);
 
-    console.log("this.dataUser");
-    console.log(this.dataUser);
-
     for (var key in this.dataUser) {
       if (key == "Nombre") {
         this.nombre = this.dataUser[key];
@@ -88,8 +85,6 @@ export class SidenavComponent {
     .pipe(delay(1))
     .subscribe((res) => {
 
-      console.log("NAV BAR");
-      console.log(res);
       if (res.matches) {
         this.sidenav.mode = 'over';
         this.sidenav.close();
@@ -123,11 +118,10 @@ export class SidenavComponent {
 
   increase() {
     this.sidenavWidth = 15;
-    console.log('increase sidenav width');
   }
   decrease() {
     this.sidenavWidth = 4;
-    console.log('decrease sidenav width');
+
   }
 
 }

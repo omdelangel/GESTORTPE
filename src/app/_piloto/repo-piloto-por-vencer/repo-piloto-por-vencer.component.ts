@@ -86,8 +86,6 @@ export class RepoPilotoPorVencerComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
  
-        console.log("regresé del reporte piloto por vencer")
-        console.log(data)
         if (data.estatus && !isEmpty(data.LPVPilotossLista[0])) {
   
           // Assign the data to the data source for the table to render

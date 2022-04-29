@@ -61,13 +61,10 @@ export class DashboardCardsComponent implements OnInit {
   ngOnInit(): void {
     this.dash.obtenDashboard(2)
     .pipe(first()).subscribe((dataList : any) => {
-      console.log("Respuesta : "+ JSON.stringify(dataList['datos']));
       this.totalContratos = dataList['datos'][0][0].Acumulados;    //map((res : any) => res.Citas);
       this.contratosNuevos =  dataList['datos'][0][0].Nuevos;
       this.porcentajeNuevos = this.contratosNuevos / this.totalContratos;
       
-      console.log("totalContratos: " + this.totalContratos);
-      console.log("contratosNuevos: " + this.contratosNuevos);
 
       this.vehiculosConsumo =  dataList['datos'][1][0].VehiculoConsumo;
       this.litrosConsumo =  dataList['datos'][1][0].LitrosConsumo;

@@ -93,11 +93,7 @@ export class ConsultaEstacionesComponent implements OnInit {
       this.catalogosService.getCatalogoEstaciones()
         .pipe(first())
         .subscribe(data => {   
-          console.log("Consulta Estaciones ")
-          console.log(data)
           this.catalogoEstaciones     = data.estacionesLista;   
-          console.log("Consulta catalogoEstaciones 1")
-          console.log(this.catalogoEstaciones)
           this.dataSource           = new MatTableDataSource(this.catalogoEstaciones);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort      = this.sort;
@@ -108,16 +104,12 @@ export class ConsultaEstacionesComponent implements OnInit {
 
   //cambiar valor de Bloqueo
     cambiaBloqueo(e: any){
-      console.log("cambia Bloqueo ")
-      console.log(e.Bloqueado)
+
       e.Bloqueado = !e.Bloqueado;
-      console.log(e.Bloqueado)
-      console.log(e)
+
       this.catalogosService.getCatUsuBloqueado(e)
         .pipe(first())
         .subscribe(data => {   
-          console.log("Actualiza Bloqueo Usuario  data ===>  ")
-          console.log(data)
           this.getConsultaEstaciones();
         },
           error => {  
@@ -127,8 +119,7 @@ export class ConsultaEstacionesComponent implements OnInit {
 
   //Edita el registro de Dictamen
     editar(e: any) {
-      console.log("consulta-editar constrasenia  1")
-      console.log(e.contrasenia)
+
       const dialogRef = this.dialog.open(EdicionEstacionesComponent, {
         disableClose: true,
         data: { 

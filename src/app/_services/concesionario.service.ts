@@ -59,9 +59,7 @@ export class ConcesionarioService {
 
     let params = new HttpParams();
     params = params.append('IdEmpresa', idEmpresa);
-
-    console.log(idEmpresa);
-    
+   
 
     return this.http.get<any>(`${environment.SERVER_URL}/concesionario-prerregistro`, {params: params})
       .pipe(map((res: Response) => {    

@@ -94,7 +94,7 @@ export class AltaSindicatosComponent implements OnInit {
     .pipe(first())
     .subscribe(data => {
       this.regiones       = data.regionesLista;
-      console.log(this.regiones)
+
     },
       error => {
       });
@@ -116,8 +116,7 @@ export class AltaSindicatosComponent implements OnInit {
     this.catalogoService.getCatalogoTipoAsignacion()
       .pipe(first())
       .subscribe(data => {
-        console.log("Tipos de Asignación")
-        console.log(data)
+
         this.TipoAsignacion   = data.TiposAsignacionsLista;
         this.f.TipoAsignacionA.setValue(this.TipoAsignacion[0].Nombre);                
         this.f.TipoAsignacionB.setValue(this.TipoAsignacion[1].Nombre);                

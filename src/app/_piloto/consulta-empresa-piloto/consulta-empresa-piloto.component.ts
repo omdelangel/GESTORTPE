@@ -45,7 +45,6 @@ export class ConsultaEmpresaPilotoComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    console.log("ngOnInit")
     this.getConsultaPromocionesSindicato();
 
   //Validación de campos en pantalla
@@ -80,15 +79,11 @@ export class ConsultaEmpresaPilotoComponent implements OnInit {
 
   //Consulta los datos de PromocionesSindicato
     getConsultaPromocionesSindicato(){
-      console.log("getConsultaPromocionesSindicato")
       this.pilotoService.getPromocionesEmpresa()
         .pipe(first())
         .subscribe(data => {   
-          console.log("Consulta PromocionesSindicato 1")
-          console.log(data)
+
           this.promocionesSindicato     = data.PromocionesSindsLista;   
-          console.log("Consulta promocionesSindicato 1")
-          console.log(this.promocionesSindicato)
           this.dataSource           = new MatTableDataSource(this.promocionesSindicato);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort      = this.sort;

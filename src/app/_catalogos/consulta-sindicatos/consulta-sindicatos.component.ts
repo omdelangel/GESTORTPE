@@ -93,11 +93,7 @@ export class ConsultaSindicatosComponent implements OnInit {
       this.catalogosService.getCatalogoSindicato()
         .pipe(first())
         .subscribe(data => {   
-          console.log("Consulta Sindicatos ")
-          console.log(data)
           this.catalogoSindicato     = data.sindicatosLista;   
-          console.log("Consulta catalogoSindicato 1")
-          console.log(this.catalogoSindicato)
           this.dataSource           = new MatTableDataSource(this.catalogoSindicato);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort      = this.sort;
@@ -108,16 +104,10 @@ export class ConsultaSindicatosComponent implements OnInit {
 
   //cambiar valor de Bloqueo
     cambiaBloqueo(e: any){
-      console.log("cambia Bloqueo ")
-      console.log(e.Bloqueado)
       e.Bloqueado = !e.Bloqueado;
-      console.log(e.Bloqueado)
-      console.log(e)
       this.catalogosService.getCatUsuBloqueado(e)
         .pipe(first())
         .subscribe(data => {   
-          console.log("Actualiza Bloqueo Usuario  data ===>  ")
-          console.log(data)
           this.getConsultaSindicatos();
         },
           error => {  
@@ -127,8 +117,6 @@ export class ConsultaSindicatosComponent implements OnInit {
 
   //Edita el registro de Sindicatos
     editar(e: any) {
-      console.log("consulta-editar Sindicato")
-      console.log(e.contrasenia)
       const dialogRef = this.dialog.open(EdicionSindicatosComponent, {
         disableClose: true,
         data: { 

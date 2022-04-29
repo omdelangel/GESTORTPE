@@ -68,9 +68,7 @@ export class ConsultaMarcasComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    console.log("OnInit")
     this.getConsultaMarcas();
-    console.log("OnInit1")
 
   //Validación de campos en pantalla
     this.reactiveForm = this.formBuilder.group({
@@ -93,7 +91,7 @@ export class ConsultaMarcasComponent implements OnInit {
 
   //Abre modal para Alta de Marca/Submarca
     openDialog(): void {
-      console.log("entre a openDialog de Marcas")
+  
       const dialogRef = this.dialog.open(AltaMarcaSubmarcaComponent, {
         disableClose: true,
 //        width: '1500px',
@@ -111,15 +109,12 @@ export class ConsultaMarcasComponent implements OnInit {
 
 
     getConsultaMarcas(){
-      console.log("Consulta Marcas4")
+
 //      this.submitted = true;  
    
       this.catalogosService.getCatalogoMarcaSubmarca()
       .pipe(first())
       .subscribe(data => {
- 
-        console.log("regresé del servico Marcas")
-        console.log(data)
         
         if (data.estatus ) {
   
@@ -180,8 +175,6 @@ changeEstatus(e: any){
 
   //Edita el registro de Marcas/Submarcas
   editarMarca(e: any) {
-    console.log("editar Marca")
-    console.log(e)
    
     const dialogRef   = this.dialog.open(EdicionMarcaSubmarcaComponent, {
       disableClose: true,
@@ -201,8 +194,6 @@ changeEstatus(e: any){
 
   //Edita el registro de Marcas/Submarcas
     editar(e: any) {
-      console.log("editar SubMarca1")
-      console.log(e)
      
       const dialogRef   = this.dialog.open(EdicionMarcaSubmarcaComponent, {
         disableClose: true,

@@ -168,13 +168,12 @@ export class AltaTalleresComponent implements OnInit {
 
   //Registra el Usuario
   guardarTaller() {
-   console.log("Entre a guardar taller")
    //this.clear();
     this.submitted = true;
 
     // stop here if form is invalid
     if (this.frmAltaTaller.invalid) {
-      console.log("Entre a guardar taller")
+
       return;
     }
 
@@ -197,8 +196,6 @@ export class AltaTalleresComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          console.log("Se intentó Alta Taller")
-          console.log(data)
                 
           if (data.Estatus) {
             this.notifier.notify('success', data.mensaje, '');    
