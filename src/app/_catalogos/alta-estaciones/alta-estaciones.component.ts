@@ -121,8 +121,7 @@ export class AltaEstacionesComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          console.log("CP")
-          console.log(data)
+  
           if (data.estatus && data.cp != "") {
             this.asentamientos = data.cp;
             this.frmAltaEstacion.patchValue({
@@ -174,14 +173,12 @@ export class AltaEstacionesComponent implements OnInit {
       TipoCombustible        : this.f.TiposGas.value      ,
       ZonaFronteriza         : this.f.ZF.value      ,
     }
-    console.log("Voy a dar de alta")
-    console.log(this.catalogoEstaciones)
+
     this.catalogoService.postRegistraEstaciones(this.catalogoEstaciones)
       .pipe(first())
       .subscribe(
         data => {
-          console.log("Se intentó Alta Estación")
-          console.log(data)
+
                 
           if (data.Estatus) {
             this.notifier.notify('success', data.mensaje, '');    

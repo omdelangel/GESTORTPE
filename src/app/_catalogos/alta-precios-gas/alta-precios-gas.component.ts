@@ -91,7 +91,7 @@ export class AltaPreciosGasComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
         this.entidades       = data.entidades;
-        console.log(this.entidades)
+
       },
         error => {
         });
@@ -99,14 +99,12 @@ export class AltaPreciosGasComponent implements OnInit {
 
   //Llena catálogo de Municipio
   getCatalogoMunicipios(event: any) {
-    console.log("getCatalogoMunicipios")
-    console.log(event)
-    console.log(event.value)
+
     this.catalogoService.getCatalogoMunicipios(event.value)
       .pipe(first())
       .subscribe(data => {
         this.municipios       = data.MunicipiossLista;
-        console.log(this.municipios)
+
       },
         error => {
         });
@@ -160,16 +158,11 @@ export class AltaPreciosGasComponent implements OnInit {
       NombreE                 :this.espacios                                           ,  
       NombreM                 :this.espacios                                           , 
      }
-
-     console.log("antes del Alta de Gas")
-     console.log(this.preciosGas)
  
      this.catalogoService.postRegistraPreciosGas(this.preciosGas)
        .pipe(first())
        .subscribe(
          data => {
-           console.log("Alta de Precios GAS")
-           console.log(data)
            if (data.estatus) {
              this.notifier.notify('success', data.mensaje, '');    
              this.dialogRef.close();

@@ -98,10 +98,9 @@ export class AltaUsuariosComponent implements OnInit {
     this.catalogoService.getCatalogoPerfiles()
       .pipe(first())
       .subscribe(data => {
-        console.log("Catálogo de Perfiles")
-        console.log(data)
+ 
         this.perfiles   = data.listaDat.perfiles;
-        console.log(this.perfiles)
+
       },
         error => {
         });
@@ -111,7 +110,7 @@ export class AltaUsuariosComponent implements OnInit {
   //Valida que las contraseñas sean Iguales 
   validarContrasenia(e: any){
     if (e.target.value != this.f.Contrasenia.value){
-      console.log("Diferentes")
+
       this.notifier.notify('error', "Las contraseñas deben ser iguales", '');
     }
   }
@@ -145,8 +144,6 @@ export class AltaUsuariosComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          console.log("Se intentó Alta Usuario")
-          console.log(data)
                 
           if (data.estatus) {
             this.notifier.notify('success', data.mensaje, '');    

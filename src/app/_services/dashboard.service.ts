@@ -17,8 +17,6 @@ export class DashboardService {
 
     let params = new HttpParams();
     params = params.append('IdConsulta', IdDashboard);
-    console.log("Iniciando consulta servicio" );
-
     
     return this.http.get<any>( `${environment.SERVER_URL}/dashboard` , {params : params} )
     

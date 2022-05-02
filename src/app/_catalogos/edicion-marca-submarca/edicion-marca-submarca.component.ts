@@ -69,8 +69,6 @@ export class EdicionMarcaSubmarcaComponent implements OnInit {
     notifierService            :NotifierService,
     public dialogRef           :MatDialogRef<EdicionMarcaSubmarcaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      console.log("Edicion Marcas-Submarcas  ==> ")
-      console.log(data)
 
     this.notifier              = notifierService;
     this.IdMarca               = data.IdMarca;
@@ -114,10 +112,6 @@ export class EdicionMarcaSubmarcaComponent implements OnInit {
   //Registro de submarca
   guardasubmarca() {
 
-    console.log("Entre a guardar Submarca")
-    console.log(this.IdMarca)
-    console.log(this.f.Submarca.value)
-
     this.submitted = true;
 
     if (this.f.TipoVehiculo.value == 0){
@@ -139,15 +133,11 @@ export class EdicionMarcaSubmarcaComponent implements OnInit {
                       TipoVehiculo     :this.f.TipoVehiculo.value,
                       Estatus          :this.Estatus,
                     }
-        console.log("Submarca  ")
-        console.log(this.submarca)
 
     this.catalogoService.postModificaSubmarca(this.submarca)
       .pipe(first())
       .subscribe(
         data => {
-          console.log("Regrese de registrar Submarca")
-          console.log(data)
       
           if (data.estatus) {
             this.getConsultasubmarcas(this.IdMarca);
@@ -174,22 +164,15 @@ export class EdicionMarcaSubmarcaComponent implements OnInit {
 
 //cambiar valor de Estatus
   changeEstatus(e: any){
-    console.log("cambia Estatus ")
-    console.log(e)
-    console.log(e.Estatus)
     if (e.Estatus == "A") {
       e.Estatus = 1;
     } else if (e.Estatus == "I") {
       e.Estatus = 0;
     }
     //e.Estatus = !e.Estatus;
-    console.log(e.Estatus)
-    console.log(e)
     this.catalogoService.postModificaSubmarca(e)
       .pipe(first())
       .subscribe(data => {   
-        console.log("Actualiza Estatus Submarca   data ===>  ")
-        console.log(data)
         this.getConsultasubmarcas(this.IdMarca);
         this.IdSubmarca      = 0
       },
@@ -199,30 +182,24 @@ export class EdicionMarcaSubmarcaComponent implements OnInit {
 
 
   guardamarca() {
-    console.log("Entre a guardar marca")
-    console.log(this.BanderaMarca)
     this.submitted      = true;
 
     // stop here if form is invalid
     if (this.reactiveForm.invalid) {
       return;
     }
-    console.log("voy a registrar")
+
     if (this.BanderaMarca){
         this.marca = {
                       IdMarca          :this.IdMarca,
                       Nombre           :this.f.Marca.value, 
                       Estatus          :this.Estatus,
                       }
-        console.log("Alta Marca")
-        console.log(this.marca)
 
         this.catalogoService.postRegistraMarca(this.marca)
           .pipe(first())
           .subscribe(
             data => {
-              console.log("Regreso de Registrar Marca")
-              console.log(data)
 
               if (data.estatus) {
                   this.BanderaMarca   = false;
@@ -253,8 +230,6 @@ export class EdicionMarcaSubmarcaComponent implements OnInit {
   //Recupera los datos del registro para la edición del submarca
   editar(e: any) {
 
-    console.log("Editar ")
-    console.log(e)
     this.BanderaMarca    = false;
     this.condition       = false;
     this.IdSubmarca      = e.IdSubmarca;
@@ -280,9 +255,6 @@ export class EdicionMarcaSubmarcaComponent implements OnInit {
           // Assign the data to the data source for the table to render
           this.submarcas = data.SubMarcasLista;
           this.dataSource = new MatTableDataSource(this.submarcas);
-          console.log(" dataSource ")
-          console.log(this.dataSource)
-          console.log(this.submarcas)
           //this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
 

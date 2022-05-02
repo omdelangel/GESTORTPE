@@ -119,20 +119,14 @@ export class RepoTaxiVanConvComponent implements OnInit {
     if (this.reactiveForm.invalid) {
      return;
     }
-      console.log("Parámetros")
-      console.log(this.f.Convertidos.value)
-      console.log( this.f.FechaInicio.value)
-      console.log(this.f.FechaFin.value)
+
 
       this.repoService.getReporteAutosConvertidos(this.f.Convertidos.value, moment(this.f.FechaInicio.value).format('YYYY-MM-DD'), moment(this.f.FechaFin.value).format('YYYY-MM-DD')) 
       .pipe(first())
       .subscribe(data => {
  
-        console.log("regresé del reporte")
-        console.log(data)
         if (data.estatus && !isEmpty(data.reporte[0])) {
   
-          console.log("true")
           // Assign the data to the data source for the table to render
           this.repoTipoAutoConvertido = data.reporte;
   
@@ -150,7 +144,6 @@ export class RepoTaxiVanConvComponent implements OnInit {
           elemReport!.style.visibility = "visible";
   
         } else {
-          console.log("false")
           var elemDiv = document.getElementById('divTitle');
             elemDiv!.style.visibility = "hidden";
   

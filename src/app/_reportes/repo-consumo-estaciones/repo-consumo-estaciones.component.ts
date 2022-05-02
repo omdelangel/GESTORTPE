@@ -93,16 +93,12 @@ this.submitted = true;
 if (this.reactiveForm.invalid) {
 return;
 }
-console.log("Parámetros")
-console.log((this.f.FechaInicio.value))
-console.log((this.f.FechaFin.value))
+
 
 this.repoService.getReporteConsumoEstaciones(moment(this.f.FechaInicio.value).format('YYYY-MM-DD'), moment(this.f.FechaFin.value).format('YYYY-MM-DD')) 
 .pipe(first())
 .subscribe(data => {
 
-console.log("regresé del reporte")
-console.log(data)
 if (data.estatus && !isEmpty(data.reporte[0])) {
 
 // Assign the data to the data source for the table to render

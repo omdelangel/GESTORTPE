@@ -59,8 +59,6 @@ export class EdicionSindicatosComponent implements OnInit {
     public dialogRef          : MatDialogRef<EdicionSindicatosComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any)   
     { 
-        console.log("data parametros Sindicatos")
-        console.log(data)
   
         this.IdSindicato             = data.IdSindicato            ;
         this.Nombre                  = data.Nombre                 ;
@@ -139,7 +137,6 @@ export class EdicionSindicatosComponent implements OnInit {
     .pipe(first())
     .subscribe(data => {
       this.regiones       = data.regionesLista;
-      console.log(this.regiones)
     },
       error => {
       });

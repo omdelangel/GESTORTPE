@@ -24,8 +24,6 @@ export class PieChartComponent implements OnInit {
       this.dataPie = dataList['datos'][0].map((res : any) => res.Citas);
       this.dimsPie = dataList['datos'][0].map((res : any) => res.TipoVehiculo);
 
-      console.log(this.dimsPie);
-
       const ctx  = 'pieChart';
 
       

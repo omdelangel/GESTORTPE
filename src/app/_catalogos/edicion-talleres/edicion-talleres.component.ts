@@ -70,8 +70,6 @@ export class EdicionTalleresComponent implements OnInit {
     public dialogRef          : MatDialogRef<EdicionTalleresComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any)   
     { 
-      console.log("data parametros")
-      console.log(data)
 
       this.IdTaller            = data.IdTaller         ;
       this.Nombre              = data.Nombre           ;
@@ -92,8 +90,7 @@ export class EdicionTalleresComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    console.log("Entre al OnInit")
-    //this.clear();
+
     //Validación de campos en pantalla
     this.frmEditTaller = this.formBuilder.group({
       'IdTaller'            : [({ value: "", disabled: true }), Validators.required],

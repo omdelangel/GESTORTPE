@@ -158,9 +158,6 @@ export class AltacitaPilotoComponent implements OnInit {
           .subscribe(
             data => {
 
-              console.log("dataRegistroCita");
-              console.log(data); 
-
               if (data.estatus) {
                 //this.success(data.mensaje);  
                 this.notifier.notify('success', data.mensaje, '');
@@ -192,9 +189,6 @@ export class AltacitaPilotoComponent implements OnInit {
           .pipe(first())
           .subscribe(
             data => {
-
-              console.log("data");
-              console.log(data);
 
               if (data.estatus) {
                 //this.success(data.mensaje);  

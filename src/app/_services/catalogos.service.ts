@@ -38,7 +38,6 @@ getCatalogoTposAsignacion(sindicato: any): Observable<any> {
   return this.http.get<any>(`${environment.SERVER_URL}/tipos-asignacion-lista`, {params: params})
   .pipe(map((res: Response) => {
 
-    console.log()
 
       return res || {}
     }),
@@ -613,13 +612,10 @@ getCatalogoMarcaSub(Marca: any): Observable<any> {
 
   //Obtiene  Catálogo de Marcas/Submarcas de toda la información de las tablas
   getCatalogoMarcaSubmarca(): Observable<any> {
-    console.log("getCatalogoMarcaSubmarca")
 
     return this.http.get<any>(`${environment.SERVER_URL}/Marca-SubmarcaCMPX`)
     .pipe(map((res: Response) => {
   
-      console.log("RES")
-      console.log(res)
         return res || {}
 
       }),

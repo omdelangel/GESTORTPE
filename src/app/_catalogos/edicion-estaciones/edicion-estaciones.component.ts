@@ -90,8 +90,7 @@ export class EdicionEstacionesComponent implements OnInit {
     public dialogRef          : MatDialogRef<EdicionEstacionesComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any)   
     { 
-      console.log("data parametros")
-      console.log(data)
+
 
       this.IdEstacion        = data.IdEstacion  ;
       this.Nombre            = data.Nombre      ;
@@ -112,7 +111,6 @@ export class EdicionEstacionesComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    console.log("Entre al OnInit")
     //this.clear();
     //Validación de campos en pantalla
     this.frmEditTaller = this.formBuilder.group({
@@ -142,7 +140,6 @@ export class EdicionEstacionesComponent implements OnInit {
   //Consulta los datos del concesionario
   llenaPantalla() {
 
-    console.log("Datos en llena pantalla")
 
     this.f.IdEstacion.setValue(this.IdEstacion);
     this.f.Nombre.setValue(this.Nombre);
@@ -242,14 +239,13 @@ export class EdicionEstacionesComponent implements OnInit {
 
 
   guardarEstacion() {
-     console.log("Entre a guardar")
      this.submitted = true;
  
      // stop here if form is invalid
      if (this.frmEditTaller.invalid) {
        return;
      }
-     console.log("Entre a guardar 1")
+
      this.catalogoEstaciones = {
       IdEstacion      : this.IdEstacion          ,
       Nombre          : this.f.Nombre.value      ,
@@ -267,8 +263,6 @@ export class EdicionEstacionesComponent implements OnInit {
       ZonaFronteriza : this.f.ZF.value      , 
      }
  
-     console.log("Entre a guardar 2")
-     console.log(this.catalogoEstaciones)
      
      this.catalogoService.postModificaEstacion(this.catalogoEstaciones)
        .pipe(first())

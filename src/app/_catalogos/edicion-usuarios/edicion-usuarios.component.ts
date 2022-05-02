@@ -85,10 +85,7 @@ export class EdicionUsuariosComponent implements OnInit {
     public dialogRef: MatDialogRef<EdicionUsuariosComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any)   
     { 
-      console.log("data parametros1")
-      console.log(data)
-      console.log(data.IdUsuario)
-      console.log(this.IdUsuario)
+
       this.IdUsuario           = data.IdUsuario        ;
       this.Nombre              = data.Nombre           ;
       this.Contrasenia         = data.Contrasenia      ;
@@ -106,7 +103,6 @@ export class EdicionUsuariosComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    console.log("Entre al OnInit")
     //this.clear();
     //Validación de campos en pantalla
     this.frmEditUsr = this.formBuilder.group({
@@ -124,13 +120,6 @@ export class EdicionUsuariosComponent implements OnInit {
 
   //Consulta los datos del concesionario
   llenaPantalla() {
-
-    console.log("Datos en llena pantalla")
-    console.log(this.IdUsuario)
-    console.log(this.Nombre)
-    console.log(this.Contrasenia)
-    console.log(this.IdPerfil)
-    console.log(this.email)
 
     this.f.IdUsuario.setValue(this.IdUsuario);                
     this.f.Nombre.setValue(this.Nombre);                
@@ -153,10 +142,7 @@ export class EdicionUsuariosComponent implements OnInit {
     this.catalogoService.getCatalogoPerfiles()
       .pipe(first())
       .subscribe(data => {
-        console.log("Catálogo de Perfiles")
-        console.log(data)
         this.perfiles   = data.listaDat.perfiles;
-        console.log(this.perfiles)
         this.llenaPantalla();
       },
         error => {
@@ -210,18 +196,14 @@ export class EdicionUsuariosComponent implements OnInit {
        Intentos           :this.Intentos,
        UltimaTransaccion  :this.UltimaTransaccion,
      }
-     console.log("guarda USUARIO")
-     console.log(this.usuario)
  
      this.catalogoService.postModificaUsuario(this.usuario)
        .pipe(first())
        .subscribe(
          data => {
-           console.log("Se intentó Alta Usuario")
-           console.log(data)
+
                  
            if (data.estatus) {
-             console.log("edición alta ok")
              this.notifier.notify('success', data.mensaje, '');    
              this.dialogRef.close();
            } else {

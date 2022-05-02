@@ -205,9 +205,6 @@ export class AltaconcesionarioComponent implements OnInit {
   //Evento para ocultar y mostrar la pestaña de propietario
   onSelectionAsignacion(value: any) {
 
-    console.log("value");
-    console.log(value);
-
     if (value == 6 || value == 3) {
       this.asigna = true;
       this.concesionarioService.sendView(true);

@@ -97,8 +97,7 @@ export class CatDictamenesComponent implements OnInit {
       this.catalogosService.getCatalogoDictamenes()
         .pipe(first())
         .subscribe(data => {   
-          console.log("Consulta Dictamen")
-          console.log(data)
+
           this.catalogoDictamenes   = data.contenido;   
           this.dataSource           = new MatTableDataSource(this.catalogoDictamenes);
           this.dataSource.paginator = this.paginator;
@@ -110,16 +109,12 @@ export class CatDictamenesComponent implements OnInit {
 
   //cambiar estatatus(Inactivo/Activo)  
     changeEstatus(e: any){
-      console.log("change Estatus ")
-      console.log(e.Estatus)
+
       e.Estatus = !e.Estatus;
-      console.log(e.Estatus)
-      console.log(e)
+
       this.catalogosService.actualizaCatalogoDictamen(e)
         .pipe(first())
         .subscribe(data => {   
-          console.log("Actualiza Dictamen data ===>  ")
-          console.log(data)
           this.getConsultaDictamen();
         },
           error => {  

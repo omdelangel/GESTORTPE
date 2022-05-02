@@ -112,9 +112,6 @@ this.repoService.getRegistrosVigentes(this.f.sindicato.value)
 .pipe(first())
 .subscribe(data => {
 
-  console.log("vigentes");
-  console.log(data);
-
 if (data.estatus && !isEmpty(data.hVigentesLista[0])) {
 
 // Assign the data to the data source for the table to render

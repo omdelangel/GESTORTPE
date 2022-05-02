@@ -89,7 +89,6 @@ export class PilotoService {
 //Registra la Cita para la desinstalación del convertidor
 postRegistraCitaDesinstalacion(citas: Citas): Observable<any> {
 
-  console.log("Registra la Cita para la desinstalación del convertidor");
 
   return this.http.post<any>(`${environment.SERVER_URL}/cita-convertidor-desinstalacion`, {'IdVehiculo': citas.IdVehiculo, 
   'IdConcesionario': citas.IdConcesionario, 'Fecha': citas.Fecha, 'IdTaller': citas.IdTaller})
@@ -117,8 +116,6 @@ postConfirmaDesinstalacion(citas: Citas): Observable<any> {
 
 //Reagenda la cita para la desinstalación del convertidor
 postCitaModificacionConvertidor(citas: Citas): Observable<any> {
-
-  console.log("Reagenda la cita para la instalación del convertidor en piloto");
 
   return this.http.post<any>(`${environment.SERVER_URL}/cita-convertidor-modificacion`, {'IdCita': citas.IdCita, 'IdVehiculo': citas.IdVehiculo, 
   'IdConcesionario': citas.IdConcesionario, 'Fecha': citas.Fecha, 'IdTaller': citas.IdTaller})

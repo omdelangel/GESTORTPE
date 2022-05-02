@@ -1,5 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-dialogo-confirmacion-piloto',
@@ -9,20 +10,25 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class DialogoConfirmacionPilotoComponent implements OnInit {
 
   constructor(public dialogo: MatDialogRef<DialogoConfirmacionPilotoComponent>,
-    @Inject(MAT_DIALOG_DATA) public mensaje: string) { 
+    @Inject(MAT_DIALOG_DATA) public mensaje: string,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any) { 
 
       dialogo.disableClose = true;
 
     }
 
-    cerrarDialogo(): void {
-      this.dialogo.close(false);
+    noConfirma(): void {
+      this.dialogo.close("NO");
     }
     confirmado(): void {
-      this.dialogo.close(true);
+      this.dialogo.close("SI");
     }
 
   ngOnInit() {
+  }
+
+  onNoClick(): void {
+    this.dialogo.close("CIERRA");
   }
 
 }
