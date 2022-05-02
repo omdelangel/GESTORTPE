@@ -224,7 +224,7 @@ actualizaCatalogoDictamen(catalogoDictamenes: CatalogoDictamenes): Observable<an
   )
 }
 
-//Actualiza el valor de la columna Bloqueado de la información de la tabla de Usuarios
+//Obtiene la información de la tabla de Usuarios
 getCatalogoUsuarios(): Observable<any> {
 
   return this.http.get<any>(`${environment.SERVER_URL}/usuarios`, {})
@@ -236,6 +236,17 @@ getCatalogoUsuarios(): Observable<any> {
   )
 }
 
+//Obtiene la información de la tabla de Empleados (Cobradores)
+getCatalogoCobradores(): Observable<any> {
+
+  return this.http.get<any>(`${environment.SERVER_URL}/lSEmpleado`, {})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
 
 //Actualiza el valor de la columna Bloqueado de la información de la tabla de Usuarios
 getCatUsuBloqueado(catalogoUsuarios: CatalogoUsuarios): Observable<any> {

@@ -113,6 +113,9 @@ import { EdicionCitaPilotoComponent } from './_piloto/edicion-cita-piloto/edicio
 import { AltaEmpresaPilotoComponent } from './_piloto/alta-empresa-piloto/alta-empresa-piloto.component';
 import { ConsultaEmpresaPilotoComponent } from './_piloto/consulta-empresa-piloto/consulta-empresa-piloto.component';
 import { AltaPreciosGasolinaComponent } from './_catalogos/alta-precios-gasolina/alta-precios-gasolina.component';
+import { AltaCobradoresComponent } from './_catalogos/alta-cobradores/alta-cobradores.component';
+import { ConsultaCobradoresComponent } from './_catalogos/consulta-cobradores/consulta-cobradores.component';
+import { EdicionCobradoresComponent } from './_catalogos/edicion-cobradores/edicion-cobradores.component';
 
 
 
@@ -262,7 +265,10 @@ FullCalendarModule.registerPlugins([
     EdicionCitaPilotoComponent,
     AltaEmpresaPilotoComponent,
     ConsultaEmpresaPilotoComponent,
-    AltaPreciosGasolinaComponent
+    AltaPreciosGasolinaComponent,
+    AltaCobradoresComponent,
+    ConsultaCobradoresComponent,
+    EdicionCobradoresComponent
   ],
   imports: [
     BrowserModule,
