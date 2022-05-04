@@ -1,0 +1,147 @@
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+    <h2 class="title-header-content" mat-raised-button>Pagos pendientes</h2>
+    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+      <div fxFlex="30">
+        <mat-card>
+          <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px" >
+            <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Filtros de búsqueda
+            </mat-card-title>
+            <button mat-fab style="background-color: #2d4248; outline: none;" matTooltip="Buscar Placa" outline:none;>
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-card-actions>
+          <mat-card-content>
+            <div fxLayout="row wrap" fxLayoutGap="30px grid">
+              <div fxFlex="100" fxFlex.lt-md="100" fxl>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Placa</mat-label>
+                  <input matInput placeholder="Placa" maxlength="10" formControlName="placa" onkeyup="javascript:this.value=this.value.toUpperCase();" >
+                  <mat-error *ngIf="reactiveForm.get('placa')!.invalid">Campo requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </form>
+    
+      <div id="divTitle" class="example-header" fxFlex="100" fxFlex.gt-md="30">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
+        </mat-form-field>
+      </div>
+  
+      <div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100" id="htmlData">
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+  
+          <ng-container matColumnDef="IdContrato">
+            <th mat-header-cell *matHeaderCellDef>Id Contrato</th>
+            <td mat-cell *matCellDef="let element">{{element.IdContrato}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="IdConcesionario">
+            <th mat-header-cell *matHeaderCellDef>Id Concesionario</th>
+            <td mat-cell *matCellDef="let element">{{element.IdConcesionario}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="NombreConcesionario">
+            <th mat-header-cell *matHeaderCellDef> Nombre Concesionario </th>
+            <td mat-cell *matCellDef="let element" > {{element.NombreConcesionario}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="IdVehiculo">
+            <th mat-header-cell *matHeaderCellDef>Id Vehículo</th>
+            <td mat-cell *matCellDef="let element">{{element.IdVehiculo}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="Marca">
+            <th mat-header-cell *matHeaderCellDef>Marca</th>
+            <td mat-cell *matCellDef="let element">{{element.Marca}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="Submarca">
+            <th mat-header-cell *matHeaderCellDef>Submarca</th>
+            <td mat-cell *matCellDef="let element">{{element.Submrca}}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Modelo">
+            <th mat-header-cell *matHeaderCellDef> Modelo/Año </th>
+            <td mat-cell *matCellDef="let element"> {{element.Modelo}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="VIN">
+            <th mat-header-cell *matHeaderCellDef> VIN </th>
+            <td mat-cell *matCellDef="let element"> {{element.VIN}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Placa">
+            <th mat-header-cell *matHeaderCellDef> Placa </th>
+            <td mat-cell *matCellDef="let element"> {{element.Placa }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="LitrosPendientesTot">
+            <th mat-header-cell *matHeaderCellDef> Total litros </th>
+            <td mat-cell *matCellDef="let element"> {{element.LitrosPendientesTot | number }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="MontoPendienteTot">
+            <th mat-header-cell *matHeaderCellDef> Monto pendiente </th>
+            <td mat-cell *matCellDef="let element"> {{element.MontoPendienteTot | currency }} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>Detalle</th>
+            <td mat-cell *matCellDef="let element">
+              <button type="button" class="btn btn-default" aria-label="Left Align" style="box-shadow: none;"
+                (click)="(expandedElement = expandedElement === element ? null : element);">
+                <mat-icon>expand_more</mat-icon>
+                <span></span>
+              </button>
+              <button mat-mini-fab class="button-pagos" (click)="pagar(element)"
+						matTooltip="Realizar pago" >
+				<mat-icon class="iconSize">attach_money</mat-icon>
+					</button> 
+            </td>
+          </ng-container>
+  
+          <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+          <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="6">
+              <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                <div class="example-element-diagram">
+                  <table class="inner-table" mat-table [dataSource]="element.Detalle">
+                    <!-- Seq Column -->
+                    <ng-container matColumnDef="FechaCorte">
+                      <th mat-header-cell *matHeaderCellDef> Fecha corte</th>
+                      <td mat-cell *matCellDef="let element"> {{element.FechaCorte}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="LitrosPendientes">
+                      <th mat-header-cell *matHeaderCellDef> Litros pendientes</th>
+                      <td mat-cell *matCellDef="let element"> {{element.LitrosPendientes | number}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="MontoPendiente">
+                      <th mat-header-cell *matHeaderCellDef> Monto pendiente</th>
+                      <td mat-cell *matCellDef="let element"> {{element.MontoPendiente | currency}} </td>
+                    </ng-container>
+   
+                    <tr mat-header-row *matHeaderRowDef="expandDisplayedColumns"></tr>
+                    <tr mat-row *matRowDef="let element; columns: expandDisplayedColumns;"></tr>
+                  </table>
+                </div>
+  
+              </div>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+          <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+        </table>
+  
+        <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+      </div>
+      <notifier-container></notifier-container>
+  </div>
+  

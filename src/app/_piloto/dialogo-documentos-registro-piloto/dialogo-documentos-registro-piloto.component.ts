@@ -192,7 +192,7 @@ export class DialogoDocumentosRegistroPilotoComponent implements OnInit {
 
       const formData = new FormData();
         formData.append('Documento', this.uploadedFiles[0], this.uploadedFiles[0].name),
-        formData.append('IdContrato', this.idContrato)
+        formData.append('IdContrato', this.idContrato),
         formData.append('IdVehiculo', row.IdVehiculo),
         formData.append('IdDocumento', row.IdDocumento),
         formData.append('IdConcesionario', this.idConcesionario)

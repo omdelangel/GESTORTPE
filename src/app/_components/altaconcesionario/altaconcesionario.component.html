@@ -42,8 +42,8 @@
                             </div>
                             <div fxFlex="33.3" fxFlex.lt-md="100" fxl>
                                 <mat-form-field class="example-full-width">
-                                    <mat-select placeholder="Asignación Sindicato" formControlName="IdAsignacionSindicato" required
-                                        [errorStateMatcher]="matcher"  (ngModelChange)="onSelectionAsignacion($event)">
+                                    <mat-select placeholder="Asignación Sindicato" formControlName="IdAsignacionSindicato" required id="asignaSindicato"
+                                        [errorStateMatcher]="matcher"  (selectionChange)="onSelectionAsignacion($event)">
                                         <mat-option *ngFor="let asignacion of asignaciones" [value]="asignacion.IdAsignacionSindicato">
                                             {{asignacion.AsignacionSindicato}}
                                         </mat-option>

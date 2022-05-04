@@ -36,6 +36,8 @@ import { ConsultaMarcasComponent } from './_catalogos/consulta-marcas/consulta-m
 import { RepoPilotoPorVencerComponent } from './_piloto/repo-piloto-por-vencer/repo-piloto-por-vencer.component';
 import { PilotoComponent } from './_piloto/piloto';
 import { ConsultaEmpresaPilotoComponent } from './_piloto/consulta-empresa-piloto';
+import { IncidentesComponent } from './_components/incidentes';
+import { PagosComponent } from './_components/pagos';
 
 
 const routes: Routes = [
@@ -77,7 +79,9 @@ const routes: Routes = [
                { path: 'repoPilotoPorVencer', component: RepoPilotoPorVencerComponent },
                { path: 'vigentes', component: VigentesComponent },  
                { path: 'piloto', component: PilotoComponent},    
-               { path: 'EmpresaPiloto', component: ConsultaEmpresaPilotoComponent},    
+               { path: 'EmpresaPiloto', component: ConsultaEmpresaPilotoComponent}, 
+               { path: 'incidentes', component: IncidentesComponent},  
+               { path: 'pagos', component: PagosComponent},       
                ]},  
  
  

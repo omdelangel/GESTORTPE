@@ -113,7 +113,10 @@ import { EdicionCitaPilotoComponent } from './_piloto/edicion-cita-piloto/edicio
 import { AltaEmpresaPilotoComponent } from './_piloto/alta-empresa-piloto/alta-empresa-piloto.component';
 import { ConsultaEmpresaPilotoComponent } from './_piloto/consulta-empresa-piloto/consulta-empresa-piloto.component';
 import { AltaPreciosGasolinaComponent } from './_catalogos/alta-precios-gasolina/alta-precios-gasolina.component';
-
+import { IncidentesComponent } from './_components/incidentes/incidentes.component';
+import { PagosComponent } from './_components/pagos/pagos.component';
+import { DialogoPagosComponent } from './_components/dialogo-pagos/dialogo-pagos.component';
+import { NgxCurrencyModule } from "ngx-currency";
 
 
 /**
@@ -262,7 +265,10 @@ FullCalendarModule.registerPlugins([
     EdicionCitaPilotoComponent,
     AltaEmpresaPilotoComponent,
     ConsultaEmpresaPilotoComponent,
-    AltaPreciosGasolinaComponent
+    AltaPreciosGasolinaComponent,
+    IncidentesComponent,
+    PagosComponent,
+    DialogoPagosComponent
   ],
   imports: [
     BrowserModule,
@@ -277,6 +283,7 @@ FullCalendarModule.registerPlugins([
     FullCalendarModule,
     PdfViewerModule,
     NgxExtendedPdfViewerModule,
+    NgxCurrencyModule,
     NotifierModule.withConfig(customNotifierOptions),
     NgxMaskModule.forRoot()
   ],
