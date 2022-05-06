@@ -72,8 +72,7 @@ export class PagosComponent implements OnInit {
 
 
 
-  onSubmit() {
-    this.submitted = true;
+  consultaPagos() {
 
 
     // stop here if form is invalid
@@ -85,6 +84,8 @@ export class PagosComponent implements OnInit {
       this.pagosService.getPagosPendientes(this.placa)
       .pipe(first())
       .subscribe(data => {
+
+        console.log(data);
   
         if (data.estatus == true) {
   
@@ -96,8 +97,8 @@ export class PagosComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
   
-          var elemDiv = document.getElementById('divTitle');
-          elemDiv!.style.visibility = "visible";
+          //var elemDiv = document.getElementById('divTitle');
+          //elemDiv!.style.visibility = "visible";
   
           var elemTable = document.getElementById('htmlData');
           elemTable!.style.visibility = "visible";
@@ -106,8 +107,8 @@ export class PagosComponent implements OnInit {
         }  else if (data.estatus == false){
           
           this.notifier.notify('warning', data.mensaje);
-          var elemDiv = document.getElementById('divTitle');
-            elemDiv!.style.visibility = "hidden";
+          //var elemDiv = document.getElementById('divTitle');
+          //  elemDiv!.style.visibility = "hidden";
   
             var elemTable = document.getElementById('htmlData');
             elemTable!.style.visibility = "hidden";
@@ -130,7 +131,9 @@ export class PagosComponent implements OnInit {
     }); 
     dialogRef.afterClosed().subscribe(res => {
 
-      this.onSubmit();
+       if(res){
+         this.consultaPagos();
+       }
        
     });
 

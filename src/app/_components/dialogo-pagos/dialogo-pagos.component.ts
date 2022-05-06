@@ -107,11 +107,15 @@ export class DialogoPagosComponent implements OnInit {
 
         if (data.estatus) {
           
+          this.dialogRef.close(true);
           //this.success(data.mensaje);
           this.notifier.notify('success', data.mensaje, '');
+ 
         } else {
+          this.dialogRef.close(false);
           //this.warn(data.mensaje);
-          this.notifier.notify('warnig', data.mensaje, '');
+          this.notifier.notify('warning', data.mensaje, '');
+    
         }
       },
       error => {
@@ -141,7 +145,6 @@ export class DialogoPagosComponent implements OnInit {
           if (confirmado) {
   
            this.pagar();
-           this.dialogRef.close();
   
           } else {
   
@@ -150,7 +153,7 @@ export class DialogoPagosComponent implements OnInit {
     }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
 
