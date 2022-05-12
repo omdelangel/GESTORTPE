@@ -13,3 +13,4 @@ export * from './talleres.service';
 export * from './operador.service';
 export * from './dashboard.service';
 export * from './piloto.service';
+export * from './pagos.service';

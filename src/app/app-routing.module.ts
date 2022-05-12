@@ -37,6 +37,8 @@ import { RepoPilotoPorVencerComponent } from './_piloto/repo-piloto-por-vencer/r
 import { PilotoComponent } from './_piloto/piloto';
 import { ConsultaEmpresaPilotoComponent } from './_piloto/consulta-empresa-piloto';
 import { ConsultaCobradoresComponent } from './_catalogos/consulta-cobradores';
+import { IncidentesComponent } from './_components/incidentes';
+import { PagosComponent } from './_components/pagos';
 
 
 const routes: Routes = [
@@ -80,6 +82,9 @@ const routes: Routes = [
                { path: 'piloto', component: PilotoComponent},    
                { path: 'EmpresaPiloto', component: ConsultaEmpresaPilotoComponent},  
                { path: 'cobradores', component: ConsultaCobradoresComponent},
+               { path: 'EmpresaPiloto', component: ConsultaEmpresaPilotoComponent}, 
+               { path: 'incidentes', component: IncidentesComponent},  
+               { path: 'pagos', component: PagosComponent},       
                ]},  
  
  

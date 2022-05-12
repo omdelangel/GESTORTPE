@@ -60,6 +60,7 @@ export class EdicionconcesionarioComponent implements OnInit {
   fechaNacimiento: string = "";
   asigna: boolean = false;
   nombreConcesionario: string = "";
+  tipoAsignacion: string = "";
 
 
   genero: Genero[] = [
@@ -216,8 +217,9 @@ export class EdicionconcesionarioComponent implements OnInit {
         this.getCatalogoTposAsignacion(data.concesionario[0].IdSindicato);
         this.f.IdAsignacionSindicato.setValue(data.concesionario[0].IdAsignacionSindicato);
         this.f.NumeroConcesion.setValue(data.concesionario[0].NumeroConcesion);
+        this.tipoAsignacion = data.concesionario[0].TipoAsignacion;
 
-        if (data.concesionario[0].IdAsignacionSindicato == 6 || data.concesionario[0].IdAsignacionSindicato == 3) {
+        if (this.tipoAsignacion == "Renta Concesión") {
           this.asigna = true;
           this.concesionarioService.sendView(true);
         } else {
@@ -248,7 +250,10 @@ export class EdicionconcesionarioComponent implements OnInit {
 
   //Evento para ocultar y mostrar la pestaña de propietario
   onSelectionAsignacion(value: any) {
-    if (value == 6 || value == 3) {
+
+    const data = value.source.selected.viewValue
+
+    if (data  == "Renta Concesión") {
       this.asigna = true;
       this.concesionarioService.sendView(true);
     } else {
@@ -302,7 +307,6 @@ export class EdicionconcesionarioComponent implements OnInit {
             this.notifier.notify('success', data.mensaje, '');         
           } else {
 
-            console.log(data.mensaje);
             //this.warn(data.mensaje);
             this.notifier.notify('warning', data.mensaje, '');
             this.submitted = false;

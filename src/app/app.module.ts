@@ -116,7 +116,10 @@ import { AltaPreciosGasolinaComponent } from './_catalogos/alta-precios-gasolina
 import { AltaCobradoresComponent } from './_catalogos/alta-cobradores/alta-cobradores.component';
 import { ConsultaCobradoresComponent } from './_catalogos/consulta-cobradores/consulta-cobradores.component';
 import { EdicionCobradoresComponent } from './_catalogos/edicion-cobradores/edicion-cobradores.component';
-
+import { IncidentesComponent } from './_components/incidentes/incidentes.component';
+import { PagosComponent } from './_components/pagos/pagos.component';
+import { DialogoPagosComponent } from './_components/dialogo-pagos/dialogo-pagos.component';
+import { NgxCurrencyModule } from "ngx-currency";
 
 
 /**
@@ -268,7 +271,10 @@ FullCalendarModule.registerPlugins([
     AltaPreciosGasolinaComponent,
     AltaCobradoresComponent,
     ConsultaCobradoresComponent,
-    EdicionCobradoresComponent
+    EdicionCobradoresComponent,
+    IncidentesComponent,
+    PagosComponent,
+    DialogoPagosComponent
   ],
   imports: [
     BrowserModule,
@@ -283,6 +289,7 @@ FullCalendarModule.registerPlugins([
     FullCalendarModule,
     PdfViewerModule,
     NgxExtendedPdfViewerModule,
+    //NgxCurrencyModule,
     NotifierModule.withConfig(customNotifierOptions),
     NgxMaskModule.forRoot()
   ],

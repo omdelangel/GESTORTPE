@@ -188,11 +188,14 @@ export class DialogoDocumentosRegistroPilotoComponent implements OnInit {
   onFileSelected(e: any, row: any) {
     this.uploadedFiles = e.target.files;
 
+    console.log(this.uploadedFiles);
+    console.log(this.uploadedFiles[0]);
+
     if (this.isFileAllowedPDF(this.uploadedFiles[0].name)) {
 
       const formData = new FormData();
         formData.append('Documento', this.uploadedFiles[0], this.uploadedFiles[0].name),
-        formData.append('IdContrato', this.idContrato)
+        formData.append('IdContrato', this.idContrato),
         formData.append('IdVehiculo', row.IdVehiculo),
         formData.append('IdDocumento', row.IdDocumento),
         formData.append('IdConcesionario', this.idConcesionario)
