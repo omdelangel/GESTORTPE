@@ -7,7 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { AltaCobradoresComponent } from '../alta-cobradores';
+import { AltaCobradoresComponent } from '../alta-cobradores/alta-cobradores.component';
 import { EdicionCobradoresComponent } from '../../_catalogos/edicion-cobradores';
 import { NotifierService } from 'angular-notifier';
 import { ImgViewerComponent } from '../../_catalogos/img-viewer/img-viewer.component'; 
@@ -28,9 +28,6 @@ export class ConsultaCobradoresComponent implements OnInit {
                   'Nombre'                ,
                   'Paterno'               ,
                   'Materno'               ,
-                  'RFC'                   ,
-                  'CURP'                  ,
-                  'INE'                   ,
                   'FechaNacimiento'       ,
                   'TPNombre'              ,
                   'GNombre'               ,
@@ -132,20 +129,36 @@ export class ConsultaCobradoresComponent implements OnInit {
 
   //Edita el registro de Dictamen
     editar(e: any) {
+      console.log("consulta cobrador e")
+      console.log(e)
       const dialogRef = this.dialog.open(EdicionCobradoresComponent, {
         disableClose: true,
         data: { 
-          IdUsuario            :e.IdUsuario        ,           
-          Nombre               :e.Nombre           ,           
-          Contrasenia          :e.Contrasenia      ,           
-          IdEmpleado           :e.IdEmpleado       ,           
-          IdPerfil             :e.IdPerfil         ,           
-          FechaRegistro        :e.FechaRegistro    ,           
-          Estatus              :e.Estatus          ,           
-          email                :e.email            ,           
-          Bloqueado            :e.Bloqueado        ,           
-          Intentos             :e.Intentos         ,           
-          UltimaTransaccion    :e.UltimaTransaccion,           
+              IdEmpleado                :e.IdEmpleado        ,
+              Nombre                    :e.Nombre            ,
+              Paterno                   :e.Paterno           ,
+              Materno                   :e.Materno           ,
+              RFC                       :e.RFC               ,
+              CURP                      :e.CURP              ,
+              INE                       :e.INE               ,
+              FechaNacimiento           :e.FechaNacimiento   ,
+              TipoPersona               :e.TipoPersona       ,
+              TPNombre				          :e.TPNombre				   ,
+              Genero                    :e.Genero            ,
+              GNombre		  		          :e.GNombre		  		 ,
+              Domicilio                 :e.Domicilio         ,
+              Colonia                   :e.Colonia           ,
+              IdColonia                 :e.IdColonia         ,
+              CP                        :e.CP                ,
+              EFNombre				          :e.EFNombre				   ,
+              MNombre					          :e.MNombre					 ,
+              Telefono                  :e.Telefono          ,
+              email                     :e.email             ,
+              IdEstacion                :e.IdEstacion        ,
+              ENombre					          :e.ENombre					 ,
+              Estatus                   :e.Estatus           ,
+              IdUsuario                 :e.IdUsuario         ,
+              contrasenia               :e.contrasenia       ,
           },
 //        width: '1500px',
 //        height: '900px'
@@ -164,93 +177,82 @@ export class ConsultaCobradoresComponent implements OnInit {
       this.dataSource.filter = filterValue;
     }
 
-  //Valida la extensión del archivo PDF
-  isFileAllowedPDF(fileName: string) {
+//Valida la extensión del archivo PDF
+isFileAllowedPDF(fileName: string) {
 
-    let isFileAllowed = false;
-    const allowedFiles = ['.jpeg', '.png', '.jpg'];
-    const regex = /(?:\.([^.]+))?$/;
-    const extension = regex.exec(fileName);
-    if (undefined !== extension && null !== extension) {
-      for (const ext of allowedFiles) {
-        if (ext === extension[0]) {
-          isFileAllowed = true;
-        }
+  let isFileAllowed = false;
+  const allowedFiles = ['.jpeg', '.png', '.jpg'];
+  const regex = /(?:\.([^.]+))?$/;
+  const extension = regex.exec(fileName);
+  if (undefined !== extension && null !== extension) {
+    for (const ext of allowedFiles) {
+      if (ext === extension[0]) {
+        isFileAllowed = true;
       }
     }
-    return isFileAllowed;
-  }    
-
-
-  //Adjunta los archivos 
-  onFileSelected(e: any, row: any) {
-    console.log("inFileSelected")
-    console.log(e)
-    console.log(e.target.files)
-    console.log(row)
-    this.uploadedFiles = e.target.files;
-
-    if (this.isFileAllowedPDF(this.uploadedFiles[0].name)) {
-        const formData = new FormData();
-        formData.append('Imagen', this.uploadedFiles[0], this.uploadedFiles[0].name),
-        formData.append('IdUsuario', row.IdUsuario),
-        console.log("FormData")
-        console.log(formData)
-        console.log(formData.append)
-
-      this.catalogosService.postGuardaImagenRegistro(formData)
-        .pipe(first())
-        .subscribe(
-          data => {
-            console.log("Graba Imagen Registro")
-            console.log(data)
-            if (data.estatus) {
-              //this.success(data.mensaje);
-              this.notifier.notify('success', data.mensaje, '');
-              this.getCatalogoCobradores();
-            } else if (!data.estatus) {
-              //this.warn(data.mensaje);
-              this.notifier.notify('warning', data.mensaje, '');
-            }
-          },
-          error => {
-            //this.error(error);
-            this.notifier.notify('error', error, '');
-            console.log("Error")
-            console.log(error)
-          });
-
-    } else {
-      this.notifier.notify('warning', 'El archivo no corresponde a las extensiones .jpeg, .png, .jpg', '');
-      //this.warn("El archivo no corresponde a la extensión .pdf");
-    }
   }
-
-  //Abre la imagen del archivo 
-  verIMG(row: any) {
-    console.log("VerIMG")
-    console.log(row)
-
-    this.openDialogIMG(row.Foto);
-    console.log("Con IMG")
- //   }
-  }  
+  return isFileAllowed;
+}    
 
 
-  //Abre modal visualizar el documento
-  openDialogIMG(archivoIMG: string): void {
+//Adjunta los archivos 
+onFileSelected(e: any, row: any) {
 
-    const dialogRef = this.dialog.open(ImgViewerComponent, {
-      width: '50%',
-      height: '80%',
-      disableClose: true,
-      data: { archivoIMG: archivoIMG }
-    });
-    dialogRef.afterClosed().subscribe(res => {
+  this.uploadedFiles = e.target.files;
 
-    });
-  }  
-  
+  if (this.isFileAllowedPDF(this.uploadedFiles[0].name)) {
+      const formData = new FormData();
+      formData.append('Imagen', this.uploadedFiles[0], this.uploadedFiles[0].name),
+      formData.append('IdUsuario', row.IdUsuario),
+
+    this.catalogosService.postGuardaImagenRegistro(formData)
+      .pipe(first())
+      .subscribe(
+        data => {
+          if (data.estatus) {
+            //this.success(data.mensaje);
+            this.notifier.notify('success', data.mensaje, '');
+            this.getCatalogoCobradores();
+          } else if (!data.estatus) {
+            //this.warn(data.mensaje);
+            this.notifier.notify('warning', data.mensaje, '');
+          }
+        },
+        error => {
+          //this.error(error);
+          this.notifier.notify('error', error, '');
+        });
+
+  } else {
+    this.notifier.notify('warning', 'El archivo no corresponde a las extensiones .jpeg, .png, .jpg', '');
+    //this.warn("El archivo no corresponde a la extensión .pdf");
+  }
+}
+
+//Abre la imagen del archivo 
+verIMG(row: any) {
+
+
+  this.openDialogIMG(row.Foto);
+
+//   }
+}  
+
+
+//Abre modal visualizar el documento
+openDialogIMG(archivoIMG: string): void {
+
+  const dialogRef = this.dialog.open(ImgViewerComponent, {
+    width: '50%',
+    height: '80%',
+    disableClose: true,
+    data: { archivoIMG: archivoIMG }
+  });
+  dialogRef.afterClosed().subscribe(res => {
+
+  });
+}  
+
 }
 
 

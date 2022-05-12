@@ -79,7 +79,7 @@
                                 <ng-container matColumnDef="FechaNacimiento">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Nacimiento
                                     </mat-header-cell>
-                                    <mat-cell *matCellDef="let row"> {{row.FechaNacimiento}} </mat-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.FechaNacimiento | date: 'dd-MM-YYYY'}} </mat-cell>
                                 </ng-container>
 
                                 <!-- ID Column -->
@@ -125,6 +125,13 @@
                                 </ng-container>
 
                                 <!-- ID Column -->
+                                <ng-container matColumnDef="IdColonia">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>IdColonia
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.IdColonia}} </mat-cell>
+                                </ng-container>
+
+                                <!-- ID Column -->
                                 <ng-container matColumnDef="CP">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>C.P.
                                     </mat-header-cell>
@@ -132,24 +139,10 @@
                                 </ng-container>
 
                                 <!-- ID Column -->
-                                <ng-container matColumnDef="IdEntidadFederal">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Entidad Federal
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let row"> {{row.IdEntidadFederal }} </mat-cell>
-                                </ng-container>
-
-                                <!-- ID Column -->
                                 <ng-container matColumnDef="EFNombre">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Entidad Federal
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let row"> {{row.EFNombre}} </mat-cell>
-                                </ng-container>
-
-                                <!-- ID Column -->
-                                <ng-container matColumnDef="IdMunicipio">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>IdMunicipio
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let row"> {{row.IdMunicipio}} </mat-cell>
                                 </ng-container>
 
                                 <!-- ID Column -->
@@ -186,7 +179,6 @@
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let row"> {{row.ENombre}} </mat-cell>
                                 </ng-container>
-
 
                                 <!--chip column -->
                                 <ng-container matColumnDef="Estatus">
