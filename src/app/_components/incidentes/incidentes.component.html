@@ -1,5 +1,5 @@
 <div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
-    <h2 class="title-header-content" mat-raised-button>Operadores</h2>
+    <h2 class="title-header-content" mat-raised-button>Consulta de Incidentes</h2>
     <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
         <div fxFlex="30">
             <mat-card>
@@ -28,214 +28,191 @@
     </form>
 
 
-    <div id="divTitle" class="example-header" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+    <div id="divTitle" class="example-header" fxFlex="30" fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
 
         <mat-form-field>
             <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
         </mat-form-field>
-
+        <!--
         <div fxFlex="50" fxLayoutAlign="end end">
             <button mat-fab style="background-color: #80BC00; outline: none;" matTooltip="Alta de Operador" outline:none; (click)="openDialog()">
         <mat-icon>add</mat-icon>
       </button>
         </div>
+-->
     </div>
 
     <div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100" id="htmlData">
         <mat-table [dataSource]="dataSource" matSort>
 
-            <!-- ID Column -->
-            <ng-container matColumnDef="NombreCompleto">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.NombreCompleto}} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="IdTipoSiniestro">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> IdTipoSiniestro </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.IdTipoSiniestro}} </mat-cell>
             </ng-container>
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="Nombre">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Nombre}} </mat-cell>
+            <ng-container matColumnDef="IdIncidenteSiniestro">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> IdIncidenteSiniestro </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.IdIncidenteSiniestro}} </mat-cell>
             </ng-container>
 
-
-            <!-- Color Column -->
-            <ng-container matColumnDef="Paterno">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Paterno
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Paterno}} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="IdVehiculo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> IdVehiculo </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.IdVehiculo}} </mat-cell>
             </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="Materno">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Materno
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Materno}} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="IdConcesionario">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> IdConcesionario </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.IdConcesionario}} </mat-cell>
             </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="RFC">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> RFC
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.RFC}} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Concesionario">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Concesionario </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Concesionario}} </mat-cell>
             </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="CURP">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> CURP
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.CURP}} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="TipoConvertidor">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> TipoConvertidor </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.TipoConvertidor}} </mat-cell>
             </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="IdIdentificacion">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Id Identificacion
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.IdIdentificacion }} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="TipoVehiculo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> TipoVehiculo </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.TipoVehiculo}} </mat-cell>
             </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="FolioIdentificacion">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>FolioIdentificacion
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.FolioIdentificacion }} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Vehiculo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Vehiculo </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Vehiculo}} </mat-cell>
             </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="FechaNacimiento">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> FechaNacimiento
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.FechaNacimiento | date: 'dd-MM-YYYY'}} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="FechaContrato">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> FechaContrato </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaContrato | date: 'dd-MM-YYYY'}} </mat-cell>
             </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="TipoPersona">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Persona
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.TipoPersona}} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Sindicato">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Sindicato </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Sindicato}} </mat-cell>
             </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="Genero">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Genero
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Genero}} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="IdCita">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> IdCita </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.IdCita}} </mat-cell>
             </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="EstadoCivil">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> EstadoCivil
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.EstadoCivil}} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="FechaCita">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> FechaCita </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaCita | date: 'dd-MM-YYYY'}} </mat-cell>
             </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="Calle">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Calle
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Calle}} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="EstatusCita">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> EstatusCita </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.EstatusCita}} </mat-cell>
             </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="Exterior">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Exterior
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Exterior}} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="GenerarCita">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> GenerarCita </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.GenerarCita}} </mat-cell>
             </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="Interior">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Interior
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Interior}} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="DictaminarRevision">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> DictaminarRevision </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.DictaminarRevision}} </mat-cell>
             </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="CP">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> CP
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.CP }} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="DocumentarEvidencia">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> DocumentarEvidencia </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.DocumentarEvidencia}} </mat-cell>
             </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="IdColonia">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> IdColonia
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.IdColonia}} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="DictaminarSeguro">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> DictaminarSeguro </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.DictaminarSeguro}} </mat-cell>
             </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="Colonia">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Colonia
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Colonia}} </mat-cell>
+            <!-- Progress Column -->
+            <ng-container matColumnDef="RegistrarFechaArreglo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> RegistrarFechaArreglo </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.RegistrarFechaArreglo}} </mat-cell>
             </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="Municipio">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Municipio
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Municipio}} </mat-cell>
-            </ng-container>
-
-            <!-- Color Column -->
-            <ng-container matColumnDef="EntidadFederativa">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> EntidadFederativa
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.EntidadFederativa}} </mat-cell>
-            </ng-container>
-
-            <!-- Color Column -->
-            <ng-container matColumnDef="Telefono">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Telefono
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Telefono}} </mat-cell>
-            </ng-container>
-
-            <!-- Color Column -->
-            <ng-container matColumnDef="Celular">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Celular
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Celular}} </mat-cell>
-            </ng-container>
-
-            <!-- Color Column -->
-            <ng-container matColumnDef="email">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> email
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
-            </ng-container>
-
-            <!-- Color Column -->
-            <ng-container matColumnDef="IdOperador">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> IdOperador
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.IdOperador}} </mat-cell>
-            </ng-container>
-
-            <!-- Color Column -->
-            <ng-container matColumnDef="Licencia">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Licencia
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.Licencia}} </mat-cell>
-            </ng-container>
-
-            <!--toggle column -->
-            <ng-container matColumnDef="Estatus">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus</mat-header-cell>
-                <mat-cell *matCellDef="let row;let i = index; " [formGroup]="reactiveForm">
-                    <div>
-                        <mat-slide-toggle [checked]="row.Estatus == 'A' ? true : false" (change)="changeEstatus(row)"> </mat-slide-toggle>
-                    </div>
+            <!--             
+            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                <mat-form-field class="example-full-width">
+                    <mat-select placeholder="tiposIncidentes" formControlName="tiposIncidentes" required [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let tipoIncidente of tiposIncidentes" [value]="tipoIncidente.TipoIncidente">
+                            {{tipoIncidente.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="reactiveForm.get('tiposIncidentes')!.hasError('required')">
+                        El dato es obligatorio
+                    </mat-error>
+                </mat-form-field>
+            </div>
+-->
+            <ng-container matColumnDef="tiposIncidentes">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Tipos Incidentes </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <mat-select placeholder="Tipos Incidentes" formControlName="tiposIncidentes" [disabled]="!TipoIncidenteB" value="selected" required (selectionChange)="mostrarDialogoConfirmacion($event)" [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let tipoIncidente of tiposIncidentes" [value]="[tipoIncidente.TipoIncidente, tipoIncidente.viewValue]">
+                            {{tipoIncidente.viewValue}}
+                        </mat-option>
+                    </mat-select>
                 </mat-cell>
             </ng-container>
 
+
+            <!-- Progress Column -->
+            <!-- 
+            <ng-container matColumnDef="tiposIncidentes">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Tipos Incidentes </mat-header-cell>
+                <mat-select placeholder="tiposIncidentes" formControlName="tiposIncidentes" required [errorStateMatcher]="matcher">
+                    <mat-option *ngFor="let tipoIncidente of tiposIncidentes" [value]="tipoIncidente.TipoIncidente">
+                        {{tipoIncidente.viewValue}}
+                    </mat-option>
+                </mat-select>
+
+                <mat-cell *matCellDef="let row"> {{row.tiposIncidentes}} </mat-cell>
+            </ng-container>
+        -->
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
                 <mat-cell *matCellDef="let row">
-                    <button mat-mini-fab class="button-edit" (click)="editar(row)" [disabled]="row.Estatus == 'A' ? false : true" matTooltip="Editar">
-              <mat-icon class="iconSize">edit</mat-icon>
-              </button>
+                    <button mat-mini-fab class="button-documentos" (click)="documentos(row)" [disabled]="!row.DocumentarEvidencia" matTooltip="Ir a documentos">
+						<mat-icon class="iconSize">attach_file</mat-icon>
+					</button>&nbsp; &nbsp;
+
+                    <button mat-mini-fab class="button-cita" (click)="cita(row)" [disabled]="!row.GenerarCita" matTooltip="Agendar Cita de Instalación">
+                        <mat-icon class="iconSize">calendar_today</mat-icon>
+                    </button> &nbsp; &nbsp;
+
+                    <button mat-mini-fab class="button-dictaminar" (click)="dictaminar(row)" [disabled]="!row.DictaminarRevision" matTooltip="Dictaminar">
+						<mat-icon class="iconSize">gavel</mat-icon>
+					</button>
+
+                    <button mat-mini-fab class="button-instalacion" (click)="confirmacion(row)" matTooltip="Confirmar Instalación" [disabled]="!row.RegistrarFechaArreglo">
+                        <mat-icon class="iconSize">directions_car</mat-icon>
+                    </button> &nbsp; &nbsp;
+
                 </mat-cell>
+
             </ng-container>
 
 

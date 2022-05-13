@@ -7,10 +7,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotifierService } from 'angular-notifier';
-import { OperadorService } from 'src/app/_services';
+import { IncidenteService } from 'src/app/_services';
 import { OperadoresAltaComponent } from '../operadores-alta';
 import { DialogoOperadorEditaComponent } from '../dialogo-operador-edita';
-import { Operador } from 'src/app/_models';
+import { Incidente } from 'src/app/_models';
+import { DialogoConfirmacionComponent } from '../dialogo-confirmacion';
+
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -20,6 +22,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
+
+interface TiposIncidentes {
+  TipoIncidente  : string;
+  viewValue      : string;
+} 
 
 @Component({
   selector: 'app-incidentes',
@@ -32,27 +39,33 @@ export class IncidentesComponent implements OnInit {
   //Columnas en Tabla de consulta
   //Columnas en Tabla de consulta
   displayedColumns = [
-                      'NombreCompleto',
-                      'FechaInicio',
-                      'FechaTermino',
-                      'ConsumoMes',                    
-                      'Periodo',
-                      'FechaContrato',                    
-                      'TipoConvertidor',                    
-                      'TipoVehiculo',                    
-                      'Vehiculo',                    
-                      'LitrosConsumidos',                    
-                      'LitrosPorConsumir',
-                      'PorcentajeConsumo',                    
-                      'TipoIncidente',                    
+//                      'IdTipoSiniestro'				,
+//                      'IdIncidenteSiniestro'  ,
+//                      'IdVehiculo'            ,
+//                      'IdConcesionario'       ,
+                      'Concesionario'         ,
+                      'TipoConvertidor'       ,
+                      'TipoVehiculo'          ,
+                      'Vehiculo'              ,
+                      'FechaContrato'         ,
+                      'Sindicato'             ,
+//                      'IdCita'                ,
+                      'FechaCita'             ,
+                      'EstatusCita'           ,
+//                      'GenerarCita'           ,
+//                      'DictaminarRevision'    ,
+//                      'DocumentarEvidencia'   ,
+//                      'DictaminarSeguro'      ,
+//                      'RegistrarFechaArreglo' ,
+                      'tiposIncidentes'       ,
                       'actions']
-                    dataSource!: MatTableDataSource<Operador>;
+                    dataSource!: MatTableDataSource<Incidente>;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   reactiveForm        !: FormGroup;
-  operadores          :Operador[] = [];
+  incidente           :Incidente[] = [];
   submitted           =false;
   placa               :string = "";
   idConcesionario     :number = 0;
@@ -60,13 +73,24 @@ export class IncidentesComponent implements OnInit {
   idOperador          :number = 0;
   estatus             :string = "";
   value               :boolean = false;
+  matcher              = new MyErrorStateMatcher();
+  TipoIncidenteB      :boolean = false;
+  palabra             :string;
+  Tiponcidente        :string = "";
+
+  //Catálogos locales
+  tiposIncidentes: TiposIncidentes[] = [
+    { TipoIncidente: 'INC', viewValue: 'FALLA EN VEHÍCULO' },
+    { TipoIncidente: 'ACC', viewValue: 'ACCIDENTE' },
+    { TipoIncidente: 'PTR', viewValue: 'PERDIDA TOTAL O ROBO' }
+  ];  
 
 
   constructor(
     public dialog              : MatDialog,
-    private operadorService    : OperadorService,
+    private incidenteService    : IncidenteService,
     private formBuilder        : FormBuilder,
-    notifierService            : NotifierService    
+    notifierService            : NotifierService   
   ) {
 
       this.notifier = notifierService; 
@@ -79,12 +103,19 @@ export class IncidentesComponent implements OnInit {
     this.reactiveForm = this.formBuilder.group({
       'placa': ['', Validators.required]
 
+
     }); 
   }
 
   get f() { return this.reactiveForm.controls; }
 
   onSubmit() {
+    this.placa = this.f.placa.value;
+    this.getConsultaIncidente(this.placa)   
+  }
+
+  
+  getConsultaIncidente(placa: string) {{
     this.submitted = true;
 
     // stop here if form is invalid
@@ -92,21 +123,35 @@ export class IncidentesComponent implements OnInit {
       return;
     } else {
 
-      this.placa = this.f.placa.value;
-      this.operadorService.getOperadorVehiculo(this.placa)
+    
+      this.incidenteService.getConcesionarioIncidente(placa)
       .pipe(first())
       .subscribe(data => {
   
-        if (data.estatus == true && data.operadores != "") {
-  
-          // Assign the data to the data source for the table to render
-          this.operadores = data.operadores;
-          this.idConcesionario = data.IdConcesionario;
-          this.idVehiculo = data.IdVehiculo;
+        console.log("regreso del Incidente")
+        console.log(data)
+        if (data.estatus == true && data.concesionario != "") {
 
-          this.dataSource = new MatTableDataSource(this.operadores);
+          // Assign the data to the data source for the table to render
+          this.incidente         = data.concesionario;
+          this.idConcesionario   = data.IdConcesionario;
+          this.idVehiculo        = data.IdVehiculo;
+
+          console.log("Tipo Incidente")
+          console.log(this.incidente[0].IdTipoIncidente)
+          if (this.incidente[0].IdTipoIncidente == ""){
+            console.log("Entre")
+              this.TipoIncidenteB = true;
+          }else{
+            this.TipoIncidenteB = false;
+            console.log("No entre")
+          }
+
+          this.dataSource = new MatTableDataSource(this.incidente);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+
+//          selected = this.incidente[0].IdTipoIncidente;
 
   
           var elemDiv = document.getElementById('divTitle');
@@ -149,112 +194,114 @@ export class IncidentesComponent implements OnInit {
 
     }
   }
+}
 
 
-      //Abre modal para alta de los operadores
-      openDialog(): void {
-        const dialogRef = this.dialog.open(OperadoresAltaComponent, {
+  //Guarda la cita
+  mostrarDialogoConfirmacion(event: any): void {     
+
+  this.submitted = true;
+
+  // stop here if form is invalid
+  if (this.reactiveForm.invalid) {
+    return;
+  }
+      if (event.value[0] == "ACC"){
+         this.palabra = "un "
+      }else{
+        this.palabra = "una "
+      }
+      this.dialog
+      .open(DialogoConfirmacionComponent, {
+        data: `Se registrará `+ this.palabra + event.value[1] +` para el vehículo ` + this.incidente[0].Vehiculo + `.`, 
+        width: '50%'
+      })
+      .afterClosed()
+      .subscribe((confirmado: Boolean) => {
+        if (confirmado) {
+            this.Tiponcidente = event.value[0];           
+            this.aplicarSiniestro();
+        } else {
+
+        }
+      });
+  }
+
+  //Abre modal para alta de los operadores
+  aplicarSiniestro(): void {
+    this.incidenteService.postConcesionarioIncidenteSiniestro(this.incidente[0].IdVehiculo, this.Tiponcidente )
+    .pipe(first())
+    .subscribe(data => {
+        console.log("regreso de aplicarSiniestro ")
+        console.log(data)
+        if (data.estatus ) {
+          this.placa = this.f.placa.value;
+          this.getConsultaIncidente(this.placa)   
+    }  else if (data.estatus == false ){
+         
+    var elemDiv = document.getElementById('divTitle');
+     elemDiv!.style.visibility = "hidden";
+
+     var elemTable = document.getElementById('htmlData');
+     elemTable!.style.visibility = "hidden";            
+
+     this.notifier.notify('warning', data.mensaje);
+  }
+  })
+}
+
+
+  //Abre modal para alta de los operadores
+  openDialog(): void {
+    /*
+    const dialogRef = this.dialog.open(OperadoresAltaComponent, {
+      disableClose: true,
+      data: {IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo}
+      //width: '1500px',
+      //height: '900px'
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      this.getConsultaIncidente(this.placa);
+    });
+    */
+  }
+  
+
+
+  cita(e: any){
+/*
+    const dialogRef = this.dialog.open(DialogoOperadorEditaComponent, {
+      disableClose: true,
+      data: { data: e, IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo},
+      //width: '1500px',
+      //height: '900px'
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      this.getConsultaIncidente(this.placa);
+    });
+*/
+
+  }
+
+  dictaminar(e: any){
+    /*
+        const dialogRef = this.dialog.open(DialogoOperadorEditaComponent, {
           disableClose: true,
-          data: {IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo}
+          data: { data: e, IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo},
           //width: '1500px',
           //height: '900px'
         });
     
         dialogRef.afterClosed().subscribe(res => {
-          this.getConsultaOperadores(this.placa);
+          this.getConsultaIncidente(this.placa);
         });
-      }
-
-
-      //Consulta los operadores
-      getConsultaOperadores(placa: string){
-
-        this.operadorService.getOperadorVehiculo(placa)
-        .pipe(first())
-        .subscribe(data => {   
-
-          
- 
-          if (data.estatus == true && data.operadores != "") {
-  
-            // Assign the data to the data source for the table to render
-            this.operadores = data.operadores;
-            this.idConcesionario = data.IdConcesionario;
-            this.idVehiculo = data.IdVehiculo;
-  
-  
-            this.dataSource = new MatTableDataSource(this.operadores);
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
+    */
     
-            var elemDiv = document.getElementById('divTitle');
-            elemDiv!.style.visibility = "visible";
-    
-            var elemTable = document.getElementById('htmlData');
-            elemTable!.style.visibility = "visible";
-    
-    
-          }  else if (data.estatus == false ){
-           
-             var elemDiv = document.getElementById('divTitle');
-              elemDiv!.style.visibility = "hidden";
-    
-              var elemTable = document.getElementById('htmlData');
-              elemTable!.style.visibility = "hidden";            
-  
-              this.notifier.notify('warning', data.mensaje);
-    
-          } else if (data.estatus == true && data.operadores == ""){
-  
-            var elemDiv = document.getElementById('divTitle');
-            elemDiv!.style.visibility = "hidden";
-  
-            var elemTable = document.getElementById('htmlData');
-            elemTable!.style.visibility = "hidden";            
-  
-            this.notifier.notify('warning', data.mensaje);
-  
-            this.idConcesionario = data.IdConcesionario;
-            this.idVehiculo = data.IdVehiculo;
-            //this.openDialog();
-            
-  
-          }
-              
- 
-        },
-          error => {
-            this.notifier.notify('success',error);
-  
-          });
-
-      }
-
-      changeEstatus(e: any){
-
-        this.idOperador = e.IdOperador;
-        if(e.Estatus == "A"){
-        this.estatus = "I";
-        } else if (e.Estatus == "I"){
-          this.estatus = "A";
-        }
-
-        this.operadorService.postBajaOperador(this.idOperador, this.idVehiculo, this.estatus)
-        .pipe(first())
-        .subscribe(data => {  
-          
-          this.getConsultaOperadores(this.placa);
-          this.notifier.notify('success', data.mensaje);
-        },
-          error => {
-  
-            this.notifier.notify('success',error);
-          });
-
-      }
-
-      editar(e: any){
-
+  }
+  confirmacion(e: any){
+    /*
         const dialogRef = this.dialog.open(DialogoOperadorEditaComponent, {
           disableClose: true,
           data: { data: e, IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo},
@@ -265,9 +312,26 @@ export class IncidentesComponent implements OnInit {
         dialogRef.afterClosed().subscribe(res => {
           this.getConsultaOperadores(this.placa);
         });
+    */
+    
+  }
 
 
-      }
+  documentos(e: any){
+    /*
+            const dialogRef = this.dialog.open(DialogoOperadorEditaComponent, {
+              disableClose: true,
+              data: { data: e, IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo},
+              //width: '1500px',
+              //height: '900px'
+            });
+        
+            dialogRef.afterClosed().subscribe(res => {
+              this.getConsultaOperadores(this.placa);
+            });
+    */
+    
+  }
 
       
       applyFilter(filterValue: string) {

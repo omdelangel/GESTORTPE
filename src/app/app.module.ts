@@ -289,7 +289,7 @@ FullCalendarModule.registerPlugins([
     FullCalendarModule,
     PdfViewerModule,
     NgxExtendedPdfViewerModule,
-    //NgxCurrencyModule,
+    NgxCurrencyModule,
     NotifierModule.withConfig(customNotifierOptions),
     NgxMaskModule.forRoot()
   ],
