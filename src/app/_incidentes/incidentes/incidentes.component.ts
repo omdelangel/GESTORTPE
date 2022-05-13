@@ -8,10 +8,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotifierService } from 'angular-notifier';
 import { IncidenteService } from 'src/app/_services';
-import { OperadoresAltaComponent } from '../operadores-alta';
-import { DialogoOperadorEditaComponent } from '../dialogo-operador-edita';
 import { Incidente } from 'src/app/_models';
-import { DialogoConfirmacionComponent } from '../dialogo-confirmacion';
+import { DialogoConfirmacionComponent } from './../../_components/dialogo-confirmacion';
+import { getTestBed } from '@angular/core/testing';
 
 
 
@@ -152,6 +151,7 @@ export class IncidentesComponent implements OnInit {
           this.dataSource.sort = this.sort;
 
 //          selected = this.incidente[0].IdTipoIncidente;
+          //this.selected.getTestBed('TipoIncidente').setValue(this.incidente[0].IdTipoIncidente);
 
   
           var elemDiv = document.getElementById('divTitle');

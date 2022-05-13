@@ -37,7 +37,7 @@ import { RepoPilotoPorVencerComponent } from './_piloto/repo-piloto-por-vencer/r
 import { PilotoComponent } from './_piloto/piloto';
 import { ConsultaEmpresaPilotoComponent } from './_piloto/consulta-empresa-piloto';
 import { ConsultaCobradoresComponent } from './_catalogos/consulta-cobradores';
-import { IncidentesComponent } from './_components/incidentes';
+import { IncidentesComponent } from './_incidentes/incidentes';
 import { PagosComponent } from './_components/pagos';
 
 
