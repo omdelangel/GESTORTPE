@@ -11,6 +11,9 @@ import { Incidente, CitasIncidente } from '../_models';
 })
 export class IncidenteService {
 
+  SERVER_URL: string = `${environment.SERVER_URL}/evidencia-edicion`;  
+
+
   constructor(private http: HttpClient) { }
 
   //Consulta Concesionario-Incidente
@@ -80,6 +83,19 @@ postModificaCitaIncidente(citasIncidente: CitasIncidente): Observable<any> {
   )
 }
 
+
+
+//Registra la evidencia del siniestro
+postGuardaEvidencias(formData: any): Observable<any> { 
+
+  return this.http.post<any>(this.SERVER_URL, formData)
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
 
 
     // Error 
