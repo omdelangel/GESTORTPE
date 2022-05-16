@@ -1,0 +1,12 @@
+<div style="padding: 15px;">
+	<div>
+		<div class="dropzone" fileDragDrop (filesChangeEmiter)="onFileChange($event)">
+			<div class="text-wrapper">
+				<div class="centered">
+					<input type="file" name="file" id="file" (change)="onFileChange($event)" multiple>
+					<label for="file"><span class="textLink">Select your file</span> or Drop it here!</label>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>
