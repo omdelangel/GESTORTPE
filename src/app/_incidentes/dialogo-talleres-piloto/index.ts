@@ -1,1 +1,0 @@
-export * from './dialogo-talleres-piloto.component';

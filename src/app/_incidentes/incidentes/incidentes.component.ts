@@ -10,7 +10,9 @@ import { NotifierService } from 'angular-notifier';
 import { IncidenteService } from 'src/app/_services';
 import { Incidente } from 'src/app/_models';
 import { DialogoConfirmacionComponent } from './../../_components/dialogo-confirmacion';
-import { DocumentosIncidentesComponent } from './../documentos-incidentes'
+import { DocumentosIncidentesComponent } from './../documentos-incidentes';
+import { DialogoTalleresIncidenteComponent } from './../dialogo-talleres-incidente';
+import { EdicionCitaIncidenteComponent} from './../edicion-cita-incidente';
 import { getTestBed } from '@angular/core/testing';
 
 
@@ -269,22 +271,51 @@ export class IncidentesComponent implements OnInit {
   }
   
 
+//Registro de Citas para la instalacion
+cita(e: any) {
 
-  cita(e: any){
-/*
-    const dialogRef = this.dialog.open(DialogoOperadorEditaComponent, {
+
+  if (e.EstatusCita == null || e.EstatusCita == "V" || e.EstatusCita == "C") {
+
+    const dialogRef = this.dialog.open(DialogoTalleresIncidenteComponent, {
       disableClose: true,
-      data: { data: e, IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo},
-      //width: '1500px',
-      //height: '900px'
+      data: { 
+            idCita            :e.IdCita, 
+            estatusCita       :e.EstatusCita, 
+            Concesionario     :e.Concesionario, 
+            idConcesionario   :e.IdConcesionario, 
+            idVehiculo        :e.IdVehiculo
+            },
     });
 
     dialogRef.afterClosed().subscribe(res => {
       this.getConsultaIncidente(this.placa);
     });
-*/
+
+
+  } else {
+
+    const dialogRef = this.dialog.open(EdicionCitaIncidenteComponent, {
+      disableClose: true,
+      data: {
+            idCita            :e.IdCita, 
+            estatusCita       :e.EstatusCita, 
+            Concesionario     :e.Concesionario, 
+            idConcesionario   :e.IdConcesionario, 
+            idVehiculo        :e.IdVehiculo,
+            marca             :e.Marca, 
+            submarca          :e.Submarca, 
+            modelo            :e.Modelo
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      this.getConsultaIncidente(this.placa);
+    });
 
   }
+
+}  
 
   dictaminar(e: any){
     /*
@@ -322,7 +353,12 @@ export class IncidentesComponent implements OnInit {
     
       const dialogRef = this.dialog.open(DocumentosIncidentesComponent, {
         disableClose: true,
-        data: { data: e, IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo},
+        data:{
+          IdTipoSiniestro       :e.IdTipoSiniestro,
+          IdIncidenteSiniestro  : e.IdIncidenteSiniestro,
+          Concesionario         :e.Concesionario, 
+          Vehiculo              :e.Vehiculo
+        },
         //width: '1500px',
         //height: '900px'
       });
