@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { CatalogoDictamenes, CatalogoUsuarios, UsuariosAltaEdicion, CatalogoTalleres, CatalogoEstaciones, CatalogoSindicato, Marca, Submarca, PreciosGas, PreciosGasolina, CatalogoAsignacionSindicato} from 'src/app/_models';
+import { CatalogoDictamenes, CatalogoUsuarios, UsuariosAltaEdicion, CatalogoTalleres, CatalogoEstaciones, CatalogoSindicato, Marca, Submarca, PreciosGas, PreciosGasolina, CatalogoAsignacionSindicato, CatalogoCobradores} from 'src/app/_models';
 
 @Injectable({
   providedIn: 'root'
@@ -223,7 +223,7 @@ actualizaCatalogoDictamen(catalogoDictamenes: CatalogoDictamenes): Observable<an
   )
 }
 
-//Actualiza el valor de la columna Bloqueado de la información de la tabla de Usuarios
+//Obtiene la información de la tabla de Usuarios
 getCatalogoUsuarios(): Observable<any> {
 
   return this.http.get<any>(`${environment.SERVER_URL}/usuarios`, {})
@@ -235,6 +235,17 @@ getCatalogoUsuarios(): Observable<any> {
   )
 }
 
+//Obtiene la información de la tabla de Empleados (Cobradores)
+getCatalogoCobradores(): Observable<any> {
+
+  return this.http.get<any>(`${environment.SERVER_URL}/lSEmpleado`, {})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
 
 //Actualiza el valor de la columna Bloqueado de la información de la tabla de Usuarios
 getCatUsuBloqueado(catalogoUsuarios: CatalogoUsuarios): Observable<any> {
@@ -275,6 +286,40 @@ getCatUsuBloqueado(catalogoUsuarios: CatalogoUsuarios): Observable<any> {
         catchError(this.handleError)
       )
   }
+    //Registra Empleados/Usuarios Cobradores
+    postRegistraCobradores(cobradores: CatalogoCobradores): Observable<any> {
+
+      return this.http.post<any>(`${environment.SERVER_URL}/Alta-UsuarioEmpleado`, {
+                'Nombre'                       :cobradores.Nombre            ,
+                'Paterno'                      :cobradores.Paterno           ,
+                'Materno'                      :cobradores.Materno           ,
+                'RFC'                          :cobradores.RFC               ,
+                'CURP'                         :cobradores.CURP              ,
+                'INE'                          :cobradores.INE               ,
+                'FechaNacimiento'              :cobradores.FechaNacimiento   ,
+                'TipoPersona'                  :cobradores.TipoPersona       ,
+                'Genero'                       :cobradores.Genero            ,
+                'Domicilio'                    :cobradores.Domicilio         ,
+                'Colonia'                      :cobradores.Colonia           ,
+                'IdColonia'                    :cobradores.IdColonia         ,
+                'CP'                           :cobradores.CP                ,
+                'IdEntidadFederal'             :cobradores.EFNombre				   ,
+                'IdMunicipio'                  :cobradores.MNombre				   ,
+                'Telefono'                     :cobradores.Telefono          ,
+                'email'                        :cobradores.email             ,
+                'IdEstacion'                   :cobradores.IdEstacion        ,
+                'Estatus'                      :cobradores.Estatus           ,
+                'IdUsuario'                    :cobradores.IdUsuario         ,
+                'Contrasenia'                  :cobradores.contrasenia       ,
+              })
+        .pipe(map((res: Response) => {
+  
+          return res || {}
+        }),
+          catchError(this.handleError)
+        )
+    }
+  
 
   //Registra usuarios
   postModificaUsuario(usuario: UsuariosAltaEdicion): Observable<any> {
@@ -299,6 +344,43 @@ getCatUsuBloqueado(catalogoUsuarios: CatalogoUsuarios): Observable<any> {
         catchError(this.handleError)
       )
   }
+
+  //Modifica Empleados/Usuarios Cobradores
+  postModificaCobradores(cobradores: CatalogoCobradores): Observable<any> {
+
+    return this.http.post<any>(`${environment.SERVER_URL}/Modifica-SEmpleado`, {
+      'IdEmpleado'                   :cobradores.IdEmpleado        ,
+      'Nombre'                       :cobradores.Nombre            ,
+      'Paterno'                      :cobradores.Paterno           ,
+      'Materno'                      :cobradores.Materno           ,
+      'RFC'                          :cobradores.RFC               ,
+      'CURP'                         :cobradores.CURP              ,
+      'INE'                          :cobradores.INE               ,
+      'FechaNacimiento'              :cobradores.FechaNacimiento   ,
+      'TipoPersona'                  :cobradores.TipoPersona       ,
+      'TPNombre'                     :cobradores.TPNombre          ,
+      'Genero'                       :cobradores.Genero            ,
+      'GNombre'                      :cobradores.GNombre           ,
+      'Domicilio'                    :cobradores.Domicilio         ,
+      'Colonia'                      :cobradores.Colonia           ,
+      'IdColonia'                    :cobradores.IdColonia         ,
+      'CP'                           :cobradores.CP                ,
+      'EFNombre'                     :cobradores.EFNombre				   ,
+      'MNombre'                      :cobradores.MNombre				   ,
+      'Telefono'                     :cobradores.Telefono          ,
+      'email'                        :cobradores.email             ,
+      'IdEstacion'                   :cobradores.IdEstacion        ,
+      'ENombre'                      :cobradores.ENombre				   ,
+      'Estatus'                      :cobradores.Estatus           ,
+    })
+      .pipe(map((res: Response) => {
+
+        return res || {}
+      }),
+        catchError(this.handleError)
+      )
+  }  
+
 
 //Obtiene lso valores de la tabla de Sindicatos
 getCatalogoSindicato(): Observable<any> {

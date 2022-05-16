@@ -10,3 +10,4 @@ export * from './cita.model';
 export * from './operador.model';
 export * from './estadoProceso.model';
 export * from './pagos.model';
+export * from './incidente.model';

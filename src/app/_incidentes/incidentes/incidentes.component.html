@@ -1,0 +1,226 @@
+<div fxLayout="row wrap" fxLayoutGap="1.5% grid" fxLayoutAlign="start center" fxLayout.lt-sm="row">
+    <h2 class="title-header-content" mat-raised-button>Consulta de Incidentes</h2>
+    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+        <div fxFlex="30">
+            <mat-card>
+                <mat-card-actions fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="100px">
+                    <mat-card-title fx-item style="color: #009288; font-weight: lighter;">Filtros de búsqueda
+                    </mat-card-title>
+                    <button mat-fab style="background-color: #2d4248; outline: none;" matTooltip="Buscar placa" outline:none;>
+                      <mat-icon>search</mat-icon>
+                    </button>
+                </mat-card-actions>
+                <mat-card-content>
+                    <div fxLayout="row wrap" fxLayoutGap="30px grid">
+                        <div fxFlex="100" fxFlex.lt-md="100" fxl>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Placa</mat-label>
+                                <input matInput placeholder="Placa" maxlength="10" formControlName="placa" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                                <mat-error *ngIf="reactiveForm.get('placa')!.invalid">Campo requerido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </mat-card-content>
+                <notifier-container></notifier-container>
+            </mat-card>
+        </div>
+    </form>
+
+
+    <div id="divTitle" class="example-header" fxFlex="30" fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="10px">
+
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
+        </mat-form-field>
+        <!--
+        <div fxFlex="50" fxLayoutAlign="end end">
+            <button mat-fab style="background-color: #80BC00; outline: none;" matTooltip="Alta de Operador" outline:none; (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+      </button>
+        </div>
+-->
+    </div>
+
+    <div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100" id="htmlData">
+        <mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="IdTipoSiniestro">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> IdTipoSiniestro </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.IdTipoSiniestro}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="IdIncidenteSiniestro">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> IdIncidenteSiniestro </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.IdIncidenteSiniestro}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="IdVehiculo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> IdVehiculo </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.IdVehiculo}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="IdConcesionario">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> IdConcesionario </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.IdConcesionario}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Concesionario">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Concesionario </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Concesionario}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="TipoConvertidor">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> TipoConvertidor </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.TipoConvertidor}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="TipoVehiculo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> TipoVehiculo </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.TipoVehiculo}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Vehiculo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Vehiculo </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Vehiculo}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="FechaContrato">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> FechaContrato </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaContrato | date: 'dd-MM-YYYY'}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Sindicato">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Sindicato </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Sindicato}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="IdCita">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> IdCita </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.IdCita}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="FechaCita">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> FechaCita </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaCita | date: 'dd-MM-YYYY'}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="EstatusCita">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> EstatusCita </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.EstatusCita}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="GenerarCita">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> GenerarCita </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.GenerarCita}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="DictaminarRevision">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> DictaminarRevision </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.DictaminarRevision}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="DocumentarEvidencia">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> DocumentarEvidencia </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.DocumentarEvidencia}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="DictaminarSeguro">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> DictaminarSeguro </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.DictaminarSeguro}} </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="RegistrarFechaArreglo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> RegistrarFechaArreglo </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.RegistrarFechaArreglo}} </mat-cell>
+            </ng-container>
+
+            <!--             
+            <div fxFlex="25" fxFlex.lt-md="100" fxl>
+                <mat-form-field class="example-full-width">
+                    <mat-select placeholder="tiposIncidentes" formControlName="tiposIncidentes" required [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let tipoIncidente of tiposIncidentes" [value]="tipoIncidente.TipoIncidente">
+                            {{tipoIncidente.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="reactiveForm.get('tiposIncidentes')!.hasError('required')">
+                        El dato es obligatorio
+                    </mat-error>
+                </mat-form-field>
+            </div>
+-->
+            <ng-container matColumnDef="tiposIncidentes">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Tipos Incidentes </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <mat-select placeholder="Tipos Incidentes" formControlName="tiposIncidentes" [disabled]="!TipoIncidenteB" value="selected" required (selectionChange)="mostrarDialogoConfirmacion($event)" [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let tipoIncidente of tiposIncidentes" [value]="[tipoIncidente.TipoIncidente, tipoIncidente.viewValue]">
+                            {{tipoIncidente.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-cell>
+            </ng-container>
+
+
+            <!-- Progress Column -->
+            <!-- 
+            <ng-container matColumnDef="tiposIncidentes">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Tipos Incidentes </mat-header-cell>
+                <mat-select placeholder="tiposIncidentes" formControlName="tiposIncidentes" required [errorStateMatcher]="matcher">
+                    <mat-option *ngFor="let tipoIncidente of tiposIncidentes" [value]="tipoIncidente.TipoIncidente">
+                        {{tipoIncidente.viewValue}}
+                    </mat-option>
+                </mat-select>
+
+                <mat-cell *matCellDef="let row"> {{row.tiposIncidentes}} </mat-cell>
+            </ng-container>
+        -->
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <button mat-mini-fab class="button-documentos" (click)="documentos(row)" [disabled]="!row.DocumentarEvidencia" matTooltip="Ir a documentos">
+						<mat-icon class="iconSize">attach_file</mat-icon>
+					</button>&nbsp; &nbsp;
+
+                    <button mat-mini-fab class="button-cita" (click)="cita(row)" [disabled]="!row.GenerarCita" matTooltip="Agendar Cita de Instalación">
+                        <mat-icon class="iconSize">calendar_today</mat-icon>
+                    </button> &nbsp; &nbsp;
+
+                    <button mat-mini-fab class="button-dictaminar" (click)="dictaminar(row)" [disabled]="!row.DictaminarRevision" matTooltip="Dictaminar">
+						<mat-icon class="iconSize">gavel</mat-icon>
+					</button>
+
+                    <button mat-mini-fab class="button-instalacion" (click)="confirmacion(row)" matTooltip="Confirmar Instalación" [disabled]="!row.RegistrarFechaArreglo">
+                        <mat-icon class="iconSize">directions_car</mat-icon>
+                    </button> &nbsp; &nbsp;
+
+                </mat-cell>
+
+            </ng-container>
+
+
+
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;">
+            </mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+    </div>
+</div>

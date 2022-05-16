@@ -193,6 +193,93 @@ export class CatalogoUsuarios {
     }    
 }
 
+
+export class CatalogoCobradores {
+    IdEmpleado                    :number; 
+    Nombre                        :string; 
+    Paterno                       :string; 
+    Materno                       :string; 
+    RFC                           :string; 
+    CURP                          :string; 
+    INE                           :string; 
+    FechaNacimiento               :string;   
+    TipoPersona                   :string; 
+    TPNombre					  :string; 
+    Genero                        :string; 
+    GNombre		  				  :string; 
+    Domicilio                     :string; 
+    Colonia				     	  :string; 
+    IdColonia                     :string; 
+    CP                            :string; 
+    EFNombre					  :string; 
+    MNombre						  :string; 
+    Telefono                      :string; 
+    email                         :string; 
+    IdEstacion                    :number; 
+    ENombre						  :string; 
+    Estatus                       :string; 
+    IdUsuario                     :string; 
+    contrasenia                   :string;
+    Foto                          :string;
+
+    constructor(catalogoCobradores: { 
+                            IdEmpleado                    :number; 
+                            Nombre                        :string; 
+                            Paterno                       :string; 
+                            Materno                       :string; 
+                            RFC                           :string; 
+                            CURP                          :string; 
+                            INE                           :string; 
+                            FechaNacimiento               :string;   
+                            TipoPersona                   :string; 
+                            TPNombre					  :string; 
+                            Genero                        :string; 
+                            GNombre		  				  :string; 
+                            Domicilio                     :string; 
+                            Colonia                       :string; 
+                            IdColonia                     :string; 
+                            CP                            :string; 
+                            EFNombre					  :string; 
+                            MNombre						  :string; 
+                            Telefono                      :string; 
+                            email                         :string; 
+                            IdEstacion                    :number; 
+                            ENombre						  :string; 
+                            Estatus                       :string;   
+                            IdUsuario                     :string; 
+                            contrasenia                   :string;  
+                            Foto                          :string;
+    }){
+        this.IdEmpleado                  = catalogoCobradores.IdEmpleado             ;
+        this.Nombre                      = catalogoCobradores.Nombre                 ;
+        this.Paterno                     = catalogoCobradores.Paterno                ;
+        this.Materno                     = catalogoCobradores.Materno                ;
+        this.RFC                         = catalogoCobradores.RFC                    ;
+        this.CURP                        = catalogoCobradores.CURP                   ;
+        this.INE                         = catalogoCobradores.INE                    ;
+        this.FechaNacimiento             = catalogoCobradores.FechaNacimiento        ;
+        this.TipoPersona                 = catalogoCobradores.TipoPersona            ;
+        this.TPNombre					 = catalogoCobradores.TPNombre				 ;
+        this.Genero                      = catalogoCobradores.Genero                 ;
+        this.GNombre		  			 = catalogoCobradores.GNombre		  		 ;
+        this.Domicilio                   = catalogoCobradores.Domicilio              ;
+        this.Colonia                     = catalogoCobradores.Colonia                ;
+        this.IdColonia                   = catalogoCobradores.IdColonia              ;
+        this.CP                          = catalogoCobradores.CP                     ;        
+        this.EFNombre					 = catalogoCobradores.EFNombre				 ;
+        this.MNombre					 = catalogoCobradores.MNombre				 ;
+        this.Telefono                    = catalogoCobradores.Telefono               ;
+        this.email                       = catalogoCobradores.email                  ;
+        this.IdEstacion                  = catalogoCobradores.IdEstacion             ;
+        this.ENombre					 = catalogoCobradores.ENombre				 ;
+        this.Estatus                     = catalogoCobradores.Estatus                ;
+        this.IdUsuario                   = catalogoCobradores.IdUsuario              ;        
+        this.contrasenia                 = catalogoCobradores.contrasenia            ;
+        this.Foto                        = catalogoCobradores.Foto                   ; 
+    }    
+}
+
+
 export class CatalogoSindicato {
     IdSindicato            :number;
     Nombre                 :string;
