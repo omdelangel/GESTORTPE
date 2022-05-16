@@ -120,8 +120,7 @@ import { IncidentesComponent } from './_incidentes/incidentes/incidentes.compone
 import { PagosComponent } from './_components/pagos/pagos.component';
 import { DialogoPagosComponent } from './_components/dialogo-pagos/dialogo-pagos.component';
 import { NgxCurrencyModule } from "ngx-currency";
-import { DocumentosIncidentesComponent } from './_components/documentos-incidentes/documentos-incidentes.component';
-import { DialogoConfirmaDocumentosComponent } from './_components/dialogo-confirma-documentos/dialogo-confirma-documentos.component';
+import { DocumentosIncidentesComponent } from './_incidentes/documentos-incidentes/documentos-incidentes.component';
 
 
 /**
@@ -277,8 +276,7 @@ FullCalendarModule.registerPlugins([
     IncidentesComponent,
     PagosComponent,
     DialogoPagosComponent,
-    DocumentosIncidentesComponent,
-    DialogoConfirmaDocumentosComponent
+    DocumentosIncidentesComponent
   ],
   imports: [
     BrowserModule,

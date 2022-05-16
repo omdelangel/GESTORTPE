@@ -1,1 +1,0 @@
-export * from './dialogo-confirma-documentos.component';

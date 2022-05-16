@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogoConfirmaDocumentosComponent } from './../dialogo-confirma-documentos/dialogo-confirma-documentos.component';
 
 @Component({
   selector: 'app-documentos-incidentes',
