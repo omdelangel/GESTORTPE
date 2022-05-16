@@ -97,6 +97,21 @@ postGuardaEvidencias(formData: any): Observable<any> {
   )
 }
 
+ //Consulta las evidencias
+ getDocumentosEvidencia(idSiniestro: number): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('IdSiniestro', idSiniestro);
+
+  return this.http.get<any>(`${environment.SERVER_URL}/vehiculo-evidencias`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  ) 
+}
+
 
     // Error 
     handleError(error: HttpErrorResponse) {

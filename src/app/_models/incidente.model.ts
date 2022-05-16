@@ -78,3 +78,18 @@ export class CitasIncidente {
         this.IdCita                       = citasIncidente.IdCita                    ;
           }    
 }
+export class DocumentoEvidencia {
+    IdEvidencia: number;
+    IdSiniestro: number;
+    ArchivoEvidencia: string;
+
+    constructor(documentoEvidencia: {
+        IdEvidencia: number;
+        IdSiniestro: number;
+        ArchivoEvidencia: string; }) {
+            this.IdEvidencia = documentoEvidencia.IdEvidencia;
+            this.IdSiniestro = documentoEvidencia.IdSiniestro;
+            this.ArchivoEvidencia = documentoEvidencia.ArchivoEvidencia;
+
+        }
+} 

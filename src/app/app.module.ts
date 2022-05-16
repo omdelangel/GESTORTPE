@@ -121,7 +121,7 @@ import { PagosComponent } from './_components/pagos/pagos.component';
 import { DialogoPagosComponent } from './_components/dialogo-pagos/dialogo-pagos.component';
 import { NgxCurrencyModule } from "ngx-currency";
 import { DocumentosIncidentesComponent } from './_incidentes/documentos-incidentes/documentos-incidentes.component';
-import { FileDragNDropDirective } from './_incidentes/incidentes/file-drag-n-drop.directive';
+import { FileDragNDropDirective } from './_incidentes/file-drag-n-drop.directive';
 import { AltacitaIncidenteComponent } from './_incidentes/altacita-incidente/altacita-incidente.component';
 import { DialogoTalleresIncidenteComponent } from './_incidentes/dialogo-talleres-incidente/dialogo-talleres-incidente.component';
 import { EdicionCitaIncidenteComponent } from './_incidentes/edicion-cita-incidente/edicion-cita-incidente.component';
