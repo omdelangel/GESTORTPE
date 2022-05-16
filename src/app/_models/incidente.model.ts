@@ -59,3 +59,19 @@ export class Incidente {
             }
 
 }
+
+export class DocumentoEvidencia {
+    IdEvidencia: number;
+    IdSiniestro: number;
+    ArchivoEvidencia: string;
+
+    constructor(documentoEvidencia: {
+        IdEvidencia: number;
+        IdSiniestro: number;
+        ArchivoEvidencia: string; }) {
+            this.IdEvidencia = documentoEvidencia.IdEvidencia;
+            this.IdSiniestro = documentoEvidencia.IdSiniestro;
+            this.ArchivoEvidencia = documentoEvidencia.ArchivoEvidencia;
+
+        }
+} 
