@@ -3,7 +3,8 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Incidente } from '../_models';
+import { Incidente, CitasIncidente } from '../_models';
+
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,44 @@ postConcesionarioIncidenteSiniestro(IdVehiculo :number, IdTipoIncidente :string)
     catchError(this.handleError)
   )
 }
+
+//Registra la Cita para un incidente
+postRegistraCitaIncidente(citasIncidente: CitasIncidente): Observable<any> {
+
+  return this.http.post<any>(`${environment.SERVER_URL}/cita-incidente`, 
+  {
+    'IdIncidenteSiniestro'       :citasIncidente.IdIncidenteSiniestro     ,
+    'Fecha'                      :citasIncidente.Fecha                    ,
+    'IdTaller'                   :citasIncidente.IdTaller                 ,
+    'IdCita'                     :citasIncidente.IdCita                   ,    
+  })
+  .pipe(map((res: Response) => { 
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+
+//Registra la Cita para un incidente
+postModificaCitaIncidente(citasIncidente: CitasIncidente): Observable<any> {
+
+  return this.http.post<any>(`${environment.SERVER_URL}/cita-incidente-modificacion`, 
+  {
+    'IdIncidenteSiniestro'       :citasIncidente.IdIncidenteSiniestro     ,
+    'Fecha'                      :citasIncidente.Fecha                    ,
+    'IdTaller'                   :citasIncidente.IdTaller                 ,
+    'IdCita'                     :citasIncidente.IdCita                   ,    
+  })
+  .pipe(map((res: Response) => { 
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
 
 
     // Error 

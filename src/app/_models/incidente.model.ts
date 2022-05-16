@@ -59,3 +59,22 @@ export class Incidente {
             }
 
 }
+
+export class CitasIncidente {
+    IdIncidenteSiniestro        :number;
+    Fecha                       :string;
+    IdTaller                    :number;
+    IdCita                      :number;
+
+    constructor(citasIncidente: { 
+        IdIncidenteSiniestro        :number;
+        Fecha                       :string;
+        IdTaller                    :number;
+        IdCita                      :number;
+        }){
+        this.IdIncidenteSiniestro         = citasIncidente.IdIncidenteSiniestro      ;
+        this.Fecha                        = citasIncidente.Fecha                     ;
+        this.IdTaller                     = citasIncidente.IdTaller                  ;
+        this.IdCita                       = citasIncidente.IdCita                    ;
+          }    
+}

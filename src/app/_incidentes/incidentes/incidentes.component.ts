@@ -199,9 +199,8 @@ export class IncidentesComponent implements OnInit {
   }
 }
 
-
-  //Guarda la cita
-  mostrarDialogoConfirmacion(event: any): void {     
+//Guarda la cita
+mostrarDialogoConfirmacion(event: any): void {     
 
   this.submitted = true;
 
@@ -210,7 +209,7 @@ export class IncidentesComponent implements OnInit {
     return;
   }
       if (event.value[0] == "ACC"){
-         this.palabra = "un "
+          this.palabra = "un "
       }else{
         this.palabra = "una "
       }
@@ -229,7 +228,7 @@ export class IncidentesComponent implements OnInit {
         }
       });
   }
-
+  
   //Abre modal para alta de los operadores
   aplicarSiniestro(): void {
     this.incidenteService.postConcesionarioIncidenteSiniestro(this.incidente[0].IdVehiculo, this.Tiponcidente )
@@ -241,17 +240,84 @@ export class IncidentesComponent implements OnInit {
           this.placa = this.f.placa.value;
           this.getConsultaIncidente(this.placa)   
     }  else if (data.estatus == false ){
-         
+          
     var elemDiv = document.getElementById('divTitle');
-     elemDiv!.style.visibility = "hidden";
+      elemDiv!.style.visibility = "hidden";
 
-     var elemTable = document.getElementById('htmlData');
-     elemTable!.style.visibility = "hidden";            
+      var elemTable = document.getElementById('htmlData');
+      elemTable!.style.visibility = "hidden";            
 
-     this.notifier.notify('warning', data.mensaje);
+      this.notifier.notify('warning', data.mensaje);
   }
   })
 }
+
+
+//Proceso para documentos
+documentos(e: any){
+   console.log("documentos e ")
+   console.log(e)
+   
+  const dialogRef = this.dialog.open(DocumentosIncidentesComponent, {
+    disableClose: true,
+    data:{
+      IdTipoSiniestro       :e.IdTipoSiniestro,
+      IdIncidenteSiniestro  :e.IdIncidenteSiniestro,
+      Concesionario         :e.Concesionario, 
+      Vehiculo              :e.Vehiculo
+    },
+    //width: '1500px',
+    //height: '900px'
+  });
+
+  dialogRef.afterClosed().subscribe(res => {
+    this.getConsultaIncidente(this.placa);
+  });    
+}
+
+
+//Registro de Citas para el incidente
+cita(e: any) {
+
+  if (e.EstatusCita == null || e.EstatusCita == "V" || e.EstatusCita == "C") {
+
+    const dialogRef = this.dialog.open(DialogoTalleresIncidenteComponent, {
+      disableClose: true,
+      data: { 
+            idCita            :e.IdCita, 
+            estatusCita       :e.EstatusCita, 
+            Concesionario     :e.Concesionario, 
+            idConcesionario   :e.IdConcesionario, 
+            idVehiculo        :e.IdVehiculo
+            },
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      this.getConsultaIncidente(this.placa);
+    });
+
+  } else {
+
+    const dialogRef = this.dialog.open(EdicionCitaIncidenteComponent, {
+      disableClose: true,
+      data: {
+            idCita            :e.IdCita, 
+            estatusCita       :e.EstatusCita, 
+            Concesionario     :e.Concesionario, 
+            idConcesionario   :e.IdConcesionario, 
+            idVehiculo        :e.IdVehiculo,
+            Vehiculo          :e.Vehiculo
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      this.getConsultaIncidente(this.placa);
+    });
+  }
+}  
+
+
+
 
 
   //Abre modal para alta de los operadores
@@ -271,51 +337,6 @@ export class IncidentesComponent implements OnInit {
   }
   
 
-//Registro de Citas para la instalacion
-cita(e: any) {
-
-
-  if (e.EstatusCita == null || e.EstatusCita == "V" || e.EstatusCita == "C") {
-
-    const dialogRef = this.dialog.open(DialogoTalleresIncidenteComponent, {
-      disableClose: true,
-      data: { 
-            idCita            :e.IdCita, 
-            estatusCita       :e.EstatusCita, 
-            Concesionario     :e.Concesionario, 
-            idConcesionario   :e.IdConcesionario, 
-            idVehiculo        :e.IdVehiculo
-            },
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      this.getConsultaIncidente(this.placa);
-    });
-
-
-  } else {
-
-    const dialogRef = this.dialog.open(EdicionCitaIncidenteComponent, {
-      disableClose: true,
-      data: {
-            idCita            :e.IdCita, 
-            estatusCita       :e.EstatusCita, 
-            Concesionario     :e.Concesionario, 
-            idConcesionario   :e.IdConcesionario, 
-            idVehiculo        :e.IdVehiculo,
-            marca             :e.Marca, 
-            submarca          :e.Submarca, 
-            modelo            :e.Modelo
-      },
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      this.getConsultaIncidente(this.placa);
-    });
-
-  }
-
-}  
 
   dictaminar(e: any){
     /*
@@ -347,35 +368,12 @@ cita(e: any) {
     */
     
   }
-
-
-  documentos(e: any){
-    
-      const dialogRef = this.dialog.open(DocumentosIncidentesComponent, {
-        disableClose: true,
-        data:{
-          IdTipoSiniestro       :e.IdTipoSiniestro,
-          IdIncidenteSiniestro  : e.IdIncidenteSiniestro,
-          Concesionario         :e.Concesionario, 
-          Vehiculo              :e.Vehiculo
-        },
-        //width: '1500px',
-        //height: '900px'
-      });
-  
-      dialogRef.afterClosed().subscribe(res => {
-        this.getConsultaIncidente(this.placa);
-      });
-   
-    
-  }
-
       
-      applyFilter(filterValue: string) {
-        filterValue = filterValue.trim(); // Remove whitespace
-        filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-        this.dataSource.filter = filterValue;
-      }
- 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+   
 }
 

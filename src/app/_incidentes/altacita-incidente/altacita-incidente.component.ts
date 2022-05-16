@@ -6,7 +6,8 @@ import * as moment from 'moment';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { HoracitaDialogComponent } from '../../_components/horacita-dialog';
 import { Citas, DisponibilidadCitas } from 'src/app/_models/cita.model';
-import { PilotoService } from 'src/app/_services';
+import { CitasIncidente } from 'src/app/_models';
+import { IncidenteService } from 'src/app/_services';
 import { first } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
 import { DialogoConfirmacionComponent } from '../../_components/dialogo-confirmacion';
@@ -20,6 +21,8 @@ import { NotifierService } from 'angular-notifier';
 })
 export class AltacitaIncidenteComponent implements OnInit {
   private readonly notifier: NotifierService;
+
+  citasIncidente          !:CitasIncidente;
 
   frmStepFour!: FormGroup;
   submitted = false;
@@ -102,23 +105,23 @@ export class AltacitaIncidenteComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder,
-    public dialog: MatDialog,
-    private pilotoService: PilotoService,
-    notifierService: NotifierService,
-    public dialogRef: MatDialogRef<AltacitaIncidenteComponent>,
+    public dialog                 :MatDialog,
+    private incidenteService      :IncidenteService,
+    notifierService               :NotifierService,
+    public dialogRef              :MatDialogRef<AltacitaIncidenteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
     dialogRef.disableClose = true;
-    this.notifier = notifierService;
-    this.idTallerValue = data.idTaller;
-    this.nombreValue = data.nombreTaller;
-    this.domicilioValue = data.domicilio;
-    this.telefonoValue = data.telefono;
-    this.contactoValue = data.contacto;
-    this.nombreConcesionario = data.nombreConce;
-    this.idConcesionarioValue = data.idConce;
-    this.idVehiculoValue = data.idVehi;
-    this.causaValue = data.causa;
+    this.notifier               = notifierService;
+    this.idTallerValue          = data.idTaller;
+    this.nombreValue            = data.nombreTaller;
+    this.domicilioValue         = data.domicilio;
+    this.telefonoValue          = data.telefono;
+    this.contactoValue          = data.contacto;
+    this.nombreConcesionario    = data.nombreConce;
+    this.idConcesionarioValue   = data.idConce;
+    this.idVehiculoValue        = data.idVehi;
+    this.causaValue             = data.causa;
 
   }
 
@@ -144,7 +147,7 @@ export class AltacitaIncidenteComponent implements OnInit {
 
   //Registra la cita para desinstalar el convertidor
   guardarCita() {
-    //this.clear(); 
+
     this.submitted = true;
 
     if (this.idCitaValue == 0 || this.idCitaValue == null || this.estatusCita == "D" || this.estatusCita == "V" || this.estatusCita == "C" ) {
@@ -152,9 +155,15 @@ export class AltacitaIncidenteComponent implements OnInit {
     if (this.dia != undefined && this.hora != undefined && this.dia != "" && this.hora != "") {
 
       this.diaHora = moment(this.dia + " " + this.hora).format('YYYY-MM-DD HH:mm:ss');
-      this.citas = { IdCita: this.idCitaValue, IdVehiculo: this.idVehiculoValue, IdConcesionario: this.idConcesionarioValue, Fecha: this.diaHora, IdTaller: this.idTallerValue }
+      this.citas = { 
+                    IdCita: this.idCitaValue, 
+                    IdVehiculo: this.idVehiculoValue, 
+                    IdConcesionario: this.idConcesionarioValue, 
+                    Fecha: this.diaHora, 
+                    IdTaller: this.idTallerValue 
+                  }
 
-        this.pilotoService.postRegistraCitaDesinstalacion(this.citas)
+        this.incidenteService.postRegistraCitaIncidente(this.citasIncidente)
           .pipe(first())
           .subscribe(
             data => {
@@ -186,7 +195,7 @@ export class AltacitaIncidenteComponent implements OnInit {
       this.diaHora = moment(this.dia + " " + this.hora).format('YYYY-MM-DD HH:mm:ss');
       this.citas = { IdCita: this.idCitaValue, IdVehiculo: this.idVehiculoValue, IdConcesionario: this.idConcesionarioValue, Fecha: this.diaHora, IdTaller: this.idTallerValue }
 
-        this.pilotoService.postCitaModificacionConvertidor(this.citas)
+        this.incidenteService.postModificaCitaIncidente(this.citasIncidente)
           .pipe(first())
           .subscribe(
             data => {

@@ -45,34 +45,32 @@ export class DialogoTalleresIncidenteComponent implements OnInit {
   //@ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  idCita            :number = 0;
-  estatusCita       :string = "";
-  concesionario     :string = "";
-  idConcesionario   :number = 0;
-  idVehiculo        :number = 0;
+  idCita              :number = 0;
+  estatusCita         :string = "";
+  concesionario       :string = "";
+  idConcesionario     :number = 0;
+  idVehiculo          :number = 0;
+  frmStepFour         !: FormGroup;
+  taller              :Taller[] = [];
+  divTalleres         :boolean = true;
+  divCitas            :boolean = false;
+  tallerValue         :string = "";
+  domicilioValue      :string = "";
+  contactoValue       :string = "";
+  telefonoValue       :string = "";
+  diaValue            :string = ""; 
+  horaValue           :string = "";  
 
-
-  frmStepFour!: FormGroup;
-  taller: Taller[] = [];
-  divTalleres: boolean = true;
-  divCitas: boolean = false;
-  tallerValue: string = "";
-  domicilioValue: string = "";
-  contactoValue: string = "";
-  telefonoValue: string = "";
-  diaValue: string = ""; 
-  horaValue: string = "";  
-
-  constructor(public dialog: MatDialog,
-    private tallerService: TalleresService,
-    private formBuilder: FormBuilder,
-    notifierService: NotifierService,
-    public dialogRef: MatDialogRef<DialogoTalleresIncidenteComponent>,
+  constructor(
+    public dialog            :MatDialog,
+    private tallerService    :TalleresService,
+    private formBuilder      :FormBuilder,
+    notifierService          :NotifierService,
+    public dialogRef         :MatDialogRef<DialogoTalleresIncidenteComponent>,
    @Inject(MAT_DIALOG_DATA) public data: any) {
 
        this.notifier = notifierService; 
        dialogRef.disableClose = true;
-
        console.log("data dialogo-talleres-incidente")
        console.log(data)
        this.idCita            = data.idCita, 
@@ -88,22 +86,22 @@ export class DialogoTalleresIncidenteComponent implements OnInit {
 
     //Validación de campos en pantalla
     this.frmStepFour = this.formBuilder.group({
-      'IdTaller': [''],
-      'Nombre':[''],
-      'RFC': [''],
-      'Domicilio':[''],
-      'IdColonia': [''],
-      'Colonia':[''],
-      'CP':[''], 
-      'Municipio': [''],
-      'EntidadFederativa':[''],
-      'Telefono':[''],
-      'Contacto':[''],
-      'HorarioIni':[''],
-      'HorarioFin':[''],
-      'Concurrencia':[''],
-      'DuracionCita':[''],
-      'Estatus':[''],
+      'IdTaller'          :[''],
+      'Nombre'            :[''],
+      'RFC'               :[''],
+      'Domicilio'         :[''],
+      'IdColonia'         :[''],
+      'Colonia'           :[''],
+      'CP'                :[''], 
+      'Municipio'         :[''],
+      'EntidadFederativa' :[''],
+      'Telefono'          :[''],
+      'Contacto'          :[''],
+      'HorarioIni'        :[''],
+      'HorarioFin'        :[''],
+      'Concurrencia'      :[''],
+      'DuracionCita'      :[''],
+      'Estatus'           :[''],
     });    
 
   }
@@ -123,16 +121,16 @@ export class DialogoTalleresIncidenteComponent implements OnInit {
 
     const dialogRef = this.dialog.open(AltacitaIncidenteComponent, {
       data: {
-            idCita: this.idCita, 
-            estatusCita: this.estatusCita, 
-            idTaller: row.IdTaller, 
-            nombreTaller: row.Nombre, 
-            domicilio: row.Domicilio + " " + row.Colonia + " " + "CP: " +row.CP + " " + row.Municipio + " " + row.EntidadFederativa, 
-            telefono: row.Telefono, 
-            contacto: row.Contacto, 
-            nombreConce: this.concesionario,
-            idConce: this.idConcesionario, 
-            idVehi: this.idVehiculo
+            idCita          :this.idCita, 
+            estatusCita     :this.estatusCita, 
+            idTaller        :row.IdTaller, 
+            nombreTaller    :row.Nombre, 
+            domicilio       :row.Domicilio + " " + row.Colonia + " " + "CP: " +row.CP + " " + row.Municipio + " " + row.EntidadFederativa, 
+            telefono        :row.Telefono, 
+            contacto        :row.Contacto, 
+            nombreConce     :this.concesionario,
+            idConce         :this.idConcesionario, 
+            idVehi          :this.idVehiculo
             },
       width: '100%',
       //height: '100%'
