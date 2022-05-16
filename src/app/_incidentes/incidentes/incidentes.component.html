@@ -195,7 +195,7 @@
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
                 <mat-cell *matCellDef="let row">
-                    <button mat-mini-fab class="button-documentos" (click)="documentos(row)" [disabled]="!row.DocumentarEvidencia" matTooltip="Ir a documentos">
+                    <button mat-mini-fab class="button-documentos" (click)="documentos(row)" [disabled]="row.DocumentarEvidencia" matTooltip="Ir a documentos">
 						<mat-icon class="iconSize">attach_file</mat-icon>
 					</button>&nbsp; &nbsp;
 

@@ -276,7 +276,7 @@ FullCalendarModule.registerPlugins([
     IncidentesComponent,
     PagosComponent,
     DialogoPagosComponent,
-    DocumentosIncidentesComponent
+    DocumentosIncidentesComponent,
   ],
   imports: [
     BrowserModule,

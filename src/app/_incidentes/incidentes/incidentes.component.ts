@@ -10,6 +10,7 @@ import { NotifierService } from 'angular-notifier';
 import { IncidenteService } from 'src/app/_services';
 import { Incidente } from 'src/app/_models';
 import { DialogoConfirmacionComponent } from './../../_components/dialogo-confirmacion';
+import { DocumentosIncidentesComponent } from './../documentos-incidentes'
 import { getTestBed } from '@angular/core/testing';
 
 
@@ -318,18 +319,18 @@ export class IncidentesComponent implements OnInit {
 
 
   documentos(e: any){
-    /*
-            const dialogRef = this.dialog.open(DialogoOperadorEditaComponent, {
-              disableClose: true,
-              data: { data: e, IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo},
-              //width: '1500px',
-              //height: '900px'
-            });
-        
-            dialogRef.afterClosed().subscribe(res => {
-              this.getConsultaOperadores(this.placa);
-            });
-    */
+    
+      const dialogRef = this.dialog.open(DocumentosIncidentesComponent, {
+        disableClose: true,
+        data: { data: e, IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo},
+        //width: '1500px',
+        //height: '900px'
+      });
+  
+      dialogRef.afterClosed().subscribe(res => {
+        this.getConsultaIncidente(this.placa);
+      });
+   
     
   }
 
