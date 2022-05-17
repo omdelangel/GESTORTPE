@@ -13,7 +13,6 @@ import { DialogoConfirmacionComponent } from './../../_components/dialogo-confir
 import { DocumentosIncidentesComponent } from './../documentos-incidentes';
 import { DialogoTalleresIncidenteComponent } from './../dialogo-talleres-incidente';
 import { EdicionCitaIncidenteComponent} from './../edicion-cita-incidente';
-import { getTestBed } from '@angular/core/testing';
 
 
 
@@ -69,6 +68,7 @@ export class IncidentesComponent implements OnInit {
   palabra             :string = "";
   TipoIncidente        :string = "";
 
+
   //Catálogos locales
   tiposIncidentes: TiposIncidentes[] = [
     { TipoIncidente: 'INC', viewValue: 'Falla en vehículo' },
@@ -118,7 +118,8 @@ export class IncidentesComponent implements OnInit {
         this.incidenteService.getConcesionarioIncidente(placa)
           .pipe(first())
           .subscribe(data => {
-
+            console.log("Consulta de Incidente   ")
+            console.log(data)
 
             if (data.estatus == true && data.concesionario != "") {
 
@@ -188,7 +189,6 @@ mostrarDialogoConfirmacion(event: any): void {
     default:
       // 
       break;  
-
 }
 
 
@@ -256,17 +256,20 @@ documentos(e: any){
 
 //Registro de Citas para el incidente
 cita(e: any) {
+  console.log("cita e ===> ")
+  console.log(e)
 
-  if (e.EstatusCita == null || e.EstatusCita == "V" || e.EstatusCita == "C") {
+  if (e.EstatusCita == null || e.EstatusCita == "" || e.EstatusCita == "V" || e.EstatusCita == "C") {
 
     const dialogRef = this.dialog.open(DialogoTalleresIncidenteComponent, {
       disableClose: true,
       data: { 
-            idCita            :e.IdCita, 
-            estatusCita       :e.EstatusCita, 
-            Concesionario     :e.Concesionario, 
-            idConcesionario   :e.IdConcesionario, 
-            idVehiculo        :e.IdVehiculo
+            idCita                 :e.IdCita, 
+            estatusCita            :e.EstatusCita, 
+            IdIncidenteSiniestro   :e.IdIncidenteSiniestro,
+            Concesionario          :e.Concesionario, 
+            idConcesionario        :e.IdConcesionario, 
+            idVehiculo             :e.IdVehiculo
             },
     });
 
@@ -279,12 +282,13 @@ cita(e: any) {
     const dialogRef = this.dialog.open(EdicionCitaIncidenteComponent, {
       disableClose: true,
       data: {
-            idCita            :e.IdCita, 
-            estatusCita       :e.EstatusCita, 
-            Concesionario     :e.Concesionario, 
-            idConcesionario   :e.IdConcesionario, 
-            idVehiculo        :e.IdVehiculo,
-            Vehiculo          :e.Vehiculo
+            idCita                  :e.IdCita, 
+            estatusCita             :e.EstatusCita, 
+            Concesionario           :e.Concesionario, 
+            idConcesionario         :e.IdConcesionario, 
+            idVehiculo              :e.IdVehiculo,
+            Vehiculo                :e.Vehiculo,
+            IdIncidenteSiniestro    :e.IdIncidenteSiniestro
       },
     });
 
