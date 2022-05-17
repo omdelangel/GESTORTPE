@@ -66,7 +66,7 @@ export class IncidentesComponent implements OnInit {
   value               :boolean = false;
   matcher              = new MyErrorStateMatcher();
   TipoIncidenteB      :boolean = false;
-  palabra             :string;
+  palabra             :string = "";
   TipoIncidente        :string = "";
 
   //Catálogos locales
@@ -233,19 +233,19 @@ mostrarDialogoConfirmacion(event: any): void {
 
 //Proceso para documentos
 documentos(e: any){
-   console.log("documentos e ")
-   console.log(e)
+
+  console.log(e)
    
   const dialogRef = this.dialog.open(DocumentosIncidentesComponent, {
     disableClose: true,
     data:{
-      IdTipoSiniestro       :e.IdTipoSiniestro,
+      IdTipoSiniestro       :e.IdTipoIncidente,
       IdIncidenteSiniestro  :e.IdIncidenteSiniestro,
       Concesionario         :e.Concesionario, 
       Vehiculo              :e.Vehiculo
     },
-    //width: '1500px',
-    //height: '900px'
+    width: '1500px',
+    height: '700px'
   });
 
   dialogRef.afterClosed().subscribe(res => {
