@@ -39,30 +39,19 @@ export class IncidentesComponent implements OnInit {
   private readonly notifier: NotifierService;
 
   //Columnas en Tabla de consulta
-  //Columnas en Tabla de consulta
   displayedColumns = [
-//                      'IdTipoSiniestro'				,
-//                      'IdIncidenteSiniestro'  ,
-//                      'IdVehiculo'            ,
-//                      'IdConcesionario'       ,
                       'Concesionario'         ,
                       'TipoConvertidor'       ,
                       'TipoVehiculo'          ,
                       'Vehiculo'              ,
                       'FechaContrato'         ,
                       'Sindicato'             ,
-//                      'IdCita'                ,
                       'FechaCita'             ,
                       'EstatusCita'           ,
-//                      'GenerarCita'           ,
-//                      'DictaminarRevision'    ,
-//                      'DocumentarEvidencia'   ,
-//                      'DictaminarSeguro'      ,
-//                      'RegistrarFechaArreglo' ,
-                      'tiposIncidentes'       ,
+                      'IdTipoIncidente'       ,
                       'actions']
-                    dataSource!: MatTableDataSource<Incidente>;
 
+   dataSource!: MatTableDataSource<Incidente>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -78,13 +67,13 @@ export class IncidentesComponent implements OnInit {
   matcher              = new MyErrorStateMatcher();
   TipoIncidenteB      :boolean = false;
   palabra             :string;
-  Tiponcidente        :string = "";
+  TipoIncidente        :string = "";
 
   //Catálogos locales
   tiposIncidentes: TiposIncidentes[] = [
-    { TipoIncidente: 'INC', viewValue: 'FALLA EN VEHÍCULO' },
-    { TipoIncidente: 'ACC', viewValue: 'ACCIDENTE' },
-    { TipoIncidente: 'PTR', viewValue: 'PERDIDA TOTAL O ROBO' }
+    { TipoIncidente: 'INC', viewValue: 'Falla en vehículo' },
+    { TipoIncidente: 'ACC', viewValue: 'Accidente' },
+    { TipoIncidente: 'PTR', viewValue: 'Pérdida total o robo' }
   ];  
 
 
@@ -103,9 +92,8 @@ export class IncidentesComponent implements OnInit {
 
     //Validación de campos en pantalla
     this.reactiveForm = this.formBuilder.group({
-      'placa': ['', Validators.required]
-
-
+      'placa': ['', Validators.required],
+     
     }); 
   }
 
@@ -117,87 +105,65 @@ export class IncidentesComponent implements OnInit {
   }
 
   
-  getConsultaIncidente(placa: string) {{
-    this.submitted = true;
+  getConsultaIncidente(placa: string) {
+    {
+      this.submitted = true;
 
-    // stop here if form is invalid
-    if (this.reactiveForm.invalid) {
-      return;
-    } else {
+      // stop here if form is invalid
+      if (this.reactiveForm.invalid) {
+        return;
+      } else {
 
-    
-      this.incidenteService.getConcesionarioIncidente(placa)
-      .pipe(first())
-      .subscribe(data => {
-  
-        console.log("regreso del Incidente")
-        console.log(data)
-        if (data.estatus == true && data.concesionario != "") {
 
-          // Assign the data to the data source for the table to render
-          this.incidente         = data.concesionario;
-          this.idConcesionario   = data.IdConcesionario;
-          this.idVehiculo        = data.IdVehiculo;
+        this.incidenteService.getConcesionarioIncidente(placa)
+          .pipe(first())
+          .subscribe(data => {
 
-          console.log("Tipo Incidente")
-          console.log(this.incidente[0].IdTipoIncidente)
-          if (this.incidente[0].IdTipoIncidente == ""){
-            console.log("Entre")
-              this.TipoIncidenteB = true;
-          }else{
-            this.TipoIncidenteB = false;
-            console.log("No entre")
-          }
 
-          this.dataSource = new MatTableDataSource(this.incidente);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
+            if (data.estatus == true && data.concesionario != "") {
 
-//          selected = this.incidente[0].IdTipoIncidente;
-          //this.selected.getTestBed('TipoIncidente').setValue(this.incidente[0].IdTipoIncidente);
+              this.incidente = data.concesionario;
+              this.idConcesionario = data.IdConcesionario;
+              this.idVehiculo = data.IdVehiculo;
 
-  
-          var elemDiv = document.getElementById('divTitle');
-          elemDiv!.style.visibility = "visible";
-  
-          var elemTable = document.getElementById('htmlData');
-          elemTable!.style.visibility = "visible";
-  
-  
-        }  else if (data.estatus == false ){
-         
-           var elemDiv = document.getElementById('divTitle');
-            elemDiv!.style.visibility = "hidden";
-  
-            var elemTable = document.getElementById('htmlData');
-            elemTable!.style.visibility = "hidden";            
 
-            this.notifier.notify('warning', data.mensaje);
-  
-        } else if (data.estatus == true && data.operadores == ""){
+              if (this.incidente[0].IdTipoIncidente == "") {
+                this.TipoIncidenteB = true;
+              } else {
+                this.TipoIncidenteB = false;
+              }
 
-          var elemDiv = document.getElementById('divTitle');
-          elemDiv!.style.visibility = "hidden";
+              this.dataSource = new MatTableDataSource(this.incidente);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
 
-          var elemTable = document.getElementById('htmlData');
-          elemTable!.style.visibility = "hidden";            
 
-          this.notifier.notify('warning', data.mensaje);
+              var elemDiv = document.getElementById('divTitle');
+              elemDiv!.style.visibility = "visible";
 
-          this.idConcesionario = data.IdConcesionario;
-          this.idVehiculo = data.IdVehiculo;
-          this.openDialog();
-          
+              var elemTable = document.getElementById('htmlData');
+              elemTable!.style.visibility = "visible";
 
-        }
-      },
-        error => {        
-  
-        });
 
+            } else if (data.estatus == false) {
+
+              var elemDiv = document.getElementById('divTitle');
+              elemDiv!.style.visibility = "hidden";
+
+              var elemTable = document.getElementById('htmlData');
+              elemTable!.style.visibility = "hidden";
+
+              this.notifier.notify('warning', data.mensaje);
+            }
+          },
+            error => {
+
+              this.notifier.notify('error', error);
+            });
+
+      }
     }
   }
-}
 
 //Guarda la cita
 mostrarDialogoConfirmacion(event: any): void {     
@@ -208,20 +174,33 @@ mostrarDialogoConfirmacion(event: any): void {
   if (this.reactiveForm.invalid) {
     return;
   }
-      if (event.value[0] == "ACC"){
-          this.palabra = "un "
-      }else{
-        this.palabra = "una "
-      }
+
+  switch (event.value) {
+    case 'INC':
+      this.palabra = "una falla en el vehículo ";
+      break;
+    case 'ACC':
+      this.palabra = "un accidente en el vehículo ";
+      break;
+    case 'PTR':
+      this.palabra = "como pérdida total o robo el vehículo ";
+      break;
+    default:
+      // 
+      break;  
+
+}
+
+
       this.dialog
       .open(DialogoConfirmacionComponent, {
-        data: `Se registrará `+ this.palabra + event.value[1] +` para el vehículo ` + this.incidente[0].Vehiculo + `.`, 
+        data: `Se registrará `+ this.palabra + this.incidente[0].Vehiculo + `.`, 
         width: '50%'
       })
       .afterClosed()
       .subscribe((confirmado: Boolean) => {
         if (confirmado) {
-            this.Tiponcidente = event.value[0];           
+            this.TipoIncidente = event.value;           
             this.aplicarSiniestro();
         } else {
 
@@ -231,11 +210,10 @@ mostrarDialogoConfirmacion(event: any): void {
   
   //Abre modal para alta de los operadores
   aplicarSiniestro(): void {
-    this.incidenteService.postConcesionarioIncidenteSiniestro(this.incidente[0].IdVehiculo, this.Tiponcidente )
+    this.incidenteService.postConcesionarioIncidenteSiniestro(this.incidente[0].IdVehiculo, this.TipoIncidente )
     .pipe(first())
     .subscribe(data => {
-        console.log("regreso de aplicarSiniestro ")
-        console.log(data)
+
         if (data.estatus ) {
           this.placa = this.f.placa.value;
           this.getConsultaIncidente(this.placa)   
