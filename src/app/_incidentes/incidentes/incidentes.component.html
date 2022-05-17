@@ -123,79 +123,33 @@
                 <mat-cell *matCellDef="let row"> {{row.EstatusCita}} </mat-cell>
             </ng-container>
 
-            <!-- Progress Column -->
-            <ng-container matColumnDef="GenerarCita">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> GenerarCita </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.GenerarCita}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="DictaminarRevision">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> DictaminarRevision </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.DictaminarRevision}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="DocumentarEvidencia">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> DocumentarEvidencia </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.DocumentarEvidencia}} </mat-cell>
-            </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="DictaminarSeguro">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> DictaminarSeguro </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.DictaminarSeguro}} </mat-cell>
-            </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="RegistrarFechaArreglo">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> RegistrarFechaArreglo </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.RegistrarFechaArreglo}} </mat-cell>
             </ng-container>
-
-            <!--             
-            <div fxFlex="25" fxFlex.lt-md="100" fxl>
-                <mat-form-field class="example-full-width">
-                    <mat-select placeholder="tiposIncidentes" formControlName="tiposIncidentes" required [errorStateMatcher]="matcher">
-                        <mat-option *ngFor="let tipoIncidente of tiposIncidentes" [value]="tipoIncidente.TipoIncidente">
-                            {{tipoIncidente.viewValue}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="reactiveForm.get('tiposIncidentes')!.hasError('required')">
-                        El dato es obligatorio
-                    </mat-error>
-                </mat-form-field>
-            </div>
--->
-            <ng-container matColumnDef="tiposIncidentes">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Tipos Incidentes </mat-header-cell>
+            
+            
+            <!-- ID Column -->
+            <ng-container matColumnDef="IdTipoIncidente">
+                <mat-header-cell *matHeaderCellDef> Tipos de incidentes </mat-header-cell>
                 <mat-cell *matCellDef="let row">
-                    <mat-select placeholder="Tipos Incidentes" formControlName="tiposIncidentes" [disabled]="!TipoIncidenteB" value="selected" required (selectionChange)="mostrarDialogoConfirmacion($event)" [errorStateMatcher]="matcher">
-                        <mat-option *ngFor="let tipoIncidente of tiposIncidentes" [value]="[tipoIncidente.TipoIncidente, tipoIncidente.viewValue]">
-                            {{tipoIncidente.viewValue}}
-                        </mat-option>
-                    </mat-select>
+                    <mat-form-field>
+                        <mat-select placeholder="Seleccionar un valor" (selectionChange)="mostrarDialogoConfirmacion($event)" 
+                        value="{{row.IdTipoIncidente}}" [disabled]="!TipoIncidenteB" >
+                            <mat-option *ngFor="let idTipoIncidente of tiposIncidentes" [value]="idTipoIncidente.TipoIncidente">
+                                {{idTipoIncidente.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </mat-cell>
-            </ng-container>
+            </ng-container>                         
 
-
-            <!-- Progress Column -->
-            <!-- 
-            <ng-container matColumnDef="tiposIncidentes">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Tipos Incidentes </mat-header-cell>
-                <mat-select placeholder="tiposIncidentes" formControlName="tiposIncidentes" required [errorStateMatcher]="matcher">
-                    <mat-option *ngFor="let tipoIncidente of tiposIncidentes" [value]="tipoIncidente.TipoIncidente">
-                        {{tipoIncidente.viewValue}}
-                    </mat-option>
-                </mat-select>
-
-                <mat-cell *matCellDef="let row"> {{row.tiposIncidentes}} </mat-cell>
-            </ng-container>
-        -->
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
                 <mat-cell *matCellDef="let row">
-                    <button mat-mini-fab class="button-documentos" (click)="documentos(row)" [disabled]="row.DocumentarEvidencia" matTooltip="Ir a documentos">
+                    <button mat-mini-fab class="button-documentos" (click)="documentos(row)" [disabled]="!row.DocumentarEvidencia" matTooltip="Ir a documentos">
 						<mat-icon class="iconSize">attach_file</mat-icon>
 					</button>&nbsp; &nbsp;
 
