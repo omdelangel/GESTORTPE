@@ -13,7 +13,6 @@ import { DialogoConfirmacionComponent } from './../../_components/dialogo-confir
 import { DocumentosIncidentesComponent } from './../documentos-incidentes';
 import { DialogoTalleresIncidenteComponent } from './../dialogo-talleres-incidente';
 import { EdicionCitaIncidenteComponent} from './../edicion-cita-incidente';
-import { getTestBed } from '@angular/core/testing';
 
 
 
@@ -119,7 +118,8 @@ export class IncidentesComponent implements OnInit {
         this.incidenteService.getConcesionarioIncidente(placa)
           .pipe(first())
           .subscribe(data => {
-
+            console.log("Consulta de Incidente   ")
+            console.log(data)
 
             if (data.estatus == true && data.concesionario != "") {
 
