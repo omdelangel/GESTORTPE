@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { CitasIncidente } from 'src/app/_models';
-import { PilotoService, CitasService } from 'src/app/_services';
+import { IncidenteService, CitasService } from 'src/app/_services';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm, ControlContainer } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -37,26 +36,30 @@ export class EdicionCitaIncidenteComponent implements OnInit {
   valorCancel:boolean = false;
   idCita: number = 0;
   estatusCita: string = "";
-  Vehiculo:string = "";  
+  Vehiculo:string = ""; 
+  IdIncidenteSiniestro                :number;         
 
 
   constructor(
-    private pilotoService    : PilotoService,
-    private formBuilder      : FormBuilder,
-    public dialog            : MatDialog,
-    notifierService          : NotifierService,
-    private citaService      : CitasService,
-    public dialogRef         : MatDialogRef<EdicionCitaIncidenteComponent>,
+    private incidenteService   : IncidenteService,
+    private formBuilder        : FormBuilder,
+    public dialog              : MatDialog,
+    notifierService            : NotifierService,
+    private citaService        : CitasService,
+    public dialogRef           : MatDialogRef<EdicionCitaIncidenteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.notifier = notifierService;   
     dialogRef.disableClose = true;
-    this.idCita            = data.IdCita, 
-    this.estatusCita       = data.EstatusCita, 
-    this.Concesionario     = data.Concesionario, 
-    this.idConcesionario   = data.IdConcesionario, 
-    this.idVehiculo        = data.IdVehiculo,
-    this.Vehiculo          = data.Vehiculo
+    console.log("parametros data edicion")
+    console.log(data)
+    this.idCita                = data.idCita, 
+    this.estatusCita           = data.estatusCita, 
+    this.Concesionario         = data.Concesionario, 
+    this.idConcesionario       = data.idConcesionario, 
+    this.idVehiculo            = data.idVehiculo,
+    this.Vehiculo              = data.Vehiculo,
+    this.IdIncidenteSiniestro  = data.IdIncidenteSiniestro
 
     switch (this.estatusCita) {
       case 'A':
@@ -108,18 +111,22 @@ export class EdicionCitaIncidenteComponent implements OnInit {
   //Consulta los datos del concesionario
   obtieneCita(idCita: number) {
     //this.clear();
-
-    this.citaService.getCitaInstalacion(idCita)
+    console.log("obtieneCita")
+    console.log(idCita)
+    
+    this.incidenteService.getCitaIncidente(idCita)
       .pipe(first())
       .subscribe(data => {
-
+        console.log("obtieneCita data")
+        console.log(data)
+    
         this.f.Concesionario.setValue(this.Concesionario);
-        this.f.Taller.setValue(data.citaInstalacion[0].Taller);
-        this.f.Domicilio.setValue(data.citaInstalacion[0].Domicilio + " " + data.citaInstalacion[0].Colonia + " " + data.citaInstalacion[0].CP + " " + data.citaInstalacion[0].Municipio + " " + data.citaInstalacion[0].EntidadFederativa);
-        this.f.Telefono.setValue(data.citaInstalacion[0].Telefono);
-        this.f.Contacto.setValue(data.citaInstalacion[0].Contacto);
-        this.f.Fecha.setValue(data.citaInstalacion[0].Fecha);
-        this.f.Hora.setValue(data.citaInstalacion[0].Hora);
+        this.f.Taller.setValue(data.citaIncidente[0].Taller);
+        this.f.Domicilio.setValue(data.citaIncidente[0].Domicilio + " " + data.citaIncidente[0].Colonia + " " + data.citaIncidente[0].CP + " " + data.citaIncidente[0].Municipio + " " + data.citaIncidente[0].EntidadFederativa);
+        this.f.Telefono.setValue(data.citaIncidente[0].Telefono);
+        this.f.Contacto.setValue(data.citaIncidente[0].Contacto);
+        this.f.Fecha.setValue(data.citaIncidente[0].Fecha);
+        this.f.Hora.setValue(data.citaIncidente[0].Hora);
       },
         error => {
         });
@@ -129,7 +136,7 @@ export class EdicionCitaIncidenteComponent implements OnInit {
   //Cancela de cita
   cancelarCita() {
 
-    this.citaService.postCancelaCitaInstalacion(this.idVehiculo, this.idCita)
+    this.incidenteService.postCancelaCitaIncidente(this.IdIncidenteSiniestro, this.idCita)
       .pipe(first())
       .subscribe(
         data => {
@@ -183,9 +190,12 @@ export class EdicionCitaIncidenteComponent implements OnInit {
 
           const dialogRef = this.dialog.open(DialogoTalleresIncidenteComponent, {
             data: {
-                  Concesionario     :this.Concesionario, 
-                  idConcesionario   :this.idConcesionario, 
-                  idVehiculo        :this.idVehiculo
+                  idCita                 :this.idCita, 
+                  estatusCita            :this.estatusCita, 
+                  IdIncidenteSiniestro   :this.IdIncidenteSiniestro,
+                  Concesionario          :this.Concesionario, 
+                  idConcesionario        :this.idConcesionario, 
+                  idVehiculo             :this.idVehiculo
                   },
                 width: '100%'
           });
@@ -204,9 +214,12 @@ export class EdicionCitaIncidenteComponent implements OnInit {
 
           const dialogRef = this.dialog.open(DialogoTalleresIncidenteComponent, {
             data: { 
-                  Concesionario     :this.Concesionario, 
-                  idConcesionario   :this.idConcesionario, 
-                  idVehiculo        :this.idVehiculo
+                  idCita                 :this.idCita, 
+                  estatusCita            :this.estatusCita, 
+                  IdIncidenteSiniestro   :this.IdIncidenteSiniestro,
+                  Concesionario          :this.Concesionario, 
+                  idConcesionario        :this.idConcesionario, 
+                  idVehiculo             :this.idVehiculo
                   },
             width: '100%'
           });

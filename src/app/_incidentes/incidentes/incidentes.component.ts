@@ -69,6 +69,7 @@ export class IncidentesComponent implements OnInit {
   palabra             :string;
   TipoIncidente        :string = "";
 
+
   //Catálogos locales
   tiposIncidentes: TiposIncidentes[] = [
     { TipoIncidente: 'INC', viewValue: 'Falla en vehículo' },
@@ -188,7 +189,6 @@ mostrarDialogoConfirmacion(event: any): void {
     default:
       // 
       break;  
-
 }
 
 
@@ -256,6 +256,8 @@ documentos(e: any){
 
 //Registro de Citas para el incidente
 cita(e: any) {
+  console.log("cita e ===> ")
+  console.log(e)
 
   if (e.EstatusCita == null || e.EstatusCita == "" || e.EstatusCita == "V" || e.EstatusCita == "C") {
 
@@ -280,12 +282,13 @@ cita(e: any) {
     const dialogRef = this.dialog.open(EdicionCitaIncidenteComponent, {
       disableClose: true,
       data: {
-            idCita            :e.IdCita, 
-            estatusCita       :e.EstatusCita, 
-            Concesionario     :e.Concesionario, 
-            idConcesionario   :e.IdConcesionario, 
-            idVehiculo        :e.IdVehiculo,
-            Vehiculo          :e.Vehiculo
+            idCita                  :e.IdCita, 
+            estatusCita             :e.EstatusCita, 
+            Concesionario           :e.Concesionario, 
+            idConcesionario         :e.IdConcesionario, 
+            idVehiculo              :e.IdVehiculo,
+            Vehiculo                :e.Vehiculo,
+            IdIncidenteSiniestro    :e.IdIncidenteSiniestro
       },
     });
 

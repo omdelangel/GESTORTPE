@@ -112,6 +112,35 @@ postGuardaEvidencias(formData: any): Observable<any> {
   ) 
 }
 
+//Obtiene los datos de la cita de instalación
+getCitaIncidente(idCita: number): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('IdCita', idCita);
+
+  return this.http.get<any>(`${environment.SERVER_URL}/cita-incidente-id`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Cancela la Cita del Incidente
+postCancelaCitaIncidente(IdIncidenteSiniestro: number, IdCita: number): Observable<any> {
+
+  return this.http.post<any>(`${environment.SERVER_URL}/cita-incidente-cancelacion`, {'IdIncidenteSiniestro': IdIncidenteSiniestro, 
+  'IdCita': IdCita})
+  .pipe(map((res: Response) => { 
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+
 
     // Error 
     handleError(error: HttpErrorResponse) {
