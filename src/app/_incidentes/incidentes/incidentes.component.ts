@@ -279,16 +279,17 @@ documentos(e: any){
 //Registro de Citas para el incidente
 cita(e: any) {
 
-  if (e.EstatusCita == null || e.EstatusCita == "V" || e.EstatusCita == "C") {
+  if (e.EstatusCita == null || e.EstatusCita == "" || e.EstatusCita == "V" || e.EstatusCita == "C") {
 
     const dialogRef = this.dialog.open(DialogoTalleresIncidenteComponent, {
       disableClose: true,
       data: { 
-            idCita            :e.IdCita, 
-            estatusCita       :e.EstatusCita, 
-            Concesionario     :e.Concesionario, 
-            idConcesionario   :e.IdConcesionario, 
-            idVehiculo        :e.IdVehiculo
+            idCita                 :e.IdCita, 
+            estatusCita            :e.EstatusCita, 
+            IdIncidenteSiniestro   :e.IdIncidenteSiniestro,
+            Concesionario          :e.Concesionario, 
+            idConcesionario        :e.IdConcesionario, 
+            idVehiculo             :e.IdVehiculo
             },
     });
 

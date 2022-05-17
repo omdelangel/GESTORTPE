@@ -5,7 +5,6 @@ import { CalendarOptions } from '@fullcalendar/angular';
 import * as moment from 'moment';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { HoracitaDialogComponent } from '../../_components/horacita-dialog';
-import { Citas, DisponibilidadCitas } from 'src/app/_models/cita.model';
 import { CitasIncidente } from 'src/app/_models';
 import { IncidenteService } from 'src/app/_services';
 import { first } from 'rxjs/operators';
@@ -33,16 +32,14 @@ export class AltacitaIncidenteComponent implements OnInit {
   domicilioValue: string = "";
   telefonoValue: string = "";
   contactoValue: string = "";
-  citas!: Citas;
-  disponibles!: DisponibilidadCitas;
   nombreConcesionario: string = "";
   idVehiculoValue: number = 0;
   idConcesionarioValue: number = 0;
   diaHora: any;
-  idCitaValue: number = 0;
+  idCita: number = 0;
+  IdIncidenteSiniestro:number = 0;
   estatusCita: string = "";
   
-
   //Determina si viene del registro o de la formalización
   causaValue: string = "";
 
@@ -110,6 +107,8 @@ export class AltacitaIncidenteComponent implements OnInit {
     notifierService               :NotifierService,
     public dialogRef              :MatDialogRef<AltacitaIncidenteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
+      console.log("Data alta cita")
+      console.log(data)
 
     dialogRef.disableClose = true;
     this.notifier               = notifierService;
@@ -121,8 +120,9 @@ export class AltacitaIncidenteComponent implements OnInit {
     this.nombreConcesionario    = data.nombreConce;
     this.idConcesionarioValue   = data.idConce;
     this.idVehiculoValue        = data.idVehi;
-    this.causaValue             = data.causa;
-
+    this.idCita                 = data.idCita, 
+    this.estatusCita            = data.estatusCita, 
+    this.IdIncidenteSiniestro   = data.IdIncidenteSiniestro
   }
 
 
@@ -145,23 +145,24 @@ export class AltacitaIncidenteComponent implements OnInit {
     }
   }
 
-  //Registra la cita para desinstalar el convertidor
+  //Registra la cita para el Incidente
   guardarCita() {
+    console.log("guardar cita")
 
     this.submitted = true;
 
-    if (this.idCitaValue == 0 || this.idCitaValue == null || this.estatusCita == "D" || this.estatusCita == "V" || this.estatusCita == "C" ) {
+    if (this.idCita == 0 || this.idCita == null || this.estatusCita == "" ||this.estatusCita == "D" || this.estatusCita == "V" || this.estatusCita == "C" ) {
 
     if (this.dia != undefined && this.hora != undefined && this.dia != "" && this.hora != "") {
 
-      this.diaHora = moment(this.dia + " " + this.hora).format('YYYY-MM-DD HH:mm:ss');
-      this.citas = { 
-                    IdCita: this.idCitaValue, 
-                    IdVehiculo: this.idVehiculoValue, 
-                    IdConcesionario: this.idConcesionarioValue, 
-                    Fecha: this.diaHora, 
-                    IdTaller: this.idTallerValue 
+      this.diaHora = moment(this.dia + " " + this.hora).format('YYYY-MM-DD HH:mm');
+      this.citasIncidente = { 
+                    IdIncidenteSiniestro    :this.IdIncidenteSiniestro,
+                    Fecha                   :this.diaHora,
+                    IdTaller                :this.idTallerValue, 
+                    IdCita                  :this.idCita 
                   }
+        console.log(this.citasIncidente)
 
         this.incidenteService.postRegistraCitaIncidente(this.citasIncidente)
           .pipe(first())
@@ -169,9 +170,11 @@ export class AltacitaIncidenteComponent implements OnInit {
             data => {
 
               if (data.estatus) {
+                console.log("regreso del alta de cita incidente")
+                console.log(data)
                 //this.success(data.mensaje);  
                 this.notifier.notify('success', data.mensaje, '');
-                this.dialogRef.close({ idCita: data.IdCitaDesinstalacion, dia: this.dia, hora: this.hora });
+                this.dialogRef.close({ idCita: data.IdCita, dia: this.dia, hora: this.hora });
               } else {
                 //this.warn(data.mensaje);
                 this.notifier.notify('warning', data.mensaje, '');
@@ -188,12 +191,17 @@ export class AltacitaIncidenteComponent implements OnInit {
       //this.info("Seleccione fecha y hora de la cita!!!");
       this.notifier.notify('info', "Seleccione fecha y hora de la cita!!!", '');
     }
-  } else if (this.idCitaValue != 0 && this.estatusCita == "A") {
+  } else if (this.idCita != 0 && this.estatusCita == "A") {
 
     if (this.dia != undefined && this.hora != undefined && this.dia != "" && this.hora != "") {
 
-      this.diaHora = moment(this.dia + " " + this.hora).format('YYYY-MM-DD HH:mm:ss');
-      this.citas = { IdCita: this.idCitaValue, IdVehiculo: this.idVehiculoValue, IdConcesionario: this.idConcesionarioValue, Fecha: this.diaHora, IdTaller: this.idTallerValue }
+      this.diaHora = moment(this.dia + " " + this.hora).format('YYYY-MM-DD HH:mm');
+      this.citasIncidente = { 
+        IdIncidenteSiniestro    :this.IdIncidenteSiniestro,
+        Fecha                   :this.diaHora,
+        IdTaller                :this.idTallerValue, 
+        IdCita                  :this.idCita 
+      }      
 
         this.incidenteService.postModificaCitaIncidente(this.citasIncidente)
           .pipe(first())
@@ -203,7 +211,7 @@ export class AltacitaIncidenteComponent implements OnInit {
               if (data.estatus) {
                 //this.success(data.mensaje);  
                 this.notifier.notify('success', data.mensaje, '');
-                this.dialogRef.close({ idCita: data.IdCitaDesinstalacion, dia: this.dia, hora: this.hora });
+                this.dialogRef.close({ idCita: data.IdCita, dia: this.dia, hora: this.hora });
               } else {
                 //this.warn(data.mensaje);
                 this.notifier.notify('warning', data.mensaje, '');

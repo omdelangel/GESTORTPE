@@ -147,6 +147,16 @@
                                     <mat-cell *matCellDef="let row"> {{row.Estatus}} </mat-cell>
                                 </ng-container>
 
+                                <!-- ID Column -->
+                                <ng-container matColumnDef="Estatus">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.Estatus=='A' ? 'Abierta': ''}} {{row.Estatus=='D' ? 'Dictaminada': ''}} {{row.Estatus=='C' ? 'Cancelada': ''}} {{row.Estatus=='V' ? 'Vencida': ''}}</mat-cell>
+                                </ng-container>
+
+
+
+
                                 <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
                                 <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectRecord(row)">
                                 </mat-row>

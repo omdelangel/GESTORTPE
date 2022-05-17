@@ -47,6 +47,7 @@ export class DialogoTalleresIncidenteComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   idCita              :number = 0;
   estatusCita         :string = "";
+  IdIncidenteSiniestro:number;        
   concesionario       :string = "";
   idConcesionario     :number = 0;
   idVehiculo          :number = 0;
@@ -73,11 +74,12 @@ export class DialogoTalleresIncidenteComponent implements OnInit {
        dialogRef.disableClose = true;
        console.log("data dialogo-talleres-incidente")
        console.log(data)
-       this.idCita            = data.idCita, 
-       this.estatusCita       = data.estatusCita, 
-       this.concesionario     = data.concesionario, 
-       this.idConcesionario   = data.idConcesionario, 
-       this.idVehiculo        = data.idVehiculo
+       this.idCita                = data.idCita, 
+       this.estatusCita           = data.estatusCita, 
+       this.IdIncidenteSiniestro  = data.IdIncidenteSiniestro,
+       this.concesionario         = data.Concesionario, 
+       this.idConcesionario       = data.idConcesionario, 
+       this.idVehiculo            = data.idVehiculo
     }
 
   ngOnInit(): void {
@@ -121,23 +123,26 @@ export class DialogoTalleresIncidenteComponent implements OnInit {
 
     const dialogRef = this.dialog.open(AltacitaIncidenteComponent, {
       data: {
-            idCita          :this.idCita, 
-            estatusCita     :this.estatusCita, 
-            idTaller        :row.IdTaller, 
-            nombreTaller    :row.Nombre, 
-            domicilio       :row.Domicilio + " " + row.Colonia + " " + "CP: " +row.CP + " " + row.Municipio + " " + row.EntidadFederativa, 
-            telefono        :row.Telefono, 
-            contacto        :row.Contacto, 
-            nombreConce     :this.concesionario,
-            idConce         :this.idConcesionario, 
-            idVehi          :this.idVehiculo
+            idCita                :this.idCita, 
+            estatusCita           :this.estatusCita, 
+            IdIncidenteSiniestro  :this.IdIncidenteSiniestro,
+            idTaller              :row.IdTaller, 
+            nombreTaller          :row.Nombre, 
+            domicilio             :row.Domicilio + " " + row.Colonia + " " + "CP: " +row.CP + " " + row.Municipio + " " + row.EntidadFederativa, 
+            telefono              :row.Telefono, 
+            contacto              :row.Contacto, 
+            nombreConce           :this.concesionario,
+            idConce               :this.idConcesionario, 
+            idVehi                :this.idVehiculo
             },
       width: '100%',
       //height: '100%'
     });
 
     dialogRef.afterClosed().subscribe(res => {
-
+      console.log("regreso del alta, estoy en el dialogo")
+      console.log(res)
+      console.log(res.idCita)
 
      if (res != undefined) {
 

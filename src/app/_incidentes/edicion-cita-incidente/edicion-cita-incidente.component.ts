@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Citas, DatosCita } from 'src/app/_models/cita.model';
+import { CitasIncidente } from 'src/app/_models';
 import { PilotoService, CitasService } from 'src/app/_services';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm, ControlContainer } from '@angular/forms';
