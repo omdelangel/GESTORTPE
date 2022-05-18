@@ -93,7 +93,7 @@ export class DocumentoEvidencia {
 
         }
 } 
-
+/*
 export class DictamenCitaIncidente {
     IdCita                :number;
     IdIncidenteSiniestro  :number;
@@ -115,4 +115,5 @@ export class DictamenCitaIncidente {
         this.Observaciones = dictamenCita.Observaciones;
     }
 }
+*/
 
