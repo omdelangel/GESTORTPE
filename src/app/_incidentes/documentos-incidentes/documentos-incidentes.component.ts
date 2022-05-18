@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { DocumentoEvidencia } from 'src/app/_models';
 import {SelectionModel} from '@angular/cdk/collections';
+import { DocViewerComponent } from '../../_components/doc-viewer'; 
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -29,6 +30,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class DocumentosIncidentesComponent implements OnInit {
 
   private readonly notifier: NotifierService;
+
+  displayedColumns = ['ArchivoEvidencia', 'actions' ];
+  dataSource!: MatTableDataSource<DocumentoEvidencia>;
+   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+
   public files: any[] = [];
   idEvidencia: number = 0;
   idIncidenteSiniestro: string = "";
@@ -37,18 +45,13 @@ export class DocumentosIncidentesComponent implements OnInit {
   vehiculo: string = "";
   reactiveForm!: FormGroup;
   dataVal:boolean = false;
+  documentosEvidencia: DocumentoEvidencia[] = [];
 
-  displayedColumns = ['ArchivoEvidencia', 'actions' ];
-  dataSource!: MatTableDataSource<DocumentoEvidencia>;
-  selection = new SelectionModel<DocumentoEvidencia>(true, []);
-
-
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private formBuilder: FormBuilder,
     public incidenteService: IncidenteService,
     notifierService: NotifierService,
+    public dialog: MatDialog,
     public dialogRef: MatDialogRef<DocumentosIncidentesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
 
@@ -130,8 +133,8 @@ export class DocumentosIncidentesComponent implements OnInit {
         if (dataList.estatus) {
 
           this.dataVal = true;
-          this.dataSource = new MatTableDataSource(dataList.Evidencias);
-
+          this.documentosEvidencia = dataList.Evidencias;
+          this.dataSource = new MatTableDataSource(this.documentosEvidencia);
           // Assign the data to the data source for the table to render
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
@@ -161,13 +164,19 @@ export class DocumentosIncidentesComponent implements OnInit {
       this.dataSource.filter = filterValue;
     }
 
-    verDocumento(event: any){
+   //Abre modal visualizar el documento
+  verDocumento(archivoPDF: any): void {
 
-       console.log(event);
+    const dialogRef = this.dialog.open(DocViewerComponent, {
+      width: '50%',
+      height: '80%',
+      disableClose: true,
+      data: { archivoPDF: archivoPDF.ArchivoEvidencia }
+    });
+    dialogRef.afterClosed().subscribe(res => {
 
-
-    }
-
+    });
+  }
 
 }
 

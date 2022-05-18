@@ -13,6 +13,7 @@ import { DialogoConfirmacionComponent } from './../../_components/dialogo-confir
 import { DocumentosIncidentesComponent } from './../documentos-incidentes';
 import { DialogoTalleresIncidenteComponent } from './../dialogo-talleres-incidente';
 import { EdicionCitaIncidenteComponent} from './../edicion-cita-incidente';
+import { DialogoConfirmaArregloComponent } from '../dialogo-confirma-arreglo';
 
 
 
@@ -233,8 +234,6 @@ mostrarDialogoConfirmacion(event: any): void {
 
 //Proceso para documentos
 documentos(e: any){
-
-  console.log(e)
    
   const dialogRef = this.dialog.open(DocumentosIncidentesComponent, {
     disableClose: true,
@@ -245,7 +244,7 @@ documentos(e: any){
       Vehiculo              :e.Vehiculo
     },
     width: '1500px',
-    height: '700px'
+    height: '800px'
   });
 
   dialogRef.afterClosed().subscribe(res => {
@@ -299,27 +298,6 @@ cita(e: any) {
 }  
 
 
-
-
-
-  //Abre modal para alta de los operadores
-  openDialog(): void {
-    /*
-    const dialogRef = this.dialog.open(OperadoresAltaComponent, {
-      disableClose: true,
-      data: {IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo}
-      //width: '1500px',
-      //height: '900px'
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      this.getConsultaIncidente(this.placa);
-    });
-    */
-  }
-  
-
-
   dictaminar(e: any){
     /*
         const dialogRef = this.dialog.open(DialogoOperadorEditaComponent, {
@@ -336,18 +314,23 @@ cita(e: any) {
     
   }
   confirmacion(e: any){
-    /*
-        const dialogRef = this.dialog.open(DialogoOperadorEditaComponent, {
+
+        const dialogRef = this.dialog.open(DialogoConfirmaArregloComponent, {
           disableClose: true,
-          data: { data: e, IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo},
+          data:{
+            IdTipoSiniestro       :e.IdTipoIncidente,
+            IdIncidenteSiniestro  :e.IdIncidenteSiniestro,
+            Concesionario         :e.Concesionario, 
+            Vehiculo              :e.Vehiculo
+          },
           //width: '1500px',
           //height: '900px'
         });
     
         dialogRef.afterClosed().subscribe(res => {
-          this.getConsultaOperadores(this.placa);
+          this.getConsultaIncidente(this.placa);
         });
-    */
+
     
   }
       

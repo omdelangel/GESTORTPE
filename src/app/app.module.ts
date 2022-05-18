@@ -125,6 +125,7 @@ import { FileDragNDropDirective } from './_incidentes/file-drag-n-drop.directive
 import { AltacitaIncidenteComponent } from './_incidentes/altacita-incidente/altacita-incidente.component';
 import { DialogoTalleresIncidenteComponent } from './_incidentes/dialogo-talleres-incidente/dialogo-talleres-incidente.component';
 import { EdicionCitaIncidenteComponent } from './_incidentes/edicion-cita-incidente/edicion-cita-incidente.component';
+import { DialogoConfirmaArregloComponent } from './_incidentes/dialogo-confirma-arreglo/dialogo-confirma-arreglo.component';
 
 
 /**
@@ -285,6 +286,7 @@ FullCalendarModule.registerPlugins([
     AltacitaIncidenteComponent,
     DialogoTalleresIncidenteComponent,
     EdicionCitaIncidenteComponent,
+    DialogoConfirmaArregloComponent,
   ],
   imports: [
     BrowserModule,

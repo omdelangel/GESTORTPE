@@ -24,8 +24,8 @@
 									<div class="centered">
 										<input type="file" name="file" id="file"
 											(change)="onFileChange($any($event).target.files)" multiple>
-										<label for="file"><span class="textLink">Selecciona tu(s)
-												archivo(s)</span> o arrastra aquí!</label>
+										<label for="file"><span class="textLink"><mat-icon>save_alt</mat-icon>Selecciona tu(s)
+												archivo(s)	</span> o arrastra aquí!</label>
 									</div>
 								</div>
 							</div>
@@ -75,14 +75,12 @@
                                             </button>
                                         </mat-cell>
                                     </ng-container>
-                        
-						
-                        
+									                        				                    
                                     <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
                                     <mat-row *matRowDef="let row; columns: displayedColumns;">
                                     </mat-row>
                                 </mat-table>
-                                <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+                                <mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
 
 							</div>
 						</div>

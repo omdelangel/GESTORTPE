@@ -172,3 +172,14 @@
     color: #001C71;
     font-weight: normal;
 }
+
+.example-container {
+    height: 400px;
+    max-width: 100%;
+    overflow: auto;
+  }
+
+  .mat-table {
+    overflow: auto;
+    max-height: 100%;
+  }

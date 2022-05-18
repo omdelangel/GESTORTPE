@@ -141,6 +141,24 @@ postCancelaCitaIncidente(IdIncidenteSiniestro: number, IdCita: number): Observab
 }
 
 
+//Registra la fecha del arreglo
+postRegistraFechaArreglo(idIncidenteSiniestro: string, fechaArreglo: string, tipoIncidente: string): Observable<any> {
+
+  console.log(idIncidenteSiniestro);
+  console.log(fechaArreglo)
+  console.log(tipoIncidente)
+
+  return this.http.post<any>(`${environment.SERVER_URL}/asignacion-fecha-arreglo`, {'IdIncidenteSiniestro': idIncidenteSiniestro, 
+  'FechaArreglo': fechaArreglo, 'TipoIncidente': tipoIncidente})
+  .pipe(map((res: Response) => { 
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+
 
     // Error 
     handleError(error: HttpErrorResponse) {
