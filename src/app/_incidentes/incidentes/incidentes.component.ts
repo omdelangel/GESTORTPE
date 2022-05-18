@@ -13,6 +13,7 @@ import { DialogoConfirmacionComponent } from './../../_components/dialogo-confir
 import { DocumentosIncidentesComponent } from './../documentos-incidentes';
 import { DialogoTalleresIncidenteComponent } from './../dialogo-talleres-incidente';
 import { EdicionCitaIncidenteComponent} from './../edicion-cita-incidente';
+import { DictamenIncidenteComponent } from './../dictamen-incidente'
 import { DialogoConfirmaArregloComponent } from '../dialogo-confirma-arreglo';
 
 
@@ -299,21 +300,61 @@ cita(e: any) {
 }  
 
 
-  dictaminar(e: any){
-    /*
-        const dialogRef = this.dialog.open(DialogoOperadorEditaComponent, {
-          disableClose: true,
-          data: { data: e, IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo},
-          //width: '1500px',
-          //height: '900px'
-        });
-    
-        dialogRef.afterClosed().subscribe(res => {
-          this.getConsultaIncidente(this.placa);
-        });
-    */
-    
+
+  //Dictaminar
+  dictaminar(e: any) {
+    console.log("dictaminar e ===>")
+    console.log(e)
+
+    if (e.EstatusCita != "A" || e.Dictaminar == 0) {
+
+      this.notifier.notify('info', 'Para poder dictaminar la cita, debe estar activa o tener una fecha posterior!!', '');
+
+
+    } else {
+
+      const dialogRef = this.dialog.open(DictamenIncidenteComponent, {
+        disableClose: true,
+        data: {
+          idCita                  :e.IdCita, 
+          estatusCita             :e.EstatusCita, 
+          Concesionario           :e.Concesionario, 
+          idConcesionario         :e.IdConcesionario, 
+          idVehiculo              :e.IdVehiculo,
+          Vehiculo                :e.Vehiculo,
+          IdIncidenteSiniestro    :e.IdIncidenteSiniestro
+        },
+        width: '100%',
+        //height: '90%'
+      });
+
+      dialogRef.afterClosed().subscribe(res => {
+        this.getConsultaIncidente(this.placa);
+      });
+
+    }
+
   }
+
+
+
+
+  //Abre modal para alta de los operadores
+  openDialog(): void {
+    /*
+    const dialogRef = this.dialog.open(OperadoresAltaComponent, {
+      disableClose: true,
+      data: {IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo}
+      //width: '1500px',
+      //height: '900px'
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      this.getConsultaIncidente(this.placa);
+    });
+    */
+  }
+  
   confirmacion(e: any){
 
         const dialogRef = this.dialog.open(DialogoConfirmaArregloComponent, {

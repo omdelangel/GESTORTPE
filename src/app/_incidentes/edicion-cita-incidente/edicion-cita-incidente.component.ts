@@ -1,13 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { IncidenteService, CitasService } from 'src/app/_services';
+import { IncidenteService } from 'src/app/_services';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm, ControlContainer } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { DialogoConfirmacionComponent } from '../../_components/dialogo-confirmacion';
+import { DialogoConfirmacionIncidenteComponent } from '../../_incidentes/dialogo-confirmacion-incidente';
 import { DialogoTalleresIncidenteComponent } from '../dialogo-talleres-incidente';
 import { NotifierService } from 'angular-notifier';
-import { HoracitaDialogComponent } from '../../_components/horacita-dialog/horacita-dialog.component';
+
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -45,7 +45,6 @@ export class EdicionCitaIncidenteComponent implements OnInit {
     private formBuilder        : FormBuilder,
     public dialog              : MatDialog,
     notifierService            : NotifierService,
-    private citaService        : CitasService,
     public dialogRef           : MatDialogRef<EdicionCitaIncidenteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
@@ -162,7 +161,7 @@ export class EdicionCitaIncidenteComponent implements OnInit {
   //Cancela la cita
   mostrarDialogoCancelar(): void {
     this.dialog
-      .open(DialogoConfirmacionComponent, {
+      .open(DialogoConfirmacionIncidenteComponent, {
         data: `¿Desea cancelar la cita?`,
         width: '25%'
       })
@@ -180,7 +179,7 @@ export class EdicionCitaIncidenteComponent implements OnInit {
   mostrarDialogoCancelarReagendar(): void {
 
     this.dialog
-      .open(DialogoConfirmacionComponent, {
+      .open(DialogoConfirmacionIncidenteComponent, {
         data: `¿Desea reagendar una nueva cita?`,
         width: '25%'
       })

@@ -141,6 +141,20 @@ postCancelaCitaIncidente(IdIncidenteSiniestro: number, IdCita: number): Observab
 }
 
 
+//Dictaminar la cita
+postDictamenCitaIncidente(dictamenCita: any): Observable<any> {
+
+  return this.http.post<any>(`${environment.SERVER_URL}/cita-incidente-dictamen`, 
+  {
+   'IdVehiculo': dictamenCita.IdVehiculo, 
+   'IdConcesionario': dictamenCita.IdConcesionario, 
+   'IdCita': dictamenCita.IdCita, 
+   'IdDictamen': dictamenCita.IdDictamen, 
+   'Observaciones': dictamenCita.Observaciones
+  })
+}
+
+
 //Registra la fecha del arreglo
 postRegistraFechaArreglo(idIncidenteSiniestro: string, fechaArreglo: string, tipoIncidente: string): Observable<any> {
 
