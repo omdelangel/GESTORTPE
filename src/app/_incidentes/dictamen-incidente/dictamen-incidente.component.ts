@@ -36,7 +36,7 @@ export class DictamenIncidenteComponent implements OnInit {
   IdIncidenteSiniestro: number = 0;
   modelo: string = "";
   estatusCita: string = "";
-  piloto: boolean = false;
+  incidente: boolean = false;
 
   constructor(
     private incidenteService   :IncidenteService,
