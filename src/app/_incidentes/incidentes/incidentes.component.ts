@@ -41,6 +41,7 @@ export class IncidentesComponent implements OnInit {
 
   //Columnas en Tabla de consulta
   displayedColumns = [
+                      'FechaReporte'          ,
                       'Concesionario'         ,
                       'TipoConvertidor'       ,
                       'TipoVehiculo'          ,
@@ -48,9 +49,8 @@ export class IncidentesComponent implements OnInit {
                       'FechaContrato'         ,
                       'Sindicato'             ,
                       'FechaCita'             ,
-                      'EstatusCita'           ,
-                      'IdTipoIncidente'       ,
-                      'FechaReporte'          ,
+                      'EstatusCita'           ,                     
+                      'IdTipoIncidente'       ,                    
                       'actions']
 
    dataSource!: MatTableDataSource<Incidente>;

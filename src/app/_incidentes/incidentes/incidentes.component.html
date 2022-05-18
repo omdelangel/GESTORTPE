@@ -33,13 +33,7 @@
         <mat-form-field>
             <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filtro">
         </mat-form-field>
-        <!--
-        <div fxFlex="50" fxLayoutAlign="end end">
-            <button mat-fab style="background-color: #80BC00; outline: none;" matTooltip="Alta de Operador" outline:none; (click)="openDialog()">
-        <mat-icon>add</mat-icon>
-      </button>
-        </div>
--->
+
     </div>
 
     <div class="example-container mat-elevation-z8" fxFlex="100" fxFlex.gt-md="100" id="htmlData">
@@ -68,7 +62,13 @@
                 <mat-header-cell *matHeaderCellDef mat-sort-header> IdConcesionario </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.IdConcesionario}} </mat-cell>
             </ng-container>
-
+            
+            <!-- Progress Column -->
+            <ng-container matColumnDef="FechaReporte">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Reporte </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaReporte}} </mat-cell>
+            </ng-container>
+            
             <!-- Progress Column -->
             <ng-container matColumnDef="Concesionario">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Concesionario </mat-header-cell>
@@ -124,14 +124,7 @@
                 <mat-cell *matCellDef="let row"> {{row.EstatusCita=='A' ? 'Abierta': ''}} {{row.EstatusCita=='D' ? 'Dictaminada': ''}} {{row.EstatusCita=='C' ? 'Cancelada': ''}} {{row.EstatusCita=='V' ? 'Vencida': ''}}</mat-cell>
             </ng-container>
 
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="FechaReporte">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Reporte </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.FechaReporte}} </mat-cell>
-            </ng-container>
-            
-            
+           
             <!-- ID Column -->
             <ng-container matColumnDef="IdTipoIncidente">
                 <mat-header-cell *matHeaderCellDef> Tipos de incidentes </mat-header-cell>
