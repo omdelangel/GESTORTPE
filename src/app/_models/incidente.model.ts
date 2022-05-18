@@ -93,3 +93,26 @@ export class DocumentoEvidencia {
 
         }
 } 
+
+export class DictamenCitaIncidente {
+    IdCita                :number;
+    IdIncidenteSiniestro  :number;
+    IdDictamen: number;
+    Observaciones: string;
+
+    constructor(dictamenCitaIncidente: {
+        IdVehiculo: number;
+        IdConcesionario: number;
+        IdCita: number;
+        IdDictamen: number;
+        Observaciones: string;
+
+    }) {
+        this.IdVehiculo = dictamenCita.IdVehiculo;
+        this.IdConcesionario = dictamenCita.IdConcesionario;
+        this.IdCita = dictamenCita.IdCita;
+        this.IdDictamen = dictamenCita.IdDictamen;
+        this.Observaciones = dictamenCita.Observaciones;
+    }
+}
+

@@ -141,6 +141,26 @@ postCancelaCitaIncidente(IdIncidenteSiniestro: number, IdCita: number): Observab
 }
 
 
+//Dictaminar la cita
+postDictamenCitaIncidente(dictamenCita: DictamenCita): Observable<any> {
+
+  return this.http.post<any>(`${environment.SERVER_URL}/cita-incidente-dictamen`, 
+  {
+   'IdVehiculo': dictamenCita.IdVehiculo, 
+   'IdConcesionario': dictamenCita.IdConcesionario, 
+   'IdCita': dictamenCita.IdCita, 
+   'IdDictamen': dictamenCita.IdDictamen, 
+   'Observaciones': dictamenCita.Observaciones
+  })
+  .pipe(map((res: Response) => { 
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+
 
     // Error 
     handleError(error: HttpErrorResponse) {
