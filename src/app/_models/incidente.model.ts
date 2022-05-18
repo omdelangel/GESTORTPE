@@ -17,6 +17,7 @@ export class Incidente {
     DocumentarEvidencia                 :boolean; 
     DictaminarSeguro                    :boolean; 
     RegistrarFechaArreglo               :boolean; 
+    FechaReporte                        :string;
 
     constructor(incidente: {
             IdTipoIncidente                     :string;  
@@ -36,7 +37,8 @@ export class Incidente {
             DictaminarRevision                  :boolean; 
             DocumentarEvidencia                 :boolean; 
             DictaminarSeguro                    :boolean; 
-            RegistrarFechaArreglo               :boolean;         
+            RegistrarFechaArreglo               :boolean;
+            FechaReporte                        :string;         
         }) {
             this.IdTipoIncidente                = incidente.IdTipoIncidente           ;
             this.IdIncidenteSiniestro           = incidente.IdIncidenteSiniestro      ;
@@ -56,6 +58,7 @@ export class Incidente {
             this.DocumentarEvidencia            = incidente.DocumentarEvidencia       ;
             this.DictaminarSeguro               = incidente.DictaminarSeguro          ;
             this.RegistrarFechaArreglo          = incidente.RegistrarFechaArreglo     ;
+            this.FechaReporte                   = incidente.FechaReporte              ;
             }
 
 }

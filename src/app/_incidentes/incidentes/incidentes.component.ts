@@ -49,6 +49,7 @@ export class IncidentesComponent implements OnInit {
                       'FechaCita'             ,
                       'EstatusCita'           ,
                       'IdTipoIncidente'       ,
+                      'FechaReporte'          ,
                       'actions']
 
    dataSource!: MatTableDataSource<Incidente>;
