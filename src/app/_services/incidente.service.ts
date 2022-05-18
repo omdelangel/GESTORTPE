@@ -142,7 +142,7 @@ postCancelaCitaIncidente(IdIncidenteSiniestro: number, IdCita: number): Observab
 
 
 //Dictaminar la cita
-postDictamenCitaIncidente(dictamenCita: DictamenCita): Observable<any> {
+postDictamenCitaIncidente(dictamenCita: any): Observable<any> {
 
   return this.http.post<any>(`${environment.SERVER_URL}/cita-incidente-dictamen`, 
   {
@@ -152,6 +152,14 @@ postDictamenCitaIncidente(dictamenCita: DictamenCita): Observable<any> {
    'IdDictamen': dictamenCita.IdDictamen, 
    'Observaciones': dictamenCita.Observaciones
   })
+}
+
+
+//Registra la fecha del arreglo
+postRegistraFechaArreglo(idIncidenteSiniestro: string, fechaArreglo: string, tipoIncidente: string): Observable<any> {
+
+  return this.http.post<any>(`${environment.SERVER_URL}/asignacion-fecha-arreglo`, {'IdIncidenteSiniestro': idIncidenteSiniestro, 
+  'FechaArreglo': fechaArreglo, 'TipoIncidente': tipoIncidente})
   .pipe(map((res: Response) => { 
 
       return res || {}

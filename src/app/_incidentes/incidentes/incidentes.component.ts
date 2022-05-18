@@ -14,6 +14,7 @@ import { DocumentosIncidentesComponent } from './../documentos-incidentes';
 import { DialogoTalleresIncidenteComponent } from './../dialogo-talleres-incidente';
 import { EdicionCitaIncidenteComponent} from './../edicion-cita-incidente';
 import { DictamenIncidenteComponent } from './../dictamen-incidente'
+import { DialogoConfirmaArregloComponent } from '../dialogo-confirma-arreglo';
 
 
 
@@ -66,7 +67,7 @@ export class IncidentesComponent implements OnInit {
   value               :boolean = false;
   matcher              = new MyErrorStateMatcher();
   TipoIncidenteB      :boolean = false;
-  palabra             :string;
+  palabra             :string = "";
   TipoIncidente        :string = "";
 
 
@@ -234,19 +235,17 @@ mostrarDialogoConfirmacion(event: any): void {
 
 //Proceso para documentos
 documentos(e: any){
-   console.log("documentos e ")
-   console.log(e)
    
   const dialogRef = this.dialog.open(DocumentosIncidentesComponent, {
     disableClose: true,
     data:{
-      IdTipoSiniestro       :e.IdTipoSiniestro,
+      IdTipoSiniestro       :e.IdTipoIncidente,
       IdIncidenteSiniestro  :e.IdIncidenteSiniestro,
       Concesionario         :e.Concesionario, 
       Vehiculo              :e.Vehiculo
     },
-    //width: '1500px',
-    //height: '900px'
+    width: '1500px',
+    height: '800px'
   });
 
   dialogRef.afterClosed().subscribe(res => {
@@ -355,23 +354,24 @@ cita(e: any) {
     */
   }
   
-
-
-
-
   confirmacion(e: any){
-    /*
-        const dialogRef = this.dialog.open(DialogoOperadorEditaComponent, {
+
+        const dialogRef = this.dialog.open(DialogoConfirmaArregloComponent, {
           disableClose: true,
-          data: { data: e, IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo},
+          data:{
+            IdTipoSiniestro       :e.IdTipoIncidente,
+            IdIncidenteSiniestro  :e.IdIncidenteSiniestro,
+            Concesionario         :e.Concesionario, 
+            Vehiculo              :e.Vehiculo
+          },
           //width: '1500px',
           //height: '900px'
         });
     
         dialogRef.afterClosed().subscribe(res => {
-          this.getConsultaOperadores(this.placa);
+          this.getConsultaIncidente(this.placa);
         });
-    */
+
     
   }
       

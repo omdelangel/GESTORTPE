@@ -137,7 +137,7 @@
                 <mat-header-cell *matHeaderCellDef> Tipos de incidentes </mat-header-cell>
                 <mat-cell *matCellDef="let row">
                     <mat-form-field>
-                        <mat-select placeholder="Seleccionar un valor" (selectionChange)="mostrarDialogoConfirmacion($event)" 
+                        <mat-select placeholder="" (selectionChange)="mostrarDialogoConfirmacion($event)" 
                         value="{{row.IdTipoIncidente}}" [disabled]="!TipoIncidenteB" >
                             <mat-option *ngFor="let idTipoIncidente of tiposIncidentes" [value]="idTipoIncidente.TipoIncidente">
                                 {{idTipoIncidente.viewValue}}

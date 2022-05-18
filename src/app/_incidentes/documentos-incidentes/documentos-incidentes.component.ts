@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { DocumentoEvidencia } from 'src/app/_models';
 import {SelectionModel} from '@angular/cdk/collections';
+import { DocViewerComponent } from '../../_components/doc-viewer'; 
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -29,40 +30,42 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class DocumentosIncidentesComponent implements OnInit {
 
   private readonly notifier: NotifierService;
+
+  displayedColumns = ['ArchivoEvidencia', 'actions' ];
+  dataSource!: MatTableDataSource<DocumentoEvidencia>;
+   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+
   public files: any[] = [];
   idEvidencia: number = 0;
-  idSiniestro: number = 0;
   idIncidenteSiniestro: string = "";
+  idTipoIncidente: string = "";
   concesionario: string = "";
   vehiculo: string = "";
   reactiveForm!: FormGroup;
+  dataVal:boolean = false;
+  documentosEvidencia: DocumentoEvidencia[] = [];
 
-  displayedColumns = ['IdEvidencia', 'IdSiniestro', 'ArchivoEvidencia', 'actions' ];
-  dataSource!: MatTableDataSource<DocumentoEvidencia>;
-  selection = new SelectionModel<DocumentoEvidencia>(true, []);
-
-
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private formBuilder: FormBuilder,
     public incidenteService: IncidenteService,
     notifierService: NotifierService,
+    public dialog: MatDialog,
     public dialogRef: MatDialogRef<DocumentosIncidentesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
 
-
       this.notifier = notifierService;
-      this.idSiniestro = data.IdTipoSiniestro;
       this.idIncidenteSiniestro = data.IdIncidenteSiniestro;
       this.concesionario = data.Concesionario;
       this.vehiculo = data.Vehiculo;
+      this.idTipoIncidente = data.IdTipoSiniestro;
 
     }
 
   ngOnInit(): void {
 
-    this.getDocumentosEvidencia(this.idSiniestro);
+    this.getDocumentosEvidencia(Number(this.idIncidenteSiniestro));
 
     //Validación de campos en pantalla
     this.reactiveForm = this.formBuilder.group({
@@ -74,6 +77,7 @@ export class DocumentosIncidentesComponent implements OnInit {
       'Calificacion': [''],
       'Observaciones': ['']
     });
+
   }
 
   onSubmit() {
@@ -90,16 +94,13 @@ export class DocumentosIncidentesComponent implements OnInit {
 
     this.files = Object.keys(pFileList).map(key => pFileList[Number(key)]);
 
-    console.log("this.files");
-    console.log(this.files);
-
     const fileListAsArray = Array.from(pFileList);
     fileListAsArray.forEach((item, i) => {
 
       const formData = new FormData();
       formData.append('ArchivoEvidencia', item),
-      formData.append('IdEvidencias', String(this.idEvidencia)),
-      formData.append('IdSiniestro', String(this.idSiniestro))
+      formData.append('IdEvidencias', String(this.idEvidencia)),  //siempre es 0 para el alta
+      formData.append('IdSiniestro', String(this.idIncidenteSiniestro))
 
       this.incidenteService.postGuardaEvidencias(formData)
       .pipe(first())
@@ -108,7 +109,7 @@ export class DocumentosIncidentesComponent implements OnInit {
 
           if (data.estatus) {
             this.notifier.notify('success', data.mensaje, '');
-            this.getDocumentosEvidencia(this.idSiniestro);
+            this.getDocumentosEvidencia(Number(this.idIncidenteSiniestro));
           } else if (!data.estatus) {
             this.notifier.notify('warning', data.mensaje, '');
           }
@@ -123,30 +124,59 @@ export class DocumentosIncidentesComponent implements OnInit {
      });
   }
 
-  getDocumentosEvidencia(idSiniestro: number){
+  getDocumentosEvidencia(idIncidenteSiniestro: number) {
 
-    this.incidenteService.getDocumentosEvidencia(9)
-    .pipe(first())
-    .subscribe(dataList => {
-      
-      console.log("dataList");
-      console.log(dataList);
+    this.incidenteService.getDocumentosEvidencia(idIncidenteSiniestro)
+      .pipe(first())
+      .subscribe(dataList => {
 
-      this.dataSource = new MatTableDataSource(dataList.Evidencias);
+        if (dataList.estatus) {
 
-      // Assign the data to the data source for the table to render
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    },
-      error => {
+          this.dataVal = true;
+          this.documentosEvidencia = dataList.Evidencias;
+          this.dataSource = new MatTableDataSource(this.documentosEvidencia);
+          // Assign the data to the data source for the table to render
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
 
-      });
-    }
+        } else {
+
+          this.dataVal = false;
+          this.notifier.notify('warning', dataList.mensaje);
+
+        }
+      },
+        error => {
+
+          this.dataVal = false;
+          this.notifier.notify('error', error);
+
+        });
+  }
 
     onNoClick(): void {
       this.dialogRef.close();
     }
 
+    applyFilter(filterValue: string) {
+      filterValue = filterValue.trim(); // Remove whitespace
+      filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+      this.dataSource.filter = filterValue;
+    }
+
+   //Abre modal visualizar el documento
+  verDocumento(archivoPDF: any): void {
+
+    const dialogRef = this.dialog.open(DocViewerComponent, {
+      width: '50%',
+      height: '80%',
+      disableClose: true,
+      data: { archivoPDF: archivoPDF.ArchivoEvidencia }
+    });
+    dialogRef.afterClosed().subscribe(res => {
+
+    });
+  }
 
 }
 

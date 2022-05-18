@@ -128,6 +128,7 @@ import { EdicionCitaIncidenteComponent } from './_incidentes/edicion-cita-incide
 import { DictamenIncidenteComponent } from './_incidentes/dictamen-incidente/dictamen-incidente.component';
 import { DialogoDictamenCitaIncidenteComponent } from './_incidentes/dialogo-dictamen-cita-incidente/dialogo-dictamen-cita-incidente.component';
 import { DialogoConfirmacionIncidenteComponent } from './_incidentes/dialogo-confirmacion-incidente/dialogo-confirmacion-incidente.component';
+import { DialogoConfirmaArregloComponent } from './_incidentes/dialogo-confirma-arreglo/dialogo-confirma-arreglo.component';
 
 
 /**
@@ -291,6 +292,7 @@ FullCalendarModule.registerPlugins([
     DictamenIncidenteComponent,
     DialogoDictamenCitaIncidenteComponent,
     DialogoConfirmacionIncidenteComponent,
+    DialogoConfirmaArregloComponent,
   ],
   imports: [
     BrowserModule,
