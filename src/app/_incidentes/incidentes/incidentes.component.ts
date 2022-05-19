@@ -337,23 +337,6 @@ cita(e: any) {
   }
 
 
-
-
-  //Abre modal para alta de los operadores
-  openDialog(): void {
-    /*
-    const dialogRef = this.dialog.open(OperadoresAltaComponent, {
-      disableClose: true,
-      data: {IdConcesionario: this.idConcesionario, IdVehiculo: this.idVehiculo}
-      //width: '1500px',
-      //height: '900px'
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      this.getConsultaIncidente(this.placa);
-    });
-    */
-  }
   
   confirmacion(e: any){
 

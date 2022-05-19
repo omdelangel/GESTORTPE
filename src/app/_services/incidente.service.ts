@@ -167,6 +167,34 @@ postRegistraFechaArreglo(idIncidenteSiniestro: string, fechaArreglo: string, tip
 }
 
 
+//Elimina la evidencia
+postEliminaEvidencia(idSiniestro: number, idEvidencias: number): Observable<any> {
+
+
+  return this.http.post<any>(`${environment.SERVER_URL}/vehiculo-evidencia`, { 
+  'IdSiniestro': idSiniestro, 'IdEvidencias': idEvidencias})
+  .pipe(map((res: Response) => { 
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Registra el dictamen del Seguro
+postGuardaDictamenSeguro(formData: any): Observable<any> { 
+
+  return this.http.post<any>(this.SERVER_URL, formData)
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+
+
 
     // Error 
     handleError(error: HttpErrorResponse) {
