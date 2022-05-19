@@ -66,7 +66,7 @@
             <!-- Progress Column -->
             <ng-container matColumnDef="FechaReporte">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Reporte </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.FechaReporte}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.FechaReporte | date: 'dd-MM-YYYY hh:mm'}} </mat-cell>
             </ng-container>
             
             <!-- Progress Column -->

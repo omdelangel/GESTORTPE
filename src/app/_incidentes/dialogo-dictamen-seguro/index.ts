@@ -1,0 +1,1 @@
+export * from './dialogo-dictamen-seguro.component';
