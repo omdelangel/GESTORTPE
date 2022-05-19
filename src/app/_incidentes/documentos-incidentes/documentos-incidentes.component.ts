@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm, ControlContainer } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { IncidenteService } from 'src/app/_services';
 import { first } from 'rxjs/operators';
@@ -10,7 +9,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { DocumentoEvidencia } from 'src/app/_models';
-import {SelectionModel} from '@angular/cdk/collections';
 import { DocViewerComponent } from '../../_components/doc-viewer'; 
 import { DialogoConfirmacionIncidenteComponent } from '../dialogo-confirmacion-incidente';
 
@@ -37,8 +35,6 @@ export class DocumentosIncidentesComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  displayedColumnsSeguro = ['ArchivoEvidencia', 'actions'];
-  dataSourceSeguro!: MatTableDataSource<DocumentoEvidencia>;
 
 
   public files: any[] = [];
@@ -49,7 +45,6 @@ export class DocumentosIncidentesComponent implements OnInit {
   vehiculo: string = "";
   reactiveForm!: FormGroup;
   dataVal: boolean = false;
-  dataSeguro: boolean = false;
   documentosEvidencia: DocumentoEvidencia[] = [];
   submitted = false;
   tipoSiniestro: boolean = false;
@@ -139,39 +134,6 @@ export class DocumentosIncidentesComponent implements OnInit {
     });
   }
 
-
-  onFileChangeSeguro(pFileList: File[]) {
-
-
-    this.files = Object.keys(pFileList).map(key => pFileList[Number(key)]);
-
-    console.log(this.files.length)
-
-    if(this.files.length == 1){
-
-      const fileListAsArray = Array.from(pFileList);
-      fileListAsArray.forEach((item, i) => {
-  
-           console.log(item)
-
-      //     const endpoint = 'your-destination-url';
-       //   const formData: FormData = new FormData();
-       //   formData.append('fileKey', item, item.name);
-       //   return this.httpClient
-      //      .post(endpoint, formData, { headers: yourHeadersConfig })
-      //      .map(() => { return true; })
-        //    .catch((e) => this.handleError(e));
-  
-      });
-
-    } else {
-
-      this.notifier.notify('warning', 'Favor de adjuntar solo 1 archivo de dictamen', '');
-
-    }
-
-
-  }
 
   getDocumentosEvidencia(idIncidenteSiniestro: number) {
 
@@ -275,51 +237,7 @@ export class DocumentosIncidentesComponent implements OnInit {
           this.notifier.notify('error', error);
 
         });
-  }
-
-
-  eliminarDocumentoSeguro(archivoPDF: any) {
-
-    this.dialog
-      .open(DialogoConfirmacionIncidenteComponent, {
-        data: `Se eliminará el archivo de dictamen: ` + archivoPDF.ArchivoEvidencia,
-        width: '25%'
-      })
-      .afterClosed()
-      .subscribe((confirmado: Boolean) => {
-        if (confirmado) {
-
-          this.eliminarEvidenciaSeguro(archivoPDF.IdEvidencias);
-
-        } else {
-
-        }
-      });
-  }
-
-  eliminarEvidenciaSeguro(idEvidencia: number) {
-
-    this.incidenteService.postEliminaEvidencia(this.idIncidenteSiniestro, idEvidencia,)
-      .pipe(first())
-      .subscribe(dataList => {
-
-        if (dataList.estatus) {
-
-          this.notifier.notify('success', dataList.mensaje);
-
-        } else {
-
-          this.notifier.notify('warning', dataList.mensaje);
-
-        }
-      },
-        error => {
-
-          this.notifier.notify('error', error);
-
-        });
-  }
-
+  } 
 
 }
 
