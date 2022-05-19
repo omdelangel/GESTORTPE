@@ -32,6 +32,27 @@
                                     <textarea matInput placeholder="" formControlName="Observaciones"></textarea>
                                 </mat-form-field>
                             </div>
+
+                            <div fxFlex="100" fxFlex.lt-md="100" fxl>
+                                <mat-card-content>
+                                    <div style="padding: 15px;">
+                                        <div>
+                                            <div class="dropzone" fileDragDrop (filesChangeEmiter)="onFileChange($event)">
+                                                <div class="text-wrapper">
+                                                    <div class="centered">
+                                                        <input type="file" name="file" id="file" (change)="onFileChange($any($event).target.files)" multiple>
+                                                        <label for="file"><span class="textLink"><mat-icon>save_alt</mat-icon>Selecciona tu archivo
+                                                            de dictamen	</span> o arrastra aquí!</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </mat-card-content>
+                            </div>
+
+
+
                         </div>
 
                         <mat-divider></mat-divider>

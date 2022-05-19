@@ -1,13 +1,20 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm, ControlContainer } from '@angular/forms';
-import { AlertService } from '../../_alert';
+import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { IncidenteService } from 'src/app/_services';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
 import { DictamenCitaIncidente } from 'src/app/_models';
 import { NotifierService } from 'angular-notifier';
 import { DialogoConfirmacionIncidenteComponent } from '../dialogo-confirmacion-incidente';
+
+import { MatSort } from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { DocumentoEvidencia } from 'src/app/_models';
+import {SelectionModel} from '@angular/cdk/collections';
+import { DocViewerComponent } from '../../_components/doc-viewer'; 
+
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -31,17 +38,20 @@ interface Dictamenes {
 export class DialogoDictamenCitaIncidenteComponent implements OnInit {
   private readonly notifier: NotifierService;
 
+  displayedColumns = ['ArchivoEvidencia', 'actions' ];
+  dataSource!: MatTableDataSource<DocumentoEvidencia>;
+   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+
 
   Concesionario: string = "";
   idCita: number = 0;
   reactiveForm!: FormGroup;
   idVehiculo: number = 0;
   idConcesionario: number = 0;
-  marca: string = "";
-  submarca: string = "";
-  modelo: string = "";
+;
   ArchivoDictamen    :string;
-  //dictamenes: Dictamen[] = [];
   matcher = new MyErrorStateMatcher();
   submitted = false;
   dictamenCitaIncidente!: DictamenCitaIncidente;
@@ -49,6 +59,19 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
   Vehiculo            :string = "";
   IdIncidenteSiniestro: number = 0;
   estatusCita: string = "";
+
+
+  public files: any[] = [];
+  idEvidencia: number = 0;
+  idIncidenteSiniestro: string = "";
+  idTipoIncidente: string = "";
+  concesionario: string = "";
+  vehiculo: string = "";
+  dataVal:boolean = false;
+  documentosEvidencia: DocumentoEvidencia[] = [];  
+
+
+
 
 
   dictamenes: Dictamenes[] = [
@@ -65,14 +88,7 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { 
 
       dialogRef.disableClose = true;
-      this.notifier = notifierService; 
-      this.idCita = data.idCita;
-      this.Concesionario = data.Concesionario;
-      this.idVehiculo = data.idVehiculo;
-      this.idConcesionario = data.idConcesionario;
-      this.marca = data.marca;
-      this.submarca = data.submarca;
-      this.modelo = data.modelo;
+      this.notifier                 = notifierService; 
 
       this.idCita                   = data.idCita;
       this.estatusCita              = data.estatusCita;
@@ -128,14 +144,14 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
       return;
     }
     this.dictamenCitaIncidente = {  
-                              IdCita                :this.idCita                  ,  
-                              IdIncidenteSiniestro  :this.IdIncidenteSiniestro    ,
-                              Dictamen              :this.f.Dictamen.value        ,
-                              Observaciones         :this.f.Observaciones.value   ,
-                              ArchivoDictamen       :this.ArchivoDictamen        
+                    IdCita                :this.idCita                  ,  
+                    IdIncidenteSiniestro  :this.IdIncidenteSiniestro    ,
+                    IdDictamen            :this.f.Dictamen.value        ,
+                    Observaciones         :this.f.Observaciones.value   ,
+                    ArchivoDictamen       :this.ArchivoDictamen        
                               }
-                              console.log("dictaminar cita")
-                              console.log(this.dictamenCitaIncidente)
+              console.log("dictaminar cita")
+              console.log(this.dictamenCitaIncidente)
                             
     this.incidenteService.postDictamenCitaIncidente(this.dictamenCitaIncidente)
     .pipe(first())
@@ -211,5 +227,69 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  onFileChange(pFileList: File[]){
+
+
+    this.files = Object.keys(pFileList).map(key => pFileList[Number(key)]);
+
+    const fileListAsArray = Array.from(pFileList);
+    fileListAsArray.forEach((item, i) => {
+
+      const formData = new FormData();
+      formData.append('ArchivoEvidencia', item),
+      formData.append('IdEvidencias', String(this.idEvidencia)),  //siempre es 0 para el alta
+      formData.append('IdSiniestro', String(this.IdIncidenteSiniestro))
+
+      this.incidenteService.postGuardaEvidencias(formData)
+      .pipe(first())
+      .subscribe(
+        data => {
+
+          if (data.estatus) {
+            this.notifier.notify('success', data.mensaje, '');
+            this.getDocumentosEvidencia(Number(this.idIncidenteSiniestro));
+          } else if (!data.estatus) {
+            this.notifier.notify('warning', data.mensaje, '');
+          }
+        },
+        error => {
+          //this.error(error);
+          this.notifier.notify('error', error, '');
+        });
+
+
+     
+     });
+  }
+
+  getDocumentosEvidencia(idIncidenteSiniestro: number) {
+
+    this.incidenteService.getDocumentosEvidencia(idIncidenteSiniestro)
+      .pipe(first())
+      .subscribe(dataList => {
+
+        if (dataList.estatus) {
+
+          this.dataVal = true;
+          this.documentosEvidencia = dataList.Evidencias;
+          this.dataSource = new MatTableDataSource(this.documentosEvidencia);
+          // Assign the data to the data source for the table to render
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+
+        } else {
+
+          this.dataVal = false;
+          this.notifier.notify('warning', dataList.mensaje);
+
+        }
+      },
+        error => {
+
+          this.dataVal = false;
+          this.notifier.notify('error', error);
+
+        });
+  }  
 
 }

@@ -147,7 +147,7 @@ postDictamenCitaIncidente(dictamenCitaIncidente: DictamenCitaIncidente): Observa
   {
     'IdCita'                :dictamenCitaIncidente.IdCita                  ,  
     'IdIncidenteSiniestro'  :dictamenCitaIncidente.IdIncidenteSiniestro    ,
-    'Dictamen'              :dictamenCitaIncidente.Dictamen                ,
+    'IdDictamen'            :dictamenCitaIncidente.IdDictamen              ,
     'Observaciones'         :dictamenCitaIncidente.Observaciones           ,
     'ArchivoDictamen'       :dictamenCitaIncidente.ArchivoDictamen        
   })}
