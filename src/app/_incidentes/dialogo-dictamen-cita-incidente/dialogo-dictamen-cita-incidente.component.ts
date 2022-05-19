@@ -2,10 +2,10 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm, ControlContainer } from '@angular/forms';
 import { AlertService } from '../../_alert';
-import { CitasService, CatalogosService } from 'src/app/_services';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { IncidenteService } from 'src/app/_services';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
-import { Dictamen, DictamenCita } from 'src/app/_models';
+import { DictamenCitaIncidente } from 'src/app/_models';
 import { NotifierService } from 'angular-notifier';
 import { DialogoConfirmacionIncidenteComponent } from '../dialogo-confirmacion-incidente';
 
@@ -16,6 +16,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
+}
+
+interface Dictamenes {
+  IdDictamen       : string;
+  viewValue        : string;
 }
 
 @Component({
@@ -35,23 +40,28 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
   marca: string = "";
   submarca: string = "";
   modelo: string = "";
-  dictamenes: Dictamen[] = [];
+  ArchivoDictamen    :string;
+  //dictamenes: Dictamen[] = [];
   matcher = new MyErrorStateMatcher();
   submitted = false;
-  dictamen!: DictamenCita;
+  dictamenCitaIncidente!: DictamenCitaIncidente;
   dictamenValue: string = "";
   Vehiculo            :string = "";
   IdIncidenteSiniestro: number = 0;
   estatusCita: string = "";
 
 
-  constructor(private citaService: CitasService,
-    private alertService: AlertService,
-    private formBuilder: FormBuilder,
-    private catalogoService: CatalogosService,
-    notifierService: NotifierService,
-    public dialog: MatDialog,
-    public dialogRef: MatDialogRef<DialogoDictamenCitaIncidenteComponent>,
+  dictamenes: Dictamenes[] = [
+    { IdDictamen: 'FV', viewValue: 'Falla vehículo' },
+    { IdDictamen: 'FC', viewValue: 'Falla Convertidor' },
+  ];   
+
+  constructor(
+    private incidenteService        :IncidenteService,
+    private formBuilder             :FormBuilder,
+    notifierService                 :NotifierService,
+    public dialog                   :MatDialog,
+    public dialogRef                :MatDialogRef<DialogoDictamenCitaIncidenteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
 
       dialogRef.disableClose = true;
@@ -76,7 +86,7 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
   ngOnInit(): void {
 
     //this.clear();
-    this.getCatalogoDictamen();
+//    this.getCatalogoDictamen();
 
      //Validación de campos en pantalla
      this.reactiveForm = this.formBuilder.group({
@@ -95,7 +105,7 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
       return
     }
   }
-
+/*
    //Llena catálogo de dictamen
    getCatalogoDictamen() {
     this.catalogoService.getCatalogoDictamen()
@@ -107,7 +117,7 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
         error => {
         });
   }
-
+*/
   dictaminarCita(){
 
     //this.clear();
@@ -117,15 +127,22 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
     if (this.reactiveForm.invalid) {
       return;
     }
-
-    this.dictamen = {
-      IdVehiculo: this.idVehiculo, IdConcesionario: this.idConcesionario, IdCita: this.idCita, IdDictamen: this.f.Dictamen.value, Observaciones: this.f.Observaciones.value
-    }
-
-    this.citaService.postDictamenCita(this.dictamen)
+    this.dictamenCitaIncidente = {  
+                              IdCita                :this.idCita                  ,  
+                              IdIncidenteSiniestro  :this.IdIncidenteSiniestro    ,
+                              Dictamen              :this.f.Dictamen.value        ,
+                              Observaciones         :this.f.Observaciones.value   ,
+                              ArchivoDictamen       :this.ArchivoDictamen        
+                              }
+                              console.log("dictaminar cita")
+                              console.log(this.dictamenCitaIncidente)
+                            
+    this.incidenteService.postDictamenCitaIncidente(this.dictamenCitaIncidente)
     .pipe(first())
     .subscribe(
       data => {
+        console.log("fui dictaminar cita")
+        console.log(data)
 
         if (data.estatus) {
           
@@ -159,17 +176,11 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
     } 
 
     switch (this.f.Dictamen.value) {
-      case 'APB':
-        this.dictamenValue = "Aprobado";
+      case 'FV':
+        this.dictamenValue = "Falla vehículo";
         break;
-      case 'RTM':
-        this.dictamenValue = "Rechazo temporal";
-        break;
-      case 'RDF':
-        this.dictamenValue = "Rechazo definitivo";
-        break;
-      case 'SIN':
-        this.dictamenValue = "Sin dictamen";
+      case 'FC':
+        this.dictamenValue = "Falla convertidor";
         break;
       default:
         // 

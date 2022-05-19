@@ -3,8 +3,7 @@ import { environment } from '../../environments/environment';
 import { Observable, throwError, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Incidente, CitasIncidente } from '../_models';
-
+import { Incidente, CitasIncidente, DictamenCitaIncidente } from '../_models';
 
 @Injectable({
   providedIn: 'root'
@@ -142,17 +141,16 @@ postCancelaCitaIncidente(IdIncidenteSiniestro: number, IdCita: number): Observab
 
 
 //Dictaminar la cita
-postDictamenCitaIncidente(dictamenCita: any): Observable<any> {
+postDictamenCitaIncidente(dictamenCitaIncidente: DictamenCitaIncidente): Observable<any> {
 
   return this.http.post<any>(`${environment.SERVER_URL}/cita-incidente-dictamen`, 
   {
-   'IdVehiculo': dictamenCita.IdVehiculo, 
-   'IdConcesionario': dictamenCita.IdConcesionario, 
-   'IdCita': dictamenCita.IdCita, 
-   'IdDictamen': dictamenCita.IdDictamen, 
-   'Observaciones': dictamenCita.Observaciones
-  })
-}
+    'IdCita'                :dictamenCitaIncidente.IdCita                  ,  
+    'IdIncidenteSiniestro'  :dictamenCitaIncidente.IdIncidenteSiniestro    ,
+    'Dictamen'              :dictamenCitaIncidente.Dictamen                ,
+    'Observaciones'         :dictamenCitaIncidente.Observaciones           ,
+    'ArchivoDictamen'       :dictamenCitaIncidente.ArchivoDictamen        
+  })}
 
 
 //Registra la fecha del arreglo
