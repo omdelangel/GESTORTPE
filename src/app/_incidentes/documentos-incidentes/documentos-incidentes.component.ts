@@ -101,7 +101,6 @@ export class DocumentosIncidentesComponent implements OnInit {
 
   onFileChange(pFileList: File[]) {
 
-
     this.files = Object.keys(pFileList).map(key => pFileList[Number(key)]);
 
     const fileListAsArray = Array.from(pFileList);
@@ -128,9 +127,6 @@ export class DocumentosIncidentesComponent implements OnInit {
             //this.error(error);
             this.notifier.notify('error', error, '');
           });
-
-
-
     });
   }
 

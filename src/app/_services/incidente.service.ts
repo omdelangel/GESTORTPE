@@ -11,6 +11,7 @@ import { Incidente, CitasIncidente, DictamenCitaIncidente } from '../_models';
 export class IncidenteService {
 
   SERVER_URL: string = `${environment.SERVER_URL}/evidencia-edicion`;  
+  SERVER_URLSeguro: string = `${environment.SERVER_URL}/siniestro-edicion`;  
   SERVER_URLI: string = `${environment.SERVER_URL}/doc-incidente`;  
 
 
@@ -183,9 +184,9 @@ postEliminaEvidencia(idSiniestro: number, idEvidencias: number): Observable<any>
 }
 
 //Registra el dictamen del Seguro
-postGuardaDictamenSeguro(formData: any): Observable<any> { 
+postGuardaDocumentoSeguro(formData: any): Observable<any> { 
 
-  return this.http.post<any>(this.SERVER_URL, formData)
+  return this.http.post<any>(this.SERVER_URLSeguro, formData)
   .pipe(map((res: Response) => {
 
       return res || {}
@@ -194,6 +195,24 @@ postGuardaDictamenSeguro(formData: any): Observable<any> {
   )
 }
 
+//Consulta el dictamen del seguro
+getDocumentoSeguro(idSiniestro: number, idVehiculo: number): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('IdSiniestro', idSiniestro);
+  params = params.append('IdVehiculo', idVehiculo);
+
+
+  return this.http.get<any>(`${environment.SERVER_URL}/consulta-siniestro`, {params: params})
+  .pipe(map((res: Response) => {
+
+    return res || {}
+  }),
+  catchError(this.handleError)
+)
+}
+
+    
 
  //Consulta las evidencias del dictamen del taller 
  getDoctosEvidenciaDictamenTaller(IdCita: number, IdIncidenteSiniestro: number): Observable<any> {
