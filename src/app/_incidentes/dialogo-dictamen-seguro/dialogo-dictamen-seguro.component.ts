@@ -18,8 +18,8 @@ export class DialogoDictamenSeguroComponent implements OnInit {
 
   private readonly notifier: NotifierService;
 
-  displayedColumnsSeguro = ['ArchivoEvidencia', 'actions'];
-  dataSourceSeguro!: MatTableDataSource<DocumentoEvidencia>;
+  displayedColumns = ['ArchivoEvidencia', 'actions'];
+  dataSource!: MatTableDataSource<DocumentoEvidencia>;
 
   documentosEvidencia: DocumentoEvidencia[] = [];
   public files: any[] = [];
@@ -32,6 +32,7 @@ export class DialogoDictamenSeguroComponent implements OnInit {
   submitted = false;
   dataVal: boolean = false;
   valRadio: boolean = false;
+  idVehiculo: number = 0;
 
   constructor(private formBuilder: FormBuilder,
     public incidenteService: IncidenteService,
@@ -40,17 +41,18 @@ export class DialogoDictamenSeguroComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogoDictamenSeguroComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
-      console.log("data")
-      console.log(data)
 
       this.notifier = notifierService;
       this.idIncidenteSiniestro = data.IdIncidenteSiniestro;
       this.concesionario = data.Concesionario;
       this.vehiculo = data.Vehiculo;
       this.idTipoIncidente = data.IdTipoSiniestro;
+      this.idVehiculo = data.idVehiculo;
      }
 
   ngOnInit(): void {
+
+    this.getDocumentosEvidencia(this.idIncidenteSiniestro, this.idVehiculo);
 
     //Validación de campos en pantalla
     this.reactiveForm = this.formBuilder.group({
@@ -62,15 +64,42 @@ export class DialogoDictamenSeguroComponent implements OnInit {
 
   onFileChangeSeguro(pFileList: File[]) {
 
-    this.f.dictame.enable();
-
-
     this.files = Object.keys(pFileList).map(key => pFileList[Number(key)]);
 
     if(this.files.length == 1){
 
       const fileListAsArray = Array.from(pFileList);
       fileListAsArray.forEach((item, i) => {
+
+      const fileListAsArray = Array.from(pFileList);
+      fileListAsArray.forEach((item, i) => {
+
+      const formData = new FormData();
+      formData.append('IdVehiculo', String(this.idVehiculo)),  //siempre es 0 para el alta
+      formData.append('IdSiniestro', String(this.idIncidenteSiniestro))
+      formData.append('ArchivoResolucion', item),
+
+      this.incidenteService.postGuardaDocumentoSeguro(formData)
+        .pipe(first())
+        .subscribe(
+          data => {
+
+            console.log("data");
+            console.log(data);
+
+            if (data.estatus) {
+              this.notifier.notify('success', data.mensaje, '');
+              
+
+            } else if (!data.estatus) {
+              this.notifier.notify('warning', data.mensaje, '');
+            }
+          },
+          error => {
+            //this.error(error);
+            this.notifier.notify('error', error, '');
+          });
+    });
          
 
 
@@ -84,6 +113,33 @@ export class DialogoDictamenSeguroComponent implements OnInit {
     }
 
 
+  }
+
+  getDocumentosEvidencia(idIncidenteSiniestro: number, idVehiculo: number) {
+
+    this.incidenteService.getDocumentoSeguro(idIncidenteSiniestro, idVehiculo)
+      .pipe(first())
+      .subscribe(dataList => {
+
+        if (dataList.estatus) {
+
+          this.dataVal = true;
+          this.documentosEvidencia = dataList.siniestro;
+          this.dataSource = new MatTableDataSource(this.documentosEvidencia);
+
+        } else {
+
+          this.dataVal = false;
+          this.notifier.notify('warning', dataList.mensaje);
+
+        }
+      },
+        error => {
+
+          this.dataVal = false;
+          this.notifier.notify('error', error);
+
+        });
   }
 
 

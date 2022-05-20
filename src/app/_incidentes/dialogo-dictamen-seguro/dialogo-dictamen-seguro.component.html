@@ -34,7 +34,7 @@
 
                     <div class=" mat-elevation-z8" *ngIf="dataVal">
 
-                        <mat-table [dataSource]="dataSourceSeguro" matSort>
+                        <mat-table [dataSource]="dataSource" matSort>
                             <!-- ID Column -->
                             <ng-container matColumnDef="IdEvidencias">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Id Evidencia
@@ -74,8 +74,8 @@
                                 </mat-cell>
                             </ng-container>
 
-                            <mat-header-row *matHeaderRowDef="displayedColumnsSeguro; sticky: true"></mat-header-row>
-                            <mat-row *matRowDef="let row; columns: displayedColumnsSeguro;">
+                            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;">
                             </mat-row>
                         </mat-table>
                         <mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
