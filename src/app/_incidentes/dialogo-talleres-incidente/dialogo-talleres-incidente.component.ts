@@ -45,6 +45,7 @@ export class DialogoTalleresIncidenteComponent implements OnInit {
   //@ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
   idCita              :number = 0;
   estatusCita         :string = "";
   IdIncidenteSiniestro:number;        
@@ -72,8 +73,6 @@ export class DialogoTalleresIncidenteComponent implements OnInit {
 
        this.notifier = notifierService; 
        dialogRef.disableClose = true;
-       console.log("data dialogo-talleres-incidente")
-       console.log(data)
        this.idCita                = data.idCita, 
        this.estatusCita           = data.estatusCita, 
        this.IdIncidenteSiniestro  = data.IdIncidenteSiniestro,
@@ -140,9 +139,6 @@ export class DialogoTalleresIncidenteComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      console.log("regreso del alta, estoy en el dialogo")
-      console.log(res)
-      console.log(res.idCita)
 
      if (res != undefined) {
 

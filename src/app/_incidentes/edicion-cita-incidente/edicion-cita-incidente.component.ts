@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { IncidenteService } from 'src/app/_services';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm, ControlContainer } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogoConfirmacionIncidenteComponent } from '../../_incidentes/dialogo-confirmacion-incidente';
@@ -27,17 +27,17 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class EdicionCitaIncidenteComponent implements OnInit {
   private readonly notifier: NotifierService;
 
-  Concesionario : string = "";
-  reactiveForm!: FormGroup;
-  idVehiculo: number = 0;
-  idConcesionario: number = 0;
-  cancelar: boolean = false;
-  nuevaCita: boolean = false;
-  valorCancel:boolean = false;
-  idCita: number = 0;
-  estatusCita: string = "";
-  Vehiculo:string = ""; 
-  IdIncidenteSiniestro                :number;         
+  Concesionario                      :string = "";
+  reactiveForm                       !:FormGroup;
+  idVehiculo                         :number = 0;
+  idConcesionario                    :number = 0;
+  cancelar                           :boolean = false;
+  nuevaCita                          :boolean = false;
+  valorCancel                        :boolean = false;
+  idCita                             :number = 0;
+  estatusCita                        :string = "";
+  Vehiculo                           :string = ""; 
+  IdIncidenteSiniestro               :number;         
 
 
   constructor(
@@ -50,8 +50,6 @@ export class EdicionCitaIncidenteComponent implements OnInit {
 
     this.notifier = notifierService;   
     dialogRef.disableClose = true;
-    console.log("parametros data edicion")
-    console.log(data)
     this.idCita                = data.idCita, 
     this.estatusCita           = data.estatusCita, 
     this.Concesionario         = data.Concesionario, 
@@ -200,12 +198,7 @@ export class EdicionCitaIncidenteComponent implements OnInit {
           });
       
           dialogRef.afterClosed().subscribe(res => {
-      
-           // let idCita = Number(sessionStorage.getItem("NuevaCita"));
-          //  this.obtieneCita(idCita);  
-          //  this.cancelar = false;
-          //  this.nuevaCita = false;  
-           this.dialogRef.close();        
+          this.dialogRef.close();        
       
           });
       
@@ -234,7 +227,5 @@ export class EdicionCitaIncidenteComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-
   
 }

@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild, Optional, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup,FormControl, FormBuilder, FormGroupDirective, NgForm , Validators} from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { NotifierService } from 'angular-notifier';
 import { IncidenteService } from 'src/app/_services';
 import { Incidente } from 'src/app/_models';
@@ -64,9 +64,6 @@ export class IncidentesComponent implements OnInit {
   placa               :string = "";
   idConcesionario     :number = 0;
   idVehiculo          :number = 0;
-  idOperador          :number = 0;
-  estatus             :string = "";
-  value               :boolean = false;
   matcher              = new MyErrorStateMatcher();
   TipoIncidenteB      :boolean = false;
   palabra             :string = "";
@@ -86,7 +83,7 @@ export class IncidentesComponent implements OnInit {
 
   constructor(
     public dialog              : MatDialog,
-    private incidenteService    : IncidenteService,
+    private incidenteService   : IncidenteService,
     private formBuilder        : FormBuilder,
     notifierService            : NotifierService   
   ) {
@@ -270,8 +267,6 @@ documentos(e: any){
 
 //Registro de Citas para el incidente
 cita(e: any) {
-  console.log("cita e ===> ")
-  console.log(e)
 
   if (e.EstatusCita == null || e.EstatusCita == "" || e.EstatusCita == "V" || e.EstatusCita == "C") {
 
