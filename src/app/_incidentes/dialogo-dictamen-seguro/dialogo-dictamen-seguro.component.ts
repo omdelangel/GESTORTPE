@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm, ControlContainer } from '@angular/forms';
 import { DocumentoEvidenciaSeguro } from 'src/app/_models';
@@ -8,6 +8,8 @@ import { DocViewerComponent } from '../../_components/doc-viewer';
 import { IncidenteService } from 'src/app/_services';
 import { DialogoConfirmacionIncidenteComponent } from '../dialogo-confirmacion-incidente';
 import { first } from 'rxjs/operators';
+import {MatPaginator} from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-dialogo-dictamen-seguro',
@@ -20,6 +22,8 @@ export class DialogoDictamenSeguroComponent implements OnInit {
 
   displayedColumns = ['ArchivoResolucionSeguro', 'actions'];
   dataSource!: MatTableDataSource<DocumentoEvidenciaSeguro>;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   documentoEvidencia: DocumentoEvidenciaSeguro[] = [];
   public files: any[] = [];
@@ -58,7 +62,7 @@ export class DialogoDictamenSeguroComponent implements OnInit {
       'ArchivoResolucionSeguro': [''],
     });
 
-    this.getDocumentosEvidencia(this.idIncidenteSiniestro, this.idVehiculo);
+    this.getDocumentoSeguro(this.idIncidenteSiniestro, this.idVehiculo);
   }
 
   get f() { return this.reactiveForm.controls; }
@@ -95,6 +99,7 @@ export class DialogoDictamenSeguroComponent implements OnInit {
           data => {
 
             if (data.estatus) {
+              this.getDocumentoSeguro(this.idIncidenteSiniestro, this.idVehiculo);
               this.notifier.notify('success', data.mensaje, '');
               
 
@@ -122,7 +127,7 @@ export class DialogoDictamenSeguroComponent implements OnInit {
 
   }
 
-  getDocumentosEvidencia(idIncidenteSiniestro: number, idVehiculo: number) {
+  getDocumentoSeguro(idIncidenteSiniestro: number, idVehiculo: number) {
 
     this.incidenteService.getDocumentoSeguro(idIncidenteSiniestro, idVehiculo)
       .pipe(first())
@@ -130,12 +135,17 @@ export class DialogoDictamenSeguroComponent implements OnInit {
 
         if (dataList.estatus) {
 
-          this.dataVal = true;
           this.documentoEvidencia = dataList.siniestro;
 
-          console.log("this.documentoEvidencia")
-          console.log(this.documentoEvidencia)
+          if (this.documentoEvidencia[0].ArchivoResolucionSeguro == "" || this.documentoEvidencia[0].ArchivoResolucionSeguro == null) {
+            this.dataVal = false;
+          } else {
+            this.dataVal = true;
+          }
+
           this.dataSource = new MatTableDataSource(this.documentoEvidencia);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
 
         } else {
 
@@ -160,7 +170,7 @@ export class DialogoDictamenSeguroComponent implements OnInit {
         width: '50%',
         height: '80%',
         disableClose: true,
-        data: { archivoPDF: archivoPDF.ArchivoEvidencia }
+        data: { archivoPDF: archivoPDF.ArchivoResolucionSeguro }
       });
       dialogRef.afterClosed().subscribe(res => {
   
@@ -175,16 +185,17 @@ export class DialogoDictamenSeguroComponent implements OnInit {
 
   eliminarDocumentoSeguro(archivoPDF: any) {
 
+
     this.dialog
       .open(DialogoConfirmacionIncidenteComponent, {
-        data: `Se eliminará el archivo de dictamen: ` + archivoPDF.ArchivoEvidencia,
+        data: `Se eliminará el archivo de dictamen: ` + archivoPDF.ArchivoResolucionSeguro,
         width: '25%'
       })
       .afterClosed()
       .subscribe((confirmado: Boolean) => {
         if (confirmado) {
 
-          this.eliminarEvidenciaSeguro(archivoPDF.IdEvidencias);
+          this.eliminarEvidenciaSeguro();
 
         } else {
 
@@ -193,14 +204,15 @@ export class DialogoDictamenSeguroComponent implements OnInit {
   }
 
 
-  eliminarEvidenciaSeguro(idEvidencia: number) {
+  eliminarEvidenciaSeguro() {
 
-    this.incidenteService.postEliminaEvidencia(this.idIncidenteSiniestro, idEvidencia,)
+    this.incidenteService.postEliminaDictamenSeguro(this.idVehiculo, this.idIncidenteSiniestro,)
       .pipe(first())
       .subscribe(dataList => {
 
         if (dataList.estatus) {
-
+          this.dataVal = false;
+          this.getDocumentoSeguro(this.idIncidenteSiniestro, this.idVehiculo);
           this.notifier.notify('success', dataList.mensaje);
 
         } else {

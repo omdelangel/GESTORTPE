@@ -256,7 +256,7 @@ documentos(e: any){
       Vehiculo              :e.Vehiculo
     },
     width: '1500px',
-    height: '800px'
+    height: '600px'
   });
 
   dialogRef.afterClosed().subscribe(res => {

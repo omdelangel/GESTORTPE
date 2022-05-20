@@ -107,6 +107,9 @@ postGuardaEvidencias(formData: any): Observable<any> {
   return this.http.get<any>(`${environment.SERVER_URL}/vehiculo-evidencias`, {params: params})
   .pipe(map((res: Response) => {
 
+    console.log("res")
+    console.log(res)
+
       return res || {}
     }),
     catchError(this.handleError)
@@ -210,6 +213,20 @@ getDocumentoSeguro(idSiniestro: number, idVehiculo: number): Observable<any> {
   }),
   catchError(this.handleError)
 )
+}
+
+//Elimina el dictamen del seguro
+postEliminaDictamenSeguro(idVehiculo: number, idSiniestro: number): Observable<any> {
+
+
+  return this.http.post<any>(`${environment.SERVER_URL}/remueve-resolucion`, { 
+  'IdVehiculo': idVehiculo, 'IdSiniestro': idSiniestro})
+  .pipe(map((res: Response) => { 
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
 }
 
     
