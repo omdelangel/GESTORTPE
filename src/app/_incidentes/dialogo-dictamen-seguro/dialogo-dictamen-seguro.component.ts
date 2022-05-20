@@ -37,6 +37,7 @@ export class DialogoDictamenSeguroComponent implements OnInit {
   dataVal: boolean = false;
   valRadio: boolean = false;
   idVehiculo: number = 0;
+  existentes:number = 0;
 
   constructor(private formBuilder: FormBuilder,
     public incidenteService: IncidenteService,
@@ -78,9 +79,10 @@ export class DialogoDictamenSeguroComponent implements OnInit {
 
   onFileChangeSeguro(pFileList: File[]) {
 
+    this.existentes = 0;
     this.files = Object.keys(pFileList).map(key => pFileList[Number(key)]);
 
-    if(this.files.length == 1){
+    if(this.files.length + this.existentes == 1 ){
 
       const fileListAsArray = Array.from(pFileList);
       fileListAsArray.forEach((item, i) => {
@@ -100,6 +102,7 @@ export class DialogoDictamenSeguroComponent implements OnInit {
 
             if (data.estatus) {
               this.getDocumentoSeguro(this.idIncidenteSiniestro, this.idVehiculo);
+              this.f.dictamen.enable();
               this.notifier.notify('success', data.mensaje, '');
               
 
@@ -134,8 +137,8 @@ export class DialogoDictamenSeguroComponent implements OnInit {
       .subscribe(dataList => {
 
         if (dataList.estatus) {
-
           this.documentoEvidencia = dataList.siniestro;
+          this.existentes = dataList.siniestro.length
 
           if (this.documentoEvidencia[0].ArchivoResolucionSeguro == "" || this.documentoEvidencia[0].ArchivoResolucionSeguro == null) {
             this.dataVal = false;
@@ -148,7 +151,7 @@ export class DialogoDictamenSeguroComponent implements OnInit {
           this.dataSource.sort = this.sort;
 
         } else {
-
+          this.existentes = 0;
           this.dataVal = false;
           this.notifier.notify('warning', dataList.mensaje);
 
@@ -212,6 +215,8 @@ export class DialogoDictamenSeguroComponent implements OnInit {
 
         if (dataList.estatus) {
           this.dataVal = false;
+          this.existentes = 0;
+          this.f.dictamen.disable();
           this.getDocumentoSeguro(this.idIncidenteSiniestro, this.idVehiculo);
           this.notifier.notify('success', dataList.mensaje);
 

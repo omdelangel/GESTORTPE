@@ -107,9 +107,6 @@ postGuardaEvidencias(formData: any): Observable<any> {
   return this.http.get<any>(`${environment.SERVER_URL}/vehiculo-evidencias`, {params: params})
   .pipe(map((res: Response) => {
 
-    console.log("res")
-    console.log(res)
-
       return res || {}
     }),
     catchError(this.handleError)
@@ -251,8 +248,6 @@ postEliminaDictamenSeguro(idVehiculo: number, idSiniestro: number): Observable<a
 //Registra el archivo de un ditamen del taller para in Incidente
 postGuardaEvidenciaDictamenTaller(formData: any): Observable<any> { 
 
-  console.log("postGuardaEvidenciaDictamenTaller SErver")
-  console.log(formData)
   return this.http.post<any>(this.SERVER_URLI, formData)
   .pipe(map((res: Response) => {
 
