@@ -143,19 +143,23 @@
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
                 <mat-cell *matCellDef="let row">
-                    <button mat-mini-fab class="button-documentos" (click)="documentos(row)" [disabled]="!row.DocumentarEvidencia" matTooltip="Ir a documentos">
+                    <button mat-mini-fab class="button-documentos" (click)="documentos(row)" [disabled]="!row.DocumentarEvidencia" matTooltip="Adjuntar evidencias">
 						<mat-icon class="iconSize">attach_file</mat-icon>
 					</button>&nbsp; &nbsp;
 
-                    <button mat-mini-fab class="button-cita" (click)="cita(row)" [disabled]="!row.GenerarCita" matTooltip="Agendar Cita de Instalación">
+                    <button mat-mini-fab class="button-cita" (click)="cita(row)" [disabled]="!row.GenerarCita" matTooltip="Agendar Cita para Revisión">
                         <mat-icon class="iconSize">calendar_today</mat-icon>
                     </button> &nbsp; &nbsp;
 
-                    <button mat-mini-fab class="button-dictaminar" (click)="dictaminar(row)" [disabled]="!row.DictaminarRevision" matTooltip="Dictaminar">
+                    <button mat-mini-fab class="button-dictaminar" (click)="dictaminar(row)" [disabled]="!row.DictaminarRevision" matTooltip="Dictaminar" *ngIf="showDictamen">
 						<mat-icon class="iconSize">gavel</mat-icon>
 					</button>
 
-                    <button mat-mini-fab class="button-instalacion" (click)="confirmacion(row)" matTooltip="Confirmar Instalación" [disabled]="!row.RegistrarFechaArreglo">
+                    <button mat-mini-fab class="button-dictaminar" (click)="dictaminarSeguro(row)" [disabled]="!row.DictaminarSeguro" matTooltip="Dictaminar" *ngIf="showDictamenSeguro">
+						<mat-icon class="iconSize">gavel</mat-icon>
+					</button>
+
+                    <button mat-mini-fab class="button-instalacion" (click)="confirmacion(row)" matTooltip="Confirmar arreglo" [disabled]="!row.RegistrarFechaArreglo">
                         <mat-icon class="iconSize">directions_car</mat-icon>
                     </button> &nbsp; &nbsp;
 

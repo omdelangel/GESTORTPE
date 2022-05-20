@@ -15,6 +15,7 @@ import { DialogoTalleresIncidenteComponent } from './../dialogo-talleres-inciden
 import { EdicionCitaIncidenteComponent} from './../edicion-cita-incidente';
 import { DictamenIncidenteComponent } from './../dictamen-incidente'
 import { DialogoConfirmaArregloComponent } from '../dialogo-confirma-arreglo';
+import { DialogoDictamenSeguroComponent } from '../dialogo-dictamen-seguro';
 
 
 
@@ -69,7 +70,10 @@ export class IncidentesComponent implements OnInit {
   matcher              = new MyErrorStateMatcher();
   TipoIncidenteB      :boolean = false;
   palabra             :string = "";
-  TipoIncidente        :string = "";
+  TipoIncidente       :string = "";
+  showDictamen        :boolean = false;
+  showDictamenSeguro  :boolean = false;
+  idTipoSiniestro     :string  = "";
 
 
   //Catálogos locales
@@ -121,8 +125,17 @@ export class IncidentesComponent implements OnInit {
         this.incidenteService.getConcesionarioIncidente(placa)
           .pipe(first())
           .subscribe(data => {
-            console.log("Consulta de Incidente   ")
-            console.log(data)
+
+            this.idTipoSiniestro = data.concesionario[0].IdTipoIncidente;
+
+            if(this.idTipoSiniestro == "INC"){
+              this.showDictamen = true;
+              this.showDictamenSeguro = false;
+            } else if(this.idTipoSiniestro == "PTR" || this.idTipoSiniestro == "ACC" || this.idTipoSiniestro == "" ){
+              this.showDictamen = false;
+              this.showDictamenSeguro = true;
+            }
+
 
             if (data.estatus == true && data.concesionario != "") {
 
@@ -301,10 +314,8 @@ cita(e: any) {
 
 
 
-  //Dictaminar
+  //Dictaminar Taller
   dictaminar(e: any) {
-    console.log("dictaminar e ===>")
-    console.log(e)
 
     if (e.EstatusCita != "A" || e.Dictaminar == 0) {
 
@@ -316,13 +327,13 @@ cita(e: any) {
       const dialogRef = this.dialog.open(DictamenIncidenteComponent, {
         disableClose: true,
         data: {
-          idCita                  :e.IdCita, 
-          estatusCita             :e.EstatusCita, 
-          Concesionario           :e.Concesionario, 
-          idConcesionario         :e.IdConcesionario, 
-          idVehiculo              :e.IdVehiculo,
-          Vehiculo                :e.Vehiculo,
-          IdIncidenteSiniestro    :e.IdIncidenteSiniestro
+          idCita: e.IdCita,
+          estatusCita: e.EstatusCita,
+          Concesionario: e.Concesionario,
+          idConcesionario: e.IdConcesionario,
+          idVehiculo: e.IdVehiculo,
+          Vehiculo: e.Vehiculo,
+          IdIncidenteSiniestro: e.IdIncidenteSiniestro
         },
         width: '100%',
         //height: '90%'
@@ -335,6 +346,30 @@ cita(e: any) {
     }
 
   }
+
+
+    //Dictaminar Seguro
+    dictaminarSeguro(e: any) {
+  
+      const dialogRef = this.dialog.open(DialogoDictamenSeguroComponent, {
+        disableClose: true,
+        data: {
+          Concesionario           :e.Concesionario, 
+          idConcesionario         :e.IdConcesionario, 
+          idVehiculo              :e.IdVehiculo,
+          Vehiculo                :e.Vehiculo,
+          IdIncidenteSiniestro    :e.IdIncidenteSiniestro
+        },
+        width: '60%',
+      });
+  
+      dialogRef.afterClosed().subscribe(res => {
+        this.getConsultaIncidente(this.placa);
+      });
+  
+ 
+  
+    }
 
 
   
