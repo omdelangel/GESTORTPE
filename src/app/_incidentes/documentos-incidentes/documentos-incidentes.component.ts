@@ -132,10 +132,14 @@ export class DocumentosIncidentesComponent implements OnInit {
 
 
   getDocumentosEvidencia(idIncidenteSiniestro: number) {
+    console.log("getDocto    Voy")
+    console.log(idIncidenteSiniestro)
 
     this.incidenteService.getDocumentosEvidencia(idIncidenteSiniestro)
       .pipe(first())
       .subscribe(dataList => {
+        console.log("getDocto    dataList")
+        console.log(dataList)
 
         if (dataList.estatus) {
 
