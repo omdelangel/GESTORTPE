@@ -100,23 +100,34 @@ export class DocumentoEvidencia {
 export class DictamenCitaIncidente {
     IdCita                :number;
     IdIncidenteSiniestro  :number;
-    Dictamen              :string;
+    IdDictamen            :string;
     Observaciones         :string;
     ArchivoDictamen       :string;
 
     constructor(dictamenCitaIncidente: {
                 IdCita                :number;
                 IdIncidenteSiniestro  :number;
-                Dictamen              :string;
+                IdDictamen            :string;
                 Observaciones         :string;
                 ArchivoDictamen       :string;            
     }) {
         this.IdCita                = dictamenCitaIncidente.IdCita                 ;
         this.IdIncidenteSiniestro  = dictamenCitaIncidente.IdIncidenteSiniestro   ;
-        this.Dictamen              = dictamenCitaIncidente.Dictamen               ;
+        this.IdDictamen            = dictamenCitaIncidente.IdDictamen             ;
         this.Observaciones         = dictamenCitaIncidente.Observaciones          ;
         this.ArchivoDictamen       = dictamenCitaIncidente.ArchivoDictamen        ;
     }
 }
+
+
+export class DocumentoEvidenciaTaller {
+    ArchivoDictamen: string;
+
+    constructor(documentoEvidenciaTaller: {
+        ArchivoDictamen: string; }) {
+            this.ArchivoDictamen = documentoEvidenciaTaller.ArchivoDictamen;
+
+        }
+} 
 
 

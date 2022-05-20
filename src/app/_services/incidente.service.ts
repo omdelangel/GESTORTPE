@@ -12,6 +12,7 @@ export class IncidenteService {
 
   SERVER_URL: string = `${environment.SERVER_URL}/evidencia-edicion`;  
   SERVER_URLSeguro: string = `${environment.SERVER_URL}/siniestro-edicion`;  
+  SERVER_URLI: string = `${environment.SERVER_URL}/doc-incidente`;  
 
 
   constructor(private http: HttpClient) { }
@@ -148,7 +149,7 @@ postDictamenCitaIncidente(dictamenCitaIncidente: DictamenCitaIncidente): Observa
   {
     'IdCita'                :dictamenCitaIncidente.IdCita                  ,  
     'IdIncidenteSiniestro'  :dictamenCitaIncidente.IdIncidenteSiniestro    ,
-    'Dictamen'              :dictamenCitaIncidente.Dictamen                ,
+    'IdDictamen'            :dictamenCitaIncidente.IdDictamen              ,
     'Observaciones'         :dictamenCitaIncidente.Observaciones           ,
     'ArchivoDictamen'       :dictamenCitaIncidente.ArchivoDictamen        
   })}
@@ -204,6 +205,54 @@ getDocumentoSeguro(idSiniestro: number, idVehiculo: number): Observable<any> {
 
   return this.http.get<any>(`${environment.SERVER_URL}/consulta-siniestro`, {params: params})
   .pipe(map((res: Response) => {
+
+    return res || {}
+  }),
+  catchError(this.handleError)
+)
+}
+
+    
+
+ //Consulta las evidencias del dictamen del taller 
+ getDoctosEvidenciaDictamenTaller(IdCita: number, IdIncidenteSiniestro: number): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('IdCita', IdCita);
+  params = params.append('IdIncidenteSiniestro', IdIncidenteSiniestro);
+
+  return this.http.get<any>(`${environment.SERVER_URL}/doc-incidente-taller`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  ) 
+}
+
+
+//Registra el archivo de un ditamen del taller para in Incidente
+postGuardaEvidenciaDictamenTaller(formData: any): Observable<any> { 
+
+  console.log("postGuardaEvidenciaDictamenTaller SErver")
+  console.log(formData)
+  return this.http.post<any>(this.SERVER_URLI, formData)
+  .pipe(map((res: Response) => {
+
+    return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Elimina la evidencia
+postEliminaEvidenciaDictamenTaller(IdCita: number, IdIncidenteSiniestro: number): Observable<any> {
+
+
+  return this.http.post<any>(`${environment.SERVER_URL}/doc-incidente-eliminacion`, { 
+  'IdCita': IdCita, 
+  'IdIncidenteSiniestro': IdIncidenteSiniestro})
+  .pipe(map((res: Response) => { 
 
       return res || {}
     }),

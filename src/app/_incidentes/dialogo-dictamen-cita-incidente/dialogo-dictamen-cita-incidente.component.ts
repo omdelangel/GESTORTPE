@@ -1,7 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm, ControlContainer } from '@angular/forms';
-import { AlertService } from '../../_alert';
+import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { IncidenteService } from 'src/app/_services';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
@@ -37,11 +36,8 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
   reactiveForm!: FormGroup;
   idVehiculo: number = 0;
   idConcesionario: number = 0;
-  marca: string = "";
-  submarca: string = "";
-  modelo: string = "";
+;
   ArchivoDictamen    :string;
-  //dictamenes: Dictamen[] = [];
   matcher = new MyErrorStateMatcher();
   submitted = false;
   dictamenCitaIncidente!: DictamenCitaIncidente;
@@ -49,7 +45,6 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
   Vehiculo            :string = "";
   IdIncidenteSiniestro: number = 0;
   estatusCita: string = "";
-
 
   dictamenes: Dictamenes[] = [
     { IdDictamen: 'FV', viewValue: 'Falla vehículo' },
@@ -65,14 +60,7 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { 
 
       dialogRef.disableClose = true;
-      this.notifier = notifierService; 
-      this.idCita = data.idCita;
-      this.Concesionario = data.Concesionario;
-      this.idVehiculo = data.idVehiculo;
-      this.idConcesionario = data.idConcesionario;
-      this.marca = data.marca;
-      this.submarca = data.submarca;
-      this.modelo = data.modelo;
+      this.notifier                 = notifierService; 
 
       this.idCita                   = data.idCita;
       this.estatusCita              = data.estatusCita;
@@ -128,14 +116,14 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
       return;
     }
     this.dictamenCitaIncidente = {  
-                              IdCita                :this.idCita                  ,  
-                              IdIncidenteSiniestro  :this.IdIncidenteSiniestro    ,
-                              Dictamen              :this.f.Dictamen.value        ,
-                              Observaciones         :this.f.Observaciones.value   ,
-                              ArchivoDictamen       :this.ArchivoDictamen        
+                    IdCita                :this.idCita                  ,  
+                    IdIncidenteSiniestro  :this.IdIncidenteSiniestro    ,
+                    IdDictamen            :this.f.Dictamen.value        ,
+                    Observaciones         :this.f.Observaciones.value   ,
+                    ArchivoDictamen       :this.ArchivoDictamen        
                               }
-                              console.log("dictaminar cita")
-                              console.log(this.dictamenCitaIncidente)
+              console.log("dictaminar cita")
+              console.log(this.dictamenCitaIncidente)
                             
     this.incidenteService.postDictamenCitaIncidente(this.dictamenCitaIncidente)
     .pipe(first())
@@ -210,6 +198,4 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-
 }

@@ -59,6 +59,74 @@
                         </div>
                     </form>
                     <mat-divider></mat-divider>
+
+
+
+                    <div fxLayout="row">
+                        <div fxFlex="100" class=" mat-elevation-z8">
+                            <mat-card>
+                                <mat-card-header>
+                                    <mat-card-title fx-item class="title-header-content">Dictamen del taller
+                                    </mat-card-title>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <div style="padding: 15px;">
+                                        <div>
+                                            <div class="dropzoneTaller" fileDragDrop (filesChangeEmiter)="onFileChangeTaller($event)">
+                                                <div class="text-wrapper">
+                                                    <div class="centered">
+                                                        <input type="file" name="file" id="file" (change)="onFileChangeTaller($any($event).target.files)" multiple>
+                                                        <label for="file"><span class="textLinkTaller"><mat-icon>save_alt</mat-icon>Selecciona el dictamen del Taller	</span>&nbsp; o arrastra aquí!</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class=" mat-elevation-z8" *ngIf="dataVal">
+
+                                        <mat-table [dataSource]="dataSource" matSort>
+
+                                            <!-- Color Column -->
+                                            <ng-container matColumnDef="ArchivoDictamen">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Documento
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let row"> {{row.archivo}}
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="actions" stickyEnd>
+                                                <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+                                                <mat-cell *matCellDef="let row">
+                                                    <button mat-mini-fab class="button-documentos" (click)="verDocumento(row)" matTooltip="Ver archivo" style="outline:none; background-color: #3f51b5;">
+													<mat-icon class="iconSize">zoom_in</mat-icon>
+												</button>&nbsp; &nbsp;
+                                                    <button mat-mini-fab class="button-documentos" (click)="eliminarDocumentoTaller(row)" matTooltip="Eliminar archivo" style="outline:none; background-color: #3f51b5;">
+												<mat-icon class="iconSize">clear</mat-icon>
+											</button>
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                                            <mat-row *matRowDef="let row; columns: displayedColumns;">
+                                            </mat-row>
+                                        </mat-table>
+                                        <mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+
+                                    </div>
+
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+
+
+
+
+
+
                     <br>
                     <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
                         <button mat-raised-button class='w-full login-field' [disabled]="dictamen" (click)="dictamenCita()">								
