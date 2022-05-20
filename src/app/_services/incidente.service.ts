@@ -11,6 +11,7 @@ import { Incidente, CitasIncidente, DictamenCitaIncidente } from '../_models';
 export class IncidenteService {
 
   SERVER_URL: string = `${environment.SERVER_URL}/evidencia-edicion`;  
+  SERVER_URLI: string = `${environment.SERVER_URL}/doc-incidente`;  
 
 
   constructor(private http: HttpClient) { }
@@ -194,6 +195,35 @@ postGuardaDictamenSeguro(formData: any): Observable<any> {
 }
 
 
+ //Consulta las evidencias del dictamen del taller 
+ getDoctosEvidenciaDictamenTaller(IdCita: number, IdIncidenteSiniestro: number): Observable<any> {
+
+  let params = new HttpParams();
+  params = params.append('IdCita', IdCita);
+  params = params.append('IdIncidenteSiniestro', IdIncidenteSiniestro);
+
+  return this.http.get<any>(`${environment.SERVER_URL}/doc-incidente-taller`, {params: params})
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  ) 
+}
+
+//Registra el archivo de un ditamen del taller para in Incidente
+postGuardaEvidenciaDictamenTaller(formData: any): Observable<any> { 
+
+  console.log("postGuardaEvidenciaDictamenTaller SErver")
+  console.log(formData)
+  return this.http.post<any>(this.SERVER_URLI, formData)
+  .pipe(map((res: Response) => {
+
+      return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
 
 
     // Error 

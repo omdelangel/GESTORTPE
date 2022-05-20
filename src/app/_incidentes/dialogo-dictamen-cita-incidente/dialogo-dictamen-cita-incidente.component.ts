@@ -8,14 +8,6 @@ import { DictamenCitaIncidente } from 'src/app/_models';
 import { NotifierService } from 'angular-notifier';
 import { DialogoConfirmacionIncidenteComponent } from '../dialogo-confirmacion-incidente';
 
-import { MatSort } from '@angular/material/sort';
-import {MatPaginator} from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { DocumentoEvidencia } from 'src/app/_models';
-import {SelectionModel} from '@angular/cdk/collections';
-import { DocViewerComponent } from '../../_components/doc-viewer'; 
-
-
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -38,12 +30,6 @@ interface Dictamenes {
 export class DialogoDictamenCitaIncidenteComponent implements OnInit {
   private readonly notifier: NotifierService;
 
-  displayedColumns = ['ArchivoEvidencia', 'actions' ];
-  dataSource!: MatTableDataSource<DocumentoEvidencia>;
-   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-
 
   Concesionario: string = "";
   idCita: number = 0;
@@ -59,20 +45,6 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
   Vehiculo            :string = "";
   IdIncidenteSiniestro: number = 0;
   estatusCita: string = "";
-
-
-  public files: any[] = [];
-  idEvidencia: number = 0;
-  idIncidenteSiniestro: string = "";
-  idTipoIncidente: string = "";
-  concesionario: string = "";
-  vehiculo: string = "";
-  dataVal:boolean = false;
-  documentosEvidencia: DocumentoEvidencia[] = [];  
-
-
-
-
 
   dictamenes: Dictamenes[] = [
     { IdDictamen: 'FV', viewValue: 'Falla vehículo' },
@@ -226,70 +198,4 @@ export class DialogoDictamenCitaIncidenteComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-  onFileChange(pFileList: File[]){
-
-
-    this.files = Object.keys(pFileList).map(key => pFileList[Number(key)]);
-
-    const fileListAsArray = Array.from(pFileList);
-    fileListAsArray.forEach((item, i) => {
-
-      const formData = new FormData();
-      formData.append('ArchivoEvidencia', item),
-      formData.append('IdEvidencias', String(this.idEvidencia)),  //siempre es 0 para el alta
-      formData.append('IdSiniestro', String(this.IdIncidenteSiniestro))
-
-      this.incidenteService.postGuardaEvidencias(formData)
-      .pipe(first())
-      .subscribe(
-        data => {
-
-          if (data.estatus) {
-            this.notifier.notify('success', data.mensaje, '');
-            this.getDocumentosEvidencia(Number(this.idIncidenteSiniestro));
-          } else if (!data.estatus) {
-            this.notifier.notify('warning', data.mensaje, '');
-          }
-        },
-        error => {
-          //this.error(error);
-          this.notifier.notify('error', error, '');
-        });
-
-
-     
-     });
-  }
-
-  getDocumentosEvidencia(idIncidenteSiniestro: number) {
-
-    this.incidenteService.getDocumentosEvidencia(idIncidenteSiniestro)
-      .pipe(first())
-      .subscribe(dataList => {
-
-        if (dataList.estatus) {
-
-          this.dataVal = true;
-          this.documentosEvidencia = dataList.Evidencias;
-          this.dataSource = new MatTableDataSource(this.documentosEvidencia);
-          // Assign the data to the data source for the table to render
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-
-        } else {
-
-          this.dataVal = false;
-          this.notifier.notify('warning', dataList.mensaje);
-
-        }
-      },
-        error => {
-
-          this.dataVal = false;
-          this.notifier.notify('error', error);
-
-        });
-  }  
-
 }

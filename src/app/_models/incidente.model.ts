@@ -120,3 +120,14 @@ export class DictamenCitaIncidente {
 }
 
 
+export class DocumentoEvidenciaTaller {
+    ArchivoEvidencia: string;
+
+    constructor(documentoEvidenciaTaller: {
+        ArchivoEvidencia: string; }) {
+            this.ArchivoEvidencia = documentoEvidenciaTaller.ArchivoEvidencia;
+
+        }
+} 
+
+
