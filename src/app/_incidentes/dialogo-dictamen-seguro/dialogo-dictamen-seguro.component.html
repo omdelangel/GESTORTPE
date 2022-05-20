@@ -3,88 +3,81 @@
         <div fxFlex="100">
             <mat-card>
                 <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
-                <div class="example-button-container">
-                    <button mat-mini-fab class="close-button" style="outline: none;" (click)="onNoClick()">
+                    <div class="example-button-container">
+                        <button mat-mini-fab class="close-button" style="outline: none;" (click)="onNoClick()">
                         <mat-icon>close</mat-icon>
                     </button>
-                </div>
-                <mat-card-header>
-                    <mat-card-title fx-item class="title-header-content">Dictamen del seguro
-                    </mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <div style="padding: 15px;">
-                        <div>
-                            <div class="dropzoneSeguro" fileDragDrop (filesChangeEmiter)="onFileChangeSeguro($event)">
-                                <div class="text-wrapper">
-                                    <div class="centered">
-                                        <input type="file" name="file" id="file"
-                                            (change)="onFileChangeSeguro($any($event).target.files)" multiple>
-                                        <label for="file"><span class="textLinkSeguro">
+                    </div>
+                    <mat-card-header>
+                        <mat-card-title fx-item class="title-header-content">Dictamen del seguro
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div style="padding: 15px;">
+                            <div>
+                                <div class="dropzoneSeguro" fileDragDrop (filesChangeEmiter)="onFileChangeSeguro($event)">
+                                    <div class="text-wrapper">
+                                        <div class="centered">
+                                            <input type="file" name="file" id="file" (change)="onFileChangeSeguro($any($event).target.files)" multiple>
+                                            <label for="file"><span class="textLinkSeguro">
                                                 <mat-icon>save_alt</mat-icon>Selecciona el dictamen del Seguro
                                             </span>&nbsp; o arrastra aquí!</label>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
 
                         </div>
 
-                    </div>
 
+                        <div class=" mat-elevation-z8" *ngIf="dataVal">
 
-                    <div class=" mat-elevation-z8" *ngIf="dataVal">
+                            <mat-table [dataSource]="dataSource" matSort>
 
-                        <mat-table [dataSource]="dataSource" matSort>
+                                <!-- Color Column -->
+                                <ng-container matColumnDef="ArchivoResolucionSeguro">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Documento
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> {{row.ArchivoResolucionSeguro}}
+                                    </mat-cell>
+                                </ng-container>
 
-                            <!-- Color Column -->
-                            <ng-container matColumnDef="ArchivoResolucionSeguro">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Documento
-                                </mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.ArchivoResolucionSeguro}}
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="actions" stickyEnd>
-                                <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
-                                <mat-cell *matCellDef="let row">
-                                    <button mat-mini-fab class="button-documentos" (click)="verDocumento(row)"
-                                        matTooltip="Ver archivo" style="outline:none; background-color: #3f51b5;">
+                                <ng-container matColumnDef="actions" stickyEnd>
+                                    <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+                                    <mat-cell *matCellDef="let row">
+                                        <button mat-mini-fab class="button-documentos" (click)="verDocumento(row)" matTooltip="Ver archivo" style="outline:none; background-color: #3f51b5;">
                                         <mat-icon class="iconSize">zoom_in</mat-icon>
                                     </button>&nbsp; &nbsp;
-                                    <button mat-mini-fab class="button-documentos"
-                                        (click)="eliminarDocumentoSeguro(row)" matTooltip="Eliminar archivo"
-                                        style="outline:none; background-color: #3f51b5;">
+                                        <button mat-mini-fab class="button-documentos" (click)="eliminarDocumentoSeguro(row)" matTooltip="Eliminar archivo" style="outline:none; background-color: #3f51b5;">
                                         <mat-icon class="iconSize">clear</mat-icon>
                                     </button>
-                                </mat-cell>
-                            </ng-container>
+                                    </mat-cell>
+                                </ng-container>
 
-                            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-                            <mat-row *matRowDef="let row; columns: displayedColumns;">
-                            </mat-row>
-                        </mat-table>
+                                <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                                </mat-row>
+                            </mat-table>
 
-                    </div>
+                        </div>
 
-                    <div style="padding: 15px;">
+                        <div style="padding: 15px;">
 
-                        <mat-label style="font-size: 16px;">¿El seguro cubre la pérdida total y los litros pendientes a
-                            consumir? &nbsp;</mat-label>
-                        <mat-radio-group aria-label="" [disabled]="true" formControlName="dictamen">
-                            <mat-radio-button value="C">SI</mat-radio-button>
-                            <mat-radio-button value="N">NO</mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-                </mat-card-content>
-                <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-                    <button mat-mini-fab style="background-color: #80BC00; outline:none;" matTooltip="Confirmar"
-                        (click)="confirmaDictamen()">
+                            <mat-label style="font-size: 16px;">¿El seguro cubre la pérdida total y los litros pendientes a consumir? &nbsp;</mat-label>
+                            <mat-radio-group aria-label="" [disabled]="true" formControlName="dictamen">
+                                <mat-radio-button value="C">SI</mat-radio-button>
+                                <mat-radio-button value="N">NO</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </mat-card-content>
+                    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+                        <button mat-mini-fab style="background-color: #80BC00; outline:none;" matTooltip="Confirmar" (click)="confirmaDictamen()">
                         <mat-icon>save</mat-icon>
                     </button>
-                </div>
-            </form>
-            </mat-card>          
+                    </div>
+                </form>
+            </mat-card>
         </div>
     </div>
 </div>
-
