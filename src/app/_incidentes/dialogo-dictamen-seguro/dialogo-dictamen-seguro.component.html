@@ -2,7 +2,7 @@
     <div fxLayout="row wrap" fxLayoutGap="20px" style="width: 100%;">
         <div fxFlex="100">
             <mat-card>
-                <form [formGroup]="reactiveForm" >
+                <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
                 <div class="example-button-container">
                     <button mat-mini-fab class="close-button" style="outline: none;" (click)="onNoClick()">
                         <mat-icon>close</mat-icon>
@@ -35,27 +35,12 @@
                     <div class=" mat-elevation-z8" *ngIf="dataVal">
 
                         <mat-table [dataSource]="dataSource" matSort>
-                            <!-- ID Column -->
-                            <ng-container matColumnDef="IdEvidencias">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Id Evidencia
-                                </mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.IdEvidencias}}
-                                </mat-cell>
-                            </ng-container>
 
                             <!-- Color Column -->
-                            <ng-container matColumnDef="IdSiniestro">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Siniestro
-                                </mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.IdSiniestro}}
-                                </mat-cell>
-                            </ng-container>
-
-                            <!-- Color Column -->
-                            <ng-container matColumnDef="ArchivoEvidencia">
+                            <ng-container matColumnDef="ArchivoResolucionSeguro">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Documento
                                 </mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.ArchivoEvidencia}}
+                                <mat-cell *matCellDef="let row"> {{row.ArchivoResolucionSeguro}}
                                 </mat-cell>
                             </ng-container>
 
@@ -78,7 +63,6 @@
                             <mat-row *matRowDef="let row; columns: displayedColumns;">
                             </mat-row>
                         </mat-table>
-                        <mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
 
                     </div>
 

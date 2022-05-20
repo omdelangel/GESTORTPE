@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective, NgForm, ControlContainer } from '@angular/forms';
-import { DocumentoEvidencia } from 'src/app/_models';
+import { DocumentoEvidenciaSeguro } from 'src/app/_models';
 import { NotifierService } from 'angular-notifier';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DocViewerComponent } from '../../_components/doc-viewer'; 
@@ -18,10 +18,10 @@ export class DialogoDictamenSeguroComponent implements OnInit {
 
   private readonly notifier: NotifierService;
 
-  displayedColumns = ['ArchivoEvidencia', 'actions'];
-  dataSource!: MatTableDataSource<DocumentoEvidencia>;
+  displayedColumns = ['ArchivoResolucionSeguro', 'actions'];
+  dataSource!: MatTableDataSource<DocumentoEvidenciaSeguro>;
 
-  documentosEvidencia: DocumentoEvidencia[] = [];
+  documentoEvidencia: DocumentoEvidenciaSeguro[] = [];
   public files: any[] = [];
   idEvidencia: number = 0;
   idIncidenteSiniestro: number = 0;
@@ -50,17 +50,27 @@ export class DialogoDictamenSeguroComponent implements OnInit {
       this.idVehiculo = data.idVehiculo;
      }
 
-  ngOnInit(): void {
-
-    this.getDocumentosEvidencia(this.idIncidenteSiniestro, this.idVehiculo);
+  ngOnInit(): void {    
 
     //Validación de campos en pantalla
     this.reactiveForm = this.formBuilder.group({
       'dictamen': [({ value: "", disabled: true })],
+      'ArchivoResolucionSeguro': [''],
     });
+
+    this.getDocumentosEvidencia(this.idIncidenteSiniestro, this.idVehiculo);
   }
 
   get f() { return this.reactiveForm.controls; }
+
+  onSubmit() {
+    if (this.reactiveForm.valid) {
+      //console.log(this.reactiveForm.value)
+
+    } else {
+      return
+    }
+  }
 
   onFileChangeSeguro(pFileList: File[]) {
 
@@ -83,9 +93,6 @@ export class DialogoDictamenSeguroComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-
-            console.log("data");
-            console.log(data);
 
             if (data.estatus) {
               this.notifier.notify('success', data.mensaje, '');
@@ -124,8 +131,11 @@ export class DialogoDictamenSeguroComponent implements OnInit {
         if (dataList.estatus) {
 
           this.dataVal = true;
-          this.documentosEvidencia = dataList.siniestro;
-          this.dataSource = new MatTableDataSource(this.documentosEvidencia);
+          this.documentoEvidencia = dataList.siniestro;
+
+          console.log("this.documentoEvidencia")
+          console.log(this.documentoEvidencia)
+          this.dataSource = new MatTableDataSource(this.documentoEvidencia);
 
         } else {
 

@@ -130,4 +130,41 @@ export class DocumentoEvidenciaTaller {
         }
 } 
 
+export class DocumentoEvidenciaSeguro {
+    IdSiniestro: number;
+    IdVehiculo: number;
+    TipoSiniestro: string;
+    FechaSiniestro: string;
+    ResolucionSeguro: string;
+    FechaResolucion: string;
+    FechaArreglo: string;
+    FechaRegistro: string;
+    ArchivoResolucionSeguro: string;
+    Estatus: string;
+
+    constructor(documentoEvidenciaSeguro: {
+        IdSiniestro: number;
+        IdVehiculo: number;
+        TipoSiniestro: string;
+        FechaSiniestro: string;
+        ResolucionSeguro: string;
+        FechaResolucion: string;
+        FechaArreglo: string;
+        FechaRegistro: string;
+        ArchivoResolucionSeguro: string;
+        Estatus: string; }) {
+            this.IdSiniestro = documentoEvidenciaSeguro.IdSiniestro;
+            this.IdVehiculo = documentoEvidenciaSeguro.IdVehiculo;
+            this.TipoSiniestro = documentoEvidenciaSeguro.TipoSiniestro;
+            this.FechaSiniestro = documentoEvidenciaSeguro.FechaSiniestro;
+            this.ResolucionSeguro = documentoEvidenciaSeguro.ResolucionSeguro;
+            this.FechaResolucion = documentoEvidenciaSeguro.FechaResolucion;
+            this.FechaArreglo = documentoEvidenciaSeguro.FechaArreglo;
+            this.FechaRegistro = documentoEvidenciaSeguro.FechaRegistro;
+            this.ArchivoResolucionSeguro = documentoEvidenciaSeguro.ArchivoResolucionSeguro;
+            this.Estatus = documentoEvidenciaSeguro.Estatus;
+        }
+} 
+
+
 
