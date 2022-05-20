@@ -211,6 +211,7 @@ postGuardaDictamenSeguro(formData: any): Observable<any> {
   ) 
 }
 
+
 //Registra el archivo de un ditamen del taller para in Incidente
 postGuardaEvidenciaDictamenTaller(formData: any): Observable<any> { 
 
@@ -218,6 +219,21 @@ postGuardaEvidenciaDictamenTaller(formData: any): Observable<any> {
   console.log(formData)
   return this.http.post<any>(this.SERVER_URLI, formData)
   .pipe(map((res: Response) => {
+
+    return res || {}
+    }),
+    catchError(this.handleError)
+  )
+}
+
+//Elimina la evidencia
+postEliminaEvidenciaDictamenTaller(IdCita: number, IdIncidenteSiniestro: number): Observable<any> {
+
+
+  return this.http.post<any>(`${environment.SERVER_URL}/doc-incidente-eliminacion`, { 
+  'IdCita': IdCita, 
+  'IdIncidenteSiniestro': IdIncidenteSiniestro})
+  .pipe(map((res: Response) => { 
 
       return res || {}
     }),

@@ -121,11 +121,11 @@ export class DictamenCitaIncidente {
 
 
 export class DocumentoEvidenciaTaller {
-    ArchivoEvidencia: string;
+    ArchivoDictamen: string;
 
     constructor(documentoEvidenciaTaller: {
-        ArchivoEvidencia: string; }) {
-            this.ArchivoEvidencia = documentoEvidenciaTaller.ArchivoEvidencia;
+        ArchivoDictamen: string; }) {
+            this.ArchivoDictamen = documentoEvidenciaTaller.ArchivoDictamen;
 
         }
 } 

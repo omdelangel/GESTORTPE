@@ -16,7 +16,6 @@ import { DocViewerComponent } from '../../_components/doc-viewer';
 import { DialogoConfirmacionIncidenteComponent } from '../dialogo-confirmacion-incidente';
 
 
-
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -35,7 +34,7 @@ export class DictamenIncidenteComponent implements OnInit {
   ArchivoDictamen              :string;
   private readonly notifier: NotifierService;
   public files: any[] = [];
-  displayedColumns = ['ArchivoEvidencia', 'actions'];
+  displayedColumns = ['ArchivoDictamen', 'actions'];
   dataSource!: MatTableDataSource<DocumentoEvidenciaTaller>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -61,7 +60,7 @@ export class DictamenIncidenteComponent implements OnInit {
   estatusCita: string = "";
   incidente: boolean = false;
   existentes     :number = 0;
-
+  
   constructor(
     notifierService            :NotifierService,
     private incidenteService   :IncidenteService,
@@ -173,21 +172,24 @@ getDoctosEvidenciaDictamenTaller(idCita: number, IdIncidenteSiniestro:number) {
     .pipe(first())
     .subscribe(dataList => {
       console.log("getDoctosEvidenciaDictamenTallers ArchivoDictamen ")
+      console.log(dataList)
       console.log(dataList.ArchivoDictamen)
 
-      if (dataList.estatus) {
-        this.existentes = dataList.Evidencias.length
+      if (dataList.estatus && dataList.ArchivoDictamen[0].archivo != '') {
+        this.existentes = dataList.ArchivoDictamen.length
         console.log("Existentes")
         console.log (this.existentes)
         this.dataVal = true;
         this.documentoEvidenciaTaller = dataList.ArchivoDictamen;
-        this.dataSource = new MatTableDataSource(this.documentoEvidenciaTaller);
+        this.dataSource = new MatTableDataSource(dataList.ArchivoDictamen);
         // Assign the data to the data source for the table to render
+        console.log(this.dataSource)
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
       } else {
-
+        console.log("Me fui por el else")
+        this.existentes = 0;
         this.dataVal = false;
 //        this.notifier.notify('warning', dataList.mensaje);
 
@@ -203,12 +205,14 @@ getDoctosEvidenciaDictamenTaller(idCita: number, IdIncidenteSiniestro:number) {
 
   //Abre modal visualizar el documento
   verDocumento(archivoPDF: any): void {
+    console.log("Ver documento")
+    console.log(archivoPDF)
 
     const dialogRef = this.dialog.open(DocViewerComponent, {
       width: '50%',
       height: '80%',
       disableClose: true,
-      data: { archivoPDF: archivoPDF.ArchivoEvidencia }
+      data: { archivoPDF: archivoPDF.ArchivoDictamen }
     });
     dialogRef.afterClosed().subscribe(res => {
 
@@ -222,16 +226,15 @@ getDoctosEvidenciaDictamenTaller(idCita: number, IdIncidenteSiniestro:number) {
 
     this.dialog
       .open(DialogoConfirmacionIncidenteComponent, {
-        data: `Se eliminará el archivo de dictamen: ` + archivoPDF.ArchivoEvidencia,
+        data: `Se eliminará el archivo de dictamen: ` + archivoPDF.archivo,
         width: '25%'
       })
       .afterClosed()
       .subscribe((confirmado: Boolean) => {
         if (confirmado) {
           console.log("eliminar archivo 2")
-
-      
-          this.eliminarEvidenciaTaller(archivoPDF.IdEvidencias);
+     
+          this.eliminarEvidenciaTaller();
 
         } else {
 
@@ -239,17 +242,18 @@ getDoctosEvidenciaDictamenTaller(idCita: number, IdIncidenteSiniestro:number) {
       });
   }  
 
-  eliminarEvidenciaTaller(idEvidencia: number) {
-    console.log("eliminar archivo")
-    console.log(idEvidencia)
+  eliminarEvidenciaTaller() {
+    console.log("eliminar archivo DEF")
 
-    this.incidenteService.postEliminaEvidencia(this.IdIncidenteSiniestro, idEvidencia,)
+
+    this.incidenteService.postEliminaEvidenciaDictamenTaller(this.idCita, this.IdIncidenteSiniestro)
       .pipe(first())
       .subscribe(dataList => {
 
         if (dataList.estatus) {
 
           this.notifier.notify('success', dataList.mensaje);
+          this.getDoctosEvidenciaDictamenTaller(this.idCita, this.IdIncidenteSiniestro);
 
         } else {
 
@@ -279,12 +283,14 @@ getDoctosEvidenciaDictamenTaller(idCita: number, IdIncidenteSiniestro:number) {
       fileListAsArray.forEach((item, i) => {
            console.log("item")
            console.log(item)
+           console.log(this.idCita)
+           console.log(this.IdIncidenteSiniestro)
            console.log(item.name)
 
            const formData = new FormData();
              formData.append('IdCita', String(this.idCita)),  
              formData.append('IdIncidenteSiniestro', String(this.IdIncidenteSiniestro)),
-             formData.append('ArchivoEvidencia', item)
+             formData.append('ArchivoDictamen', item)
      
            this.incidenteService.postGuardaEvidenciaDictamenTaller(formData)
            .pipe(first())
@@ -301,6 +307,7 @@ getDoctosEvidenciaDictamenTaller(idCita: number, IdIncidenteSiniestro:number) {
              },
              error => {
                //this.error(error);
+               console.log("error" + error)
                this.notifier.notify('error', error, '');
              });
    
