@@ -102,7 +102,6 @@ export class DialogoDictamenSeguroComponent implements OnInit {
 
             if (data.estatus) {
               this.getDocumentoSeguro(this.idIncidenteSiniestro, this.idVehiculo);
-              this.f.dictamen.enable();
               this.notifier.notify('success', data.mensaje, '');
               
 
@@ -141,11 +140,14 @@ export class DialogoDictamenSeguroComponent implements OnInit {
           this.existentes = dataList.siniestro.length
 
           if (this.documentoEvidencia[0].ArchivoResolucionSeguro == "" || this.documentoEvidencia[0].ArchivoResolucionSeguro == null) {
+            this.f.dictamen.disable();
             this.dataVal = false;
           } else {
+            this.f.dictamen.enable();
             this.dataVal = true;
           }
-
+          
+         
           this.dataSource = new MatTableDataSource(this.documentoEvidencia);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
@@ -234,6 +236,31 @@ export class DialogoDictamenSeguroComponent implements OnInit {
   }
 
   confirmaDictamen(){
+
+    
+
+    this.incidenteService.postGuardaDictamen(this.idVehiculo, this.idIncidenteSiniestro, this.f.dictamen.value)
+    .pipe(first())
+    .subscribe(dataList => {
+
+      if (dataList.estatus) {
+        this.dataVal = false;
+        this.existentes = 0;
+        this.f.dictamen.disable();
+        this.getDocumentoSeguro(this.idIncidenteSiniestro, this.idVehiculo);
+        this.notifier.notify('success', dataList.mensaje);
+
+      } else {
+
+        this.notifier.notify('warning', dataList.mensaje);
+
+      }
+    },
+      error => {
+
+        this.notifier.notify('error', error);
+
+      });
 
 
 

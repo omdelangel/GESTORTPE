@@ -72,6 +72,9 @@
                                 <mat-radio-button value="C">SI</mat-radio-button>
                                 <mat-radio-button value="N">NO</mat-radio-button>
                             </mat-radio-group>
+                            <mat-error *ngIf="reactiveForm.get('dictamen')!.hasError('required')">
+                                El dato es obligatorio
+                            </mat-error>
                         </div>
             
                     </mat-card-content>
