@@ -59,7 +59,7 @@ export class DialogoDictamenSeguroComponent implements OnInit {
 
     //Validación de campos en pantalla
     this.reactiveForm = this.formBuilder.group({
-      'dictamen': [({ value: "", disabled: true })],
+      'dictamen': [({ value: "", disabled: true }), Validators.required],
       'ArchivoResolucionSeguro': [''],
     });
 
@@ -234,6 +234,8 @@ export class DialogoDictamenSeguroComponent implements OnInit {
   }
 
   confirmaDictamen(){
+
+
 
 
   }
