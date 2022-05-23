@@ -275,6 +275,10 @@ postEliminaEvidenciaDictamenTaller(IdCita: number, IdIncidenteSiniestro: number)
 //Guarda el dictamen
 postGuardaDictamen(idVehiculo: number, idSiniestro: number, resolucionSeguro: string): Observable<any> {
 
+  console.log(idVehiculo)
+  console.log(idSiniestro)
+  console.log(resolucionSeguro)
+  
 
   return this.http.post<any>(`${environment.SERVER_URL}/resolucion-siniestro`, { 
   'IdVehiculo': idVehiculo, 'IdSiniestro': idSiniestro, 'ResolucionSeguro': resolucionSeguro})
