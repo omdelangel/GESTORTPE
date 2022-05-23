@@ -62,13 +62,13 @@
                 <mat-header-cell *matHeaderCellDef mat-sort-header> IdConcesionario </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.IdConcesionario}} </mat-cell>
             </ng-container>
-            
+
             <!-- Progress Column -->
             <ng-container matColumnDef="FechaReporte">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Reporte </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.FechaReporte | date: 'dd-MM-YYYY hh:mm'}} </mat-cell>
             </ng-container>
-            
+
             <!-- Progress Column -->
             <ng-container matColumnDef="Concesionario">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Concesionario </mat-header-cell>
@@ -124,21 +124,20 @@
                 <mat-cell *matCellDef="let row"> {{row.EstatusCita=='A' ? 'Abierta': ''}} {{row.EstatusCita=='D' ? 'Dictaminada': ''}} {{row.EstatusCita=='C' ? 'Cancelada': ''}} {{row.EstatusCita=='V' ? 'Vencida': ''}}</mat-cell>
             </ng-container>
 
-           
+
             <!-- ID Column -->
             <ng-container matColumnDef="IdTipoIncidente">
                 <mat-header-cell *matHeaderCellDef> Tipos de incidentes </mat-header-cell>
                 <mat-cell *matCellDef="let row">
                     <mat-form-field>
-                        <mat-select placeholder="" (selectionChange)="mostrarDialogoConfirmacion($event)" 
-                        value="{{row.IdTipoIncidente}}" [disabled]="!TipoIncidenteB" >
+                        <mat-select placeholder="" (selectionChange)="mostrarDialogoConfirmacion($event)" value="{{row.IdTipoIncidente}}" [disabled]="!TipoIncidenteB">
                             <mat-option *ngFor="let idTipoIncidente of tiposIncidentes" [value]="idTipoIncidente.TipoIncidente">
                                 {{idTipoIncidente.viewValue}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </mat-cell>
-            </ng-container>                         
+            </ng-container>
 
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
