@@ -92,10 +92,6 @@ export class DialogoDictamenSeguroComponent implements OnInit {
     this.existentes = 0;
     this.files = Object.keys(pFileList).map(key => pFileList[Number(key)]);
 
-    console.log(" onFileChangeSeguro ")
-    console.log(this.files.length)
-    console.log(this.existentes)
-
     if(this.files.length + this.existentes == 1 ){
 
       const fileListAsArray = Array.from(pFileList);
@@ -151,10 +147,6 @@ export class DialogoDictamenSeguroComponent implements OnInit {
 
         if (dataList.estatus) {
           this.documentoEvidencia = dataList.siniestro;
-          console.log("getDocumentoSeguro")
-          console.log(dataList)
-          console.log(this.existentes)
-
 
           if (this.documentoEvidencia[0].ArchivoResolucionSeguro == "" || this.documentoEvidencia[0].ArchivoResolucionSeguro == null) {
             this.existentes = 0
@@ -166,7 +158,6 @@ export class DialogoDictamenSeguroComponent implements OnInit {
             this.f.dictamen.enable();
             this.dataVal = true;
           }
-          console.log(this.existentes)
          
           this.dataSource = new MatTableDataSource(this.documentoEvidencia);
           this.dataSource.paginator = this.paginator;
@@ -257,22 +248,12 @@ export class DialogoDictamenSeguroComponent implements OnInit {
 
   confirmaDictamen(){
 
-    console.log("confirmaDictamen entrada")
-    console.log(this.idVehiculo)
-    console.log(this.idIncidenteSiniestro)
-    console.log(this.f.dictamen.value)
-    console.log(this.f.dictamen.valid)
     this.submitted = true;
 
     if (this.reactiveForm.invalid) {
       return;
     }
     
-    console.log("confirmaDictamen")
-    console.log(this.idVehiculo)
-    console.log(this.idIncidenteSiniestro)
-    console.log(this.f.dictamen.value)
-
     if (this.f.dictamen.value == ""){
       this.notifier.notify('warning', "Favor de seleccionar una opción válida");
     }else{
@@ -281,8 +262,6 @@ export class DialogoDictamenSeguroComponent implements OnInit {
     .subscribe(dataList => {
 
       if (dataList.estatus) {
-        console.log("confirmaDictamen regresa")
-        console.log(dataList)
         this.dataVal = false;
         this.existentes = 0;
         this.f.dictamen.disable();

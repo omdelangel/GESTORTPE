@@ -122,11 +122,7 @@ export class IncidentesComponent implements OnInit {
         this.incidenteService.getConcesionarioIncidente(placa)
           .pipe(first())
           .subscribe(data => {
-
-            console.log("data");
-            console.log(data);
-
-        
+       
             if (data.estatus == true && data.concesionario != "") {
 
               this.idTipoSiniestro = data.concesionario[0].IdTipoIncidente;
