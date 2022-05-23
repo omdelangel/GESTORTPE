@@ -123,18 +123,21 @@ export class IncidentesComponent implements OnInit {
           .pipe(first())
           .subscribe(data => {
 
-            this.idTipoSiniestro = data.concesionario[0].IdTipoIncidente;
+            console.log("data");
+            console.log(data);
 
-            if(this.idTipoSiniestro == "INC"){
-              this.showDictamen = true;
-              this.showDictamenSeguro = false;
-            } else if(this.idTipoSiniestro == "PTR" || this.idTipoSiniestro == "ACC" || this.idTipoSiniestro == "" ){
-              this.showDictamen = false;
-              this.showDictamenSeguro = true;
-            }
-
-
+        
             if (data.estatus == true && data.concesionario != "") {
+
+              this.idTipoSiniestro = data.concesionario[0].IdTipoIncidente;
+
+              if(this.idTipoSiniestro == "INC"){
+                this.showDictamen = true;
+                this.showDictamenSeguro = false;
+              } else if(this.idTipoSiniestro == "PTR" || this.idTipoSiniestro == "ACC" || this.idTipoSiniestro == "" ){
+                this.showDictamen = false;
+                this.showDictamenSeguro = true;
+              }
 
               this.incidente = data.concesionario;
               this.idConcesionario = data.IdConcesionario;
